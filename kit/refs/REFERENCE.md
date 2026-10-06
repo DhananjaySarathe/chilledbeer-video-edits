@@ -68,7 +68,7 @@ What it says:
 
 ## Result on model-compare (v2 → v3, face shots, same metrics)
 
-Side by side at the same moments: `kit/refs/model-compare_v2_vs_v3.jpg`.
+
 
 Centre − edge +21 → **+37**, highlight R−B +15 → **+33**, skin chroma 27.3 → **24.5**, black p1 15 → **12**: all
 inside the reference range. The freeze check found two static holds (a still screenshot, the reveal); each got a
@@ -77,5 +77,5 @@ slow push-in, following the "never a dull moment" rule.
 ## Standard from 2026-10-01: HyperFrames builds and renders, our kit does the footage
 
 - **Cut-out:** `python3 kit/look/cutout.py <clip> <out.webm> [--from= --to=]`. It extracts frames, masks and grades them into one transparent VP9 WebM, and deletes its temporary files. That's ~70–85 MB per minute kept, instead of ~1.2 GB per minute for per-frame PNGs. The WebM keeps source timing: cut it in the composition with `data-media-start`, `data-duration` and `data-playback-rate`.
-- **Build and render:** a HyperFrames composition (reference: `films/model-compare-hf`). Use `npx hyperframes lint` and `snapshot` before rendering, and set `"version": 1` on audio automation.
+- **Build and render:** a HyperFrames composition (reference: `kit/hf/showcase/src/template.html`). Use `npx hyperframes lint` and `snapshot` before rendering, and set `"version": 1` on audio automation.
 - **After rendering:** master to −14 LUFS / −1.5 dBTP (the engine has no loudness target), then run the black/freeze and loudness checks.

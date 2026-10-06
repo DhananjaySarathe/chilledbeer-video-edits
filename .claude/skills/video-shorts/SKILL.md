@@ -69,7 +69,7 @@ For new edits (not old videos, and not inside preset_paper_studio's calm look un
 For long-form 16:9, for reels built from several takes, and whenever the user wants top-creator quality:
 1. Ingest and glossary-fix the transcript (`shorts probe --landscape` and `shorts analyze` for the word timings), then write the brief and beat sheet, show them to the user, and score the scene plan's slideshow risk (EDITING.md §1, §8).
 2. Cut-outs: `python3 kit/look/cutout.py <clip> <out.webm> [--from= --to=]` produces one transparent graded WebM (about 70–85 MB/min); its temporary files are deleted automatically.
-3. Build a HyperFrames composition. `films/model-compare-hf/` (prep.py, build.py, template.html) is the worked example: the cut-out goes on a studio backdrop, heroes sit behind the head, captions use the highlight style, and shader transitions are saved for 1–2 hero moments.
+3. Build a HyperFrames composition. `kit/presets/paper_studio/example/` (with its `templates/`) and `kit/hf/showcase/src/template.html` are the worked examples. For a studio look: the cut-out goes on a studio backdrop, heroes sit behind the head, captions use the highlight style, and shader transitions are saved for 1–2 hero moments.
    - Run `npx hyperframes lint`, then `npx hyperframes snapshot` and look at the frames.
    - Render with `npx hyperframes render --quality delivery`, then master to −14 LUFS (`build.py --master` shows how).
 4. QA: `python3 kit/qa/qa.py <video> --cuts=<cuts.json> --expect-duration=<s> --expect-size=WxH [--allow-freeze=a-b]`. Exit 3 is FAIL, so fix and re-render; never deliver it. `python3 kit/qa/sheet.py <video> <dir> --cuts=...` makes the review sheets.

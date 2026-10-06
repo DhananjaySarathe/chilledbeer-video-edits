@@ -1,8 +1,57 @@
 # ChilledBeer Video Edits
 
-A local video editor driven by Claude Code. Give it a talking-head recording and it gives back a posting-ready video:
-a captioned 9:16 short or reel, or a 16:9 YouTube long-form with motion graphics. Everything runs on your Mac: no
-cloud editor, no paid renderer.
+**Drop in a talking-head recording, get back a video ready to post.** A local editor driven by
+[Claude Code](https://claude.com/claude-code): it cuts the pauses and fillers without ever chopping a sentence, adds
+word-by-word captions, motion graphics, music and a colour grade, then checks the result before you see it. It makes
+9:16 shorts and reels, and 16:9 YouTube videos. Everything runs on your Mac: no cloud editor, no paid renderer.
+
+## Quick start
+
+On a Mac with Apple silicon:
+
+```bash
+xcode-select --install                                      # once, if you don't have the command line tools yet
+git clone https://github.com/DhananjaySarathe/chilledbeer-video-edits.git "chilledbeer-video-edits"
+cd "chilledbeer-video-edits"
+./setup.sh                                                  # about 20-30 min the first time: mostly downloads
+echo 'export HYPERFRAMES_NO_UPDATE_CHECK=1' >> ~/.zshrc     # keeps the video renderer on its tested version
+claude                                                      # opens Claude Code in this folder
+```
+
+Then ask Claude: *"Make a short from ~/Downloads/take.mp4"*. It shows you a brief and a preview, asks before the final
+render, and puts the finished video in `output/final/<video>/`.
+
+## What gets installed
+
+**Install these yourself first** (`setup.sh` checks for them):
+
+| What | Why it's needed | Where it goes | How to install | Size |
+|---|---|---|---|---|
+| Homebrew | installs the tools below | `/opt/homebrew` | the one-line command on [brew.sh](https://brew.sh) | varies |
+| Xcode Command Line Tools | builds the two Apple Vision tools | `/Library/Developer/CommandLineTools` | `xcode-select --install` | 1.3 GB |
+| Google Chrome | draws the graphics and renders the compositions | `/Applications` | [google.com/chrome](https://www.google.com/chrome/) | 720 MB |
+| Claude Code | runs the editing | your user folder | [claude.com/claude-code](https://claude.com/claude-code) | |
+
+**`./setup.sh` installs the rest** (safe to re-run; anything already there is skipped):
+
+| What | Why it's needed | Where it goes | Command it runs | Size |
+|---|---|---|---|---|
+| ffmpeg | cutting, encoding, loudness, checks | `/opt/homebrew` | `brew install ffmpeg` | 770 MB with its libraries |
+| whisper.cpp | speech to text | `/opt/homebrew` | `brew install whisper.cpp` | 6 MB (+150 MB shared libraries) |
+| uv, node | run the Python and JavaScript parts | `/opt/homebrew` | `brew install uv node` | 120 MB |
+| Python packages (OpenCV, ONNX Runtime, numpy...) | the editor itself | `.venv/` in this folder | `uv sync` | 540 MB |
+| Node packages (Chrome driver, GSAP, rough.js) | graphics rendering | `node_modules/` in this folder | `npm install` | 60 MB |
+| HyperFrames 0.8.134 | renders long-form compositions | the global npm folder | `npm install -g hyperframes@0.8.134` | 120 MB |
+| Whisper large-v3-turbo (q5) | transcription | `kit/models/` | `uv run shorts setup` | 574 MB |
+| SaT sentence model + tokenizer | finds sentence ends, so no cut lands mid-sentence | `kit/models/hf/` | `uv run shorts setup` | 421 MB |
+| wav2vec2 aligner (int8) | word timings to about 30 ms | `kit/models/` | `uv run shorts setup` | 95 MB |
+| Smart Turn, Silero VAD, YuNet | end of a thought, speech vs pause, face detection | `kit/models/` | `uv run shorts setup` | 11 MB |
+| Apple Vision tools | person cut-outs, text on screen | `kit/bin/` | built by `uv run shorts setup` | under 1 MB |
+| Music and sound effects | background tracks and hits | `kit/music/`, `kit/sfx/` | `uv run python kit/assets_src/fetch.py` | 240 MB |
+
+In total: about **1.9 GB inside this folder**, plus up to about **3 GB of system tools** if you have none of them yet,
+plus room for your footage and renders in `output/`. `uv run shorts doctor` checks that everything is in place. The
+fonts (3.5 MB) come with the repo.
 
 ## What it does
 
@@ -13,45 +62,11 @@ cloud editor, no paid renderer.
 - **Look and sound:** a face-aware colour grade, the speaker cut out for words-behind-head shots, a music and sound-effect library, mastered to −14 LUFS.
 - **Check:** the final file is checked for size, frame rate, duration, loudness, true peak, black or frozen picture and cropped sentences, then a fresh Claude critic reviews it.
 
-## Install (macOS, Apple silicon)
+Why `HYPERFRAMES_NO_UPDATE_CHECK=1`: HyperFrames otherwise upgrades itself in the background, even mid-render, which
+crashes that render and breaks the tested version. Claude Code runs in this folder already get it from
+`.claude/settings.json`. To move to a newer HyperFrames on purpose, change `HYPERFRAMES_VERSION` in `shorts/config.py`
+and re-run `./setup.sh`.
 
-You need [Homebrew](https://brew.sh), the Xcode command line tools (`xcode-select --install`), Google Chrome and
-[Claude Code](https://claude.com/claude-code). Then:
-
-```bash
-git clone https://github.com/DhananjaySarathe/chilledbeer-video-edits.git "chilledbeer-video-edits"
-cd "chilledbeer-video-edits"
-./setup.sh
-```
-
-`setup.sh` is safe to re-run. It:
-- installs ffmpeg, whisper.cpp, uv and node with Homebrew, plus the pinned HyperFrames renderer (`HYPERFRAMES_VERSION` in `shorts/config.py`);
-- runs `uv sync` and `npm install`;
-- downloads the models (~1.2 GB: whisper, the aligner, YuNet, Smart Turn, Silero VAD and the SaT text model) and the fonts;
-- builds the Apple Vision tools in `kit/bin`;
-- creates `.env` from `.env.example` (only the optional Jev key lives there);
-- runs `uv run shorts doctor`, which checks everything and prints tool versions.
-
-Add one line to `~/.zshrc`:
-
-```bash
-export HYPERFRAMES_NO_UPDATE_CHECK=1
-```
-
-HyperFrames otherwise upgrades itself in the background, even mid-render, which crashes that render and breaks the
-pinned version. Claude Code runs in this folder already get it from `.claude/settings.json`. To move to a newer
-HyperFrames on purpose, change `HYPERFRAMES_VERSION` and re-run `./setup.sh`.
-
-## Claude Code cloud sessions (Linux)
-
-`cloud-setup.sh` is the Linux counterpart of `setup.sh`. The `SessionStart` hook in `.claude/settings.json` runs it
-automatically in cloud sessions (only when `CLAUDE_CODE_REMOTE=true`, so it never fires on a Mac). Leave the cloud
-environment's own setup script empty. Its output goes to `/tmp/cloud-setup.log`.
-
-A cloud session can edit code, run the tests and build graphics. Grading, person cut-outs, OCR boxes and full renders
-need macOS (Apple Vision, Chrome in `/Applications`), so they stay on the Mac. The speech and face models are skipped by
-default. Run `CLOUD_MODELS=1 ./cloud-setup.sh` to download them (needs Full network access). Cloud sessions clone
-from GitHub, so a push is all it takes to update them.
 
 ## Use
 
@@ -132,6 +147,16 @@ The audio files are not in this repository: their licences (NCS, Mixkit and othe
 `kit/sfx/library.json`; about 10 minutes the first time); a few tracks have no public download and are simply skipped. Credits are in
 `kit/music/CREDITS.md`: paste the block into your video description when a track asks for one. Add your own tracks to
 `kit/music/<mood>/` and `kit/music/library.json`.
+
+## Licences of what's bundled or downloaded
+
+- **Fonts** (`kit/fonts/`, in the repo): all under the SIL Open Font License 1.1, which allows sharing them with their
+  licence; each family's licence text is in `kit/fonts/licenses/`.
+- **Models**: not in the repo. `uv run shorts setup` downloads them from their official sources, each under its own
+  permissive licence (MIT, Apache-2.0 or BSD).
+- **Music and sound effects**: not in the repo (see above). You download them from their sources yourself, and the
+  track's own terms apply to your videos: credit NCS tracks as `kit/music/CREDITS.md` shows.
+- **Python and npm packages**: installed from PyPI and npm under their own licences.
 
 ## Tests
 

@@ -2,7 +2,7 @@
 
 A template is one reusable animated graphic. Jev picks it by its description, Claude fills its words, and the
 renderer turns it into a scene video (1080×1920, 30 fps) that is laid over, or replaces, the speaker.
-The design record is in `docs/superpowers/specs/2026-09-26-graphics-library-design.md`.
+
 
 ## Files
 

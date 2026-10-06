@@ -1,6 +1,6 @@
 # preset_paper_studio
 
-The look and workflow of **"I Don't Use a Video Editor. Claude Edits My Videos"** (`films/how-i-edit`, 2026-10-02). It is the first long-form edit the user signed off on ("nicee one.. really appreciated").
+The look and workflow of **"I Don't Use a Video Editor. Claude Edits My Videos"** (2026-10-02), the author's first approved long-form edit.
 
 When the user says **"use preset_paper_studio"** (or "paper studio", or "the how-i-edit style"), follow this file from top to bottom. It produces:
 
@@ -26,7 +26,7 @@ Keep the real room. The speaker sits in front of a plain cream wall, so we **don
 | `kit/look/grade.py` | the footage grade (shared kit tool) |
 | `kit/qa/qa.py` | the quality gate (shared kit tool) |
 
-`films/how-i-edit/` is the original project (old layout, kept as made). `example/` is the same film on the `output/` layout (kit/paths.py). Copy `example/` into a new `films/<name>/`, copy `templates/*.html` to `src/template.html` (and `reel/src/template.html`), then change only what the new video needs.
+`example/` is the original film's recipe on the `output/` layout (kit/paths.py); its footage isn't included, so read it as a model rather than run it. Copy `example/` into a new `films/<name>/`, copy `templates/*.html` to `src/template.html` (and `reel/src/template.html`), then change only what the new video needs.
 
 ## 3. Pipeline (commands)
 

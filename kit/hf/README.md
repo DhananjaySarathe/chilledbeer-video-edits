@@ -265,7 +265,7 @@ hide a little softness); a camera push so deep the outer pieces leave the frame 
 | rough.js 4.6.6 | MIT | `npm i` at the repo root; `vendor/rough.js` (external file: it contains `Math.random`, unused with a seed) |
 | perfect-freehand 1.2.3 | MIT | `npm i`; vendored as `vendor/perfect-freehand.js` (the CJS build wrapped to set `window.PerfectFreehand`) |
 | GSAP DrawSVGPlugin 3.15 | GSAP standard licence (free, including plugins, since 2025) | `node_modules/gsap/dist`; `vendor/DrawSVGPlugin.min.js` |
-| Excalifont (Latin subset) | SIL OFL 1.1 | `kit/fonts/Excalifont-Regular.woff2`, from excalidraw's GitHub; licence in `kit/fonts/Excalifont-OFL.txt` |
+| Excalifont (Latin subset) | SIL OFL 1.1 | `kit/fonts/Excalifont-Regular.woff2`, from excalidraw's GitHub; licence in `kit/fonts/licenses/Excalifont-OFL.txt` |
 | Caveat 700 (fallback hand) | SIL OFL 1.1 | `kit/fonts/Caveat-700.ttf` (already in the kit) |
 
 Excalifont's Latin file covers U+20–7E and Latin-1 (no arrows or ✓: draw those as strokes). `vendor.py` copies the
@@ -346,7 +346,7 @@ print("\n".join(P["log"]))
 HF.camera(K, st, { plan: D.camera, pipRadius: 158 });
 // 9:16: camera.plan({..., mode: "panel", top: 880, width: 1080, height: 1920, format: "reel", hook: [0, hookEnd]})
 ```
-- Pieces need `face` = [cx, cy, size] from a YuNet track (films/expensewaale/face_track.py); words need `i, text, t, e`.
+- Pieces need `face` = [cx, cy, size] from a YuNet track (kit/look/faces.py); words need `i, text, t, e`.
 - Don't tween `st.wrap` (or `cam` top/height in panel mode) in the template: the camera writes them every frame. To own
   the wrap for a while (a custom hook), pass `active: [a, b]`.
 - Re-run the bake whenever the A-roll or the plan changes (the clip holds finished frames).

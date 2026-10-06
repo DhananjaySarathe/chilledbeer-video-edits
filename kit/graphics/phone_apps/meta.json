@@ -1,0 +1,71 @@
+{
+  "id": "phone_apps",
+  "name": "Phone home screen: apps get deleted",
+  "category": "mockup",
+  "kind": "fullscreen",
+  "description": "A black phone on the clean background shows a home screen (status bar, a big clock, a grid of rounded app tiles with labels). The apps marked for removal start to jiggle, get an orange minus badge and pop away one after another, leaving dashed empty slots; a white card beside the phone counts them down to 0, and one kept app can end on an orange ring.",
+  "use_when": "Deleting or not having apps: a digital detox, 'no social media on my phone', 'I removed every distracting app', 'my phone only has these tools', cleaning up a home screen.",
+  "params": {
+    "apps": {
+      "type": "list",
+      "required": true,
+      "max_len": 12,
+      "help": "home-screen apps in grid order (4 per row): [{label, icon, remove, star}]; label <= 10 characters, generic names only ('Reels', 'Feed', 'Chat'), never a brand; icon is a GFX icon name; remove: true pops it away; star: true rings the kept app at the end"
+    },
+    "time": {
+      "type": "text",
+      "default": "9:41",
+      "max_len": 5,
+      "help": "big clock on the home screen, e.g. '11:30'"
+    },
+    "label": {
+      "type": "text",
+      "default": "Social apps",
+      "max_len": 18,
+      "help": "small label on the counter card; '' hides the card"
+    },
+    "note": {
+      "type": "text",
+      "default": "",
+      "max_len": 22,
+      "help": "short line under the count, e.g. 'on my phone'"
+    },
+    "date": {
+      "type": "text",
+      "default": "",
+      "max_len": 22,
+      "help": "small line under the clock, e.g. 'Focus mode' or 'Monday, 12 June'; '' hides it"
+    }
+  },
+  "duration": {
+    "min": 2.4,
+    "default": 3.4,
+    "max": 5.5
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "phone",
+    "apps",
+    "delete",
+    "detox",
+    "social media",
+    "home screen",
+    "distraction"
+  ],
+  "explains": [
+    "instruction"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "phone_post",
+  "version": "1"
+}

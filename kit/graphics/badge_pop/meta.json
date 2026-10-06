@@ -1,0 +1,69 @@
+{
+  "id": "badge_pop",
+  "name": "Badge popping next to the head",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A tilted orange pill badge bounces in beside the speaker's head at eye level: a white circle with an icon (a check that draws itself, an x, a star or a flame) and one big condensed uppercase word like 'EASY', then a glossy shine sweeps across it while it gently floats.",
+  "use_when": "A one-word verdict or reaction the speaker says out loud: easy, done, fast, free, wrong, nope, winner, hot; a quick approval (check), rejection (x), highlight (star) or hype (fire).",
+  "params": {
+    "text": {
+      "type": "text",
+      "required": true,
+      "max_len": 12,
+      "help": "one short word or two, e.g. 'EASY', 'DONE', 'NOPE'"
+    },
+    "icon": {
+      "type": "text",
+      "default": "check",
+      "max_len": 16,
+      "help": "check | x | star | fire, or any icon name from docs/graphics.md"
+    },
+    "tone": {
+      "type": "text",
+      "default": "accent",
+      "max_len": 8,
+      "help": "accent (orange) | good (green, for yes/win) | ink (black)"
+    },
+    "side": {
+      "type": "text",
+      "default": "right",
+      "max_len": 5,
+      "help": "right | left: which side of the head it pops on"
+    }
+  },
+  "duration": {
+    "min": 0.8,
+    "default": 1.6,
+    "max": 4.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "pop",
+      "gain_db": -12
+    },
+    {
+      "at": 0.3,
+      "name": "tick",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "badge",
+    "reaction",
+    "verdict",
+    "sticker",
+    "check",
+    "overlay"
+  ],
+  "explains": [
+    "emphasis"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "word_slam",
+  "version": "1"
+}

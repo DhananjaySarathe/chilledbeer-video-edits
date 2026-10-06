@@ -1,0 +1,85 @@
+<style>
+  .bp-pos { position: absolute; left: 0; top: 0; }
+  .bp-badge { position: relative; display: inline-flex; align-items: center; gap: 20px; padding: 16px 36px 16px 16px;
+    border-radius: 26px; background: var(--accent); color: #fff; white-space: nowrap;
+    box-shadow: 0 22px 44px rgba(0, 0, 0, .28), 0 5px 12px rgba(0, 0, 0, .18); }
+  .bp-badge.good { background: var(--good); }
+  .bp-badge.ink { background: var(--ink); }
+  .bp-icon { flex: none; width: 88px; height: 88px; border-radius: 50%; background: #fff; color: var(--accent);
+    display: flex; align-items: center; justify-content: center; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .08); }
+  .bp-badge.good .bp-icon { color: var(--good); }
+  .bp-icon svg { display: block; }
+  .bp-text { font-family: var(--condensed); font-weight: 700; font-size: 92px; line-height: 1; letter-spacing: .01em;
+    text-transform: uppercase; padding-bottom: 4px; }
+  .bp-gloss { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
+  .bp-gloss i { position: absolute; top: -20%; bottom: -20%; left: 0; width: 34%;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .42) 50%, rgba(255, 255, 255, 0) 100%); }
+</style>
+<div class="bp-pos" id="pos"><div id="pop"><div class="bp-badge" id="badge">
+  <span class="bp-icon" id="icon"></span><span class="bp-text" id="text"></span>
+  <span class="bp-gloss"><i id="shine"></i></span>
+</div></div></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const pos = GFX.$("#pos"), pop = GFX.$("#pop"), badge = GFX.$("#badge"), icon = GFX.$("#icon"), text = GFX.$("#text");
+    const tone = ["good", "ink"].includes(P.tone) ? P.tone : "accent";
+    const name = P.icon || "check";
+    badge.classList.add(tone);
+    text.textContent = P.text || "";
+    icon.innerHTML = GFX.icon(name, { size: 56, width: 3.6 });
+
+    // place it beside the head, level with the eyes (face box, or a centred default)
+    const f = GFX.face || { x: 300, y: 390, w: 480, h: 620 };
+    GFX.layout(() => {
+      const w = badge.offsetWidth, h = badge.offsetHeight;
+      const room = { right: 1040 - (f.x + f.w * 0.9), left: f.x + f.w * 0.1 - 40 };
+      // the asked-for side, unless the head leaves clearly more room on the other one
+      let left = P.side === "left";
+      const mine = left ? room.left : room.right, other = left ? room.right : room.left;
+      if (mine < w * 0.75 && other > mine * 1.25) left = !left;
+      const space = left ? room.left : room.right;
+      const k = Math.max(0.62, Math.min(1, space / w));   // long words shrink the whole badge
+      const ws = w * k, hs = h * k;
+      let x, cy;
+      if (ws <= space + 1) { x = left ? f.x + f.w * 0.1 - ws : f.x + f.w * 0.9; cy = f.y + f.h * 0.4; }
+      else { x = left ? 40 : 1040 - ws; cy = f.y + f.h * 0.1; }  // too wide: slide in over the forehead, above the eyes
+      x = Math.min(Math.max(x, 40), 1040 - ws);
+      const y = Math.min(Math.max(cy - hs / 2, 300), 1000 - hs);
+      pos.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px) scale(${k.toFixed(3)})`;
+      pos.style.transformOrigin = "0 0";
+      pop.style.transformOrigin = left ? "100% 60%" : "0% 60%";
+
+      // bounce in from the head, overshoot, settle at the tilt
+      const tilt = left ? 7 : -7, dir = left ? 1 : -1;
+      GFX.anim(pop, [
+        { opacity: 0, transform: `translateX(${dir * -50}px) scale(.2) rotate(${tilt * 3.4}deg)` },
+        { opacity: 1, transform: `translateX(0) scale(1.16) rotate(${tilt * 0.3}deg)`, offset: 0.5 },
+        { opacity: 1, transform: `translateX(0) scale(.95) rotate(${tilt * 1.35}deg)`, offset: 0.76 },
+        { opacity: 1, transform: `translateX(0) scale(1) rotate(${tilt}deg)` },
+      ], { at: 0, dur: 640, ease: "out" });
+      // then a slow, gentle drift so it never freezes
+      GFX.anim(badge, [{ translate: "0 0", rotate: "0deg" }, { translate: "0 -10px", rotate: `${-tilt * 0.18}deg` }],
+        { at: 640, dur: Math.max(400, D - 640), ease: "inOut" });
+    });
+
+    // icon disc pops, then its mark draws (or spins in for filled icons)
+    GFX.anim(icon, [
+      { transform: "scale(0) rotate(-90deg)" }, { transform: "scale(1.2) rotate(8deg)", offset: 0.65 }, { transform: "scale(1) rotate(0)" },
+    ], { at: 70, dur: 420, ease: "out" });
+    const paths = GFX.$$("path, circle, rect", icon);
+    const stroked = icon.querySelector("svg").getAttribute("fill") === "none";
+    if (stroked) {
+      paths.forEach((p) => { p.setAttribute("pathLength", "1"); p.style.strokeDasharray = "1"; p.style.strokeDashoffset = "1"; });
+      GFX.anim(paths, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { at: 240, dur: 320, ease: "inOut" });
+    } else {
+      GFX.anim(icon.querySelector("svg"), [{ transform: "scale(0)" }, { transform: "scale(1)" }], { at: 240, dur: 320, ease: "back" });
+    }
+    GFX.anim(text, [{ opacity: 0, transform: "translateX(-18px)" }, { opacity: 1, transform: "translateX(0)" }],
+      { at: 50, dur: 300, ease: "out" });
+
+    // a glossy shine sweeps across once it has landed
+    GFX.anim(GFX.$("#shine"), [{ transform: "translateX(-120%) skewX(-12deg)" }, { transform: "translateX(420%) skewX(-12deg)" }],
+      { at: Math.min(720, D - 560), dur: 540, ease: "inOut" });
+  })();
+</script>

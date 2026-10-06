@@ -1,0 +1,4180 @@
+{
+ "RR_Free": {
+  "artist": "Reece Ros\u00e9",
+  "title": "Free",
+  "slug": "RR_Free",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "exciting"
+  ],
+  "date": "22 Sep 2026"
+ },
+ "c_pullmedown": {
+  "artist": "CERES, TAME",
+  "title": "Pull Me Down",
+  "slug": "c_pullmedown",
+  "versions": "Regular, Instrumental",
+  "genre": "Techno",
+  "moods": [
+   "powerful",
+   "energetic"
+  ],
+  "date": "20 Mar 2026"
+ },
+ "justthewayitgoesWE": {
+  "artist": "Crumb Pit",
+  "title": "Just The Way It Goes",
+  "slug": "justthewayitgoesWE",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance-Pop",
+  "moods": [
+   "exciting",
+   "positive",
+   "energetic"
+  ],
+  "date": "16 Jan 2026"
+ },
+ "YourPoison": {
+  "artist": "ROY KNOX",
+  "title": "Your Poison",
+  "slug": "YourPoison",
+  "versions": "Regular, Instrumental",
+  "genre": "Dubstep",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Heavy",
+   "Restless",
+   "Hopeful"
+  ],
+  "date": "10 Oct 2024"
+ },
+ "BS_OnandOn": {
+  "artist": "Sayfro, BAYZY",
+  "title": "On and On",
+  "slug": "BS_OnandOn",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "Happy",
+   "Restless"
+  ],
+  "date": "26 Sep 2024"
+ },
+ "PartyPioneers": {
+  "artist": "NOYSE, Rudeejay",
+  "title": "Party Pioneers",
+  "slug": "PartyPioneers",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance-Pop",
+  "moods": [
+   "Euphoric",
+   "Heavy",
+   "Quirky",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "13 Sep 2024"
+ },
+ "RM_Home": {
+  "artist": "Robbie Mendez",
+  "title": "Home",
+  "slug": "RM_Home",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Quirky",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "3 Sep 2024"
+ },
+ "TFaster": {
+  "artist": "Tobu",
+  "title": "Faster",
+  "slug": "TFaster",
+  "versions": "Regular, Instrumental",
+  "genre": "Progressive House",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Glamorous",
+   "Epic",
+   "Sentimental"
+  ],
+  "date": "9 Aug 2024"
+ },
+ "MHIB": {
+  "artist": "NEYVO",
+  "title": "My Heart Is Broken",
+  "slug": "MHIB",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance-Pop",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Laid Back",
+   "Quirky",
+   "Restless",
+   "Sentimental"
+  ],
+  "date": "30 Jul 2024"
+ },
+ "Overdose_TR": {
+  "artist": "Tatsunoshin, David Allen, Andrew A, KDH",
+  "title": "Overdose (feat. David Allen) (Tatsunoshin Remix)",
+  "slug": "Overdose_TR",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardstyle",
+  "moods": [
+   "Eccentric",
+   "Chasing",
+   "Euphoric",
+   "Heavy",
+   "Mysterious",
+   "Restless",
+   "Dark"
+  ],
+  "date": "26 Jul 2024"
+ },
+ "GRAVE": {
+  "artist": "Idle Days, HOWL",
+  "title": "GRAVE",
+  "slug": "GRAVE",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Glamorous",
+   "Restless"
+  ],
+  "date": "25 Jul 2024"
+ },
+ "LYA": {
+  "artist": "LAADS",
+  "title": "Love You (Anyway)",
+  "slug": "LYA",
+  "versions": "Regular, Instrumental",
+  "genre": "Garage",
+  "moods": [
+   "Elegant",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "Hopeful"
+  ],
+  "date": "19 Jul 2024"
+ },
+ "Overdose": {
+  "artist": "David Allen, Andrew A, KDH",
+  "title": "Overdose (feat. David Allen)",
+  "slug": "Overdose",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Eccentric",
+   "Chasing",
+   "Euphoric",
+   "Heavy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "12 Jul 2024"
+ },
+ "Worship": {
+  "artist": "Diamond Eyes",
+  "title": "Worship",
+  "slug": "Worship",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Chasing",
+   "Eccentric",
+   "Epic",
+   "Euphoric",
+   "Heavy",
+   "Mysterious",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "5 Jul 2024"
+ },
+ "CZ_Warzone": {
+  "artist": "Zaug, Clarx",
+  "title": "Warzone (feat. Zaug)",
+  "slug": "CZ_Warzone",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dark",
+   "Elegant",
+   "Euphoric",
+   "Glamorous",
+   "Heavy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "28 Jun 2024"
+ },
+ "YGMH": {
+  "artist": "Rex Hooligan",
+  "title": "You Get Me High",
+  "slug": "YGMH",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Elegant",
+   "Dreamy",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "Quirky",
+   "Restless",
+   "Sentimental"
+  ],
+  "date": "11 Jun 2024"
+ },
+ "TheRightTime": {
+  "artist": "LUVIUM, Youth In Circles",
+  "title": "The Right Time",
+  "slug": "TheRightTime",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Restless",
+   "Sentimental"
+  ],
+  "date": "6 Jun 2024"
+ },
+ "Comet": {
+  "artist": "Keepsake, Skybreak",
+  "title": "Comet",
+  "slug": "Comet",
+  "versions": "Regular, Instrumental",
+  "genre": "Drumstep",
+  "moods": [
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Sexy"
+  ],
+  "date": "23 May 2024"
+ },
+ "WYC": {
+  "artist": "Reuben Cameron, DEAN, Palm Skies",
+  "title": "Will You Come",
+  "slug": "WYC",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance Pop",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Happy",
+   "Quirky",
+   "Restless",
+   "Sentimental",
+   "Sexy"
+  ],
+  "date": "9 May 2024"
+ },
+ "HMHY": {
+  "artist": "Clarx, Shiah Maisel",
+  "title": "Help Me Help You",
+  "slug": "HMHY",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Hopeful",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "sad",
+   "Suspense",
+   "Chasing",
+   "Eccentric",
+   "Elegant",
+   "Floating",
+   "Heavy",
+   "Sentimental"
+  ],
+  "date": "19 Apr 2024"
+ },
+ "GottaLeave": {
+  "artist": "Shiah Maisel, Clarx",
+  "title": "Gotta Leave",
+  "slug": "GottaLeave",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Hopeful",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "sad",
+   "Suspense",
+   "Chasing",
+   "Eccentric",
+   "Elegant",
+   "Floating",
+   "Heavy",
+   "Sentimental"
+  ],
+  "date": "19 Apr 2024"
+ },
+ "IWannaDance": {
+  "artist": "PYTI",
+  "title": "I Wanna Dance",
+  "slug": "IWannaDance",
+  "versions": "Regular, Instrumental",
+  "genre": "Techno",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Chasing",
+   "Euphoric",
+   "Epic",
+   "Fear",
+   "Heavy",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "16 Apr 2024"
+ },
+ "UP_Hollow": {
+  "artist": "Unlike Pluto",
+  "title": "Hollow",
+  "slug": "UP_Hollow",
+  "versions": "Regular, Instrumental",
+  "genre": "Alternative Pop",
+  "moods": [
+   "Chasing",
+   "Eccentric",
+   "Euphoric",
+   "Heavy",
+   "Mysterious",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "12 Apr 2024"
+ },
+ "AlongYourWay": {
+  "artist": "Pala Chrome, Dust of Apollon",
+  "title": "Along Your Way",
+  "slug": "AlongYourWay",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Floating",
+   "Glamorous",
+   "Hopeful",
+   "Epic",
+   "romantic",
+   "Sentimental"
+  ],
+  "date": "4 Apr 2024"
+ },
+ "LostMyLove": {
+  "artist": "Tatsunoshin",
+  "title": "Lost My Love",
+  "slug": "LostMyLove",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardstyle",
+  "moods": [
+   "Chasing",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "Sentimental",
+   "Sexy"
+  ],
+  "date": "28 Mar 2024"
+ },
+ "RoundNRound": {
+  "artist": "Shiah Maisel, Clarx",
+  "title": "Round n' Round",
+  "slug": "RoundNRound",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Chasing",
+   "Eccentric",
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Restless",
+   "Elegant"
+  ],
+  "date": "22 Mar 2024"
+ },
+ "ImNotReady": {
+  "artist": "Low Mileage",
+  "title": "I'm Not Ready",
+  "slug": "ImNotReady",
+  "versions": "Regular, Instrumental",
+  "genre": "Garage House",
+  "moods": [
+   "Dreamy",
+   "Eccentric",
+   "Elegant",
+   "Euphoric",
+   "Floating",
+   "Glamorous",
+   "Happy",
+   "Hopeful",
+   "Laid Back",
+   "Quirky",
+   "relaxed"
+  ],
+  "date": "19 Mar 2024"
+ },
+ "FFAD": {
+  "artist": "LINKER, ROY KNOX",
+  "title": "Fell For A Demon",
+  "slug": "FFAD",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Quirky",
+   "Restless",
+   "Sentimental"
+  ],
+  "date": "15 Mar 2024"
+ },
+ "prettyafternoon": {
+  "artist": "Andrah",
+  "title": "pretty afternoon",
+  "slug": "prettyafternoon",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Floating",
+   "Glamorous",
+   "Happy",
+   "Laid Back",
+   "Hopeful",
+   "romantic",
+   "Sexy",
+   "Sentimental"
+  ],
+  "date": "8 Mar 2024"
+ },
+ "LeftWithNothing": {
+  "artist": "Clarx, Shiah Maisel",
+  "title": "Left With Nothing",
+  "slug": "LeftWithNothing",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Epic",
+   "Floating",
+   "Glamorous",
+   "Mysterious",
+   "Sentimental",
+   "Suspense"
+  ],
+  "date": "23 Feb 2024"
+ },
+ "Sinner": {
+  "artist": "Diamond Eyes",
+  "title": "Sinner",
+  "slug": "Sinner",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "Dreamy",
+   "Eccentric",
+   "Elegant",
+   "Euphoric",
+   "Floating",
+   "Hopeful",
+   "Quirky",
+   "romantic",
+   "Sentimental"
+  ],
+  "date": "16 Feb 2024"
+ },
+ "MemoryBox": {
+  "artist": "ROY KNOX",
+  "title": "Memory Box",
+  "slug": "MemoryBox",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dreamy",
+   "Eccentric",
+   "Elegant",
+   "Euphoric",
+   "Glamorous",
+   "Heavy",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "9 Feb 2024"
+ },
+ "COYN": {
+  "artist": "Lottie Jones, Tom Wigley, MANIA",
+  "title": "Calling Out Your Name",
+  "slug": "COYN",
+  "versions": "Regular, Instrumental",
+  "genre": "Liquid DnB",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Floating",
+   "Glamorous",
+   "Hopeful",
+   "Laid Back",
+   "relaxed",
+   "romantic",
+   "Sentimental",
+   "Sexy"
+  ],
+  "date": "25 Jan 2024"
+ },
+ "Unbreakable": {
+  "artist": "Chris Linton, ANGELPLAYA, Lost Sky",
+  "title": "Unbreakable",
+  "slug": "Unbreakable",
+  "versions": "Regular, Instrumental",
+  "genre": "Midtempo Bass",
+  "moods": [
+   "Chasing",
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "Floating",
+   "Hopeful",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "12 Jan 2024"
+ },
+ "dontstay": {
+  "artist": "NGO",
+  "title": "Don't Stay",
+  "slug": "dontstay",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance Pop",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Restless"
+  ],
+  "date": "11 Jan 2024"
+ },
+ "ILikeIt": {
+  "artist": "Fame Sounds, P for Parker, Defx",
+  "title": "I Like It",
+  "slug": "ILikeIt",
+  "versions": "Regular, Instrumental",
+  "genre": "Disco House",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Floating",
+   "Hopeful",
+   "Peaceful",
+   "romantic"
+  ],
+  "date": "10 Jan 2024"
+ },
+ "Alright": {
+  "artist": "Sync, Avi Snow, Marky Style",
+  "title": "Alright",
+  "slug": "Alright",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie Dance",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Floating",
+   "Hopeful",
+   "Peaceful",
+   "romantic"
+  ],
+  "date": "9 Jan 2024"
+ },
+ "TWU": {
+  "artist": "RVLE, Tollef",
+  "title": "Time With You (feat. RVLE)",
+  "slug": "TWU",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance Pop",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "romantic",
+   "Sexy"
+  ],
+  "date": "21 Dec 2023"
+ },
+ "Reason": {
+  "artist": "MANIA, Remy Night",
+  "title": "Reason (ft. Remy Night)",
+  "slug": "Reason",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Laid Back",
+   "Peaceful"
+  ],
+  "date": "8 Dec 2023"
+ },
+ "a-allineed": {
+  "artist": "Karl Killing, Ariadne",
+  "title": "All I Need (feat. Karl Killing)",
+  "slug": "a-allineed",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Dreamy",
+   "energetic",
+   "Epic",
+   "Euphoric"
+  ],
+  "date": "30 Nov 2023"
+ },
+ "WinAndLose": {
+  "artist": "Chime",
+  "title": "Win & Lose",
+  "slug": "WinAndLose",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dreamy",
+   "Glamorous",
+   "Happy",
+   "Laid Back",
+   "romantic",
+   "Sentimental"
+  ],
+  "date": "27 Aug 2024"
+ },
+ "SV_Vibe": {
+  "artist": "Spicyverse",
+  "title": "Vibe",
+  "slug": "SV_Vibe",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Eccentric",
+   "Glamorous",
+   "Happy",
+   "Quirky",
+   "Restless",
+   "romantic",
+   "Sentimental",
+   "Sexy"
+  ],
+  "date": "23 Apr 2024"
+ },
+ "HOM": {
+  "artist": "Raul Ojamaa",
+  "title": "Hold On Me",
+  "slug": "HOM",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "Funny",
+   "Glamorous",
+   "Happy",
+   "Quirky"
+  ],
+  "date": "28 Nov 2023"
+ },
+ "NEBRASKA_WY": {
+  "artist": "Sam Day",
+  "title": "NEBRASKA (WITH YOU)",
+  "slug": "NEBRASKA_WY",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Happy",
+   "Laid Back",
+   "Peaceful",
+   "relaxed"
+  ],
+  "date": "5 Oct 2023"
+ },
+ "holdyou": {
+  "artist": "Low Mileage",
+  "title": "Hold You",
+  "slug": "holdyou",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Peaceful",
+   "romantic"
+  ],
+  "date": "3 Oct 2023"
+ },
+ "DL_Honey": {
+  "artist": "Daniel Levi",
+  "title": "Honey",
+  "slug": "DL_Honey",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie",
+  "moods": [
+   "Glamorous",
+   "Happy",
+   "Funny",
+   "Laid Back",
+   "romantic",
+   "Sexy"
+  ],
+  "date": "22 Sep 2023"
+ },
+ "sugarplumbin": {
+  "artist": "Reece Taylor",
+  "title": "Sugar Plumbin'",
+  "slug": "sugarplumbin",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie",
+  "moods": [
+   "Dreamy",
+   "energetic",
+   "Glamorous",
+   "Happy",
+   "Laid Back",
+   "Sexy"
+  ],
+  "date": "17 Aug 2023"
+ },
+ "dreamin": {
+  "artist": "NOYSE",
+  "title": "Dreamin'",
+  "slug": "dreamin",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "romantic"
+  ],
+  "date": "16 Aug 2023"
+ },
+ "falltoodeep": {
+  "artist": "Barmuda, Andrew A",
+  "title": "Fall Too Deep",
+  "slug": "falltoodeep",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "romantic"
+  ],
+  "date": "21 Jul 2023"
+ },
+ "allornothing": {
+  "artist": "SGNLS, Guy Arthur, Aiobahn",
+  "title": "All or Nothing (feat. SGNLS)",
+  "slug": "allornothing",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Glamorous",
+   "Happy"
+  ],
+  "date": "13 Jul 2023"
+ },
+ "toofar": {
+  "artist": "jeonghyeon, Noisy Choice",
+  "title": "Too Far",
+  "slug": "toofar",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Quirky",
+   "Happy",
+   "Restless"
+  ],
+  "date": "20 Jun 2023"
+ },
+ "clownaround": {
+  "artist": "Daniel Levi",
+  "title": "Clown Around",
+  "slug": "clownaround",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Laid Back",
+   "Funny"
+  ],
+  "date": "16 Jun 2023"
+ },
+ "FFY": {
+  "artist": "Charles B, Justmyl\u00f8rd",
+  "title": "Falling For You",
+  "slug": "FFY",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Happy",
+   "Hopeful",
+   "romantic",
+   "Glamorous"
+  ],
+  "date": "9 Jun 2023"
+ },
+ "PaperWalls": {
+  "artist": "Mykyl, Riggs, Elliot Kings",
+  "title": "Paper Walls (with Mykyl)",
+  "slug": "PaperWalls",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "Dreamy",
+   "energetic",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "Hopeful",
+   "Quirky",
+   "romantic",
+   "scary"
+  ],
+  "date": "11 Apr 2023"
+ },
+ "toxicjoysry": {
+  "artist": "SRY, Toxic Joy",
+  "title": "Walk Away",
+  "slug": "toxicjoysry",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "Laid Back",
+   "Restless",
+   "Sexy"
+  ],
+  "date": "15 Mar 2023"
+ },
+ "PLVoyage": {
+  "artist": "PLEEG",
+  "title": "Voyage",
+  "slug": "PLVoyage",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "Mysterious",
+   "Laid Back",
+   "Glamorous",
+   "Happy",
+   "relaxed",
+   "energetic",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "14 Mar 2023"
+ },
+ "PL_Alive": {
+  "artist": "PLEEG",
+  "title": "Alive",
+  "slug": "PL_Alive",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Happy",
+   "Restless",
+   "Euphoric",
+   "Quirky"
+  ],
+  "date": "10 Jan 2023"
+ },
+ "Unstoppable": {
+  "artist": "JOXION, Thorne, iFeature",
+  "title": "Unstoppable",
+  "slug": "Unstoppable",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Epic",
+   "energetic",
+   "Euphoric",
+   "Quirky",
+   "Restless",
+   "Happy",
+   "sad"
+  ],
+  "date": "6 Jan 2023"
+ },
+ "NoMoreLev": {
+  "artist": "Rex Hooligan, Anna Simone",
+  "title": "No More Levitation",
+  "slug": "NoMoreLev",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Epic",
+   "energetic",
+   "Euphoric",
+   "Quirky",
+   "Restless",
+   "Happy",
+   "sad"
+  ],
+  "date": "6 Jan 2023"
+ },
+ "RKC_TOS": {
+  "artist": "ROY KNOX",
+  "title": "The Other Side",
+  "slug": "RKC_TOS",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dreamy",
+   "Epic",
+   "energetic",
+   "Euphoric",
+   "Happy",
+   "Restless"
+  ],
+  "date": "30 Dec 2022"
+ },
+ "A_Echo": {
+  "artist": "Apollo On The Run",
+  "title": "Echo",
+  "slug": "A_Echo",
+  "versions": "Regular, Instrumental",
+  "genre": "Alternative Pop",
+  "moods": [
+   "Dark",
+   "Dreamy",
+   "Epic",
+   "Hopeful",
+   "Mysterious",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "1 Oct 2024"
+ },
+ "MB_AI": {
+  "artist": "Max Brhon",
+  "title": "AI",
+  "slug": "MB_AI",
+  "versions": "Regular, Instrumental",
+  "genre": "Midtempo Bass",
+  "moods": [
+   "Angry",
+   "Chasing",
+   "Epic",
+   "Fear",
+   "Heavy",
+   "Mysterious",
+   "Restless",
+   "scary",
+   "Suspense"
+  ],
+  "date": "21 Mar 2024"
+ },
+ "Vienna": {
+  "artist": "James Mercy, PhiloSofie",
+  "title": "Vienna (feat. PhiloSofie)",
+  "slug": "Vienna",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock, Trap",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Epic",
+   "Glamorous",
+   "Sexy",
+   "Mysterious",
+   "Heavy",
+   "Elegant"
+  ],
+  "date": "29 Dec 2023"
+ },
+ "DoneBetter": {
+  "artist": "AViVA, Clarx, Shiah Maisel",
+  "title": "Done Better (feat. AViVA)",
+  "slug": "DoneBetter",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Angry",
+   "Epic",
+   "Heavy",
+   "Restless",
+   "sad"
+  ],
+  "date": "22 Dec 2023"
+ },
+ "clockwork": {
+  "artist": "Jnathyn, Bryan Andrew Medina",
+  "title": "Clockwork",
+  "slug": "clockwork",
+  "versions": "Regular, Instrumental",
+  "genre": "Midtempo",
+  "moods": [
+   "Epic",
+   "Mysterious",
+   "Dark",
+   "Dreamy"
+  ],
+  "date": "7 Dec 2023"
+ },
+ "goneforgood": {
+  "artist": "Rival, Jim Yosef, Alaina Cross",
+  "title": "Gone For Good",
+  "slug": "goneforgood",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Quirky",
+   "Restless",
+   "Dark"
+  ],
+  "date": "1 Dec 2023"
+ },
+ "karma": {
+  "artist": "Alaina Cross",
+  "title": "Karma",
+  "slug": "karma",
+  "versions": "Regular, Instrumental",
+  "genre": "Pop, Electronic",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Epic",
+   "Glamorous",
+   "Quirky"
+  ],
+  "date": "10 Nov 2023"
+ },
+ "KOTH": {
+  "artist": "Nat James, Dirty Palm",
+  "title": "King Of The Hill",
+  "slug": "KOTH",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Angry",
+   "energetic",
+   "Epic",
+   "Quirky",
+   "Mysterious",
+   "Gloomy",
+   "Fear"
+  ],
+  "date": "12 Oct 2023"
+ },
+ "summersend": {
+  "artist": "Jade Key, Tatsunoshin",
+  "title": "Summer's End",
+  "slug": "summersend",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardstyle",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Quirky",
+   "Restless",
+   "Euphoric"
+  ],
+  "date": "30 Aug 2023"
+ },
+ "madness": {
+  "artist": "WATEVA, m els",
+  "title": "Madness (feat. m els)",
+  "slug": "madness",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Quirky",
+   "Restless",
+   "Euphoric"
+  ],
+  "date": "29 Aug 2023"
+ },
+ "temptation": {
+  "artist": "Toxic Joy",
+  "title": "Temptation",
+  "slug": "temptation",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Restless",
+   "Euphoric"
+  ],
+  "date": "18 Aug 2023"
+ },
+ "8rounds": {
+  "artist": "Zaug",
+  "title": "8 Rounds",
+  "slug": "8rounds",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "Restless",
+   "Angry",
+   "Dark",
+   "Epic"
+  ],
+  "date": "18 Aug 2023"
+ },
+ "NoMoney": {
+  "artist": "Clarx, Zaug",
+  "title": "No Money",
+  "slug": "NoMoney",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Restless"
+  ],
+  "date": "21 Jul 2023"
+ },
+ "whatiwant_BL": {
+  "artist": "Ray Le Fanue, Britt Lari",
+  "title": "What I Want",
+  "slug": "whatiwant_BL",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Glamorous",
+   "Quirky"
+  ],
+  "date": "20 Jul 2023"
+ },
+ "OnReplay": {
+  "artist": "NIVIRO",
+  "title": "On Replay",
+  "slug": "OnReplay",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Hopeful",
+   "Restless"
+  ],
+  "date": "14 Jul 2023"
+ },
+ "LikeThat": {
+  "artist": "JJL, SIIK",
+  "title": "Like That",
+  "slug": "LikeThat",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Glamorous"
+  ],
+  "date": "7 Jul 2023"
+ },
+ "BlameMe": {
+  "artist": "Fransis Derelle, Josh Rubin",
+  "title": "Blame Me",
+  "slug": "BlameMe",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "Glamorous"
+  ],
+  "date": "7 Jul 2023"
+ },
+ "V_WalkAway": {
+  "artist": "Vaskan",
+  "title": "Walk Away",
+  "slug": "V_WalkAway",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardstyle",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Restless"
+  ],
+  "date": "30 Jun 2023"
+ },
+ "thetime": {
+  "artist": "Tatsunoshin",
+  "title": "The Time",
+  "slug": "thetime",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "Dreamy",
+   "Epic",
+   "Euphoric",
+   "romantic",
+   "Glamorous"
+  ],
+  "date": "28 Jun 2023"
+ },
+ "allweveeverknown": {
+  "artist": "Cartoon, Fred V, Immy Odon",
+  "title": "All We've Ever Known (ft. Fred V & Immy Odon)",
+  "slug": "allweveeverknown",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "majestic",
+   "exciting"
+  ],
+  "date": "29 Aug 2025"
+ },
+ "Whiplash": {
+  "artist": "Cartoon",
+  "title": "Whiplash",
+  "slug": "Whiplash",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "exciting",
+   "powerful"
+  ],
+  "date": "25 Jul 2025"
+ },
+ "Spicy": {
+  "artist": "Cartoon",
+  "title": "Spicy",
+  "slug": "Spicy",
+  "versions": "Regular, Instrumental",
+  "genre": "Dubstep",
+  "moods": [
+   "energetic",
+   "exciting",
+   "dramatic"
+  ],
+  "date": "25 Jul 2025"
+ },
+ "C_euphoria": {
+  "artist": "Cartoon, VALLO, KAZHI, Blooom",
+  "title": "Euphoria",
+  "slug": "C_euphoria",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "exciting",
+   "powerful"
+  ],
+  "date": "18 Jul 2025"
+ },
+ "TS_OnMyMind": {
+  "artist": "Slenderino, Tatsunoshin",
+  "title": "On My Mind",
+  "slug": "TS_OnMyMind",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardcore",
+  "moods": [
+   "energetic",
+   "exciting",
+   "powerful"
+  ],
+  "date": "15 Jul 2025"
+ },
+ "waitawhile": {
+  "artist": "m els, Pasha, Leowi, Cartoon",
+  "title": "Wait A While (ft. Pasha & m els)",
+  "slug": "waitawhile",
+  "versions": "Regular, Instrumental",
+  "genre": "Speed Garage",
+  "moods": [
+   "exciting",
+   "energetic"
+  ],
+  "date": "20 Jun 2025"
+ },
+ "AroundUs": {
+  "artist": "Pasha, Carlos Ukareda, VALLO, NCT, Cartoon",
+  "title": "Around Us (ft. Pasha & Carlos Ukareda)",
+  "slug": "AroundUs",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "exciting",
+   "positive",
+   "romantic",
+   "powerful",
+   "majestic",
+   "energetic",
+   "dramatic"
+  ],
+  "date": "23 May 2025"
+ },
+ "LikeFire": {
+  "artist": "Apollo On The Run, Immy Odon, Biometrix",
+  "title": "Like Fire",
+  "slug": "LikeFire",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "exciting",
+   "powerful"
+  ],
+  "date": "15 May 2025"
+ },
+ "T_Alive": {
+  "artist": "Tamlin",
+  "title": "Alive",
+  "slug": "T_Alive",
+  "versions": "Regular, Instrumental",
+  "genre": "Disco",
+  "moods": [
+   "exciting",
+   "positive"
+  ],
+  "date": "13 May 2025"
+ },
+ "SoGood": {
+  "artist": "More Plastic",
+  "title": "So Good",
+  "slug": "SoGood",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "exciting"
+  ],
+  "date": "29 Apr 2025"
+ },
+ "MadeForTheGame": {
+  "artist": "AC13, KAZHI, Jessee, Cartoon",
+  "title": "Made For The Game (ft. Kazhi)",
+  "slug": "MadeForTheGame",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance-Pop",
+  "moods": [
+   "powerful",
+   "majestic",
+   "energetic",
+   "dramatic",
+   "positive",
+   "exciting"
+  ],
+  "date": "25 Apr 2025"
+ },
+ "Wonder": {
+  "artist": "Rarin, Bri Tolani, Unknown Brain",
+  "title": "Wonder (ft. Rarin & Bri Tolani)",
+  "slug": "Wonder",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dreamy",
+   "Eccentric",
+   "Elegant",
+   "Heavy",
+   "Hopeful",
+   "Restless",
+   "Sentimental",
+   "Glamorous"
+  ],
+  "date": "23 Aug 2024"
+ },
+ "TakingItSlow": {
+  "artist": "JVNA",
+  "title": "Taking It Slow",
+  "slug": "TakingItSlow",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bass",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Floating",
+   "Glamorous",
+   "Sentimental",
+   "Hopeful"
+  ],
+  "date": "27 Jun 2024"
+ },
+ "RnJ": {
+  "artist": "SadBois, Manno",
+  "title": "Romeo and Juliet",
+  "slug": "RnJ",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "Hopeful",
+   "romantic",
+   "sad",
+   "Heavy",
+   "Dark"
+  ],
+  "date": "22 Feb 2024"
+ },
+ "more": {
+  "artist": "Natan Chaim, Asketa",
+  "title": "More",
+  "slug": "more",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Hopeful",
+   "Laid Back",
+   "Peaceful",
+   "romantic"
+  ],
+  "date": "24 Aug 2023"
+ },
+ "surrender": {
+  "artist": "Josh Rubin",
+  "title": "Surrender",
+  "slug": "surrender",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic, House",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Quirky",
+   "Restless",
+   "Mysterious",
+   "Hopeful",
+   "Sexy"
+  ],
+  "date": "12 May 2023"
+ },
+ "DontWantToFeel": {
+  "artist": "n\u00f8ll, Highlnd, Josh Rubin",
+  "title": "Don't Want To Feel",
+  "slug": "DontWantToFeel",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bass",
+  "moods": [
+   "energetic",
+   "Mysterious",
+   "sad",
+   "Dreamy",
+   "Gloomy",
+   "Hopeful"
+  ],
+  "date": "21 Apr 2023"
+ },
+ "Rift": {
+  "artist": "Rob Gasser, Miss Lina",
+  "title": "Rift",
+  "slug": "Rift",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Dreamy",
+   "energetic",
+   "Epic",
+   "Hopeful",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "29 Dec 2022"
+ },
+ "feelsomething": {
+  "artist": "if found",
+  "title": "feel someth!ng",
+  "slug": "feelsomething",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Hopeful",
+   "Mysterious",
+   "Restless",
+   "Quirky",
+   "Suspense"
+  ],
+  "date": "6 Dec 2022"
+ },
+ "Online": {
+  "artist": "MANSHN",
+  "title": "Online",
+  "slug": "Online",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Euphoric",
+   "energetic",
+   "Restless",
+   "Hopeful",
+   "Quirky",
+   "Happy",
+   "Epic"
+  ],
+  "date": "16 Nov 2022"
+ },
+ "TwentyFive": {
+  "artist": "if found, Luma",
+  "title": "twenty five",
+  "slug": "TwentyFive",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Happy",
+   "Hopeful",
+   "Restless"
+  ],
+  "date": "8 Nov 2022"
+ },
+ "FindAWay": {
+  "artist": "T & Sugah, NCT, Cammie Robinson",
+  "title": "Find A Way (feat. Cammie Robinson)",
+  "slug": "FindAWay",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Happy",
+   "Hopeful",
+   "Restless"
+  ],
+  "date": "21 Oct 2022"
+ },
+ "akina": {
+  "artist": "Ailow",
+  "title": "akina",
+  "slug": "akina",
+  "versions": "Regular, Instrumental",
+  "genre": "Dubstep",
+  "moods": [
+   "Angry",
+   "Dark",
+   "dramatic"
+  ],
+  "date": "7 Aug 2025"
+ },
+ "EN_Silence": {
+  "artist": "N3b, Extra Terra",
+  "title": "Silence",
+  "slug": "EN_Silence",
+  "versions": "Regular, Instrumental",
+  "genre": "Midtempo Bass",
+  "moods": [
+   "Chasing",
+   "Dark",
+   "Angry",
+   "Eccentric",
+   "Fear",
+   "Mysterious",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "19 Sep 2024"
+ },
+ "SJ_Earthquake": {
+  "artist": "Justin J. Moore, SNAILS, ESCARGOT, Jay Eskar",
+  "title": "Earthquake (feat. Justin J. Moore)",
+  "slug": "SJ_Earthquake",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Floating",
+   "Mysterious",
+   "Dark",
+   "Heavy",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "20 Aug 2024"
+ },
+ "Overdose_VIP": {
+  "artist": "David Allen, Andrew A, KDH",
+  "title": "Overdose (feat. David Allen) (VIP)",
+  "slug": "Overdose_VIP",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Heavy",
+   "Eccentric",
+   "Chasing",
+   "Dark",
+   "Mysterious"
+  ],
+  "date": "26 Jul 2024"
+ },
+ "Overdose_Edit": {
+  "artist": "David Allen, Andrew A, KDH",
+  "title": "Overdose (feat. David Allen) (KDH Edit)",
+  "slug": "Overdose_Edit",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Heavy",
+   "Eccentric",
+   "Chasing",
+   "Dark",
+   "Mysterious"
+  ],
+  "date": "26 Jul 2024"
+ },
+ "LR_Symphony": {
+  "artist": "Barmuda, Revaeon, Lionis",
+  "title": "Symphony (feat. Barmuda)",
+  "slug": "LR_Symphony",
+  "versions": "Regular, Instrumental",
+  "genre": "Bass House",
+  "moods": [
+   "Chasing",
+   "Dark",
+   "Mysterious",
+   "Restless",
+   "Weird",
+   "Quirky"
+  ],
+  "date": "23 Jul 2024"
+ },
+ "RallyUp": {
+  "artist": "XI$OW, Grioten",
+  "title": "Rally Up!",
+  "slug": "RallyUp",
+  "versions": "Regular, Instrumental",
+  "genre": "Brazilian Phonk",
+  "moods": [
+   "Chasing",
+   "Dark",
+   "Heavy",
+   "Mysterious",
+   "Restless",
+   "Weird"
+  ],
+  "date": "19 Jul 2024"
+ },
+ "WantItAll": {
+  "artist": "Mqx, MVSTAFA",
+  "title": "Want It All",
+  "slug": "WantItAll",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardstyle",
+  "moods": [
+   "Angry",
+   "Chasing",
+   "Dark",
+   "Dreamy",
+   "Heavy",
+   "Quirky",
+   "Mysterious",
+   "scary"
+  ],
+  "date": "2 May 2024"
+ },
+ "KHARMA": {
+  "artist": "Christopher Damas",
+  "title": "KHARMA",
+  "slug": "KHARMA",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Chasing",
+   "Dark",
+   "Eccentric",
+   "Fear",
+   "Heavy",
+   "Mysterious",
+   "Restless",
+   "Suspense",
+   "Weird"
+  ],
+  "date": "27 Mar 2024"
+ },
+ "TSA_Throne": {
+  "artist": "Tomatow, SagaB, Adam Putra",
+  "title": "Throne",
+  "slug": "TSA_Throne",
+  "versions": "Regular, Instrumental",
+  "genre": "Midtempo Bass",
+  "moods": [
+   "Dark",
+   "Dreamy",
+   "Eccentric",
+   "Elegant",
+   "Heavy",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "15 Feb 2024"
+ },
+ "LateAtNight": {
+  "artist": "VIDE, CiDE",
+  "title": "Late At Night",
+  "slug": "LateAtNight",
+  "versions": "Regular, Instrumental",
+  "genre": "Deep house",
+  "moods": [
+   "Dreamy",
+   "Dark",
+   "Elegant",
+   "Floating",
+   "Mysterious",
+   "Quirky"
+  ],
+  "date": "31 Jan 2024"
+ },
+ "PullMeIn": {
+  "artist": "M.I.M.E, Shiah Maisel, Clarx",
+  "title": "Pull Me In",
+  "slug": "PullMeIn",
+  "versions": "Regular, Instrumental",
+  "genre": "Alternative Dance",
+  "moods": [
+   "Dark",
+   "Eccentric",
+   "Elegant",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "Sentimental",
+   "Suspense"
+  ],
+  "date": "19 Jan 2024"
+ },
+ "Lies": {
+  "artist": "Diamond Eyes",
+  "title": "Lies",
+  "slug": "Lies",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Trap",
+  "moods": [
+   "Dark",
+   "Dreamy",
+   "Eccentric",
+   "Floating",
+   "Mysterious",
+   "Quirky",
+   "sad",
+   "Weird"
+  ],
+  "date": "5 Jan 2024"
+ },
+ "FAVHELLA": {
+  "artist": "Mc Guidanny, T-Mass, ANGELPLAYA",
+  "title": "FAVHELLA (feat. Mc Guidanny)",
+  "slug": "FAVHELLA",
+  "versions": "Regular, Instrumental",
+  "genre": "Brazilian Phonk",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Heavy",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "28 Dec 2023"
+ },
+ "RPM": {
+  "artist": "JOXION",
+  "title": "RPM",
+  "slug": "RPM",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Angry",
+   "Dark",
+   "energetic",
+   "Mysterious",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "8 Nov 2023"
+ },
+ "hideyourheart": {
+  "artist": "BRIGHTDVWN, VOLT VISION",
+  "title": "Hide Your Heart",
+  "slug": "hideyourheart",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Restless",
+   "Quirky",
+   "Gloomy"
+  ],
+  "date": "1 Aug 2023"
+ },
+ "gettingdown": {
+  "artist": "JOXION",
+  "title": "Getting Down",
+  "slug": "gettingdown",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "Weird"
+  ],
+  "date": "26 Jul 2023"
+ },
+ "BTO_WW": {
+  "artist": "WinWel, Sam Day",
+  "title": "BE THE ONE (WinWel Remix)",
+  "slug": "BTO_WW",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dreamy",
+   "Elegant",
+   "Glamorous",
+   "Laid Back",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "13 Jun 2024"
+ },
+ "Sharks": {
+  "artist": "Zeli",
+  "title": "Sharks",
+  "slug": "Sharks",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie, Electronic",
+  "moods": [
+   "Mysterious",
+   "sad",
+   "Quirky",
+   "Dreamy",
+   "Gloomy",
+   "Laid Back",
+   "romantic"
+  ],
+  "date": "7 Mar 2023"
+ },
+ "BR_TrustMe": {
+  "artist": "Blackryst",
+  "title": "Trust Me",
+  "slug": "BR_TrustMe",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "Laid Back",
+   "Sexy",
+   "romantic",
+   "Mysterious",
+   "Quirky",
+   "Dreamy"
+  ],
+  "date": "24 Feb 2023"
+ },
+ "HeartRobbery": {
+  "artist": "Harddope",
+  "title": "Heart Robbery",
+  "slug": "HeartRobbery",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Laid Back",
+   "Sexy",
+   "romantic",
+   "Mysterious",
+   "Quirky",
+   "Dreamy"
+  ],
+  "date": "22 Feb 2023"
+ },
+ "TSR_NeedYou": {
+  "artist": "Thorne, Sam Riley",
+  "title": "Need You",
+  "slug": "TSR_NeedYou",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Dreamy",
+   "Laid Back",
+   "Quirky",
+   "Glamorous",
+   "romantic"
+  ],
+  "date": "10 Feb 2023"
+ },
+ "RB_ForYou": {
+  "artist": "Eline Mann, ReauBeau",
+  "title": "For You (feat. Eline Mann)",
+  "slug": "RB_ForYou",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dreamy",
+   "Glamorous",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "romantic"
+  ],
+  "date": "12 Jan 2023"
+ },
+ "Behind": {
+  "artist": "Thorne, Andrew A",
+  "title": "Behind",
+  "slug": "Behind",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Dreamy",
+   "Glamorous",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "romantic"
+  ],
+  "date": "28 Dec 2022"
+ },
+ "MemoryNights": {
+  "artist": "Jack Shore, KORA",
+  "title": "Memory Nights",
+  "slug": "MemoryNights",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Dreamy",
+   "Glamorous",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "romantic"
+  ],
+  "date": "27 Dec 2022"
+ },
+ "BH_Alone": {
+  "artist": "Heleen, BEAUZ",
+  "title": "Alone",
+  "slug": "BH_Alone",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Dreamy",
+   "energetic",
+   "Glamorous",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "romantic"
+  ],
+  "date": "9 Dec 2022"
+ },
+ "Insanity": {
+  "artist": "iFeature",
+  "title": "Insanity",
+  "slug": "Insanity",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Laid Back",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "Dreamy"
+  ],
+  "date": "23 Nov 2022"
+ },
+ "TakingControl_berx": {
+  "artist": "Raptures., Sam Ourt, berx",
+  "title": "Taking Control ft. Halvorsen (berx Remix)",
+  "slug": "TakingControl_berx",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Laid Back",
+   "Quirky",
+   "Dark",
+   "Glamorous"
+  ],
+  "date": "26 Sep 2022"
+ },
+ "TakingControl_pema": {
+  "artist": "Raptures., Sam Ourt, pema.",
+  "title": "Taking Control ft. Halvorsen (pema. Remix)",
+  "slug": "TakingControl_pema",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Laid Back",
+   "Quirky",
+   "Dark",
+   "Glamorous"
+  ],
+  "date": "26 Sep 2022"
+ },
+ "WIWY": {
+  "artist": "Arcando",
+  "title": "When I'm With You",
+  "slug": "WIWY",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic",
+  "moods": [
+   "energetic",
+   "Quirky",
+   "Dreamy",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Laid Back"
+  ],
+  "date": "16 Sep 2022"
+ },
+ "LikeAStone": {
+  "artist": "Tollef",
+  "title": "Like A Stone",
+  "slug": "LikeAStone",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie",
+  "moods": [
+   "energetic",
+   "Glamorous",
+   "Laid Back",
+   "Euphoric",
+   "romantic",
+   "Hopeful",
+   "Quirky",
+   "Happy"
+  ],
+  "date": "8 Sep 2022"
+ },
+ "WYBW": {
+  "artist": "Aeden",
+  "title": "Would You Be Waiting",
+  "slug": "WYBW",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic, Indie",
+  "moods": [
+   "energetic",
+   "Glamorous",
+   "Laid Back",
+   "Dreamy",
+   "Quirky",
+   "Happy"
+  ],
+  "date": "26 Aug 2022"
+ },
+ "SymbolismIII": {
+  "artist": "Electro-Light",
+  "title": "Symbolism pt. III",
+  "slug": "SymbolismIII",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dreamy",
+   "Happy",
+   "Hopeful",
+   "Laid Back",
+   "Quirky"
+  ],
+  "date": "12 Aug 2022"
+ },
+ "CJSBelieveMe": {
+  "artist": "CADMIUM, JAMZ, SIMONNE",
+  "title": "Believe Me",
+  "slug": "CJSBelieveMe",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Glamorous",
+   "Laid Back",
+   "romantic",
+   "Dreamy",
+   "Quirky"
+  ],
+  "date": "4 Aug 2022"
+ },
+ "NeedYa": {
+  "artist": "Syn Cole",
+  "title": "Need Ya",
+  "slug": "NeedYa",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Dreamy",
+   "Laid Back",
+   "Peaceful",
+   "Hopeful",
+   "relaxed",
+   "Sexy"
+  ],
+  "date": "29 Jul 2022"
+ },
+ "Spirit": {
+  "artist": "PLEEG",
+  "title": "Spirit",
+  "slug": "Spirit",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie",
+  "moods": [
+   "energetic",
+   "Laid Back",
+   "Hopeful",
+   "Dreamy",
+   "Quirky"
+  ],
+  "date": "12 Jul 2022"
+ },
+ "SetMeFree": {
+  "artist": "Frizzy The Streetz, Simbai",
+  "title": "Set Me Free",
+  "slug": "SetMeFree",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Mysterious",
+   "Laid Back",
+   "Dreamy",
+   "Quirky"
+  ],
+  "date": "23 Jun 2022"
+ },
+ "Island": {
+  "artist": "Michael Shynes, Max Vermeulen, Almost Weekend",
+  "title": "Island (ft. Michael Shynes)",
+  "slug": "Island",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "Laid Back",
+   "Euphoric",
+   "Hopeful",
+   "Happy"
+  ],
+  "date": "21 Jun 2022"
+ },
+ "Feel": {
+  "artist": "DigEx, Raptures.",
+  "title": "Feel",
+  "slug": "Feel",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Laid Back",
+   "Restless",
+   "Dark"
+  ],
+  "date": "7 Jun 2022"
+ },
+ "Dependant": {
+  "artist": "Cartoon",
+  "title": "Dependant",
+  "slug": "Dependant",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "dramatic",
+   "powerful",
+   "positive"
+  ],
+  "date": "25 Jul 2025"
+ },
+ "FadingLight": {
+  "artist": "Fytch",
+  "title": "Fading Light",
+  "slug": "FadingLight",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "powerful",
+   "dramatic",
+   "energetic"
+  ],
+  "date": "3 Apr 2025"
+ },
+ "Lighthouse": {
+  "artist": "PhiloSofie, Azertion, JJD",
+  "title": "Lighthouse (feat. PhiloSofie)",
+  "slug": "Lighthouse",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bass",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "13 Mar 2025"
+ },
+ "Mortals_TMBK": {
+  "artist": "Boom Kitty, TOKYO MACHINE, Warriyo",
+  "title": "Mortals (TOKYO MACHINE & Boom Kitty Remix)",
+  "slug": "Mortals_TMBK",
+  "versions": "Regular, Instrumental",
+  "genre": "Dubstep",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "14 Feb 2025"
+ },
+ "JAMM": {
+  "artist": "Division One, Halvorsen, JJD",
+  "title": "Just A Minute More (feat. Halvorsen)",
+  "slug": "JAMM",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bass",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "6 Feb 2025"
+ },
+ "LayLow": {
+  "artist": "Zeli, Biometrix",
+  "title": "Lay Low",
+  "slug": "LayLow",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "4 Feb 2025"
+ },
+ "A_Overdrive": {
+  "artist": "Aspyer",
+  "title": "Overdrive",
+  "slug": "A_Overdrive",
+  "versions": "Regular, Instrumental",
+  "genre": "Garage",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "14 Jan 2025"
+ },
+ "DoxxMyHeart": {
+  "artist": "Diamond Eyes",
+  "title": "Doxx My Heart",
+  "slug": "DoxxMyHeart",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "26 Dec 2024"
+ },
+ "SeveredRose": {
+  "artist": "SlidV, Clarx",
+  "title": "Severed Rose",
+  "slug": "SeveredRose",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic Rock",
+  "moods": [
+   "dramatic",
+   "energetic",
+   "powerful"
+  ],
+  "date": "5 Dec 2024"
+ },
+ "TS_sunrise": {
+  "artist": "Tatsunoshin, fawlin",
+  "title": "Sunrise (feat. fawlin)",
+  "slug": "TS_sunrise",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardcore",
+  "moods": [
+   "energetic",
+   "majestic",
+   "powerful"
+  ],
+  "date": "7 Nov 2025"
+ },
+ "shadowglow": {
+  "artist": "Janji",
+  "title": "Shadow Glow",
+  "slug": "shadowglow",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance-Pop",
+  "moods": [
+   "powerful",
+   "dark",
+   "energetic"
+  ],
+  "date": "25 Sep 2025"
+ },
+ "TheRiot": {
+  "artist": "NIVIRO",
+  "title": "The Riot",
+  "slug": "TheRiot",
+  "versions": "Regular, Instrumental",
+  "genre": "Midtempo Bass",
+  "moods": [
+   "Angry",
+   "Chasing",
+   "Fear",
+   "Heavy",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "4 Oct 2024"
+ },
+ "BringMeBack": {
+  "artist": "Nieulotni, Adikop",
+  "title": "Bring Me Back (feat. Nieulotni)",
+  "slug": "BringMeBack",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Dreamy",
+   "Eccentric",
+   "Glamorous",
+   "Mysterious",
+   "Quirky",
+   "Restless",
+   "Sentimental",
+   "Suspense"
+  ],
+  "date": "4 Jul 2024"
+ },
+ "A_Karma": {
+  "artist": "Ariadne",
+  "title": "Karma",
+  "slug": "A_Karma",
+  "versions": "Regular, Instrumental",
+  "genre": "Alternative Pop",
+  "moods": [
+   "Chasing",
+   "Elegant",
+   "Eccentric",
+   "Quirky",
+   "Restless",
+   "Sexy",
+   "Suspense"
+  ],
+  "date": "8 Mar 2024"
+ },
+ "Mess": {
+  "artist": "SIIK, Alenn",
+  "title": "Mess",
+  "slug": "Mess",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Quirky",
+   "Mysterious",
+   "Gloomy",
+   "Restless",
+   "Suspense",
+   "Dark"
+  ],
+  "date": "16 Dec 2022"
+ },
+ "AAB_Waiting": {
+  "artist": "Andrew A, Barmuda",
+  "title": "Waiting",
+  "slug": "AAB_Waiting",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Quirky",
+   "Mysterious",
+   "Gloomy",
+   "Suspense"
+  ],
+  "date": "14 Dec 2022"
+ },
+ "ZM_Psycho": {
+  "artist": "Zack Merci, Nieko",
+  "title": "Psycho (feat. Nieko)",
+  "slug": "ZM_Psycho",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "Quirky",
+   "Mysterious",
+   "Gloomy",
+   "Restless",
+   "Suspense"
+  ],
+  "date": "13 Dec 2022"
+ },
+ "Wings": {
+  "artist": "Thorne",
+  "title": "Wings",
+  "slug": "Wings",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Dark",
+   "Gloomy",
+   "Quirky",
+   "Suspense"
+  ],
+  "date": "9 Nov 2022"
+ },
+ "Sweet": {
+  "artist": "Raptures., MAZAN",
+  "title": "Sweet",
+  "slug": "Sweet",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Suspense",
+   "Dreamy",
+   "Gloomy",
+   "Quirky",
+   "Dark"
+  ],
+  "date": "4 Oct 2022"
+ },
+ "HurtMe": {
+  "artist": "Evanly",
+  "title": "Hurt Me",
+  "slug": "HurtMe",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Suspense",
+   "Quirky",
+   "Weird"
+  ],
+  "date": "31 May 2022"
+ },
+ "BounceOnDaRiddim": {
+  "artist": "Emily J, Cartoon, Southby, NCT",
+  "title": "Bounce On Da Riddim (ft. Emily J)",
+  "slug": "BounceOnDaRiddim",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "exciting",
+   "positive"
+  ],
+  "date": "21 Mar 2025"
+ },
+ "CarryOn": {
+  "artist": "Anna Yvette, Lost Sky",
+  "title": "Carry On",
+  "slug": "CarryOn",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "exciting",
+   "positive"
+  ],
+  "date": "20 Mar 2025"
+ },
+ "DancefloorDreamer": {
+  "artist": "NIVIRO",
+  "title": "Dancefloor Dreamer",
+  "slug": "DancefloorDreamer",
+  "versions": "Regular, Instrumental",
+  "genre": "Trance",
+  "moods": [
+   "energetic",
+   "exciting",
+   "positive"
+  ],
+  "date": "14 Mar 2025"
+ },
+ "RealGoodLiar": {
+  "artist": "Nokae",
+  "title": "Real Good Liar",
+  "slug": "RealGoodLiar",
+  "versions": "Regular, Instrumental",
+  "genre": "Bass House",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "21 Feb 2025"
+ },
+ "Change": {
+  "artist": "November Lights, Diviners",
+  "title": "Change",
+  "slug": "Change",
+  "versions": "Regular, Instrumental",
+  "genre": "Progressive House",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "13 Feb 2025"
+ },
+ "FeelingsFade": {
+  "artist": "Wwings, jeonghyeon",
+  "title": "Feelings Fade",
+  "slug": "FeelingsFade",
+  "versions": "Regular, Instrumental",
+  "genre": "Future House",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "30 Jan 2025"
+ },
+ "BeautifulDisaster": {
+  "artist": "Rarin, Mason Musso, Tyla Yaweh",
+  "title": "Beautiful Disaster",
+  "slug": "BeautifulDisaster",
+  "versions": "Regular, Instrumental",
+  "genre": "Alternative Pop",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "24 Jan 2025"
+ },
+ "Skyline_II": {
+  "artist": "Electro-Light, Kovan",
+  "title": "Skyline Pt. II",
+  "slug": "Skyline_II",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bounce",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "21 Jan 2025"
+ },
+ "OTBOD": {
+  "artist": "Nordic Pulse, Kitty Florentine, Kristjan J\u00e4rvi, Cartoon",
+  "title": "On The Break Of Dawn",
+  "slug": "OTBOD",
+  "versions": "Regular, Instrumental",
+  "genre": "Dance-Pop",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "3 Jan 2025"
+ },
+ "BackstreetBoy": {
+  "artist": "Halvorsen, Netrum",
+  "title": "Backstreet Boy",
+  "slug": "BackstreetBoy",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie Dance",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "20 Dec 2024"
+ },
+ "AfterTheEnd": {
+  "artist": "Rex Hooligan",
+  "title": "After The End",
+  "slug": "AfterTheEnd",
+  "versions": "Regular, Instrumental",
+  "genre": "Drum & Bass",
+  "moods": [
+   "energetic",
+   "positive",
+   "powerful"
+  ],
+  "date": "17 Dec 2024"
+ },
+ "OnMyMind": {
+  "artist": "No Hero",
+  "title": "On My Mind",
+  "slug": "OnMyMind",
+  "versions": "Regular, Instrumental",
+  "genre": "Hardstyle",
+  "moods": [
+   "energetic",
+   "powerful",
+   "positive"
+  ],
+  "date": "26 Nov 2024"
+ },
+ "Alright_YB": {
+  "artist": "Yvvan Back, Marky Style, Sync",
+  "title": "Alright (Yvvan Back Remix)",
+  "slug": "Alright_YB",
+  "versions": "Regular, Instrumental",
+  "genre": "Tribal House",
+  "moods": [
+   "energetic",
+   "neutral",
+   "romantic",
+   "positive"
+  ],
+  "date": "16 Oct 2024"
+ },
+ "VV_Dangerous": {
+  "artist": "Beneath My Shade, VOLT VISION",
+  "title": "Dangerous",
+  "slug": "VV_Dangerous",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "Epic",
+   "Gloomy",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "6 Jun 2023"
+ },
+ "DANGEROUS": {
+  "artist": "ANGELPLAYA",
+  "title": "DANGEROUS",
+  "slug": "DANGEROUS",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Dreamy",
+   "Fear",
+   "Gloomy",
+   "Restless"
+  ],
+  "date": "30 May 2023"
+ },
+ "TheRaven": {
+  "artist": "XTOM, ATSMXN",
+  "title": "The Raven",
+  "slug": "TheRaven",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Gloomy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "14 Apr 2023"
+ },
+ "BadHabit-Phonk": {
+  "artist": "Zaug, J\u00e9ja",
+  "title": "Bad Habit (feat. Zaug) - Phonk Version",
+  "slug": "BadHabit-Phonk",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Glamorous",
+   "Quirky",
+   "Restless",
+   "romantic",
+   "Dark",
+   "Gloomy"
+  ],
+  "date": "12 Apr 2023"
+ },
+ "PSYCHOPATHIC": {
+  "artist": "ANGELPLAYA",
+  "title": "PSYCHOPATHIC",
+  "slug": "PSYCHOPATHIC",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Gloomy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "16 Mar 2023"
+ },
+ "Enemies": {
+  "artist": "ATSMXN, XTOM",
+  "title": "Enemies",
+  "slug": "Enemies",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Gloomy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "23 Feb 2023"
+ },
+ "PULLUP": {
+  "artist": "ANGELPLAYA",
+  "title": "PULL UP",
+  "slug": "PULLUP",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Gloomy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "3 Jan 2023"
+ },
+ "Escape_VIP": {
+  "artist": "Juan Dileju, Sam Ourt, AKIAL",
+  "title": "Escape (Juan Dileju & Sam Ourt VIP Mix)",
+  "slug": "Escape_VIP",
+  "versions": "Regular, Instrumental",
+  "genre": "Phonk",
+  "moods": [
+   "Dark",
+   "energetic",
+   "Gloomy",
+   "Mysterious",
+   "Restless"
+  ],
+  "date": "12 Dec 2022"
+ },
+ "tobeloved": {
+  "artist": "Salvo, Maazel, Arcando",
+  "title": "To Be Loved",
+  "slug": "tobeloved",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bass",
+  "moods": [
+   "energetic",
+   "romantic",
+   "Restless",
+   "Quirky",
+   "Weird"
+  ],
+  "date": "11 Aug 2023"
+ },
+ "blackandwhite": {
+  "artist": "Josh Rubin",
+  "title": "Black and White",
+  "slug": "blackandwhite",
+  "versions": "Regular, Instrumental",
+  "genre": "Future Bass",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Glamorous",
+   "Sexy",
+   "Mysterious"
+  ],
+  "date": "2 Jun 2023"
+ },
+ "MoveLikeThis": {
+  "artist": "Bad Computer",
+  "title": "Move Like This",
+  "slug": "MoveLikeThis",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "exciting"
+  ],
+  "date": "25 Mar 2025"
+ },
+ "BadGirl": {
+  "artist": "LAADS",
+  "title": "Bad Girl",
+  "slug": "BadGirl",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Glamorous",
+   "Quirky",
+   "Sexy"
+  ],
+  "date": "13 Oct 2023"
+ },
+ "MPU_Psycho": {
+  "artist": "More Plastic, URBANO",
+  "title": "Psycho",
+  "slug": "MPU_Psycho",
+  "versions": "Regular, Instrumental",
+  "genre": "House, Electronic",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Glamorous",
+   "Dreamy",
+   "Dark",
+   "Quirky"
+  ],
+  "date": "10 Feb 2023"
+ },
+ "Volcano": {
+  "artist": "Jim Yosef, Scarlett",
+  "title": "Volcano",
+  "slug": "Volcano",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Glamorous",
+   "Dreamy",
+   "Dark",
+   "Quirky"
+  ],
+  "date": "27 Jan 2023"
+ },
+ "BackToYou": {
+  "artist": "Tobu",
+  "title": "Back To You",
+  "slug": "BackToYou",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Glamorous",
+   "Sexy"
+  ],
+  "date": "25 Nov 2022"
+ },
+ "ifidisappear": {
+  "artist": "Tom M\u00e5rtensson, Tobu",
+  "title": "If I Disappear",
+  "slug": "ifidisappear",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Peaceful",
+   "Restless",
+   "romantic",
+   "Hopeful",
+   "Happy"
+  ],
+  "date": "6 May 2022"
+ },
+ "TheEdge": {
+  "artist": "Harley Bird, NIVIRO",
+  "title": "The Edge",
+  "slug": "TheEdge",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Euphoric",
+   "energetic",
+   "Happy",
+   "Dreamy"
+  ],
+  "date": "18 Mar 2022"
+ },
+ "EmotionsLike": {
+  "artist": "Alva Gracia",
+  "title": "Emotions Like",
+  "slug": "EmotionsLike",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Happy",
+   "Hopeful"
+  ],
+  "date": "10 Feb 2022"
+ },
+ "Electric": {
+  "artist": "Robbie Rosen, Deerock, Vaance",
+  "title": "Electric",
+  "slug": "Electric",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Happy",
+   "Epic",
+   "Euphoric",
+   "energetic",
+   "Dreamy"
+  ],
+  "date": "16 Dec 2021"
+ },
+ "Capsized": {
+  "artist": "Tollef",
+  "title": "Capsized",
+  "slug": "Capsized",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Happy",
+   "Epic",
+   "Euphoric",
+   "energetic",
+   "Dreamy"
+  ],
+  "date": "14 Dec 2021"
+ },
+ "SFLoveMe": {
+  "artist": "FERGO, Sam Ourt",
+  "title": "Love Me",
+  "slug": "SFLoveMe",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Epic"
+  ],
+  "date": "16 Nov 2021"
+ },
+ "StreetLights": {
+  "artist": "JJD, Azertion, Time To Talk",
+  "title": "Street Lights",
+  "slug": "StreetLights",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Happy"
+  ],
+  "date": "5 Oct 2021"
+ },
+ "Evolution": {
+  "artist": "Harley Bird, Emdi, Castion, 3rd Prototype, Debris, Clarx",
+  "title": "Evolution",
+  "slug": "Evolution",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "energetic"
+  ],
+  "date": "14 Sep 2021"
+ },
+ "RTogether": {
+  "artist": "Axol, Alex Skrindo, Distrion, RudeLies",
+  "title": "Together",
+  "slug": "RTogether",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "energetic"
+  ],
+  "date": "7 Sep 2021"
+ },
+ "Destiny": {
+  "artist": "Tobu, DEAF KEV, Anna Yvette, Electro-Light, Jim Yosef",
+  "title": "Destiny",
+  "slug": "Destiny",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "Happy",
+   "Hopeful"
+  ],
+  "date": "17 Aug 2021"
+ },
+ "Done": {
+  "artist": "Halvorsen, Clarx",
+  "title": "Done",
+  "slug": "Done",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "Epic"
+  ],
+  "date": "5 Aug 2021"
+ },
+ "#": {
+  "artist": "Magnus",
+  "title": "Like This",
+  "slug": "#",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Restless",
+   "Epic",
+   "Euphoric",
+   "Happy"
+  ],
+  "date": "22 Jul 2021"
+ },
+ "TalkIsCheap": {
+  "artist": "VinDon, Magnus",
+  "title": "Talk Is Cheap",
+  "slug": "TalkIsCheap",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Euphoric",
+   "Happy",
+   "Epic",
+   "Hopeful"
+  ],
+  "date": "25 Jun 2021"
+ },
+ "Sanity": {
+  "artist": "Whats Gud, Magnus",
+  "title": "Sanity",
+  "slug": "Sanity",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Restless",
+   "Epic",
+   "Euphoric",
+   "Happy"
+  ],
+  "date": "15 Jun 2021"
+ },
+ "TenMoreMinutes": {
+  "artist": "Shiah Maisel, CHENDA",
+  "title": "Ten More Minutes",
+  "slug": "TenMoreMinutes",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Epic",
+   "sad",
+   "Gloomy",
+   "Restless"
+  ],
+  "date": "27 May 2021"
+ },
+ "FoundYou": {
+  "artist": "RYVM, Avaya, Time To Talk",
+  "title": "Found You",
+  "slug": "FoundYou",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "Peaceful"
+  ],
+  "date": "18 May 2021"
+ },
+ "Letter": {
+  "artist": "Shiah Maisel, Electro-Light",
+  "title": "Letter",
+  "slug": "Letter",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "Happy",
+   "Hopeful"
+  ],
+  "date": "12 Feb 2021"
+ },
+ "SCTime": {
+  "artist": "Syn Cole",
+  "title": "Time",
+  "slug": "SCTime",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "Dreamy",
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "Peaceful"
+  ],
+  "date": "30 Oct 2020"
+ },
+ "DKSafeAndSound": {
+  "artist": "DEAF KEV",
+  "title": "Safe & Sound",
+  "slug": "DKSafeAndSound",
+  "versions": "Regular, Instrumental",
+  "genre": "House",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Euphoric",
+   "Dreamy"
+  ],
+  "date": "2 Oct 2020"
+ },
+ "noway": {
+  "artist": "BIMINI, Avi Snow",
+  "title": "No Way (with Avi Snow)",
+  "slug": "noway",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill, Electronic",
+  "moods": [
+   "Dreamy",
+   "Glamorous",
+   "Peaceful"
+  ],
+  "date": "5 Dec 2023"
+ },
+ "Talk": {
+  "artist": "Beave",
+  "title": "Talk",
+  "slug": "Talk",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Dreamy",
+   "Gloomy",
+   "Laid Back",
+   "Mysterious",
+   "Peaceful",
+   "romantic"
+  ],
+  "date": "24 Feb 2022"
+ },
+ "ClickScroll": {
+  "artist": "Eli Raain, Veronica Bravo, CADMIUM",
+  "title": "Click & Scroll (feat. Eli Raain & Veronica Bravo)",
+  "slug": "ClickScroll",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "relaxed",
+   "Peaceful",
+   "romantic",
+   "Laid Back"
+  ],
+  "date": "12 Feb 2019"
+ },
+ "Limbo": {
+  "artist": "Floatinurboat, ELLI\u00d8T",
+  "title": "Limbo (feat. ELLI\u00d8T)",
+  "slug": "Limbo",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Dreamy",
+   "romantic",
+   "sad",
+   "relaxed"
+  ],
+  "date": "7 Sep 2018"
+ },
+ "WithYou": {
+  "artist": "Marin Hoxha",
+  "title": "With You",
+  "slug": "WithYou",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "romantic",
+   "Glamorous"
+  ],
+  "date": "4 Jul 2018"
+ },
+ "ghost": {
+  "artist": "Eli Raain, CADMIUM",
+  "title": "Ghost (feat. Eli Raain)",
+  "slug": "ghost",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Fear",
+   "Peaceful",
+   "Dark",
+   "Laid Back"
+  ],
+  "date": "6 Jun 2018"
+ },
+ "HoldingOn": {
+  "artist": "Floatinurboat, Chris Linton",
+  "title": "Holding On [Instrumental]",
+  "slug": "HoldingOn",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Hopeful",
+   "sad",
+   "Suspense",
+   "Dark"
+  ],
+  "date": "2 May 2018"
+ },
+ "Seasons": {
+  "artist": "Rival, CADMIUM, Harley Bird",
+  "title": "Seasons (feat. Harley Bird)",
+  "slug": "Seasons",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "romantic",
+   "Glamorous",
+   "Sexy",
+   "Hopeful"
+  ],
+  "date": "4 Apr 2018"
+ },
+ "TooFarGone": {
+  "artist": "Inukshuk",
+  "title": "Too Far Gone",
+  "slug": "TooFarGone",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Glamorous",
+   "Happy"
+  ],
+  "date": "28 Feb 2018"
+ },
+ "December": {
+  "artist": "Halcyon, GIAN",
+  "title": "December (feat. Gian)",
+  "slug": "December",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Laid Back",
+   "Peaceful",
+   "Dreamy",
+   "Hopeful"
+  ],
+  "date": "13 Dec 2017"
+ },
+ "TLRH": {
+  "artist": "Inukshuk",
+  "title": "The Long Road Home",
+  "slug": "TLRH",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "Laid Back",
+   "Peaceful",
+   "Euphoric",
+   "relaxed"
+  ],
+  "date": "11 Nov 2017"
+ },
+ "Incomplete": {
+  "artist": "Aero Chord, Anuka",
+  "title": "Incomplete",
+  "slug": "Incomplete",
+  "versions": "Regular, Instrumental",
+  "genre": "Chill",
+  "moods": [
+   "sad",
+   "romantic",
+   "Restless",
+   "Gloomy"
+  ],
+  "date": "25 May 2017"
+ },
+ "MuscleUp": {
+  "artist": "Drama B, SKAN",
+  "title": "Muscle Up (feat. Drama B & Ryo)",
+  "slug": "MuscleUp",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "powerful",
+   "angry",
+   "negative"
+  ],
+  "date": "2 Jan 2025"
+ },
+ "GoEasy": {
+  "artist": "Uplink, Shiah Maisel",
+  "title": "Go Easy",
+  "slug": "GoEasy",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Mysterious",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "1 Dec 2022"
+ },
+ "GA_Runaway": {
+  "artist": "Guy Arthur",
+  "title": "Runaway",
+  "slug": "GA_Runaway",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "Glamorous",
+   "Euphoric",
+   "Restless",
+   "Quirky",
+   "Weird"
+  ],
+  "date": "27 Oct 2022"
+ },
+ "GhostTown": {
+  "artist": "Arcando, ThatBehavior",
+  "title": "Ghost Town (feat. Vanessa Campagna)",
+  "slug": "GhostTown",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Restless",
+   "Dreamy",
+   "Gloomy",
+   "Quirky"
+  ],
+  "date": "18 Oct 2022"
+ },
+ "32SFreedom": {
+  "artist": "Harley Bird, CHENDA, 32Stitches",
+  "title": "Freedom",
+  "slug": "32SFreedom",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Euphoric",
+   "Gloomy",
+   "Weird",
+   "Dark"
+  ],
+  "date": "2 Sep 2022"
+ },
+ "ZMCNobody": {
+  "artist": "Zack Merci, CRVN",
+  "title": "Nobody",
+  "slug": "ZMCNobody",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Mysterious",
+   "Restless",
+   "Gloomy",
+   "Quirky",
+   "Dark",
+   "sad"
+  ],
+  "date": "7 Jul 2022"
+ },
+ "Sunrise": {
+  "artist": "Leat'eq",
+  "title": "Sunrise",
+  "slug": "Sunrise",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "Hopeful",
+   "Happy",
+   "Dreamy",
+   "Quirky"
+  ],
+  "date": "5 Jul 2022"
+ },
+ "EgArMat_Runaway": {
+  "artist": "Mathew V, Arcando, Egzod",
+  "title": "Runaway (feat. Mathew V)",
+  "slug": "EgArMat_Runaway",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "energetic",
+   "Hopeful",
+   "Restless"
+  ],
+  "date": "13 May 2022"
+ },
+ "Avatar": {
+  "artist": "RYVN",
+  "title": "Avatar",
+  "slug": "Avatar",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Epic",
+   "Fear",
+   "scary",
+   "Sexy",
+   "Suspense"
+  ],
+  "date": "4 Mar 2022"
+ },
+ "RayOfLight": {
+  "artist": "Nieko, Zack Merci",
+  "title": "Ray Of Light",
+  "slug": "RayOfLight",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Epic",
+   "scary",
+   "Suspense"
+  ],
+  "date": "18 Feb 2022"
+ },
+ "Circus": {
+  "artist": "Isolated",
+  "title": "Circus",
+  "slug": "Circus",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dark",
+   "Gloomy",
+   "Mysterious",
+   "Suspense"
+  ],
+  "date": "25 Jan 2022"
+ },
+ "GotMe": {
+  "artist": "Nito-Onna, Poylow",
+  "title": "Got Me",
+  "slug": "GotMe",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "7 Jan 2022"
+ },
+ "WhenWeLeavin": {
+  "artist": "Peter Piffen, Too Martian, IntoAlter",
+  "title": "When We Leavin",
+  "slug": "WhenWeLeavin",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Angry",
+   "Dark",
+   "energetic",
+   "Suspense",
+   "Quirky"
+  ],
+  "date": "21 Dec 2021"
+ },
+ "HateYou": {
+  "artist": "Nito-Onna, BAUWZ, Poylow",
+  "title": "Hate You",
+  "slug": "HateYou",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Quirky",
+   "Restless",
+   "Fear"
+  ],
+  "date": "17 Dec 2021"
+ },
+ "FullSpeedAhead": {
+  "artist": "Wanden, Slashtaq",
+  "title": "Full Speed Ahead",
+  "slug": "FullSpeedAhead",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "Gloomy",
+   "Restless",
+   "energetic"
+  ],
+  "date": "18 Nov 2021"
+ },
+ "PushTheGas": {
+  "artist": "The LJ, M.I.M.E",
+  "title": "Push The Gas",
+  "slug": "PushTheGas",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Angry",
+   "Epic",
+   "energetic",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "5 Nov 2021"
+ },
+ "Ropes": {
+  "artist": "Chandler Jewels, Dirty Palm",
+  "title": "Ropes",
+  "slug": "Ropes",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Angry",
+   "Epic",
+   "energetic",
+   "Quirky",
+   "Restless"
+  ],
+  "date": "28 Oct 2021"
+ },
+ "NumbThePain": {
+  "artist": "Shiah Maisel, Anikdote, CHENDA, Le Malls, Catas, Clarx",
+  "title": "Numb The Pain",
+  "slug": "NumbThePain",
+  "versions": "Regular, Instrumental",
+  "genre": "Indie, Trap",
+  "moods": [
+   "Dark",
+   "Gloomy",
+   "Fear",
+   "Restless"
+  ],
+  "date": "28 Sep 2021"
+ },
+ "ZeroGravity": {
+  "artist": "Jauque X, Tom Wilson",
+  "title": "Zero Gravity",
+  "slug": "ZeroGravity",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "Epic",
+   "energetic",
+   "Quirky"
+  ],
+  "date": "2 Sep 2021"
+ },
+ "LongNightPt2": {
+  "artist": "JPB, M.I.M.E",
+  "title": "Long Night pt. II (feat. M.I.M.E & Drama B)",
+  "slug": "LongNightPt2",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Heavy",
+   "Mysterious",
+   "Weird",
+   "Elegant"
+  ],
+  "date": "23 Jul 2021"
+ },
+ "ifNeedYou": {
+  "artist": "if found",
+  "title": "Need You",
+  "slug": "ifNeedYou",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "Happy",
+   "Euphoric",
+   "Dreamy"
+  ],
+  "date": "25 May 2021"
+ },
+ "GameOver": {
+  "artist": "EMM, Egzod",
+  "title": "Game Over ",
+  "slug": "GameOver",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "Quirky",
+   "Gloomy",
+   "Mysterious"
+  ],
+  "date": "20 May 2021"
+ },
+ "Royalty": {
+  "artist": "Maestro Chives, Egzod, Neoni",
+  "title": "Royalty",
+  "slug": "Royalty",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "Happy",
+   "Euphoric",
+   "Hopeful",
+   "Quirky"
+  ],
+  "date": "22 Apr 2021"
+ },
+ "FAElevate": {
+  "artist": "Arcando, Fabian Mazur",
+  "title": "Elevate",
+  "slug": "FAElevate",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "energetic",
+   "Angry",
+   "Gloomy"
+  ],
+  "date": "25 Mar 2021"
+ },
+ "TopFloor": {
+  "artist": "JPB",
+  "title": "Top Floor",
+  "slug": "TopFloor",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Laid Back"
+  ],
+  "date": "19 Mar 2021"
+ },
+ "RunForYourLife": {
+  "artist": "Tom Wilson",
+  "title": "Run For Your Life ",
+  "slug": "RunForYourLife",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "Quirky",
+   "Restless",
+   "energetic"
+  ],
+  "date": "19 Feb 2021"
+ },
+ "Touchdown": {
+  "artist": "M.I.M.E, N3WPORT",
+  "title": "Touchdown",
+  "slug": "Touchdown",
+  "versions": "Regular, Instrumental",
+  "genre": "Trap",
+  "moods": [
+   "Epic",
+   "energetic",
+   "Dark",
+   "Gloomy"
+  ],
+  "date": "5 Feb 2021"
+ },
+ "thinkaboutme": {
+  "artist": "Yancle",
+  "title": "Think About Me",
+  "slug": "thinkaboutme",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dreamy",
+   "Euphoric",
+   "Mysterious",
+   "Quirky"
+  ],
+  "date": "19 Jul 2023"
+ },
+ "spenditall": {
+  "artist": "Guy Arthur",
+  "title": "Spend It All",
+  "slug": "spenditall",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "Epic",
+   "Restless",
+   "Euphoric",
+   "Quirky",
+   "Weird"
+  ],
+  "date": "16 May 2023"
+ },
+ "akaciaelectric": {
+  "artist": "Akacia",
+  "title": "Electric",
+  "slug": "akaciaelectric",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic, Melodic Dubstep",
+  "moods": [
+   "Epic",
+   "energetic",
+   "Mysterious",
+   "Euphoric",
+   "Quirky",
+   "Glamorous",
+   "Restless"
+  ],
+  "date": "9 Mar 2023"
+ },
+ "NotGivingIn": {
+  "artist": "Culture Code",
+  "title": "Not Giving In",
+  "slug": "NotGivingIn",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Euphoric",
+   "energetic",
+   "Restless",
+   "Quirky",
+   "Epic"
+  ],
+  "date": "11 Nov 2022"
+ },
+ "die4u": {
+  "artist": "if found, n\u00f8ll, damnboy!",
+  "title": "die 4 u (feat. damnboy!)",
+  "slug": "die4u",
+  "versions": "Regular, Instrumental",
+  "genre": "Electronic, Melodic Dubstep",
+  "moods": [
+   "Mysterious",
+   "energetic",
+   "Euphoric",
+   "Restless",
+   "Hopeful",
+   "Quirky",
+   "Epic"
+  ],
+  "date": "11 Oct 2022"
+ },
+ "BlameItOnMe": {
+  "artist": "Shiah Maisel, CADMIUM",
+  "title": "Blame It On Me",
+  "slug": "BlameItOnMe",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "Glamorous",
+   "romantic",
+   "Dreamy",
+   "Quirky"
+  ],
+  "date": "1 Sep 2022"
+ },
+ "JJDSomebody": {
+  "artist": "Halvorsen, Division One, JJD",
+  "title": "Somebody Like Me (feat. Halvorsen)",
+  "slug": "JJDSomebody",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "Euphoric",
+   "Hopeful",
+   "Dreamy",
+   "Epic"
+  ],
+  "date": "29 Jul 2022"
+ },
+ "IHearSleighBells": {
+  "artist": "Like Lions, Severin",
+  "title": "I Hear Sleigh Bells",
+  "slug": "IHearSleighBells",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Euphoric",
+   "Happy",
+   "Hopeful",
+   "Epic",
+   "relaxed"
+  ],
+  "date": "17 Dec 2021"
+ },
+ "Wounds": {
+  "artist": "Papa Khan",
+  "title": "Wounds",
+  "slug": "Wounds",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Epic",
+   "Euphoric",
+   "energetic",
+   "Suspense",
+   "Quirky"
+  ],
+  "date": "16 Sep 2021"
+ },
+ "CCYouAndI": {
+  "artist": "Alexis Donn, Culture Code",
+  "title": "You & I",
+  "slug": "CCYouAndI",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Laid Back",
+   "Dreamy",
+   "Euphoric",
+   "Hopeful"
+  ],
+  "date": "26 Aug 2021"
+ },
+ "Heart": {
+  "artist": "Like Lions, Severin, Alex Skrindo",
+  "title": "Heart",
+  "slug": "Heart",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Euphoric",
+   "Happy",
+   "Epic",
+   "Hopeful"
+  ],
+  "date": "12 Aug 2021"
+ },
+ "MrBully": {
+  "artist": "CHENDA",
+  "title": "Mr. Bully",
+  "slug": "MrBully",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Epic",
+   "sad",
+   "Gloomy",
+   "Restless"
+  ],
+  "date": "24 Jun 2021"
+ },
+ "CSlowDown": {
+  "artist": "CADMIUM, Chris Linton",
+  "title": "Slow Down",
+  "slug": "CSlowDown",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dark",
+   "Restless",
+   "Gloomy",
+   "sad"
+  ],
+  "date": "14 Aug 2020"
+ },
+ "GravityD": {
+  "artist": "Diamond Eyes",
+  "title": "Gravity ",
+  "slug": "GravityD",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dark",
+   "Gloomy",
+   "Fear",
+   "scary",
+   "energetic",
+   "sad",
+   "Hopeful"
+  ],
+  "date": "18 Jan 2020"
+ },
+ "BlueEyedDemon": {
+  "artist": "ROY KNOX",
+  "title": "Blue Eyed Demon",
+  "slug": "BlueEyedDemon",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Angry",
+   "Dark",
+   "Restless",
+   "Quirky"
+  ],
+  "date": "4 Jan 2020"
+ },
+ "Everyday": {
+  "artist": "Ashley Apollodor, Beatcore",
+  "title": "Everyday",
+  "slug": "Everyday",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Epic",
+   "Dreamy",
+   "Glamorous",
+   "Hopeful",
+   "romantic"
+  ],
+  "date": "10 Dec 2019"
+ },
+ "Shining": {
+  "artist": "ROY KNOX",
+  "title": "Shining",
+  "slug": "Shining",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "energetic",
+   "romantic",
+   "Happy",
+   "Hopeful",
+   "Euphoric"
+  ],
+  "date": "13 Sep 2019"
+ },
+ "BurningBridges": {
+  "artist": "Beatcore, Ashley Apollodor",
+  "title": "Burning Bridges",
+  "slug": "BurningBridges",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dreamy",
+   "Epic",
+   "Dark",
+   "Quirky"
+  ],
+  "date": "26 Jul 2019"
+ },
+ "ChangeYourMind": {
+  "artist": "CADMIUM",
+  "title": "Change Your Mind",
+  "slug": "ChangeYourMind",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "romantic",
+   "sad",
+   "Gloomy",
+   "Laid Back",
+   "Peaceful"
+  ],
+  "date": "21 May 2019"
+ },
+ "Stars": {
+  "artist": "Diamond Eyes",
+  "title": "Stars",
+  "slug": "Stars",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Happy",
+   "Hopeful",
+   "Euphoric",
+   "Dreamy",
+   "Epic"
+  ],
+  "date": "1 May 2019"
+ },
+ "Starfire": {
+  "artist": "Spencer Maro",
+  "title": "Starfire",
+  "slug": "Starfire",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "sad",
+   "Gloomy",
+   "Dark",
+   "Laid Back"
+  ],
+  "date": "19 Nov 2018"
+ },
+ "Eclipse": {
+  "artist": "Last Heroes, AERYN, TwoWorldsApart",
+  "title": "Eclipse (feat. AERYN)",
+  "slug": "Eclipse",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Epic",
+   "energetic",
+   "Dark",
+   "Angry",
+   "Glamorous",
+   "Gloomy"
+  ],
+  "date": "10 Oct 2018"
+ },
+ "Sekai_Running": {
+  "artist": "Sekai",
+  "title": "Running",
+  "slug": "Sekai_Running",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "romantic",
+   "Dreamy",
+   "relaxed",
+   "Peaceful"
+  ],
+  "date": "22 Aug 2018"
+ },
+ "Closer": {
+  "artist": "Au5, Danyka Nadeau",
+  "title": "Closer (feat. Danyka Nadeau)",
+  "slug": "Closer",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Euphoric",
+   "energetic",
+   "Mysterious",
+   "Quirky"
+  ],
+  "date": "2 May 2018"
+ },
+ "JustStay": {
+  "artist": "Ashley Apollodor",
+  "title": "Just Stay",
+  "slug": "JustStay",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "romantic",
+   "Hopeful",
+   "Dreamy",
+   "Euphoric",
+   "relaxed"
+  ],
+  "date": "19 Dec 2017"
+ },
+ "WTWB": {
+  "artist": "Paul Flint, Chris Linton",
+  "title": "Watch The World Burn (feat. Chris Linton)",
+  "slug": "WTWB",
+  "versions": "Regular, Instrumental",
+  "genre": "Melodic Dubstep",
+  "moods": [
+   "Dark",
+   "Gloomy",
+   "energetic",
+   "Suspense"
+  ],
+  "date": "11 Oct 2017"
+ }
+}

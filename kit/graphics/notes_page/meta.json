@@ -1,0 +1,99 @@
+{
+  "id": "notes_page",
+  "name": "Notes page linked to a video",
+  "category": "mockup",
+  "kind": "speaker",
+  "description": "A white browser window of a study-notes page (lock + path in the URL bar, no domain or logo) with the speaker live in a round face bubble on its corner: an orange mono label, a big title that gets a marker swipe, 2-4 note lines that write in one by one, then a dark timestamp chip ('▶ 04:12') pops beside each note; a cursor clicks the first chip and a dark video player under the notes jumps its progress bar to that moment.",
+  "use_when": "Lines about notes, docs or a study page, especially notes that link back to a video, lecture or course (timestamps, 'it references the video itself').",
+  "params": {
+    "url": {
+      "type": "text",
+      "default": "notes / course / ep-03",
+      "max_len": 40,
+      "help": "a path, not a real domain"
+    },
+    "label": {
+      "type": "text",
+      "default": "",
+      "max_len": 30,
+      "help": "small orange label, e.g. 'SEASON 1 · EPISODE 3'"
+    },
+    "title": {
+      "type": "text",
+      "required": true,
+      "max_len": 26
+    },
+    "notes": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "[{text, time}] note lines (<= 30 characters) with an optional video timestamp like '04:12'"
+    },
+    "notes_at": {
+      "type": "number",
+      "default": 0.8,
+      "help": "seconds from the scene start when the notes start writing in"
+    },
+    "link_at": {
+      "type": "number",
+      "default": null,
+      "help": "seconds from the scene start when the timestamp chips and the player appear"
+    },
+    "player": {
+      "type": "text",
+      "default": "",
+      "max_len": 32,
+      "help": "video title in the player"
+    },
+    "player_status": {
+      "type": "text",
+      "default": "Playing from",
+      "max_len": 16
+    },
+    "progress": {
+      "type": "number",
+      "default": 0.32,
+      "help": "0-1, where the player jumps to"
+    },
+    "click": {
+      "type": "bool",
+      "default": true
+    },
+    "pip": {
+      "type": "bool",
+      "default": true,
+      "help": "the speaker's round face bubble on the window's corner"
+    }
+  },
+  "duration": {
+    "min": 2.5,
+    "default": 4.5,
+    "max": 7.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "notes",
+    "docs",
+    "study",
+    "course",
+    "video",
+    "timestamps",
+    "learn"
+  ],
+  "explains": [
+    "definition"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "sticky_notes",
+  "version": "1"
+}

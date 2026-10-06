@@ -1,0 +1,71 @@
+{
+  "id": "calendar_page",
+  "name": "Calendar page, day circled",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A white tear-off calendar page with metal rings and an orange month header swings down into the top band over the speaker: a huge day number and the weekday in orange; the weekday gets circled in black marker with a white hand-written note beside it ('limits reset!'), and optionally the page is torn off at the end, tilting and falling away.",
+  "use_when": "Lines that name a day or date that matters (today is Sunday, every Monday, the 1st of the month, deadline day), especially an opening.",
+  "params": {
+    "month": {
+      "type": "text",
+      "default": "September",
+      "max_len": 16
+    },
+    "day": {
+      "type": "text",
+      "default": "27",
+      "max_len": 3
+    },
+    "weekday": {
+      "type": "text",
+      "required": true,
+      "max_len": 12
+    },
+    "circle_at": {
+      "type": "number",
+      "default": 0.5,
+      "help": "seconds from the scene start when the weekday gets circled"
+    },
+    "note": {
+      "type": "text",
+      "default": "",
+      "max_len": 16,
+      "help": "hand-written note beside the page, e.g. 'reset day!'"
+    },
+    "tear_at": {
+      "type": "number",
+      "default": null,
+      "help": "seconds from the scene start when the page is torn off (usually just before the scene ends)"
+    }
+  },
+  "duration": {
+    "min": 1.2,
+    "default": 2.2,
+    "max": 4.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "date",
+    "day",
+    "calendar",
+    "sunday",
+    "opening",
+    "deadline"
+  ],
+  "explains": [
+    "chronology"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "counter_big",
+  "version": "1"
+}

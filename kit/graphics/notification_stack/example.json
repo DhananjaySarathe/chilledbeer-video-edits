@@ -1,0 +1,5 @@
+{"items": [
+  {"app": "Messages", "title": "New client inquiry", "body": "Hey, are you taking new projects?", "icon": "chat"},
+  {"app": "Payments", "title": "Invoice paid", "body": "You received $1,200.00", "icon": "dollar"},
+  {"app": "Calendar", "title": "Call booked", "body": "Tomorrow at 10:00 AM", "icon": "calendar"}
+]}

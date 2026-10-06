@@ -1,0 +1,116 @@
+<style>
+  .sw-bg { position: absolute; inset: 0; background:
+      radial-gradient(60% 34% at 50% 70%, rgba(252, 59, 0, 0.10), rgba(252, 59, 0, 0) 70%), var(--bg); }
+  .sw-win { position: absolute; overflow: hidden; background: #000; z-index: 2; }
+  .sw-win .speaker { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .sw-rim { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 8px #fff; pointer-events: none; }
+  .sw-shadow { position: absolute; border-radius: 60px; box-shadow: 0 40px 90px rgba(17, 17, 17, 0.28),
+    0 10px 24px rgba(17, 17, 17, 0.14); z-index: 1; }
+  .sw-top { position: absolute; left: 70px; right: 70px; top: 276px; height: 300px; display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: center; text-align: center; z-index: 3; }
+  .sw-kicker { font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 18px; }
+  .sw-head { font-family: var(--condensed); font-weight: 700; line-height: 1.02; text-transform: uppercase; color: var(--ink); }
+  .sw-head .hl { padding: 0 0.12em; display: inline-block; line-height: 1; margin: 0.05em 0; }   /* its box never covers the line above */
+  .sw-bubbles { position: absolute; left: 70px; right: 70px; top: 262px; height: 318px; display: flex; flex-direction: column;
+    justify-content: flex-end; gap: 16px; z-index: 3; }
+  .sw-b { max-width: 820px; padding: 18px 28px 20px; border-radius: 32px; font-family: var(--ui); font-weight: 700;
+    font-size: 42px; line-height: 1.14; box-shadow: var(--shadow-sm); position: relative; transform-origin: 20% 100%; }
+  .sw-b.them { align-self: flex-start; background: #fff; color: var(--ink); border-bottom-left-radius: 10px; }
+  .sw-b.me { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 10px; }
+  .sw-b .tag { display: inline-block; margin-bottom: 8px; padding: 4px 12px 3px; border-radius: 8px; background: var(--accent);
+    color: #fff; font-family: var(--mono); font-weight: 700; font-size: 19px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .sw-sticker { position: absolute; font-size: 130px; line-height: 1; z-index: 4;
+    filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.25)); }
+</style>
+<div class="sw-bg"></div>
+<div class="sw-shadow" id="shadow"></div>
+<div class="sw-win" id="win"><img class="speaker" id="me" alt=""><div class="sw-rim" id="rim"></div></div>
+<div class="sw-top" id="top"><div class="sw-kicker" id="kicker"></div><div class="sw-head" id="head"></div></div>
+<div class="sw-bubbles" id="bubbles"></div>
+<div class="sw-sticker" id="sticker"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const W = (s) => String(s ?? "").trim();
+    const win = GFX.$("#win"), shadow = GFX.$("#shadow"), me = GFX.$("#me"), rim = GFX.$("#rim");
+    GFX.speaker(me);
+
+    // the window: lower part of the frame, framed so the face sits ~30% down it, i.e. around y 900, clear of
+    // the caption band (y ~1120-1250) and above the platform's bottom UI
+    const R = { left: 200, top: 590, width: 680, height: 1030, radius: 56 };
+    const face = GFX.face;
+    const fy = face ? (face.y + face.h * 0.45) / 1920 : 0.36;
+    const fx = face ? (face.x + face.w / 2) / 1080 : 0.5;
+    const imgH = R.width * 1920 / 1080;                     // cover: the 9:16 frame scaled to the window width
+    // face centre as high as the head allows (a close selfie has a big face: keep the forehead in, the chin above
+    // the captions)
+    const faceH = face ? face.h / 1920 * imgH : 0.3 * imgH;
+    const want = Math.max(0.26 * R.height, 0.45 * faceH + 36);
+    const posY = GFX.clamp((fy * imgH - want) / (imgH - R.height)) * 100;
+    const posX = fx * 100;
+    const FULL = { left: 0, top: 0, width: 1080, height: 1920, radius: 0 };
+    const box = (r) => ({ left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px",
+                          borderRadius: r.radius + "px" });
+    const inDur = 460, outDur = 380;
+    const mIn = P.morph_in !== false, mOut = P.morph_out !== false;
+    const tHold0 = mIn ? inDur : 0, tOut = mOut ? D - outDur : D;
+    Object.assign(win.style, box(mIn ? FULL : R));
+    // one track per element: full -> window (in), a slow drift while held, window -> full (out)
+    const stops = [];
+    if (mIn) stops.push({ at: 0, ...box(FULL), objectPosition: "50% 50%" }, { at: inDur, ...box(R), ease: "expo" });
+    else stops.push({ at: 0, ...box(R) });
+    GFX.track(win, stops.concat(mOut ? [{ at: tOut, ...box(R) }, { at: D, ...box(FULL), ease: "inOut" }] : [{ at: D, ...box(R) }]));
+    const pos = [{ at: 0, objectPosition: mIn ? "50% 50%" : `${posX}% ${posY}%` }, { at: tHold0, objectPosition: `${posX}% ${posY}%` }];
+    if (mOut) pos.push({ at: tOut, objectPosition: `${posX}% ${posY}%` }, { at: D, objectPosition: "50% 50%" });
+    else pos.push({ at: D, objectPosition: `${posX}% ${posY}%` });
+    GFX.track(me, pos, { ease: "expo" });
+    // the rim and shadow only exist while it is a window
+    GFX.track(rim, [{ at: 0, opacity: mIn ? 0 : 1 }, { at: tHold0, opacity: 1 }, { at: tOut, opacity: 1 }, { at: D, opacity: mOut ? 0 : 1 }]);
+    Object.assign(shadow.style, box(R));
+    GFX.track(shadow, [{ at: 0, opacity: mIn ? 0 : 1 }, { at: tHold0, opacity: 1 }, { at: tOut, opacity: 1 }, { at: D, opacity: mOut ? 0 : 1 }]);
+    GFX.anim(me, [{ transform: "scale(1.0)" }, { transform: "scale(1.04)" }], { at: tHold0, dur: Math.max(1, tOut - tHold0), ease: "linear", fill: "none" });
+
+    // above the window: a headline, or speech bubbles
+    const top = GFX.$("#top"), head = GFX.$("#head"), kicker = GFX.$("#kicker"), bubbles = GFX.$("#bubbles");
+    const list = (P.bubbles || []).slice(0, 3).map((b) => (typeof b === "string" ? { from: "them", text: b } : b || {}));
+    const appear = tHold0 - 120;
+    if (list.length) {
+      top.remove();
+      const span = Math.max(300, tOut - appear - 500);
+      list.forEach((b, i) => {
+        const el = GFX.h("div", { class: "sw-b " + (b.from === "me" ? "me" : "them") },
+          b.from !== "me" && W(b.name) ? GFX.h("div", { class: "tag", text: W(b.name) }) : null,
+          GFX.h("div", { text: W(b.text) }));
+        bubbles.append(el);
+        const at = b.at != null ? Number(b.at) * 1000 : appear + (list.length > 1 ? (span * i) / (list.length - 1) * 0.8 : 0);
+        GFX.anim(el, [{ opacity: 0, transform: "translateY(40px) scale(.9)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+          { at, dur: 380, ease: "back" });
+        GFX.sfx("pop", at + 40, -16);
+      });
+      GFX.layout(() => { if (bubbles.scrollHeight > 318) { bubbles.style.transformOrigin = '50% 100%'; bubbles.style.scale = (318 / bubbles.scrollHeight).toFixed(3); } });
+    } else {
+      bubbles.remove();
+      if (W(P.kicker)) kicker.textContent = W(P.kicker); else kicker.remove();
+      const text = W(P.headline), hl = W(P.highlight);
+      const i = hl ? text.toLowerCase().indexOf(hl.toLowerCase()) : -1;
+      head.innerHTML = i < 0 ? GFX.esc(text)
+        : GFX.esc(text.slice(0, i)) + `<span class="hl">${GFX.esc(text.slice(i, i + hl.length))}</span>` + GFX.esc(text.slice(i + hl.length));
+      GFX.fit(head, { width: 940, height: 250, max: 130, min: 56, lines: 2 });
+      GFX.in(top, "rise", { at: appear, dur: 420, ease: "back" });
+    }
+    const sticker = GFX.$("#sticker");
+    if (W(P.sticker)) {
+      sticker.textContent = W(P.sticker);
+      Object.assign(sticker.style, { left: R.left + R.width - 90 + "px", top: R.top - 74 + "px" });
+      GFX.anim(sticker, [{ opacity: 0, transform: "scale(.2) rotate(-40deg)" }, { opacity: 1, transform: "scale(1) rotate(8deg)" }],
+        { at: appear + 250, dur: 420, ease: "back" });
+      GFX.anim(sticker, [{ rotate: "0deg" }, { rotate: "-6deg" }, { rotate: "0deg" }],
+        { at: appear + 700, dur: 900, iterations: Math.max(1, Math.floor((tOut - appear - 700) / 900)), ease: "inOut" });
+      GFX.sfx("pop", appear + 280, -14);
+    } else sticker.remove();
+    if (mOut) {                       // everything but the speaker clears before it grows back
+      GFX.anim([top, bubbles, sticker].filter((e) => e.isConnected), [{ opacity: 1 }, { opacity: 0 }], { at: tOut - 60, dur: 200, fill: "forwards" });
+    }
+  })();
+</script>

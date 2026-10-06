@@ -1,0 +1,92 @@
+<style>
+  .sc-card { position: absolute; left: 80px; right: 80px; top: 330px; padding: 46px 54px 40px; }
+  .sc-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .sc-label { font-family: var(--ui); font-weight: 700; font-size: 40px; }
+  .sc-period { font-family: var(--mono); font-weight: 500; font-size: 22px; letter-spacing: .22em; color: var(--muted); text-transform: uppercase; }
+  .sc-num-row { display: flex; align-items: center; gap: 22px; margin-top: 8px; }
+  .sc-num { font-family: var(--condensed); font-weight: 700; font-size: 190px; line-height: 1; color: var(--accent);
+    letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .sc-delta { display: inline-flex; align-items: center; gap: 6px; border-radius: 14px; padding: 8px 16px;
+    font-family: var(--mono); font-weight: 700; font-size: 30px; color: #fff; background: var(--good); }
+  .sc-delta.down { background: var(--accent); }
+  .sc-chart { position: relative; height: 200px; margin: 14px 0 26px; }
+  .sc-chart svg { position: absolute; inset: 0; overflow: visible; }
+  .sc-base { stroke: var(--line); stroke-width: 3; stroke-dasharray: 6 10; }
+  .sc-line { fill: none; stroke: var(--accent); stroke-width: 9; stroke-linecap: round; }
+  .sc-area { fill: var(--accent-soft); }
+  .sc-dot { fill: var(--accent); stroke: #fff; stroke-width: 6; }
+  .sc-stats { display: flex; gap: 18px; }
+  .sc-stat { flex: 1; padding: 20px 24px; }
+  .sc-stat b { display: block; font-family: var(--condensed); font-weight: 700; font-size: 58px; line-height: 1;
+    font-variant-numeric: tabular-nums; }
+  .sc-stat span { display: block; margin-top: 8px; font-family: var(--mono); font-size: 18px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); }
+  .sc-heart { position: absolute; color: var(--accent); }
+</style>
+<div class="card sc-card" id="card">
+  <div class="sc-head"><div class="sc-label" id="label"></div><div class="sc-period" id="period"></div></div>
+  <div class="sc-num-row"><div class="sc-num" id="num"></div><div class="sc-delta" id="delta"></div></div>
+  <div class="sc-chart" id="chart"></div>
+  <div class="sc-stats" id="stats"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const up = P.trend !== "down";
+    GFX.$("#label").textContent = P.label;
+    GFX.$("#period").textContent = P.period;
+    const num = GFX.$("#num"), delta = GFX.$("#delta");
+    const tStart = 260, tEnd = Math.min(D - 350, 1900);
+    GFX.count(num, P.from, P.to, { at: tStart, dur: tEnd - tStart, decimals: P.decimals, prefix: P.prefix, suffix: P.suffix });
+    if (P.delta) {
+      delta.innerHTML = GFX.icon(up ? "trendUp" : "trendDown", { size: 30, stroke: "#fff", width: 3 }) + GFX.esc(P.delta);
+      if (!up) delta.classList.add("down");
+      GFX.in(delta, "pop", { at: tEnd - 120, dur: 380 });
+    } else delta.remove();
+
+    // chart: a smooth curve rising (or falling) to the right
+    const W = 872, H = 200, pts = [];
+    for (let i = 0; i <= 24; i++) {
+      const x = i / 24, y = up ? Math.pow(x, 2.2) * 0.92 + Math.sin(x * 9) * 0.025 : 1 - Math.pow(x, 0.55) * 0.9 + Math.sin(x * 8) * 0.02;
+      pts.push([x * W, H - 12 - y * (H - 30)]);
+    }
+    const d = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+    const last = pts[pts.length - 1];
+    GFX.$("#chart").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+      <line class="sc-base" x1="0" y1="${H - 12}" x2="${W}" y2="${H - 12}"/>
+      <path class="sc-area" id="area" d="${d} L${W} ${H} L0 ${H} Z"/>
+      <path class="sc-line" id="line" d="${d}" pathLength="1000" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+      <circle class="sc-dot" id="dot" cx="${last[0]}" cy="${last[1]}" r="16"/></svg>`;
+    GFX.anim(GFX.$("#line"), [{ strokeDashoffset: 1000 }, { strokeDashoffset: 0 }], { at: tStart, dur: tEnd - tStart, ease: "inOut" });
+    GFX.in(GFX.$("#area"), "fade", { at: tEnd - 500, dur: 500 });
+    GFX.in(GFX.$("#dot"), "pop", { at: tEnd - 60, dur: 320 });
+
+    const stats = GFX.$("#stats");
+    (P.stats || []).slice(0, 3).forEach((s, i) => {
+      const tile = GFX.h("div", { class: "inset sc-stat" }, GFX.h("b"), GFX.h("span", { text: s.label || "" }));
+      stats.append(tile);
+      const b = tile.querySelector("b");
+      if (s.compact) GFX.tween((v) => { b.textContent = (s.prefix || "") + GFX.compact(v) + (s.suffix || ""); },
+        { at: tStart + 80 * i, dur: tEnd - tStart, from: s.from ?? 0, to: s.to });
+      else GFX.count(b, s.from ?? 0, s.to, { at: tStart + 80 * i, dur: tEnd - tStart, prefix: s.prefix || "", suffix: s.suffix || "" });
+    });
+    if (!(P.stats || []).length) stats.remove();
+
+    GFX.in(GFX.$("#card"), "rise", { at: 0, dur: 520, ease: "back" });
+
+    if (P.hearts && up) {
+      const r = GFX.rand(11), card = GFX.$("#card");
+      for (let k = 0; k < 9; k++) {
+        const hEl = GFX.h("div", { class: "sc-heart", html: GFX.icon("heart", { size: 46 + r() * 30 }) });
+        hEl.style.left = (650 + r() * 220) + "px"; hEl.style.top = (230 + r() * 90) + "px";
+        card.append(hEl);
+        const at = tEnd - 500 + k * 110, drift = -60 + r() * 120;
+        GFX.anim(hEl, [
+          { opacity: 0, transform: "translate(0, 0) scale(.3)" },
+          { opacity: 1, transform: `translate(${drift * 0.3}px, -60px) scale(1)`, offset: 0.25 },
+          { opacity: 0, transform: `translate(${drift}px, -300px) scale(.9)` },
+        ], { at, dur: 1100, ease: "out" });
+      }
+    }
+  })();
+</script>

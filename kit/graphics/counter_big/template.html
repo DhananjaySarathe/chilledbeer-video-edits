@@ -1,0 +1,116 @@
+<style>
+  /* dark "photo" backdrop: layered light falloff + accent glow + vignette, slowly pushing in
+     (no film grain: noise makes every captured frame ~3.5x heavier and doubles render time) */
+  .cb-bg { position: absolute; inset: 0; overflow: hidden; background: #0B0C0E; }
+  .cb-light { position: absolute; inset: -8%; will-change: transform; background:
+      radial-gradient(ellipse 58% 30% at 26% 20%, rgba(150, 160, 182, 0.22), transparent 70%),
+      radial-gradient(ellipse 62% 38% at 80% 80%, rgba(112, 118, 134, 0.17), transparent 72%),
+      radial-gradient(ellipse 46% 15% at 50% 36%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 72%),
+      radial-gradient(circle at 84% 14%, rgba(255, 244, 228, 0.07) 0, transparent 7%),
+      radial-gradient(circle at 12% 62%, rgba(214, 224, 255, 0.05) 0, transparent 9%),
+      radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.035) 0, transparent 6%),
+      linear-gradient(118deg, transparent 32%, rgba(255, 255, 255, 0.045) 46%, transparent 60%),
+      linear-gradient(170deg, #1A1B1F 0%, #0D0E10 55%, #121317 100%); }
+  .cb-vignette { position: absolute; inset: 0;
+    background: radial-gradient(ellipse 78% 58% at 50% 38%, transparent 38%, rgba(0, 0, 0, 0.78) 100%); }
+  .cb-wrap { position: absolute; left: var(--safe-left); right: var(--safe-left); top: var(--safe-top);
+    bottom: calc(1920px - var(--content-bottom)); display: flex; flex-direction: column; align-items: center;
+    justify-content: center; }
+  .cb-kicker { font-size: 34px; letter-spacing: 0.34em; text-indent: 0.34em; white-space: nowrap; text-align: center; }
+  .cb-row { margin-top: 18px; text-align: center; white-space: nowrap; }
+  .cb-num { display: inline-block; font-family: var(--display); font-size: 250px; line-height: 1.02;
+    white-space: nowrap; color: var(--ink); }
+  .cb-num .d { display: inline-block; width: var(--dw, 0.5em); text-align: center; }
+  .cb-num .hi { color: var(--accent); }
+  .cb-num .sep { display: inline-block; margin: 0 0.03em; }
+  .cb-num .word { font-size: 0.34em; margin-left: 0.22em; letter-spacing: 0.02em; color: var(--ink); }
+  .cb-num.accent { color: var(--accent); }
+  body.cb-dark .cb-kicker { color: rgba(255, 255, 255, 0.92); }
+  body.cb-dark .cb-num, body.cb-dark .cb-num .word { color: #FFFFFF; }
+  body.cb-dark .cb-num.accent { color: var(--accent); }
+  body.cb-dark .cb-num { text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45); }
+</style>
+<div class="cb-bg" id="bg">
+  <div class="cb-light" id="light"></div>
+  <div class="cb-vignette"></div>
+</div>
+<div class="cb-wrap" id="wrap">
+  <div class="kicker cb-kicker" id="kicker"></div>
+  <div class="cb-row" id="row"><span class="cb-num" id="num"></span></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const clock = P.format !== "number";
+    const dark = P.dark !== false;
+    const num = GFX.$("#num"), kicker = GFX.$("#kicker"), row = GFX.$("#row");
+    if (dark) document.body.classList.add("cb-dark"); else GFX.$("#bg").remove();
+
+    // Display fonts have proportional digits: fixed-width cells (a hair under the widest digit, so the
+    // side bearings overlap) keep a racing number from wobbling.
+    GFX.layout(() => {
+      const probe = GFX.h("span", { style: "position:absolute;display:inline-block;visibility:hidden;white-space:pre" });
+      num.append(probe);
+      let w = 0;
+      for (const d of "0123456789") { probe.textContent = d.repeat(10); w = Math.max(w, probe.offsetWidth / 10); } // layout width: entrance transforms don't skew it
+      num.style.setProperty("--dw", (0.95 * w / parseFloat(getComputedStyle(probe).fontSize)).toFixed(4) + "em");
+      probe.remove();
+    });
+    const cells = (s) => [...s].map((c) => (c >= "0" && c <= "9" ? `<span class="d">${c}</span>`
+      : c === ":" ? '<span class="sep">:</span>' : GFX.esc(c))).join("");
+    const pad = (n) => String(n).padStart(2, "0");
+
+    // "clock": HH:MM:SS with the hours in the accent (as in the reference); "number": grouped, prefix/suffix
+    const places = (x) => (Number.isInteger(x) ? 0 : Math.min(2, (String(x).split(".")[1] || "").length));
+    const decimals = clock ? 0 : places(Number(P.to) || 0);
+    const suffix = String(P.suffix || ""), prefix = String(P.prefix || "");
+    const wordSuffix = suffix.trim().length > 2;
+    const render = (v) => {
+      if (clock) {
+        const s = Math.max(0, Math.round(v));
+        const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+        return `<span class="hi">${cells(pad(h))}</span>${cells(":" + pad(m) + ":" + pad(sec))}`;
+      }
+      const body = Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+      const sign = v < 0 && Math.abs(v) >= Math.pow(10, -decimals) / 2 ? "-" : "";
+      return cells(prefix + sign + body) + (suffix ? (wordSuffix ? `<span class="word">${GFX.esc(suffix.trim())}</span>` : cells(suffix)) : "");
+    };
+    if (!clock) num.classList.add("accent");
+
+    const from = Number(P.from) || 0, to = Number(P.to) || 0;
+    // size the number for its widest state, then let the count take over
+    num.innerHTML = render(Math.abs(from) > Math.abs(to) ? from : to);
+    GFX.fit(num, { width: 880, max: 232, min: 90 });
+    kicker.textContent = P.kicker || "";
+    // size the label on an un-animated clone: its letter-spacing entrance would skew a live measurement
+    GFX.layout(() => {
+      if (!P.kicker) return;
+      const probe = kicker.cloneNode(true);
+      probe.style.cssText = "position:absolute;visibility:hidden;font-size:34px";
+      kicker.parentElement.append(probe);
+      const fs = Math.max(22, Math.min(34, Math.floor((34 * 950) / Math.max(1, probe.scrollWidth))));
+      const wide = (probe.scrollWidth * fs) / 34;
+      probe.remove();
+      kicker.style.fontSize = fs + "px";
+      // the label tightens in from wider tracking, never wider than the frame
+      const ls = GFX.clamp(0.34 + (950 - wide) / (Math.max(1, kicker.textContent.length) * fs), 0.34, 0.7).toFixed(3);
+      GFX.anim(kicker, [{ opacity: 0, letterSpacing: ls + "em", textIndent: ls + "em", transform: "translateY(12px)" },
+        { opacity: 1, letterSpacing: "0.34em", textIndent: "0.34em", transform: "translateY(0)" }], { at: 0, dur: 620, ease: "expo" });
+    });
+
+    // count fast, then settle; the seconds keep ticking into the landing
+    const tStart = 150, tEnd = Math.max(tStart + 700, D - 520);
+    let last = "";
+    GFX.tween((v) => { const html = render(v); if (html !== last) { num.innerHTML = html; last = html; } },
+      { at: tStart, dur: tEnd - tStart, ease: "expo", from, to });
+
+    // entrances: the number resolves out of a blur, then a small landing punch
+    if (!P.kicker) kicker.remove();
+    GFX.in(row, "blur", { at: 60, dur: 460 });
+    GFX.anim(num, [{ transform: "scale(1)" }, { transform: "scale(1.045)", offset: 0.35 }, { transform: "scale(1)" }],
+      { at: tEnd - 40, dur: 360, ease: "out" });
+    GFX.anim(GFX.$("#wrap"), [{ transform: "translateY(14px)" }, { transform: "translateY(0)" }], { dur: D, ease: "out" });
+    if (dark) GFX.anim(GFX.$("#light"), [{ transform: "scale(1.1) translateY(-18px)" }, { transform: "scale(1) translateY(0)" }],
+      { dur: D, ease: "linear" });
+  })();
+</script>

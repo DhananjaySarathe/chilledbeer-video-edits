@@ -1,0 +1,81 @@
+{
+  "id": "file_upload",
+  "name": "Drag a file into a folder and wait for the upload",
+  "category": "mockup",
+  "kind": "fullscreen",
+  "description": "A white file card (dark film thumbnail, filename like 'raw_take_03.mov', size and length) sits below a dark folder icon with an orange upload arrow; a cursor grabs the file and drags it into the folder, where it shrinks away, then an upload card appears under the folder: 'Uploading…' with a percentage and an orange bar that crawls and stalls at a low number, plus an ETA.",
+  "use_when": "Lines about uploading, sending or transferring footage (to a drive, the cloud, an editor or a client), or about slow steps before editing even starts: 'first you upload the video', 'wait for it to upload'.",
+  "params": {
+    "filename": {
+      "type": "text",
+      "default": "raw_take_03.mov",
+      "max_len": 32,
+      "help": "the file being dragged, with its extension"
+    },
+    "meta": {
+      "type": "text",
+      "default": "2:41 · 486 MB",
+      "max_len": 24,
+      "help": "length and size under the filename; '' hides it"
+    },
+    "folder_label": {
+      "type": "text",
+      "default": "Drive / uploads",
+      "max_len": 30,
+      "help": "label under the folder, generic: 'Drive / uploads', 'Client / footage'"
+    },
+    "percent_to": {
+      "type": "number",
+      "default": 18,
+      "help": "0-100: where the upload bar stops; keep it low (5-25) so it feels slow"
+    },
+    "eta": {
+      "type": "text",
+      "default": "ETA 14 min",
+      "max_len": 16,
+      "help": "time left next to the bar, e.g. 'ETA 14 min', '2 h left'; '' hides it"
+    }
+  },
+  "duration": {
+    "min": 2.2,
+    "default": 2.8,
+    "max": 4.5
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.7,
+      "name": "click",
+      "gain_db": -14
+    },
+    {
+      "at": 1.4,
+      "name": "pop",
+      "gain_db": -16
+    }
+  ],
+  "tags": [
+    "upload",
+    "file",
+    "drive",
+    "cloud",
+    "drag",
+    "slow",
+    "waiting",
+    "workflow"
+  ],
+  "explains": [
+    "instruction"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "file_list",
+  "version": "1"
+}

@@ -1,0 +1,105 @@
+<style>
+  .lr-lockup { position: absolute; left: 0; top: 0; display: flex; align-items: center; white-space: nowrap; }
+  .lr-mark { position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    background: var(--accent); color: var(--accent-ink); box-shadow: 0 18px 40px rgba(252, 59, 0, 0.28); }
+  .lr-mark svg { display: block; }
+  .lr-name { font-family: var(--display); text-transform: uppercase; line-height: 1; letter-spacing: 0.005em;
+    color: var(--ink); padding: 0.04em 0.02em 0; }
+  .lr-name .accent { color: var(--accent); }
+  .lr-panel { position: absolute; inset: 0; background: var(--accent); overflow: hidden; }
+  .lr-words { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-direction: column; align-items: center; }
+  .lr-word { display: block; font-family: var(--display); text-transform: uppercase; line-height: 0.9;
+    letter-spacing: 0.005em; white-space: nowrap; color: var(--ink); }
+  .lr-word.white { color: var(--accent-ink); }
+  .lr-ring { position: absolute; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%;
+    border: 12px solid rgba(255, 255, 255, 0.34); opacity: 0; }
+</style>
+<div class="lr-lockup" id="lockup">
+  <div class="lr-mark" id="mark"></div>
+  <div class="lr-name" id="name"></div>
+</div>
+<div class="lr-panel" id="panel"><div class="lr-words" id="words"></div></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const panel = GFX.$("#panel"), wordsBox = GFX.$("#words"), lockup = GFX.$("#lockup");
+    const mark = GFX.$("#mark"), name = GFX.$("#name");
+    const CY = 720;                                   // optical centre of the visible area
+
+    // wordmark: the first split_at characters in ink, the rest in the accent
+    const brand = String(P.brand || "").trim();
+    let cut = Number.isFinite(P.split_at) ? Math.max(0, Math.min(brand.length, Math.round(P.split_at))) : brand.lastIndexOf(" ");
+    if (cut < 0) cut = brand.length;
+    name.append(brand.slice(0, cut));
+    if (cut < brand.length) name.append(GFX.h("span", { class: "accent", text: brand.slice(cut) }));
+
+    const words = (P.words || []).slice(0, 3).map((w) => String(w).trim()).filter(Boolean);
+    const els = words.map((w, i) => {
+      const el = GFX.h("div", { class: "lr-word" + (i % 2 ? " white" : ""), text: w });
+      wordsBox.append(el);
+      return el;
+    });
+
+    // timeline (scales down a little for three words or short scenes)
+    const n = Math.max(1, els.length);
+    const step = GFX.clamp((D - 1300) / n, 180, 300);
+    const tWord = (i) => 40 + i * step;
+    const collapse = 420, tCollapse = Math.min(tWord(n - 1) + 380, D - 450 - collapse), tLanded = tCollapse + collapse;
+
+    GFX.layout(() => {
+      // 1. words: one shared size, as big as fits (width 940, whole stack inside the visible area)
+      let size = 330;
+      for (const el of els) {
+        el.style.fontSize = "100px";
+        size = Math.min(size, Math.floor((940 / el.scrollWidth) * 100));
+      }
+      size = Math.max(90, Math.min(size, Math.floor(820 / (n * 0.9))));
+      els.forEach((el) => { el.style.fontSize = size + "px"; });
+      wordsBox.style.top = (CY - wordsBox.offsetHeight / 2) + "px";
+      els.forEach((el, i) => {
+        GFX.anim(el, [{ opacity: 0, transform: "scale(1.9)" }, { opacity: 1, transform: "scale(1)" }],
+          { at: tWord(i), dur: 280, ease: "snap" });
+        const ring = GFX.h("div", { class: "lr-ring" });
+        ring.style.left = "540px";
+        ring.style.top = (wordsBox.offsetTop + el.offsetTop + el.offsetHeight / 2) + "px";
+        panel.insertBefore(ring, wordsBox);
+        GFX.anim(ring, [{ opacity: 1, transform: "scale(.3)" }, { opacity: 0, transform: "scale(1.7)" }],
+          { at: tWord(i), dur: 760, ease: "out", fill: "forwards" });
+      });
+
+      // 2. lockup: mark about as tall as the capitals, whole lockup at most 940 wide
+      name.style.fontSize = "100px";
+      const k = name.offsetWidth / 100;
+      const F = Math.max(70, Math.min(190, Math.floor(940 / (0.84 + 0.2 + k))));
+      const S = Math.round(F * 0.84), gap = Math.round(F * 0.2);
+      name.style.fontSize = F + "px";
+      mark.style.cssText = `width:${S}px;height:${S}px;border-radius:${Math.round(S * 0.24)}px;margin-right:${gap}px`;
+      mark.innerHTML = GFX.icon(P.icon || "play", { size: Math.round(S * 0.5), stroke: "#fff", width: 2.6 });
+      GFX.in(mark.firstElementChild, "pop", { at: tLanded - 20, dur: 360 });
+      const W = lockup.offsetWidth, H = lockup.offsetHeight;
+      const x = Math.round(540 - W / 2), y = Math.round(CY - H / 2);
+      lockup.style.left = x + "px";
+      lockup.style.top = y + "px";
+      const mx = x, my = y + (H - S) / 2;
+
+      // 3. the accent panel collapses into the brand mark
+      GFX.anim(panel, [
+        { clipPath: "inset(0px 0px 0px 0px round 0px)" },
+        { clipPath: `inset(${my}px ${1080 - mx - S}px ${1920 - my - S}px ${mx}px round ${Math.round(S * 0.24)}px)` },
+      ], { at: tCollapse, dur: collapse, ease: "cubic-bezier(.75,0,.2,1)" });
+      GFX.anim(wordsBox, [{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.72)" }],
+        { at: tCollapse, dur: collapse * 0.6, ease: "in", fill: "forwards" });
+      GFX.anim(panel, [{ visibility: "visible" }, { visibility: "hidden" }], { at: tLanded, dur: 1, fill: "forwards" });
+      mark.style.transformOrigin = "50% 50%";
+    });
+
+    // 4. the real mark takes over: a small bounce, the icon pops, the name slides out from behind it
+    GFX.anim(mark, [{ transform: "scale(1)" }, { transform: "scale(1.12)", offset: 0.35 }, { transform: "scale(1)" }],
+      { at: tLanded, dur: 380, ease: "out" });
+    GFX.anim(name, [{ clipPath: "inset(0 100% 0 0)", transform: "translateX(-60px)" },
+      { clipPath: "inset(0 0% 0 0)", transform: "translateX(0)" }], { at: tLanded + 30, dur: 440, ease: "expo" });
+    GFX.anim(lockup, [{ scale: "1" }, { scale: "1.04" }], { at: tLanded, dur: Math.max(300, D - tLanded), ease: "linear" });
+    // words keep pushing gently while they are on screen
+    GFX.anim(wordsBox, [{ scale: "1.04" }, { scale: "1" }], { at: 0, dur: tCollapse, ease: "out" });
+  })();
+</script>

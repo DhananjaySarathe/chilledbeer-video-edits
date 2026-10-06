@@ -1,0 +1,84 @@
+{
+  "id": "phone_post",
+  "name": "Phone posts the video",
+  "category": "mockup",
+  "kind": "speaker",
+  "description": "A black phone centred on the clean background plays the speaker's own video under a small 'New post' header; a cursor taps the orange 'Post now' button, it spins and turns into a green '✓ Posted', then platform chips (e.g. REELS, TIKTOK) pop out around the phone.",
+  "use_when": "Lines about publishing or uploading: 'post it', 'upload it straight to your socials', 'ship it today', 'hit publish', sharing one video to several platforms.",
+  "params": {
+    "header": {
+      "type": "text",
+      "default": "New post",
+      "max_len": 18,
+      "help": "small title at the top of the phone screen"
+    },
+    "button": {
+      "type": "text",
+      "default": "Post now",
+      "max_len": 16,
+      "help": "label on the orange button before the tap"
+    },
+    "done": {
+      "type": "text",
+      "default": "Posted",
+      "max_len": 14,
+      "help": "label on the green button after the tap (a check is added)"
+    },
+    "platforms": {
+      "type": "list",
+      "default": [
+        "Reels",
+        "TikTok"
+      ],
+      "max_len": 3,
+      "help": "0-3 short platform names shown as chips after posting, each under ~10 characters; [] for none"
+    }
+  },
+  "duration": {
+    "min": 2.2,
+    "default": 2.6,
+    "max": 4.5
+  },
+  "captions": "dark",
+  "caption_y": 0.62,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.83,
+      "name": "click",
+      "gain_db": -12
+    },
+    {
+      "at": 1.68,
+      "name": "ding",
+      "gain_db": -16
+    },
+    {
+      "at": 1.73,
+      "name": "pop",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "post",
+    "upload",
+    "publish",
+    "phone",
+    "social",
+    "share",
+    "cta"
+  ],
+  "explains": [
+    "proof"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "phone_feed",
+  "version": "1"
+}

@@ -1,0 +1,70 @@
+{
+  "id": "bar_compare",
+  "name": "Horizontal bar comparison",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A big condensed uppercase title over a white card with 2-4 horizontal bars. Each row has a mono label on the left and a value on the right that counts up while its bar grows from zero, one row after another; the highlighted bar (the largest by default) is accent, the others ink, then fade to grey so the highlight stands out.",
+  "use_when": "Lines that compare amounts side by side: this versus that, before versus after, one option against others (time, cost, effort, counts, steps).",
+  "params": {
+    "title": {
+      "type": "text",
+      "required": true,
+      "max_len": 36,
+      "help": "what is compared, e.g. 'Hours per video'; fits on one or two lines"
+    },
+    "bars": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "2-4 items [{label, value}]; label up to ~20 characters, value a number"
+    },
+    "suffix": {
+      "type": "text",
+      "default": "",
+      "max_len": 6,
+      "help": "after each value: 1-2 characters sit at full size ('h', '%', 'x'), longer words are set small ('hours')"
+    },
+    "highlight": {
+      "type": "number",
+      "default": null,
+      "help": "index of the accent bar (0 = first); defaults to the largest value"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.6,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "caption_y": 0.62,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.42,
+      "name": "riser",
+      "gain_db": -22
+    }
+  ],
+  "tags": [
+    "comparison",
+    "bars",
+    "versus",
+    "chart",
+    "numbers",
+    "options"
+  ],
+  "explains": [
+    "comparison",
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "before_after",
+  "version": "1"
+}

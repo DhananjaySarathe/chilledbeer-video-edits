@@ -1,0 +1,111 @@
+<style>
+  .ls { display: flex; flex-direction: column; justify-content: center; }
+  .ls-title { width: 952px; font-size: 150px; white-space: nowrap; color: var(--ink); margin-bottom: 46px; }
+  .ls-rows { display: flex; flex-direction: column; gap: var(--gap); }
+  .ls-row { position: relative; display: flex; align-items: center; gap: 30px; height: var(--rh); padding: 0 30px 0 28px;
+    border-radius: 30px; box-shadow: 0 18px 44px rgba(17, 17, 17, 0.1), 0 4px 12px rgba(17, 17, 17, 0.06); }
+  .ls-ring { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 5px var(--accent); opacity: 0;
+    pointer-events: none; }
+  .ls-num { flex: none; display: flex; align-items: center; justify-content: center; width: var(--nd); height: var(--nd);
+    border-radius: 50%; background: var(--ink); color: #fff; font-family: var(--condensed); font-weight: 700;
+    font-size: calc(var(--nd) * 0.44); font-variant-numeric: tabular-nums; }
+  .ls-text { flex: 1; min-width: 0; }
+  .ls-t { font-family: var(--condensed); font-weight: 700; font-size: var(--tf); line-height: 1.05; text-transform: uppercase;
+    white-space: nowrap; color: var(--ink); }
+  .ls-tt { position: relative; display: inline-block; }
+  .ls-tt .strike { height: 0.085em; top: 57%; margin-top: -0.04em; }
+  .ls-sub { margin-top: 8px; font-family: var(--mono); font-weight: 500; font-size: var(--sf); letter-spacing: 0.06em;
+    color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ls-badge { flex: none; display: flex; align-items: center; justify-content: center; width: var(--bd); height: var(--bd);
+    border-radius: 50%; background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 20px rgba(252, 59, 0, 0.3); }
+</style>
+<div class="stage ls" id="stage">
+  <div class="display ls-title" id="title"></div>
+  <div class="ls-rows" id="rows"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const stage = GFX.$("#stage"), title = GFX.$("#title"), rows = GFX.$("#rows");
+    const items = (P.items || []).slice(0, 4).map((it) => (typeof it === "string" ? { title: it } : it || {}));
+    const n = Math.max(1, items.length);
+    const mode = ["strike", "check", "none"].includes(P.mode) ? P.mode : "strike";
+    const keep = Number.isInteger(P.keep) && P.keep >= 0 && P.keep < items.length ? P.keep : -1;
+    const css = getComputedStyle(document.documentElement);
+    const C = { ink: css.getPropertyValue("--ink").trim(), accent: css.getPropertyValue("--accent").trim(),
+      card: css.getPropertyValue("--card").trim(), soft: css.getPropertyValue("--soft").trim(),
+      muted: "#A3A29C", line: "#C9C8C2" };
+    title.textContent = P.title || "";
+    GFX.fit(title, { width: 952, max: 150, min: 70 });
+
+    // row size by count: fewer rows are bigger
+    const S = n <= 2 ? { rh: 190, nd: 100, tf: 66, sf: 24, bd: 70, gap: 26 }
+      : n === 3 ? { rh: 172, nd: 90, tf: 64, sf: 23, bd: 66, gap: 24 }
+      : { rh: 148, nd: 78, tf: 52, sf: 21, bd: 60, gap: 20 };
+    for (const [k, v] of Object.entries(S)) stage.style.setProperty("--" + k, v + "px");
+
+    const els = items.map((it, i) => {
+      const tt = GFX.h("span", { class: "ls-tt", text: it.title || "" });
+      const row = GFX.h("div", { class: "card ls-row" },
+        GFX.h("div", { class: "ls-num", text: String(i + 1).padStart(2, "0") }),
+        GFX.h("div", { class: "ls-text" }, GFX.h("div", { class: "ls-t" }, tt), it.sub ? GFX.h("div", { class: "ls-sub", text: it.sub }) : null));
+      rows.append(row);
+      return { row, tt, num: row.querySelector(".ls-num"), t: row.querySelector(".ls-t"), sub: row.querySelector(".ls-sub") };
+    });
+    // long row titles shrink to the space left of the badge
+    GFX.layout(() => els.forEach((e) => {
+      const t = e.tt.parentElement, w = t.clientWidth;
+      let s = S.tf;
+      while (s > S.tf * 0.55 && e.tt.offsetWidth > w) { s -= 2; t.style.fontSize = s + "px"; }
+    }));
+
+    // entrance: title rises out of a mask, rows stagger up with their number popping
+    GFX.anim(title, [{ transform: "translateY(100%)", clipPath: "inset(-5% -2% 100% -2%)" },
+      { transform: "translateY(0)", clipPath: "inset(-5% -2% -10% -2%)" }], { at: 0, dur: 480, ease: "expo" });
+    els.forEach((e, i) => {
+      GFX.in(e.row, "rise", { at: 220 + i * 110, dur: 460, ease: "back" });
+      GFX.anim(e.num, [{ transform: "scale(0)" }, { transform: "scale(1)" }], { at: 320 + i * 110, dur: 360, ease: "back" });
+    });
+
+    // verdicts: each row in turn gets struck (or checked), one after another
+    const targets = mode === "none" ? [] : els.map((e, i) => i).filter((i) => i !== keep);
+    const start = Math.min(1000, D * 0.4);
+    const step = targets.length ? Math.min(360, (D - 450 - start) / targets.length) : 0;
+    const badge = (e, icon, at) => {
+      const b = GFX.h("div", { class: "ls-badge", html: GFX.icon(icon, { size: S.bd * 0.5, stroke: "currentColor", width: 3.4 }) });
+      e.row.append(b);
+      GFX.anim(b, [{ opacity: 0, transform: "scale(0) rotate(-120deg)" }, { opacity: 1, transform: "scale(1) rotate(0deg)" }], { at, dur: 380, ease: "back" });
+    };
+    // rows without a badge keep an empty slot so all titles share one width
+    const slot = (e) => e.row.append(GFX.h("div", { class: "ls-badge", style: "visibility:hidden" }));
+    targets.forEach((i, k) => {
+      const e = els[i], at = start + k * step;
+      if (mode === "strike") {
+        const line = GFX.h("i", { class: "strike" });
+        e.tt.append(line);
+        GFX.anim(line, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { at, dur: 260, ease: "inOut" });
+        badge(e, "x", at + 120);
+        // the words grey out but the orange strike stays loud
+        GFX.anim(e.t, [{ color: C.ink }, { color: C.muted }], { at: at + 180, dur: 320, ease: "out" });
+        if (e.sub) GFX.anim(e.sub, [{ opacity: 1 }, { opacity: 0.55 }], { at: at + 180, dur: 320, ease: "out" });
+        GFX.anim(e.num, [{ backgroundColor: C.ink }, { backgroundColor: C.line }], { at: at + 180, dur: 320, ease: "out" });
+        GFX.anim(e.row, [{ backgroundColor: C.card, scale: "1" }, { backgroundColor: C.soft, scale: "0.975" }], { at: at + 180, dur: 360, ease: "out" });
+      } else {
+        badge(e, "check", at);
+        GFX.anim(e.num, [{ backgroundColor: C.ink }, { backgroundColor: C.accent }], { at: at + 60, dur: 260, ease: "out" });
+        GFX.anim(e.row, [{ scale: "1" }, { scale: "1.03" }, { scale: "1" }], { at, dur: 360, ease: "out" });
+      }
+    });
+    if (keep >= 0) {
+      // the survivor: orange ring, orange number, a small lift, and a check
+      const e = els[keep], at = targets.length ? start + targets.length * step + 40 : Math.min(1000, D * 0.45);
+      const ring = GFX.h("i", { class: "ls-ring" });
+      e.row.append(ring);
+      GFX.anim(ring, [{ opacity: 0 }, { opacity: 1 }], { at, dur: 240, ease: "out" });
+      GFX.anim(e.row, [{ scale: "1" }, { scale: "1.04" }], { at, dur: 420, ease: "back" });
+      GFX.anim(e.num, [{ backgroundColor: C.ink }, { backgroundColor: C.accent }], { at, dur: 300, ease: "out" });
+      badge(e, "check", at + 80);
+    }
+    els.forEach((e) => { if (!e.row.querySelector(".ls-badge")) slot(e); });
+  })();
+</script>

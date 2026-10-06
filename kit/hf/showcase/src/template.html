@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <!--HF:KIT-->
+  </head>
+  <body>
+    <div id="root" data-composition-id="hfshowcase" data-start="0" data-duration="__TOTAL__" data-width="1920" data-height="1080" style="position:relative;width:1920px;height:1080px;overflow:hidden">
+      <video id="aroll" class="clip" src="assets/aroll.mp4" muted playsinline data-start="0" data-duration="__TOTAL__" data-media-start="0" data-track-index="2"></video>
+    </div>
+    <script>
+      /*DATA*/
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        window.__timelines = window.__timelines || {};
+        window.__timelines["hfshowcase"] = tl;                                       // the linter looks for this line
+        const K = HF.kit({ tl, id: "hfshowcase", width: 1920, height: 1080, pieces: D.pieces });
+        const st = HF.stage(K, document.getElementById("root"), { aroll: "aroll" });
+        const w = D.win, C = HF.C, { LEFT, RIGHT, COLW } = HF.COLS;
+        HF.camera(K, st, { framing: D.framing, hideAt: w.end[0] - 0.05 });
+
+        // ---------------------------------------------------------- intro: the name title + a chapter tag
+        HF.lowerThird(K, st.top, { name: "Your Name", line: "Building with Claude Code, every weekend", t: 0.3 });
+        HF.chapter(K, st.top, w.hook[0], w.compare[0], 0, "kit/hf showcase");
+
+        // ---------------------------------------------------------- side words beside the speaker
+        {
+          const [a, b] = w.hook, L = HF.side(K, st, a, b);
+          const lb = K.el(L, `left:${LEFT + 4}px;top:330px`, "One kit, every film", "hf-lbl hf-abs"); K.fade(lb, a + 0.1);
+          const t = K.words(L, "Reusable|*scenes", `left:${LEFT}px;top:380px;font-size:180px;line-height:.95`);
+          K.rise(t.ws, [a + 0.4, a + 0.6]);
+          const p = HF.pill(K, L, LEFT, 760, `${HF.icon("layers", 26, C.acc)} kit/hf · v${HF.version}`); K.enter(p, a + 1.4);
+          K.sfx("swish", a + 0.3);
+        }
+
+        // ---------------------------------------------------------- the living diagram (first passage)
+        const steps = [{ id: "rec", label: "Record", sub: "one take", icon: "cam" }, { id: "clean", label: "Clean up", sub: "transcript + skill", icon: "broom" },
+          { id: "plan", label: "Plan", sub: "scenes by meaning", icon: "map" }, { id: "find", label: "Find motion", sub: "the registry", icon: "search" },
+          { id: "build", label: "Build", sub: "HyperFrames → render", icon: "code" }];
+        const dI = HF.insert(K, st, w.diagram[0], w.diagram[1]);
+        const dR = HF.insert(K, st, w.recap[0], w.recap[1]);
+        const dLayer = K.el(st.ins, "left:0;top:0;width:1920px;height:1080px");            // the diagram lives above both inserts
+        const dg = HF.diagram(K, dLayer, { title: "My whole workflow", nodes: steps, edges: [["rec", "clean"], ["clean", "plan"], ["plan", "find"], ["find", "build"]], pad: 0.13 });
+        {
+          const a = w.diagram[0];
+          dg.show(a - 0.05, w.diagram[1] - 0.1).reveal(steps.map((s) => s.id), a + 0.15, 0.14).connectAll(a + 0.9, 0.4, 0.14);
+          dg.focus("clean", a + 3.0).note("clean", a + 3.4, "a skill file does it", a + 6.0).flow("rec", "clean", a + 3.4, { dur: 1.1, dots: 3 });
+          dg.overview(a + 6.2).done(["rec", "clean"], a + 6.9).focus(["plan", "find"], a + 8.0).highlight("plan", a + 8.6, a + 10.6).overview(a + 10.8);
+        }
+
+        // ---------------------------------------------------------- annotated screen demo (a real recording, coordinates in its pixels)
+        {
+          const [a, b] = w.screen, L = HF.insert(K, st, a, b);
+          const r = (x) => a + x;                                                          // recording time -> film time
+          const sd = HF.screen(K, L, { x: 110, y: 110, w: 1360, h: 860, chrome: "browser", url: "github.com/heygen-com/hyperframes",
+            src: "assets/screen.mp4", start: a - 0.2, dur: b - a + 0.6, mediaStart: 0, srcW: 1920, srcH: 1080 }).show(a - 0.1);
+          sd.zoom(r(0.9), [1260, 190, 620, 250]).highlight(r(1.5), [1288, 236, 268, 60], { label: "What it is", until: r(3.5) });
+          sd.cursor([{ t: r(1.8), x: 1500, y: 420 }, { t: r(3.1), x: 1200, y: 222 }, { t: r(4.4), x: 1210, y: 230 }], { clicks: [r(3.4)], until: r(4.6) });
+          sd.reset(r(3.7)).callout(r(4.2), [1306, 651], "55.8k stars", { side: "right", until: r(6.4) }).arrow(r(4.4), [1640, 520], [1410, 645], { until: r(6.4) });
+          sd.zoom(r(10.6), [330, 620, 900, 200]).highlight(r(11.2), [362, 701, 120, 28], { label: "A CLAUDE.md for agents", until: r(13.3), dim: true });
+          sd.blur([[720, 690, 540, 40]], { from: r(10.6) });
+          const cap = HF.pill(K, L, 1500, 160, `${HF.icon("eye", 24, C.acc)} Annotated screen demo`); K.enter(cap, a + 0.4);
+          const c2 = HF.card(K, L, 1500, 260, 320, 0, `<div style="font:500 22px/1.45 Inter,sans-serif;color:${C.ink2};white-space:normal">Zoom, highlight, cursor, callouts and privacy blur, placed in the recording's own pixels</div>`, "padding:24px 26px");
+          K.enter(c2, a + 0.8);
+        }
+
+        // ---------------------------------------------------------- code walkthrough: type in, highlight, diff
+        {
+          const [a, b] = w.code, L = HF.insert(K, st, a, b);
+          const cw = HF.code(K, L, { x: 110, y: 120, w: 1360, h: 820, title: "plan.js — pick a scene by meaning", lang: "js", lines: [
+            "// every passage of the script gets a scene from the registry",
+            "for (const beat of plan.beats) {",
+            "  const tpl = registry.get(beat.template);",
+            "  if (!tpl.ratios.includes(plan.ratio)) {",
+            "    beat.template = tpl.fallback;        // never a broken scene",
+            "  }",
+            "  render(tpl, beat.inputs);",
+            "}"] });
+          cw.typeIn(a, 70);
+          cw.highlight(a + 3.6, [4, 6], { until: a + 5.6, note: "wrong ratio → fallback" });
+          cw.add(a + 5.8, 6, ["  const key = cacheKey(tpl.version, beat.inputs, style);"]);
+          cw.remove(a + 7.0, [8, 8]);
+          cw.add(a + 8.2, 7, ["  renderCached(key, tpl, beat.inputs);"]);
+          const cap = HF.pill(K, L, 1510, 160, `${HF.icon("code", 24, C.acc)} Code walkthrough`); K.enter(cap, a + 0.4);
+        }
+
+        // ---------------------------------------------------------- terminal: command, spinner, result
+        {
+          const [a, b] = w.term, L = HF.insert(K, st, a, b);
+          const term = HF.terminal(K, L, { x: 110, y: 160, w: 1360, h: 640, title: "zsh — films/how-i-edit" }).show(a);
+          let e = term.cmd(a + 0.6, "npx hyperframes render --quality delivery", 26);
+          e = term.spinner(e + 0.2, e + 1.9, "Rendering 5,232 frames", "Rendered in 6 min 28 s");
+          e = term.cmd(e + 0.4, "python3 kit/qa/qa.py how_i_edit_with_claude.mp4", 40);
+          term.out(e + 0.3, ["PASS  1920x1080 · 30 fps · 174.41 s · LUFS -14.2 · TP -1.6"], "ok");
+          const cap = HF.pill(K, L, 1510, 160, `${HF.icon("terminal", 24, C.acc)} Terminal`); K.enter(cap, a + 0.4);
+        }
+
+        // ---------------------------------------------------------- before / after, aligned row by row
+        {
+          const [a, b] = w.compare, L = HF.insert(K, st, a, b);
+          HF.compare(K, L, { x: 160, y: 230, w: 1600, t: a + 0.1, stagger: 0.4,
+            left: { title: "Timeline editor", tone: "bad", rows: ["Drag every clip by hand", "Start over for the next video", "Hours per edit"] },
+            right: { title: "Code + presets", tone: "ok", rows: ["Scenes from a registry", "Reused in every video", "15–20 minutes per edit"] },
+            verdict: { side: "right", t: a + 2.6 } });
+          const lb = K.el(L, "left:0;width:1920px;top:150px;text-align:center", "Before / after", "hf-lbl hf-abs"); K.fade(lb, a);
+        }
+
+        // ---------------------------------------------------------- the living diagram again: the recap (same diagram, state carried over)
+        {
+          const a = w.recap[0];
+          dg.show(a - 0.05, w.recap[1] - 0.1).done(["plan", "find", "build"], a + 0.6, 0.18).flow("find", "build", a + 1.2, { dur: 1.0, dots: 4 });
+        }
+
+        // ---------------------------------------------------------- chat explainer beside the speaker
+        {
+          const [a, b] = w.chat, L = HF.side(K, st, a, b);
+          HF.chat(K, L, { x: LEFT, y: 230, w: 720, h: 560, title: "Claude Code", t: a, msgs: [
+            { from: "you", text: "Edit this into a 10-second launch film.", t: a + 0.4, cps: 34 },
+            { from: "ai", text: "Seven shots of two beats, cut on the music.", t: a + 3.2, cps: 40 }], thinking: [a + 2.0, a + 3.1] });
+        }
+
+        // ---------------------------------------------------------- a stickman moment (kit/stickman, driven by K.finish)
+        {
+          const [a, b] = w.stick, L = HF.insert(K, st, a, b);
+          const NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg");
+          svg.setAttribute("width", 1920); svg.setAttribute("height", 1080); svg.style.cssText = "position:absolute;left:0;top:0;overflow:visible"; L.append(svg);
+          const fig = Stickman.create(svg, { x: 640, ground: 900, scale: 1.45 });
+          fig.set("relax");
+          fig.to(a + 0.6, "sip", 0.5).hold(Stickman.props.cup(), "handR", a + 0.9, b + 1, { dy: -6 }).to(a + 2.2, "relax", 0.5).loop("nod", a + 2.6, a + 3.2, 0.6);
+          const card = HF.card(K, L, 1000, 380, 700, 0, `<div class="hf-lbl" style="font-size:18px;color:${C.mute}">Meanwhile, the render</div><div class="pc hf-serif" style="margin-top:12px;font-size:130px">0%</div>` +
+            `<div style="margin-top:18px;height:20px;border-radius:10px;background:#efe8df;overflow:hidden"><i class="bar" style="display:block;height:100%;width:100%;background:${C.ok};transform-origin:0 50%;transform:scaleX(0)"></i></div>`, "padding:34px 40px");
+          K.enter(card, a + 0.2);
+          tl.to(card.querySelector(".bar"), { scaleX: 1, duration: 2.6, ease: "power2.inOut" }, K.Q(a + 0.5));
+          K.countUp(card.querySelector(".pc"), 0, 100, a + 0.5, 2.6, (v) => Math.round(v) + "%");
+          const s = Stickman.emote(svg, "spark", 860, 470, 0.7); tl.set(s, { opacity: 0 }, 0); tl.fromTo(s, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.3 }, K.Q(a + 3.1));
+        }
+
+        // ---------------------------------------------------------- end card
+        HF.endCard(K, st.full, { t: w.end[0], title: "Built from the *kit.", sub: "kit/hf · diagram · screen · code · compare · chat · stickman", cta: "Subscribe", handle: "@yourhandle" });
+        K.finish(D.total);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<style>
+  .tb-kicker { position: absolute; top: 286px; left: 0; right: 0; text-align: center; font-size: 36px; }
+  .tb-word { position: absolute; top: 332px; left: 60px; right: 60px; text-align: center; white-space: nowrap;
+    color: var(--ink); }
+  .tb-word.accent { color: var(--accent); }
+  .tb-word span { position: relative; display: inline-block; }
+  .tb-word .strike { height: 0.085em; top: 50%; }
+  .tb-speaker { left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 50% 100%;
+    /* scaled below 1 the camera frame's side edges show: fade them so a cut shoulder never ends in a hard line */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%); }
+</style>
+<div class="kicker tb-kicker" id="kicker"></div>
+<div class="display tb-word" id="word" data-bleed><span id="wordText"></span></div>
+<img class="speaker tb-speaker" id="me" alt="">
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const word = GFX.$("#word"), text = GFX.$("#wordText"), kicker = GFX.$("#kicker"), me = GFX.$("#me");
+    text.textContent = P.word;
+    kicker.textContent = P.kicker || "";
+    if (P.accent) word.classList.add("accent");
+    if (P.kicker) word.style.top = "350px";
+    GFX.fit(text, { width: 960, max: 400, min: 120 });
+    if (P.strike) {
+      const s = GFX.h("i", { class: "strike" });
+      text.append(s);
+      GFX.anim(s, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { at: D * 0.42, dur: 300, ease: "inOut" });
+    }
+    // optional: fade the cut-out body away below the chest (hides mics, hands or props held near the lens)
+    const ff = Number(P.fade_from);
+    if (P.fade_from != null && Number.isFinite(ff)) {
+      const a = Math.round(GFX.clamp(ff, 0.3, 0.95) * 100), b = Math.min(100, a + 12);
+      const side = "linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%)";
+      const down = `linear-gradient(to bottom, #000 ${a}%, transparent ${b}%)`;
+      me.style.webkitMaskImage = me.style.maskImage = `${side}, ${down}`;
+      me.style.webkitMaskComposite = "source-in";
+      me.style.maskComposite = "intersect";
+    }
+    GFX.speaker(me);
+    const k = P.speaker_scale;
+    GFX.anim(me, [{ transform: `scale(${k})` }, { transform: `scale(${k * 1.035})` }], { dur: D, ease: "linear" });
+    GFX.in(word, "blur", { at: 0, dur: 460 });
+    GFX.anim(word, [{ scale: "1.06" }, { scale: "1" }], { dur: D, ease: "out" });
+    if (P.kicker) GFX.in(kicker, "rise", { at: 140, dur: 380 });
+  })();
+</script>

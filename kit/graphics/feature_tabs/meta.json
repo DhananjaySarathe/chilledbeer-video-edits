@@ -1,0 +1,83 @@
+{
+  "id": "feature_tabs",
+  "name": "Row of feature chips getting checked",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A row of two to four white pill chips with short mono uppercase labels drops in across the top of the frame, then the chips are ticked off one after another: each fills orange from the left, a white check mark draws itself, and the chip pops with a small ring.",
+  "use_when": "Lines that run through a short list of features, steps or things it does ('it adds b-roll, layouts, captions and motion graphics'), or a checklist being completed as the speaker names each item.",
+  "params": {
+    "items": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "2-4 short labels, each under ~12 characters, e.g. ['B-roll', 'Layouts', 'Captions', 'Motion gfx']"
+    },
+    "checked": {
+      "type": "number",
+      "default": 0,
+      "help": "how many chips (from the left) are already checked when the scene starts"
+    },
+    "check_to": {
+      "type": "number",
+      "default": null,
+      "help": "how many are checked by the end; default all"
+    },
+    "at": {
+      "type": "list",
+      "default": null,
+      "max_len": 4,
+      "help": "optional seconds from the scene start when each chip (after the pre-checked ones) gets checked; default evenly spread"
+    }
+  },
+  "duration": {
+    "min": 1.4,
+    "default": 2.4,
+    "max": 6.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.7,
+      "name": "tick",
+      "gain_db": -14
+    },
+    {
+      "at": 1.13,
+      "name": "tick",
+      "gain_db": -14
+    },
+    {
+      "at": 1.55,
+      "name": "tick",
+      "gain_db": -14
+    },
+    {
+      "at": 1.98,
+      "name": "tick",
+      "gain_db": -14
+    }
+  ],
+  "tags": [
+    "checklist",
+    "features",
+    "chips",
+    "tabs",
+    "list",
+    "overlay"
+  ],
+  "explains": [
+    "comparison",
+    "definition"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "split_screen",
+  "version": "1"
+}

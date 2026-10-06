@@ -1,0 +1,91 @@
+<style>
+  .pr-wrap { position: absolute; left: var(--safe-left); right: var(--safe-left); top: var(--safe-top);
+    bottom: calc(1920px - var(--content-bottom)); display: flex; flex-direction: column; align-items: center;
+    justify-content: center; }
+  .pr-kicker { font-size: 30px; letter-spacing: 0.34em; text-indent: 0.34em; white-space: nowrap; margin-bottom: 34px; }
+  .pr-disc { position: relative; width: 560px; height: 560px; border-radius: 50%; flex: none; }
+  .pr-disc svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .pr-track { fill: none; stroke: color-mix(in srgb, var(--ink) 7%, var(--card)); stroke-width: 44; }
+  .pr-arc { fill: none; stroke: var(--accent); stroke-width: 44; stroke-linecap: round; }
+  .pr-tip { fill: #FFFFFF; }
+  .pr-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .pr-num { font-family: var(--display); font-size: 190px; line-height: 1; color: var(--ink); white-space: nowrap;
+    display: inline-block; }
+  .pr-num .d { display: inline-block; width: var(--dw, 0.5em); text-align: center; }
+  .pr-num .pct { color: var(--accent); font-size: 0.5em; margin-left: 0.06em; vertical-align: 0.74em; }
+  .pr-label { margin-top: 38px; max-width: 900px; text-align: center; font-family: var(--condensed); font-weight: 700;
+    font-size: 54px; line-height: 1.04; text-transform: uppercase; color: var(--ink); }
+</style>
+<div class="pr-wrap" id="wrap">
+  <div class="kicker pr-kicker" id="kicker"></div>
+  <div class="card pr-disc" id="disc">
+    <svg viewBox="0 0 560 560">
+      <circle class="pr-track" cx="280" cy="280" r="222"/>
+      <circle class="pr-arc" id="arc" cx="280" cy="280" r="222" pathLength="100" stroke-dasharray="0 100"
+        transform="rotate(-90 280 280)"/>
+      <circle class="pr-tip" id="tip" cx="280" cy="58" r="9"/>
+    </svg>
+    <div class="pr-center"><span class="pr-num" id="num"></span></div>
+  </div>
+  <div class="pr-label" id="label"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const value = GFX.clamp(Number(P.value) || 0, 0, 100);
+    const kicker = GFX.$("#kicker"), label = GFX.$("#label"), num = GFX.$("#num");
+    const arc = GFX.$("#arc"), tip = GFX.$("#tip");
+    kicker.textContent = P.kicker || "";
+    label.textContent = P.label || "";
+    if (!P.kicker) kicker.remove(); else GFX.fit(kicker, { width: 950, max: 30, min: 20 });
+    if (!P.label) label.remove(); else GFX.fit(label, { width: 900, height: 114, max: 54, min: 34 });
+
+    // percentage in fixed-width digit cells so the count doesn't wobble; the % sign rides small and accent
+    const decimals = Number.isInteger(value) ? 0 : 1;
+    const fmt = (v) => [...v.toFixed(decimals)].map((c) => (c >= "0" && c <= "9" ? `<span class="d">${c}</span>` : c)).join("")
+      + '<span class="pct">%</span>';
+    num.innerHTML = fmt(value);
+    GFX.layout(() => {
+      const probe = GFX.h("span", { style: "position:absolute;display:inline-block;visibility:hidden;white-space:pre" });
+      num.append(probe);
+      let w = 0;
+      for (const d of "0123456789") { probe.textContent = d.repeat(10); w = Math.max(w, probe.offsetWidth / 10); }
+      num.style.setProperty("--dw", (0.95 * w / parseFloat(getComputedStyle(probe).fontSize)).toFixed(4) + "em");
+      probe.remove();
+    });
+    GFX.fit(num, { width: 360, max: 190, min: 90 });
+
+    // the dial takes the room the kicker and label leave (560-640 px)
+    GFX.layout(() => {
+      const wrap = GFX.$("#wrap"), disc = GFX.$("#disc");
+      const used = [...wrap.children].filter((el) => el !== disc)
+        .reduce((h, el) => h + el.offsetHeight + parseFloat(getComputedStyle(el).marginTop) + parseFloat(getComputedStyle(el).marginBottom), 0);
+      const size = Math.round(GFX.clamp(wrap.clientHeight - used - 40, 440, 640));
+      disc.style.width = disc.style.height = size + "px";
+    });
+
+    // the ring draws to the value while the number counts; a white dot rides the tip
+    const tStart = 320, tEnd = Math.max(tStart + 700, D - 620);
+    let last = "";
+    GFX.tween((v) => {
+      const html = fmt(v);
+      if (html !== last) { num.innerHTML = html; last = html; }
+      arc.setAttribute("stroke-dasharray", `${v.toFixed(3)} 100`);
+      arc.style.opacity = v < 0.4 ? "0" : "1";
+      const a = (v / 100) * 2 * Math.PI - Math.PI / 2;
+      tip.setAttribute("cx", (280 + 222 * Math.cos(a)).toFixed(2));
+      tip.setAttribute("cy", (280 + 222 * Math.sin(a)).toFixed(2));
+      tip.style.opacity = v < 2 ? "0" : "1";
+    }, { at: tStart, dur: tEnd - tStart, ease: "out", from: 0, to: value });
+
+    // entrances, then the tip and the number land together
+    GFX.in(GFX.$("#disc"), "pop", { at: 0, dur: 520 });
+    if (P.kicker) GFX.in(kicker, "rise", { at: 60, dur: 420 });
+    if (P.label) GFX.in(label, "rise", { at: 380, dur: 460 });
+    tip.style.transformBox = "fill-box"; tip.style.transformOrigin = "center";
+    GFX.anim(tip, [{ transform: "scale(1)" }, { transform: "scale(1.8)", offset: 0.4 }, { transform: "scale(1)" }],
+      { at: tEnd - 40, dur: 420, ease: "out", fill: "none" });
+    GFX.anim(num, [{ transform: "scale(1)" }, { transform: "scale(1.06)", offset: 0.4 }, { transform: "scale(1)" }],
+      { at: tEnd - 40, dur: 420, ease: "out", fill: "none" });
+  })();
+</script>

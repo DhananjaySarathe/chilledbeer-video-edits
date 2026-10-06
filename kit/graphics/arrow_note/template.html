@@ -1,0 +1,81 @@
+<style>
+  .an-note { position: absolute; left: 0; top: 0; display: inline-block; max-width: 520px; text-align: center;
+    font-family: var(--hand); font-weight: 700; font-size: 112px; line-height: .92; color: var(--accent);
+    -webkit-text-stroke: 14px #fff; paint-order: stroke fill; stroke-linejoin: round;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .3)); white-space: normal; overflow-wrap: break-word; text-wrap: balance; }
+  .an-svg { position: absolute; left: 0; top: 0; overflow: visible; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .28)); }
+  .an-svg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .an-svg .halo { stroke: #fff; stroke-width: 22; }
+  .an-svg .ink { stroke: var(--accent); stroke-width: 11; }
+</style>
+<svg class="an-svg" id="svg" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+<div class="an-note" id="note"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const note = GFX.$("#note"), svg = GFX.$("#svg");
+    note.textContent = P.text || "";
+    const corner = ["top-left", "bottom-right", "bottom-left"].includes(P.corner) ? P.corner : "top-right";
+    const right = corner.endsWith("right"), top = corner.startsWith("top");
+    const f = GFX.face || { x: 300, y: 390, w: 480, h: 620 };
+    const tilt = right ? -6 : -4;
+
+    GFX.layout(() => {
+      // largest size that fits: two short lines up top; at the bottom only the gap between chin and captions
+      const maxH = top ? 230 : Math.max(84, 1098 - (f.y + f.h * 1.02));
+      const maxW = top ? 520 : 560;
+      note.style.maxWidth = maxW + "px";
+      let size = 112;
+      while ((note.offsetHeight > maxH || note.scrollWidth > maxW) && size > 60) { size -= 4; note.style.fontSize = size + "px"; }
+      const W = note.offsetWidth, H = note.offsetHeight;
+      // note beside the head, clear of the caption band and the like/comment column
+      const maxRight = top ? 1030 : 940;
+      let cx = right ? Math.min(maxRight - W / 2, f.x + f.w + 40) : Math.max(50 + W / 2, f.x - 40);
+      if (!top) cx = right ? maxRight - W / 2 : 50 + W / 2;   // bottom notes hug the outer edge, away from the mouth
+      cx = Math.min(Math.max(cx, 50 + W / 2), maxRight - W / 2);
+      let cy = top ? Math.max(300 + H / 2, f.y - 30) : 1098 - H / 2;
+      if (top) cy = Math.min(cy, 700);
+      note.style.left = (cx - W / 2).toFixed(1) + "px";
+      note.style.top = (cy - H / 2).toFixed(1) + "px";
+      note.style.transform = `rotate(${tilt}deg)`;
+
+      // target: given point, or the face edge on the note's side
+      const tx = Number.isFinite(P.target_x) ? P.target_x : right ? f.x + f.w * 0.98 : f.x + f.w * 0.02;
+      const ty = Number.isFinite(P.target_y) ? P.target_y : f.y + f.h * (top ? 0.4 : 0.55);
+      const custom = Number.isFinite(P.target_x);
+      const side = custom ? (cx >= tx ? 1 : -1) : right ? 1 : -1;   // the arrow arrives from the note's side
+      // start under (or over) the outer end of the note, swing out, then hook in to the target
+      const sx = cx + side * W * 0.22, sy = top ? cy + H / 2 + 34 : cy - H / 2 - 34;
+      const ex = tx + side * 18, ey = ty;                  // stop just short of the target
+      const dx = ex - sx, dy = ey - sy;
+      const reach = Math.max(90, Math.abs(dx) * 0.9 + 60);
+      const c1 = [sx + side * 40, sy + dy * 0.6], c2 = [Math.min(1040, Math.max(40, ex + side * reach)), ey - Math.sign(dy) * 8];
+      const d = `M${sx.toFixed(1)} ${sy.toFixed(1)} C ${c1[0].toFixed(1)} ${c1[1].toFixed(1)}, ${c2[0].toFixed(1)} ${c2[1].toFixed(1)}, ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+      // arrowhead: two strokes folding back from the tip along the arrival direction
+      const ux = ex - c2[0], uy = ey - c2[1], ul = Math.hypot(ux, uy) || 1;
+      const ang = Math.atan2(uy / ul, ux / ul), L = 50, spread = 0.5;
+      const hp = (s) => `${(ex - L * Math.cos(ang + s)).toFixed(1)} ${(ey - L * Math.sin(ang + s)).toFixed(1)}`;
+      const head = `M${hp(spread)} L${ex.toFixed(1)} ${ey.toFixed(1)} L${hp(-spread)}`;
+      svg.innerHTML = [["halo", d, "shaft"], ["halo", head, "head"], ["ink", d, "shaft"], ["ink", head, "head"]]
+        .map(([c, p, k]) => `<path class="${c} ${k}" d="${p}" pathLength="1" stroke-dasharray="1 1.1" stroke-dashoffset="1.04"/>`).join("");
+
+      // arrow draws itself from the note to the target, then the head snaps on
+      const drawAt = 420, drawDur = 460;
+      GFX.anim(GFX.$$(".shaft", svg), [{ strokeDashoffset: 1.04 }, { strokeDashoffset: 0 }], { at: drawAt, dur: drawDur, ease: "inOut" });
+      GFX.anim(GFX.$$(".head", svg), [{ strokeDashoffset: 1.04 }, { strokeDashoffset: 0 }], { at: drawAt + drawDur - 40, dur: 180, ease: "out" });
+      // then it nudges toward the target twice
+      const nx = Math.cos(ang) * 10, ny = Math.sin(ang) * 10;
+      GFX.anim(svg, [{ translate: "0 0" }, { translate: `${nx.toFixed(1)}px ${ny.toFixed(1)}px` }, { translate: "0 0" }],
+        { at: drawAt + drawDur + 160, dur: 360, ease: "inOut", iterations: 2 });
+    });
+
+    // the note writes itself in left to right with a small pop
+    GFX.anim(note, [
+      { clipPath: "inset(-20% 100% -20% -10%)", scale: ".9" },
+      { clipPath: "inset(-20% -10% -20% -10%)", scale: "1" },
+    ], { at: 0, dur: 440, ease: "inOut" });
+    GFX.anim(note, [{ opacity: 0 }, { opacity: 1 }], { at: 0, dur: 120 });
+    GFX.anim(note, [{ scale: "1" }, { scale: "1.05" }, { scale: "1" }], { at: 1100, dur: 420, ease: "inOut", fill: "none" });
+    GFX.anim(note, [{ translate: "0 0" }, { translate: "0 -8px" }], { at: 440, dur: Math.max(400, D - 440), ease: "inOut" });
+  })();
+</script>

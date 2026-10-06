@@ -1,0 +1,68 @@
+{
+  "id": "list_strike",
+  "name": "Numbered list that gets struck off",
+  "category": "list",
+  "kind": "fullscreen",
+  "description": "A big condensed black title ('SAME PROBLEM.') above up to four white numbered row cards (black number circle, bold uppercase title, small grey mono subtitle) that stagger in; then each row in turn is struck through with an orange line, gets an orange ✗ badge and greys out; or gets an orange ✓ badge instead. One row can be spared and highlighted with an orange outline and a ✓.",
+  "use_when": "Lines that sum up or rule out options, attempts or myths ('all three have the same problem', 'none of these work', 'I tried everything'), a checklist being ticked off ('you need three things'), or narrowing many choices down to the one that is left.",
+  "params": {
+    "title": {
+      "type": "text",
+      "required": true,
+      "max_len": 22,
+      "help": "headline above the list, e.g. 'Same problem.'; fitted to one line"
+    },
+    "items": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "[{title, sub}] rows in order; title up to ~18 characters, sub is an optional short mono note (~30 characters)"
+    },
+    "mode": {
+      "type": "text",
+      "default": "strike",
+      "help": "'strike' (each row struck + orange ✗, greyed), 'check' (each row gets an orange ✓) or 'none' (just the list)"
+    },
+    "keep": {
+      "type": "number",
+      "default": null,
+      "help": "0-based index of one row that is NOT struck and gets highlighted (orange outline + ✓), e.g. 2 for the third row; unset for none"
+    }
+  },
+  "duration": {
+    "min": 2.0,
+    "default": 2.8,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.25,
+      "name": "pop",
+      "gain_db": -22
+    }
+  ],
+  "tags": [
+    "list",
+    "options",
+    "strike",
+    "checklist",
+    "comparison",
+    "recap"
+  ],
+  "explains": [
+    "comparison",
+    "definition"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "checklist_steps",
+  "version": "1"
+}

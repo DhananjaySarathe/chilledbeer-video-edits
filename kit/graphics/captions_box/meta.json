@@ -1,0 +1,47 @@
+{
+  "id": "captions_box",
+  "name": "Caption track (box style)",
+  "category": "captions",
+  "kind": "overlay",
+  "description": "The word-by-word caption track: condensed uppercase words, the word being spoken sits in an accent box; white with a soft shadow over footage, ink over cream scenes.",
+  "use_when": "Internal: rendered automatically for the whole short when captions use the box style.",
+  "params": {
+    "pages": {
+      "type": "list",
+      "required": true,
+      "help": "[{start, end, dark, words: [{text, start, end, hl}]}], seconds from the scene start"
+    },
+    "y": {
+      "type": "number",
+      "default": 1185,
+      "help": "vertical centre of the caption line in px"
+    },
+    "size": {
+      "type": "number",
+      "default": 96
+    },
+    "font": {
+      "type": "text",
+      "default": "condensed",
+      "help": "condensed (Oswald) or display (Anton)"
+    }
+  },
+  "duration": {
+    "min": 0.3,
+    "default": 3.0,
+    "max": 30.0
+  },
+  "captions": "hide",
+  "cutout": false,
+  "sfx": [],
+  "tags": [
+    "captions"
+  ],
+  "internal": true,
+  "explains": [],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": null,
+  "version": "1"
+}

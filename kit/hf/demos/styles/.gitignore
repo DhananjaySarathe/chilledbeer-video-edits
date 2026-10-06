@@ -1,0 +1,11 @@
+# built by build.py (media and vendored copies stay local)
+assets/
+vendor/
+index.html
+cues.json
+snapshots/
+landscape/assets/
+landscape/vendor/
+landscape/index.html
+landscape/cues.json
+landscape/hyperframes.json

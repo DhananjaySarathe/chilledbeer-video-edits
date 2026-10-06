@@ -1,0 +1,60 @@
+/* kit/hf/paper.css — the preset_paper_studio design tokens and component styles for HyperFrames compositions.
+   Inlined into a film page by kit/hf/vendor.py (FONTS/ becomes assets/fonts/, where vendor.py copies the fonts). */
+@font-face { font-family: "InstrumentSerif"; src: url("FONTS/InstrumentSerif-Regular.ttf"); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: "InstrumentSerif"; src: url("FONTS/InstrumentSerif-Italic.ttf"); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: "Inter"; src: url("FONTS/Inter-500.ttf"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Inter"; src: url("FONTS/Inter-600.ttf"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Inter"; src: url("FONTS/Inter-700.ttf"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Inter"; src: url("FONTS/Inter-800.ttf"); font-weight: 800 900; font-display: block; }
+@font-face { font-family: "JBMono"; src: url("FONTS/JetBrainsMono-500.ttf"); font-weight: 500; font-display: block; }
+@font-face { font-family: "JBMono"; src: url("FONTS/JetBrainsMono-700.ttf"); font-weight: 700; font-display: block; }
+/* kinetic.js display faces: heavy condensed and heavy wide (declared here, not by script, so the render waits for them) */
+@font-face { font-family: "Anton"; src: url("FONTS/Anton-400.ttf"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Montserrat"; src: url("FONTS/Montserrat-800.ttf"); font-weight: 800; font-display: block; }
+@font-face { font-family: "Montserrat"; src: url("FONTS/Montserrat-900.ttf"); font-weight: 900; font-display: block; }
+
+:root {
+  --paper: #f3eee6; --card: #ffffff; --ink: #1b1815; --ink2: #4a443d; --mute: #8a8178; --line: rgba(27, 24, 21, 0.1);
+  --acc: #e2562b; --acc-tint: #fbe4dc; --ok: #2f8a5b; --ok-tint: #dcefe3; --bad: #c23b22; --bad-tint: #f7dcd5;
+  --shadow: 0 1px 0 rgba(27, 24, 21, 0.04), 0 22px 60px rgba(60, 40, 20, 0.14);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow: hidden; background: var(--paper); font-family: "Inter", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+.hf-abs { position: absolute; }
+.hf-fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.hf-paper { background: radial-gradient(120% 90% at 50% 35%, #f8f4ed 0%, #f1ebe2 60%, #e9e2d7 100%); }
+.hf-grain { background-image: radial-gradient(rgba(27, 24, 21, 0.05) 1px, transparent 1.2px); background-size: 36px 36px; opacity: 0.6; }
+.hf-ink { background: var(--ink); color: var(--paper); }
+.hf-serif { font-family: "InstrumentSerif", serif; font-weight: 400; letter-spacing: -0.01em; line-height: 0.98; white-space: nowrap; }
+.hf-serif i, i.hf-acc { font-style: italic; color: var(--acc); }
+.hf-lbl { font: 700 20px "Inter", sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--acc); white-space: nowrap; }
+.hf-m { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.06em 0.06em 0.2em; margin: -0.06em -0.06em -0.2em; }
+.hf-wi { display: inline-block; }
+.hf-card { position: absolute; border-radius: 26px; background: var(--card); box-shadow: var(--shadow); border: 1px solid rgba(27, 24, 21, 0.06); }
+.hf-pill { position: absolute; display: inline-flex; align-items: center; gap: 12px; border-radius: 999px; padding: 14px 24px; font: 600 26px "Inter", sans-serif;
+  white-space: nowrap; background: #fff; color: var(--ink); box-shadow: 0 12px 34px rgba(60, 40, 20, 0.14); border: 1px solid rgba(27, 24, 21, 0.06); }
+.hf-win { position: absolute; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 2px 0 rgba(27, 24, 21, 0.04), 0 40px 110px rgba(60, 40, 20, 0.22);
+  border: 1px solid rgba(27, 24, 21, 0.08); }
+.hf-win .bar { position: absolute; left: 0; top: 0; width: 100%; height: 46px; background: #f6f3ee; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 9px; padding: 0 18px; z-index: 2; }
+.hf-win .bar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.hf-win .url { margin-left: 18px; height: 28px; flex: 1; max-width: 680px; border-radius: 8px; background: #fff; border: 1px solid var(--line); color: var(--ink2);
+  font: 500 16px "JBMono", monospace; display: flex; align-items: center; padding: 0 14px; white-space: nowrap; overflow: hidden; }
+.hf-win .view { position: absolute; left: 0; top: 46px; width: 100%; bottom: 0; overflow: hidden; }
+.hf-win.dark { background: #1b1815; border-color: rgba(243, 238, 230, 0.08); }
+.hf-win.dark .bar { background: #24201c; border-bottom-color: rgba(243, 238, 230, 0.08); }
+.hf-win.dark .url { background: #1b1815; color: #a89f94; border-color: rgba(243, 238, 230, 0.1); }
+.hf-phone { position: absolute; overflow: hidden; background: #000; border: 5px solid #1b1815; box-shadow: 0 30px 80px rgba(60, 40, 20, 0.28); }
+.hf-phone video, .hf-phone img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* code + terminal */
+.hf-code { font: 500 20px/1.6 "JBMono", monospace; white-space: pre; color: #2d2823; }
+.hf-code .ln { position: absolute; left: 0; width: 100%; display: flex; align-items: center; }
+.hf-code .no { width: 70px; flex: none; text-align: right; padding-right: 18px; color: #b8aea2; }
+.hf-code .gut { width: 22px; flex: none; text-align: center; font-weight: 700; }
+.hf-code .tx { flex: 1; white-space: pre; overflow: hidden; }
+.hf-code .t-k { color: #c2410c; } .hf-code .t-s { color: #2f8a5b; } .hf-code .t-c { color: #9a8f83; font-style: italic; }
+.hf-code .t-n { color: #9a5b13; } .hf-code .t-f { color: #1b1815; font-weight: 700; } .hf-code .t-p { color: #8a8178; }
+.hf-dark .hf-code, .hf-code.dark { color: #ece5da; }
+.hf-code.dark .t-k { color: #ff8a5c; } .hf-code.dark .t-s { color: #8fd19e; } .hf-code.dark .t-c { color: #8a8178; }
+.hf-code.dark .t-n { color: #f0b46a; } .hf-code.dark .t-f { color: #ffffff; } .hf-code.dark .no { color: #6b635a; }
+.hf-term { font: 500 22px/1.55 "JBMono", monospace; color: #ece5da; white-space: pre; }
+.hf-term .pr { color: var(--acc); font-weight: 700; } .hf-term .ok { color: #8fd19e; } .hf-term .err { color: #ff8a7a; } .hf-term .mu { color: #8a8178; }

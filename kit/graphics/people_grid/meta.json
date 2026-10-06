@@ -1,0 +1,82 @@
+{
+  "id": "people_grid",
+  "name": "Audience grid with a dropping percentage",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A spaced mono label and a big accent percentage over a grid of little person icons (10 x 8 by default) on the clean dotted background. The percentage counts from the start value to the final one while icons fade to light grey in a scattered order until only that share is left; the few survivors turn accent.",
+  "use_when": "Lines about how many people see, stay, click or care: reach shrinking, most viewers leaving, only a few percent of an audience, a share of people who do something.",
+  "params": {
+    "kicker": {
+      "type": "text",
+      "default": "Audience reached",
+      "max_len": 26,
+      "help": "small spaced label above the number"
+    },
+    "from": {
+      "type": "number",
+      "default": 100,
+      "help": "start percentage (0-100)"
+    },
+    "to": {
+      "type": "number",
+      "required": true,
+      "help": "final percentage (0-100); lower than 'from' fades icons out, higher lights them up"
+    },
+    "cols": {
+      "type": "number",
+      "default": 10,
+      "help": "icons per row, 5-14"
+    },
+    "rows": {
+      "type": "number",
+      "default": 8,
+      "help": "rows of icons, 3-10"
+    },
+    "suffix": {
+      "type": "text",
+      "default": "%",
+      "max_len": 3,
+      "help": "after the number"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.6,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.15,
+      "name": "pop",
+      "gain_db": -22
+    },
+    {
+      "at": 0.8,
+      "name": "swipe",
+      "gain_db": -22
+    }
+  ],
+  "tags": [
+    "audience",
+    "reach",
+    "percentage",
+    "people",
+    "drop",
+    "viewers"
+  ],
+  "explains": [
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "counter_big",
+  "version": "1"
+}

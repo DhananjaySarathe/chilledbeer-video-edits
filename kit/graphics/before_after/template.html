@@ -1,0 +1,75 @@
+<style>
+  .ba { position: absolute; left: 64px; width: 886px; top: 300px; display: flex; flex-direction: column; align-items: center; }
+  .ba-kick { font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #fff; background: rgba(17, 17, 17, 0.82); padding: 12px 24px 10px; border-radius: 999px; margin-bottom: 14px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3); white-space: nowrap; }
+  .ba-row { display: flex; align-items: center; justify-content: center; gap: 22px; white-space: nowrap; }
+  .ba-before { position: relative; font-family: var(--display); font-size: 150px; line-height: 1.05; color: #fff;
+    text-shadow: 0 0.03em 0.16em rgba(0, 0, 0, 0.5); }
+  .ba-strike { position: absolute; left: -5%; top: 50%; width: 110%; height: 0.12em; margin-top: -0.06em;
+    background: var(--accent); border-radius: 0.05em; transform-origin: 0 50%; transform: scaleX(0) rotate(-8deg);
+    box-shadow: 0 0.02em 0.08em rgba(0, 0, 0, 0.35); }
+  .ba-arrow { display: flex; color: #fff; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)); }
+  .ba-arrow svg { width: 86px; height: 86px; display: block; }
+  .ba-after { font-family: var(--display); font-size: 190px; line-height: 1.02; background: var(--accent); color: var(--accent-ink);
+    padding: 0.06em 0.16em 0.02em; border-radius: 0.07em; box-shadow: 0 0.08em 0.28em rgba(0, 0, 0, 0.35); }
+  .ba-tag { margin-top: 20px; font-family: var(--condensed); font-weight: 700; font-size: 42px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--ink); background: #fff; padding: 8px 26px 6px; border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28); white-space: nowrap; }
+</style>
+<div class="ba" id="ba">
+  <div class="ba-kick" id="kick"></div>
+  <div class="ba-row" id="row">
+    <div class="ba-before" id="before"><span id="bt"></span><i class="ba-strike" id="strike"></i></div>
+    <div class="ba-arrow" id="arrow"></div>
+    <div class="ba-after" id="after"></div>
+  </div>
+  <div class="ba-tag" id="tag"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const ba = GFX.$("#ba"), row = GFX.$("#row"), kick = GFX.$("#kick"), before = GFX.$("#before"), bt = GFX.$("#bt"),
+      strike = GFX.$("#strike"), arrow = GFX.$("#arrow"), after = GFX.$("#after"), tag = GFX.$("#tag");
+    const tilt = Math.max(-6, Math.min(6, Number.isFinite(Number(P.tilt)) ? Number(P.tilt) : 3));
+    kick.textContent = String(P.kicker || "");
+    if (!P.kicker) kick.style.display = "none";
+    bt.textContent = String(P.before || "");
+    after.textContent = String(P.after || "");
+    tag.textContent = String(P.tag || "");
+    if (!P.tag) tag.style.display = "none";
+    arrow.innerHTML = GFX.icon("arrowRight", { size: 86, width: 3.2 });
+
+    // one row inside the 886 px column: shrink both values together until it fits; then keep it above the eyes
+    GFX.layout(() => {
+      GFX.fitLine(kick, { width: 860, max: 26, min: 18 });
+      let k = 1;
+      for (let i = 0; i < 24; i++) {
+        before.style.fontSize = Math.round(150 * k) + "px";
+        after.style.fontSize = Math.round(190 * k) + "px";
+        if (row.scrollWidth <= 886) break;
+        k *= 0.94;
+      }
+      const h = ba.offsetHeight;
+      let top = 300;
+      if (GFX.face) top = Math.min(top, GFX.face.y + GFX.face.h * 0.34 - h);   // eyes sit about a third down the face
+      ba.style.top = Math.round(Math.max(270, top)) + "px";
+    });
+
+    // beat: label drops, old value rises, strike slashes across, arrow shoots in, new value slams with a shake
+    if (P.kicker) GFX.in(kick, "drop", { at: 0, dur: 320 });
+    GFX.in(before, "rise", { at: 60, dur: 360 });
+    GFX.anim(strike, [{ transform: "scaleX(0) rotate(-8deg)" }, { transform: "scaleX(1) rotate(-8deg)" }], { at: 420, dur: 220, ease: "out" });
+    GFX.anim(before, [{ opacity: 1 }, { opacity: 0.75 }], { at: 640, dur: 200, ease: "out" });
+    GFX.in(arrow, "left", { at: 540, dur: 240 });
+    GFX.anim(after, [
+      { opacity: 0, transform: `scale(2.3) rotate(${tilt * 2.5}deg)`, easing: "cubic-bezier(.55,0,.9,.4)" },
+      { opacity: 1, transform: `scale(.94) rotate(${tilt}deg)`, offset: 0.55, easing: "cubic-bezier(.2,.9,.3,1)" },
+      { opacity: 1, transform: `scale(1) rotate(${tilt}deg)` },
+    ], { at: 560, dur: 340, ease: "linear" });
+    GFX.anim(ba, [{ translate: "0 0" }, { translate: "-14px 8px" }, { translate: "12px -7px" }, { translate: "-7px 4px" },
+      { translate: "3px -2px" }, { translate: "0 0" }], { at: 740, dur: 320, ease: "out" });
+    if (P.tag) GFX.in(tag, "pop", { at: 900, dur: 320 });
+    GFX.anim(row, [{ scale: "1" }, { scale: "1.05" }], { at: 1060, dur: Math.max(300, D - 1060), ease: "out" });
+  })();
+</script>

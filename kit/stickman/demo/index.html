@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <script src="vendor/stickman.js"></script>
+    <style>
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Regular.ttf"); font-style: normal; font-display: block; }
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Italic.ttf"); font-style: italic; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-600.ttf"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-800.ttf"); font-weight: 800; font-display: block; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body, #root { width: 1920px; height: 1080px; overflow: hidden; background: #f3eee6; font-family: "Inter", sans-serif; color: #1b1815; }
+      .paper { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 35%, #f8f4ed 0%, #f1ebe2 60%, #e9e2d7 100%); }
+      .grain { position: absolute; inset: 0; opacity: .6; background-image: radial-gradient(rgba(27,24,21,.05) 1px, transparent 1.2px); background-size: 36px 36px; }
+      .serif { position: absolute; font-family: "InstrumentSerif", serif; line-height: .98; white-space: nowrap; }
+      .m { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em .06em .2em; margin: -.06em -.06em -.2em; }
+      .wi { display: inline-block; }
+      .pill { position: absolute; display: inline-flex; align-items: center; gap: 12px; padding: 12px 22px; border-radius: 999px; background: #fff;
+        box-shadow: 0 12px 34px rgba(60,40,20,.14); font: 600 26px "Inter", sans-serif; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="stickdemo" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="paper"></div><div class="grain"></div>
+      <div id="world" style="position:absolute;inset:0;transform-origin:42% 52%"></div>
+      <div id="txt" style="position:absolute;inset:0"></div>
+    </div>
+    <script>
+      // "2 days of work ... gone." — a 6 s stickman beat in the preset_paper_studio look (kit/stickman demo)
+      const tl = gsap.timeline({ paused: true });
+      const Q = (t) => Math.round(t * 30) / 30;
+      const NS = "http://www.w3.org/2000/svg", { ACC, INK, MUTE } = Stickman.COLORS;
+      const world = document.getElementById("world");
+      const svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("width", 1920); svg.setAttribute("height", 1080); svg.style.cssText = "position:absolute;left:0;top:0;overflow:visible";
+      world.append(svg);
+      const mk = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.append(e); return e; };
+
+      // the set: a monitor on a desk (the figure stands behind the desk)
+      const DESK = 668;
+      const mon = Stickman.props.monitor(svg, 770, DESK, 440, 300);
+      const fig = Stickman.create(svg, { x: 600, ground: 905, scale: 1.5 });
+      Stickman.props.desk(svg, 410, DESK, 840, 237);
+      Stickman.props.keyboard(svg, 535, DESK, 130);
+      svg.append(mon.g);                                                     // monitor above the desk line
+
+      // code lines fill the screen over "two days"
+      const code = mk("g", {}, mon.screen);
+      const widths = [0.62, 0.44, 0.8, 0.36, 0.7, 0.52, 0.86, 0.4, 0.66, 0.58, 0.74, 0.3, 0.82, 0.48];
+      widths.forEach((w, i) => {
+        const r = mk("rect", { x: mon.x + 18 + (i % 3 === 1 ? 26 : 0), y: mon.y + 18 + i * 26, width: (mon.w - 60) * w, height: 12, rx: 6,
+          fill: i % 4 === 2 ? ACC : i % 3 === 0 ? INK : MUTE, opacity: 0 }, code);
+        tl.to(r, { opacity: i % 3 === 0 ? 0.85 : 0.6, duration: 0.08 }, Q(0.15 + i * 0.14));
+      });
+      tl.to(code, { y: -120, duration: 1.2, ease: "power1.inOut" }, Q(1.0));
+      // 2.3 s: the screen goes blank -> project not found
+      const flash = mk("rect", { x: mon.x, y: mon.y, width: mon.w, height: mon.h, fill: "#fff", opacity: 0 }, mon.screen);
+      tl.set(code, { opacity: 0 }, Q(2.32));
+      tl.fromTo(flash, { opacity: 0 }, { opacity: 1, duration: 0.05 }, Q(2.28));
+      tl.to(flash, { opacity: 0, duration: 0.3 }, Q(2.34));
+      const lost = mk("g", { opacity: 0 }, mon.screen);
+      const cx = mon.x + mon.w / 2, cy = mon.y + mon.h / 2 - 20;
+      lost.append(Stickman.emote(svg, "cross", cx, cy, 1.1).parentNode);
+      const nf = mk("text", { x: cx, y: cy + 78, "text-anchor": "middle", "font-family": "Inter, sans-serif", "font-weight": 600, "font-size": 24, fill: MUTE }, lost);
+      nf.textContent = "project not found";
+      tl.to(lost, { opacity: 1, duration: 0.2 }, Q(2.42));
+
+      // the figure: typing -> shock -> facepalm
+      fig.set("type").loop("type", 0, 2.25);
+      fig.to(2.28, { ...Stickman.POSES.handsOnHead, lift: 14 }, 0.16, "power3.out");
+      fig.to(2.46, { lift: 0 }, 0.25, "power2.in");
+      fig.loop("shake", 2.4, 2.95, 1);
+      fig.to(3.0, "facepalm", 0.42, "power2.inOut");
+      fig.to(3.5, { torso: 9, neck: -16 }, 1.4, "sine.inOut");
+      Stickman.drive(tl, 6);
+
+      // emotes at the head
+      const h1 = fig.at(2.4, "head"), h2 = fig.at(3.6, "head");
+      const ex = Stickman.emote(svg, "exclaim", h1[0] + 74, h1[1] - 40, 1.1), sh = Stickman.emote(svg, "shock", h1[0], h1[1] - 58, 1.0);
+      [ex, sh].forEach((e, k) => { tl.set(e, { opacity: 0 }, 0); tl.fromTo(e, { opacity: 0, scale: 0.4, transformOrigin: "50% 100%" }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out" }, Q(2.32 + k * 0.04)); tl.to(e, { opacity: 0, duration: 0.25 }, Q(3.0)); });
+      const sw = Stickman.emote(svg, "sweat", h2[0] - 62, h2[1] - 18, 0.9);
+      tl.set(sw, { opacity: 0 }, 0);
+      tl.fromTo(sw, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3 }, Q(3.45));
+      tl.to(sw, { y: 70, opacity: 0, duration: 1.6, ease: "power1.in" }, Q(4.1));
+
+      // labels: the day counter, then the line
+      const T = document.getElementById("txt");
+      const day = document.createElement("div"); day.className = "pill"; day.style.cssText = "left:858px;top:236px;opacity:0";
+      day.innerHTML = `<span style="width:12px;height:12px;border-radius:50%;background:${ACC};display:inline-block"></span><span class="d">Day 1</span>`;
+      T.append(day);
+      tl.fromTo(day, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, Q(0.1));
+      tl.set(day.querySelector(".d"), { textContent: "Day 1" }, 0); tl.set(day.querySelector(".d"), { textContent: "Day 2" }, Q(1.2));
+      tl.fromTo(day, { scale: 1 }, { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1 }, Q(1.2));
+      tl.to(day, { opacity: 0, duration: 0.2 }, Q(2.3));
+      const words = (str, style) => {
+        const b = document.createElement("div"); b.className = "serif"; b.style.cssText = style; T.append(b);
+        return str.split(" ").map((w, i, a) => { const m = document.createElement("span"); m.className = "m"; const s = document.createElement("span"); s.className = "wi";
+          if (w[0] === "*") { s.style.fontStyle = "italic"; s.style.color = ACC; w = w.slice(1); } s.textContent = w; m.append(s); b.append(m); if (i < a.length - 1) b.append(" "); return s; });
+      };
+      const w1 = words("2 days", "left:1420px;top:330px;font-size:170px"), w2 = words("*gone.", "left:1420px;top:520px;font-size:170px");
+      w1.forEach((s, k) => tl.fromTo(s, { yPercent: 115 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, Q(0.4 + k * 0.08)));
+      tl.to(w1, { opacity: 0.35, duration: 0.4 }, Q(3.6));
+      w2.forEach((s) => tl.fromTo(s, { yPercent: 115 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, Q(3.55)));
+      tl.fromTo(world, { scale: 1.14 }, { scale: 1.19, duration: 6, ease: "none" }, 0);   // the shot never sits still
+      window.__timelines = { stickdemo: tl };
+    </script>
+  </body>
+</html>

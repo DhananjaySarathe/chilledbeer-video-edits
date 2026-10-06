@@ -1,0 +1,64 @@
+<style>
+  .sn { position: absolute; width: 290px; height: 262px; padding: 34px 22px 22px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; border-radius: 6px 6px 22px 6px;
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.42), 0 4px 10px rgba(0, 0, 0, 0.2); }
+  .sn.c0 { background: #FFD84D; color: #1B1B1A; }
+  .sn.c1 { background: #FFFFFF; color: #1B1B1A; }
+  .sn.c2 { background: var(--accent); color: #fff; }
+  .sn.c3 { background: #9BE7C4; color: #1B1B1A; }
+  .sn-tape { position: absolute; top: -20px; left: 50%; width: 130px; height: 44px; margin-left: -65px; transform: rotate(-4deg);
+    background: rgba(255, 255, 255, 0.55); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); border-left: 2px dashed rgba(0, 0, 0, 0.06);
+    border-right: 2px dashed rgba(0, 0, 0, 0.06); }
+  .sn-emoji { font-size: 62px; line-height: 1; margin-bottom: 8px; }
+  .sn-text { font-family: var(--hand); font-weight: 700; font-size: 72px; line-height: 0.95; width: 100%; }
+  .sn-fold { position: absolute; right: 0; bottom: 0; width: 46px; height: 46px; border-radius: 0 0 22px 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.14) 50%); }
+</style>
+<div id="wrap"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const notes = (P.notes || []).slice(0, 4).map((n) => (typeof n === "string" ? { text: n } : n));
+    const wrap = GFX.$("#wrap");
+    // slots around the head: top band left / centre / right, then a lower-left one; tilts alternate
+    const slots = [
+      { x: 60, y: 300, r: -8 }, { x: 395, y: 270, r: 3 }, { x: 730, y: 305, r: 8 }, { x: 64, y: 640, r: -4 },
+    ];
+    const order = notes.length === 2 ? [0, 2] : notes.length === 1 ? [1] : [0, 1, 2, 3];
+    // keep the top row above the eyes when the face is known
+    let lift = 0;
+    if (GFX.face) {
+      const eyes = GFX.face.y + GFX.face.h * 0.34;
+      lift = Math.max(0, 300 + 262 + 20 - eyes);
+    }
+    const n = notes.length;
+    const t0 = 120, span = Math.max(300, D - t0 - 700);
+    notes.forEach((note, i) => {
+      const s = slots[order[i]];
+      const el = GFX.h("div", { class: `sn c${(note.color ?? i) % 4}` },
+        GFX.h("i", { class: "sn-tape" }), note.emoji ? GFX.h("div", { class: "sn-emoji", text: note.emoji }) : "",
+        GFX.h("div", { class: "sn-text", text: note.text }), GFX.h("i", { class: "sn-fold" }));
+      const top = order[i] === 3 ? s.y : Math.max(270, s.y - lift);
+      el.style.left = s.x + "px";
+      el.style.top = top + "px";
+      el.style.transform = `rotate(${s.r}deg)`;
+      wrap.append(el);
+      const at = note.at != null ? GFX.clamp(Number(note.at) * 1000, 0, D - 300) : t0 + (n > 1 ? (i * span) / (n - 1) : 0);
+      // slap: flies in big and tilted from above the lens, lands with a squash, then breathes slowly
+      GFX.anim(el, [
+        { opacity: 0, transform: `translateY(-60px) scale(1.7) rotate(${s.r + 14}deg)`, boxShadow: "0 60px 90px rgba(0,0,0,.3)" },
+        { opacity: 1, transform: `translateY(0) scale(.94) rotate(${s.r - 1}deg)`, offset: 0.62, boxShadow: "0 10px 18px rgba(0,0,0,.4)" },
+        { opacity: 1, transform: `translateY(0) scale(1.02) rotate(${s.r}deg)`, offset: 0.82 },
+        { opacity: 1, transform: `translateY(0) scale(1) rotate(${s.r}deg)`, boxShadow: "0 22px 40px rgba(0,0,0,.42)" },
+      ], { at, dur: 420, ease: "out", fill: "backwards" });
+      GFX.anim(el, [{ translate: "0 0" }, { translate: `0 ${i % 2 ? -8 : 8}px` }], { at: at + 420, dur: Math.max(300, D - at - 420), ease: "inOut" });
+      GFX.sfx("thud", at + 240, -14);
+    });
+    GFX.layout(() => {
+      GFX.$$(".sn-text").forEach((t) => {
+        const hasEmoji = !!t.previousElementSibling && t.previousElementSibling.classList.contains("sn-emoji");
+        GFX.fit(t, { width: 246, height: hasEmoji ? 130 : 196, max: hasEmoji ? 64 : 76, min: 34, lines: 2 });
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,113 @@
+<style>
+  /* phone: 404 x 820, centred inside the content box (y 268-1088) */
+  .pp-phone { left: 338px; top: 268px; width: 404px; height: 820px; padding: 14px; border-radius: 64px;
+    transform-origin: 50% 92%; }
+  .pp-phone .screen { border-radius: 51px; }
+  .pp-head { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; align-items: center;
+    justify-content: center; color: #fff; font-family: var(--mono); font-weight: 500; font-size: 22px;
+    letter-spacing: 0.04em; padding-top: 6px; }
+  .pp-head .pp-x { position: absolute; left: 30px; top: 25px; color: rgba(255, 255, 255, 0.55); }
+  .pp-head .pp-title { max-width: 230px; white-space: nowrap; }
+  .pp-video { position: absolute; left: 0; right: 0; top: 76px; height: 612px; overflow: hidden; background: #1A1A1A; }
+  .pp-video .speaker { left: 0; top: 0; width: 100%; height: 100%; object-position: 50% 30%; }
+  .pp-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; }
+  .pp-btn { position: absolute; left: 50%; top: 46%; width: 308px; height: 64px; translate: -50% -50%;
+    border-radius: 32px; background: var(--accent); color: var(--accent-ink); overflow: hidden;
+    box-shadow: 0 8px 20px rgba(252, 59, 0, 0.28); }
+  .pp-btn > * { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--ui); font-weight: 700; font-size: 27px; white-space: nowrap; }
+  .pp-btn .pp-lbl, .pp-btn .pp-done span { max-width: 260px; }
+  .pp-spin i { width: 34px; height: 34px; border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff; }
+  .pp-done { color: #fff; opacity: 0; }
+  /* platform chips that pop out around the phone */
+  .pp-chip { position: absolute; z-index: 20; font-size: 28px; padding: 12px 28px 12px 12px; gap: 14px;
+    box-shadow: 0 18px 40px rgba(17, 17, 17, 0.18), 0 4px 10px rgba(17, 17, 17, 0.08); }
+  .pp-chip .pp-ic { width: 50px; height: 50px; border-radius: 50%; background: var(--accent); display: flex;
+    align-items: center; justify-content: center; flex: none; }
+  .pp-chip span { max-width: 230px; }
+</style>
+<div class="phone pp-phone" id="phone">
+  <div class="screen">
+    <div class="pp-head"><span class="pp-x" id="x"></span><span class="pp-title" id="header"></span></div>
+    <div class="pp-video"><img class="speaker" id="me" alt=""></div>
+    <div class="pp-bar">
+      <div class="pp-btn" id="btn">
+        <div class="pp-lbl" id="lbl"></div>
+        <div class="pp-spin" id="spin"><i id="ring"></i></div>
+        <div class="pp-done" id="done"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const phone = GFX.$("#phone"), btn = GFX.$("#btn"), lbl = GFX.$("#lbl"), spin = GFX.$("#spin"), done = GFX.$("#done");
+
+    // shrink a one-line label until it fits its box; if it still doesn't, trim words and add an ellipsis
+    const fitLine = (el, max, min) => GFX.layout(() => {
+      for (let fs = max; fs >= min; fs--) { el.style.fontSize = fs + "px"; if (el.scrollWidth <= el.clientWidth + 1) return; }
+      let words = el.textContent.split(" ");
+      while (words.length > 1 && el.scrollWidth > el.clientWidth + 1) { words.pop(); el.textContent = words.join(" ") + "…"; }
+    });
+    const block = (el) => { el.style.display = "block"; el.style.overflow = "visible"; };
+
+    GFX.$("#x").innerHTML = GFX.icon("x", { size: 24, width: 2.6 });
+    const header = GFX.$("#header");
+    header.textContent = P.header || "New post";
+    fitLine(header, 22, 16);
+    lbl.innerHTML = `<span>${GFX.esc(P.button || "Post now")}</span>`;
+    done.innerHTML = GFX.icon("check", { size: 28, stroke: "#fff", width: 3.4 }) + `<span>${GFX.esc(P.done || "Posted")}</span>`;
+    [lbl.firstChild, done.lastChild].forEach((s) => { block(s); fitLine(s, 27, 18); });
+    GFX.speaker(GFX.$("#me"));
+
+    // timeline: phone in, cursor taps the button, button spins then turns green, platforms pop out
+    const tc = Math.round(GFX.clamp(D * 0.32, 650, 1100));
+    GFX.in(phone, "rise", { at: 0, dur: 540, ease: "back" });
+    GFX.anim(phone, [{ scale: "1" }, { scale: "1.025" }], { at: 0, dur: D, ease: "linear" });
+
+    const bx = 540 + 30, by = 268 + 14 + 688 + 104 * 0.46;   // button centre in page space
+    GFX.cursor([
+      { x: 820, y: 1010, at: Math.max(260, tc - 560) },
+      { x: bx - 10, y: by - 7, at: tc, click: true },
+      { x: bx + 40, y: by + 36, at: tc + 520 },
+    ]);
+    GFX.anim(btn, [{ scale: "1" }, { scale: ".93" }, { scale: "1" }], { at: tc - 40, dur: 220, ease: "inOut" });
+    GFX.anim(lbl, [{ opacity: 1 }, { opacity: 0 }], { at: tc + 40, dur: 120, fill: "forwards" });
+    // the pill shrinks to a white spinner on the black bar, then grows back as a green pill (no muddy colour blend)
+    const rgb = (v) => { const e = GFX.h("i", { style: `color:${v}` }); document.body.append(e);
+      const c = getComputedStyle(e).color.match(/[\d.]+/g).slice(0, 3).join(","); e.remove(); return c; };
+    const css = getComputedStyle(document.documentElement);
+    const A = rgb(css.getPropertyValue("--accent").trim() || "#FC3B00"), G = rgb(css.getPropertyValue("--good").trim() || "#16A34A");
+    GFX.anim(btn, [{ width: "308px" }, { width: "64px" }], { at: tc + 60, dur: 260, ease: "inOut", fill: "forwards" });
+    GFX.anim(btn, [{ backgroundColor: `rgba(${A},1)`, boxShadow: `0 8px 20px rgba(${A},.28)` },
+      { backgroundColor: `rgba(${A},0)`, boxShadow: `0 8px 20px rgba(${A},0)` }], { at: tc + 280, dur: 140, fill: "forwards" });
+    GFX.anim(spin, [{ opacity: 0 }, { opacity: 1 }], { at: tc + 280, dur: 100 });
+    GFX.anim(GFX.$("#ring"), [{ transform: "rotate(0deg)" }, { transform: "rotate(900deg)" }], { at: tc + 280, dur: 500, ease: "linear" });
+    GFX.anim(spin, [{ opacity: 1 }, { opacity: 0 }], { at: tc + 700, dur: 90, fill: "forwards" });
+    GFX.anim(btn, [{ width: "64px" }, { width: "308px" }], { at: tc + 720, dur: 360, ease: "back", fill: "forwards" });
+    GFX.anim(btn, [{ backgroundColor: `rgba(${G},0)`, boxShadow: `0 8px 20px rgba(${G},0)` },
+      { backgroundColor: `rgba(${G},1)`, boxShadow: `0 8px 20px rgba(${G},.3)` }], { at: tc + 720, dur: 140, fill: "forwards" });
+    GFX.anim(done, [{ opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "scale(1)" }], { at: tc + 820, dur: 320, ease: "back", fill: "forwards" });
+
+    // chips alternate left / right of the phone and overlap its edge a little
+    const spots = [{ side: "left", top: 420, rot: -5 }, { side: "right", top: 610, rot: 4 }, { side: "left", top: 800, rot: -3 }];
+    const plats = (P.platforms || []).filter(Boolean).slice(0, 3);
+    const t0 = tc + 900, step = plats.length > 1 ? Math.max(60, Math.min(150, (D - 420 - t0) / (plats.length - 1))) : 0;
+    plats.forEach((name, i) => {
+      const s = spots[i];
+      const chip = GFX.h("div", { class: "chip pp-chip", style: `top:${s.top}px;${s.side === "left" ? "right:712px" : "left:712px"}` },
+        GFX.h("div", { class: "pp-ic", html: GFX.icon("check", { size: 30, stroke: "#fff", width: 3.4 }) }), GFX.h("span", { text: String(name) }));
+      document.body.append(chip);
+      const sp = chip.lastChild;
+      block(sp);
+      fitLine(sp, 28, 18);
+      const dx = s.side === "left" ? 90 : -90;
+      GFX.anim(chip, [
+        { opacity: 0, transform: `translateX(${dx}px) scale(.3) rotate(0deg)` },
+        { opacity: 1, transform: `translateX(0) scale(1) rotate(${s.rot}deg)` },
+      ], { at: t0 + i * step, dur: 440, ease: "snap" });
+    });
+  })();
+</script>

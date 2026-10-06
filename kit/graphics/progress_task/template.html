@@ -1,0 +1,126 @@
+<style>
+  .pt-card { width: 900px; padding: 40px 50px 46px; }
+  .pt-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+  .pt-app { display: inline-flex; align-items: center; gap: 12px; padding: 10px 20px 10px 12px; border-radius: 999px;
+    background: var(--soft); font-family: var(--mono); font-weight: 700; font-size: 22px; letter-spacing: .14em;
+    text-transform: uppercase; white-space: nowrap; }
+  .pt-app i { width: 30px; height: 30px; border-radius: 9px; background: var(--ink); display: flex; align-items: center;
+    justify-content: center; color: var(--accent); }
+  .pt-spin { position: relative; width: 46px; height: 46px; flex: none; }
+  .pt-spin svg { position: absolute; inset: 0; }
+  .pt-done { position: absolute; inset: 0; border-radius: 50%; background: var(--good); color: #fff; display: flex;
+    align-items: center; justify-content: center; opacity: 0; }
+  .pt-task { font-family: var(--ui); font-weight: 800; font-size: 58px; line-height: 1.08; letter-spacing: -0.01em; }
+  .pt-detail { margin-top: 14px; font-family: var(--mono); font-weight: 500; font-size: 26px; letter-spacing: .04em;
+    color: var(--muted); }
+  .pt-num-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin: 30px 0 18px; }
+  .pt-pct { display: flex; align-items: baseline; font-family: var(--condensed); font-weight: 700;
+    color: var(--accent); line-height: .9; font-variant-numeric: tabular-nums; }
+  .pt-pct b { font-size: 176px; font-weight: 700; }
+  .pt-pct span { font-size: 88px; margin-left: 2px; }
+  .pt-eta { padding-bottom: 12px; text-align: right; }
+  .pt-eta small { display: flex; align-items: center; justify-content: flex-end; gap: 8px; font-family: var(--mono); font-weight: 700;
+    font-size: 20px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .pt-eta b { display: block; margin-top: 8px; font-family: var(--ui); font-weight: 700; font-size: 40px; white-space: nowrap; }
+  .pt-track { position: relative; height: 28px; border-radius: 14px; background: var(--line); overflow: hidden; }
+  .pt-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 14px; background: var(--accent); overflow: hidden; }
+  .pt-stripes { position: absolute; top: 0; bottom: 0; left: -40px; right: -40px;
+    background: repeating-linear-gradient(-45deg, rgba(255, 255, 255, .22) 0 12px, rgba(255, 255, 255, 0) 12px 24px); }
+  .pt-sheen { position: absolute; top: 0; bottom: 0; left: -30%; width: 120px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .55), rgba(255, 255, 255, 0)); }
+  .pt-stages { display: flex; flex-direction: column; gap: 18px; margin-top: 38px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .pt-stage { display: flex; align-items: center; gap: 20px; font-family: var(--ui); font-weight: 500; font-size: 32px; color: var(--muted); }
+  .pt-dot { position: relative; flex: none; width: 38px; height: 38px; }
+  .pt-dot > * { position: absolute; inset: 0; opacity: 0; }
+  .pt-dot .d-wait { border-radius: 50%; border: 3px solid var(--line); }
+  .pt-dot .d-run svg { position: absolute; inset: 0; }
+  .pt-dot .d-ok { border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .pt-stage.wait .d-wait, .pt-stage.run .d-run, .pt-stage.ok .d-ok { opacity: 1; }
+  .pt-stage.run { color: var(--ink); font-weight: 700; }
+  .pt-stage.ok { color: var(--ink-2); }
+</style>
+<div class="stage center">
+  <div class="card pt-card" id="card">
+    <div class="pt-head">
+      <div class="pt-app" id="appChip"><i id="appIcon"></i><span id="app"></span></div>
+      <div class="pt-spin"><svg viewBox="0 0 46 46" id="spin"><circle cx="23" cy="23" r="18" fill="none" stroke="var(--line)" stroke-width="5"/>
+        <circle cx="23" cy="23" r="18" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" stroke-dasharray="30 200"/></svg>
+        <div class="pt-done" id="done"></div></div>
+    </div>
+    <div class="pt-task" id="task"></div>
+    <div class="pt-detail" id="detail"></div>
+    <div class="pt-num-row">
+      <div class="pt-pct"><b id="pct">0</b><span>%</span></div>
+      <div class="pt-eta" id="eta"><small id="etaLabel"></small><b id="etaText"></b></div>
+    </div>
+    <div class="pt-track"><div class="pt-bar" id="bar"><i class="pt-stripes" id="stripes"></i><i class="pt-sheen" id="sheen"></i></div></div>
+    <div class="pt-stages" id="stages"></div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration, E = GFX.ease;
+    const slow = P.slow !== false;
+    const to = Math.max(0, Math.min(100, Number(P.percent_to) || 0));
+    GFX.$("#app").textContent = P.app || "";
+    if (!P.app) GFX.$("#appChip").style.visibility = "hidden";
+    GFX.$("#appIcon").innerHTML = GFX.icon("play", { size: 14 });
+    GFX.$("#task").textContent = P.task;
+    GFX.$("#detail").textContent = P.detail || "";
+    if (P.detail) GFX.fit(GFX.$("#detail"), { width: 800, max: 26, min: 20 });
+    else GFX.$("#detail").remove();
+    if (P.eta) {
+      GFX.$("#etaLabel").innerHTML = GFX.icon("clock", { size: 22, width: 2.6 }) + "Remaining";
+      GFX.$("#etaText").textContent = P.eta;
+      GFX.fit(GFX.$("#etaText"), { width: 420, max: 40, min: 24 });
+    } else GFX.$("#eta").remove();
+    GFX.$("#done").innerHTML = GFX.icon("check", { size: 28, width: 3.4 });
+    GFX.fit(GFX.$("#task"), { width: 800, height: 140, max: 58, min: 34 });
+
+    // stages: done / running / waiting, driven by the progress value
+    const names = (P.stages || []).slice(0, 3);
+    const box = GFX.$("#stages");
+    const ring = `<svg viewBox="0 0 38 38"><circle cx="19" cy="19" r="15.5" fill="none" stroke="var(--accent-soft)" stroke-width="4"/>
+      <circle cx="19" cy="19" r="15.5" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="26 200"/></svg>`;
+    const stages = names.map((s) => {
+      const el = GFX.h("div", { class: "pt-stage wait" },
+        GFX.h("div", { class: "pt-dot" }, GFX.h("i", { class: "d-wait" }), GFX.h("i", { class: "d-run", html: ring }),
+          GFX.h("i", { class: "d-ok", html: GFX.icon("check", { size: 22, width: 3.4 }) })),
+        GFX.h("span", { text: String(s) }));
+      box.append(el);
+      GFX.fit(el.querySelector("span"), { width: 740, max: 32, min: 22 });
+      return el;
+    });
+    if (!stages.length) box.remove();
+
+    // progress: slow = a crawl that stalls three times; fast = a confident ease-out
+    const t0 = 380, t1 = slow ? D - 140 : Math.min(D - 500, t0 + 1400);
+    const crawl = (u) => u - Math.sin(6 * Math.PI * u) / (6 * Math.PI);
+    const pct = GFX.$("#pct"), bar = GFX.$("#bar");
+    const doneAt = t1;
+    GFX.each((t) => {
+      const u = GFX.clamp((t - t0) / (t1 - t0));
+      const v = to * (slow ? crawl(u) : E.out(u));
+      pct.textContent = String(u >= 1 ? Math.round(to) : Math.floor(v));
+      bar.style.width = Math.max(v > 0 ? 3 : 0, v) + "%";
+      // slow: the first stage is already done and the next one hangs; fast: stages finish as the bar passes them
+      const n = stages.length;
+      const done = slow ? Math.min(n - 1, n > 1 ? 1 : 0) : (to >= 100 && u >= 1 ? n : Math.min(n - 1, Math.floor((v / 100) * n)));
+      stages.forEach((el, i) => { el.className = "pt-stage " + (i < done ? "ok" : i === done ? "run" : "wait"); });
+    }, 0, t1 + 1);
+
+    const loop = (el, kf, dur, from) => GFX.anim(el, kf, { at: from, dur, iterations: Math.max(1, Math.floor((D - from) / dur)), ease: "linear" });
+    loop(GFX.$("#stripes"), [{ transform: "translateX(0px)" }, { transform: "translateX(-33.94px)" }], 420, 0);
+    GFX.anim(GFX.$("#sheen"), [{ left: "-30%" }, { left: "130%" }], { at: t0 + 300, dur: 1000, iterations: Math.max(1, Math.floor((D - t0 - 300) / 1000)), ease: "inOut" });
+    const spinEnd = to >= 100 && !slow ? doneAt : D;
+    GFX.anim(GFX.$("#spin"), [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
+      { at: 0, dur: 900, iterations: Math.max(1, spinEnd / 900), ease: "linear", fill: "both" });
+    GFX.$$(".d-run svg").forEach((s) => loop(s, [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], 900, 0));
+    if (to >= 100 && !slow) GFX.in(GFX.$("#done"), "pop", { at: doneAt, dur: 360 });
+
+    GFX.in(GFX.$("#card"), "rise", { at: 0, dur: 500, ease: "back" });
+    stages.forEach((el, i) => GFX.anim(el, [{ opacity: 0, transform: "translateX(-28px)" }, { opacity: 1, transform: "translateX(0)" }],
+      { at: 280 + i * 90, dur: 380, ease: "out" }));
+    if (P.eta) GFX.in(GFX.$("#eta"), "fade", { at: 520, dur: 360 });
+  })();
+</script>

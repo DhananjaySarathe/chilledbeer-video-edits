@@ -1,0 +1,12 @@
+showcase/assets/
+showcase/vendor/
+showcase/work/
+showcase/index.html
+showcase/cues.json
+showcase/*.mp4
+showcase/node_modules
+showcase/vertical/assets/
+showcase/vertical/vendor/
+showcase/vertical/out/
+showcase/vertical/index.html
+showcase/vertical/hyperframes.json

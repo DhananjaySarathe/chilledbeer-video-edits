@@ -1,0 +1,95 @@
+<style>
+  .cp { position: absolute; left: 50%; top: 290px; width: 520px; margin-left: -260px; transform-origin: 50% 0; }
+  .cp-page { position: relative; background: #fff; border-radius: 26px; overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.2); }
+  .cp-head { position: relative; height: 92px; background: var(--accent); color: #fff; display: flex; align-items: flex-end;
+    justify-content: center; padding-bottom: 14px; font-family: var(--condensed); font-weight: 700; font-size: 44px;
+    letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+  .cp-rings { position: absolute; left: 0; right: 0; top: -18px; display: flex; justify-content: space-between; padding: 0 44px; z-index: 3; }
+  .cp-rings i { width: 26px; height: 58px; border-radius: 13px; background: linear-gradient(90deg, #6B6B68, #D8D8D4 45%, #7A7A77);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35); }
+  .cp-body { position: relative; text-align: center; padding: 6px 20px 26px; }
+  .cp-num { font-family: var(--display); font-size: 184px; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .cp-day { position: relative; display: inline-block; margin-top: -4px; font-family: var(--condensed); font-weight: 700; font-size: 62px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .cp-ring { position: absolute; left: -44px; top: -26px; width: calc(100% + 88px); height: calc(100% + 46px); overflow: visible; }
+  .cp-ring path { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
+  .cp-note { position: absolute; top: 225px; left: 100%; margin-left: 8px; font-family: var(--hand); font-weight: 700; font-size: 62px;
+    line-height: 0.95; color: #fff; white-space: nowrap; transform: rotate(-8deg); transform-origin: 0 50%;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.75), 0 0 2px rgba(0, 0, 0, 0.9); }
+  .cp-under { position: absolute; left: 0; right: 0; top: 10px; height: 100%; border-radius: 26px; background: #F4F3EF; z-index: -1;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35); }
+</style>
+<div class="cp" id="cp">
+  <div class="cp-under" id="under"></div>
+  <div class="cp-rings"><i></i><i></i></div>
+  <div class="cp-page" id="page">
+    <div class="cp-head"><span id="month"></span></div>
+    <div class="cp-body">
+      <div class="cp-num" id="num"></div>
+      <div class="cp-day" id="day"><span id="dtext"></span>
+        <svg class="cp-ring" viewBox="0 0 100 40" preserveAspectRatio="none"><path id="ring"
+          d="M58 4 C 86 3, 99 12, 97 22 C 95 33, 70 38, 46 37 C 20 36, 2 30, 3 19 C 4 9, 25 3, 52 3 C 64 3, 72 5, 76 8"/></svg></div>
+    </div>
+  </div>
+  <div class="cp-note" id="note"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const cp = GFX.$("#cp"), page = GFX.$("#page"), note = GFX.$("#note");
+    GFX.$("#month").textContent = String(P.month || "");
+    GFX.$("#num").textContent = String(P.day ?? "");
+    GFX.$("#dtext").textContent = String(P.weekday || "");
+    note.textContent = String(P.note || "");
+    if (!P.note) note.style.display = "none";
+    const circleAt = GFX.clamp(Number(P.circle_at ?? 0.5) * 1000, 250, Math.max(250, D - 500));
+    const tearAt = P.tear_at == null ? null : GFX.clamp(Number(P.tear_at) * 1000, circleAt + 300, Math.max(circleAt + 300, D - 150));
+
+    GFX.layout(() => {
+      GFX.fitLine(GFX.$("#month"), { width: 470, max: 44, min: 28 });
+      GFX.fitLine(GFX.$("#dtext"), { width: 360, max: 62, min: 36 });
+      // above the eyes when the face is known; the hand note goes to the side with more room
+      const h = cp.offsetHeight;
+      let top = 290;
+      if (GFX.face) {
+        top = Math.min(top, GFX.face.y + GFX.face.h * 0.3 - h);
+        const fc = GFX.face.x + GFX.face.w / 2;
+        if (fc > 540) { cp.style.left = "44%"; }
+        if (fc < 540) { cp.style.left = "56%"; }
+      }
+      cp.style.top = Math.round(Math.max(270, top)) + "px";
+      // the note sits on whichever side of the page has more space
+      const r = cp.getBoundingClientRect();
+      if (r.left > 1080 - r.right) { note.style.left = "auto"; note.style.right = "100%"; note.style.marginRight = "4px";
+        note.style.transformOrigin = "100% 50%"; note.style.transform = "rotate(8deg)"; }
+      GFX.fitLine(note, { width: Math.max(r.left, 1080 - r.right) - 30, max: 62, min: 36 });
+    });
+
+    // beat: the page drops in swinging from its rings, the day gets circled in marker with a hand note,
+    // then (optionally) the page is torn off: it lifts, tilts and falls away to reveal the next scene
+    GFX.anim(cp, [
+      { opacity: 0, transform: "translateY(-160px) rotate(-10deg)" },
+      { opacity: 1, transform: "translateY(0) rotate(4deg)", offset: 0.55 },
+      { opacity: 1, transform: "translateY(0) rotate(-2deg)", offset: 0.8 },
+      { opacity: 1, transform: "translateY(0) rotate(0deg)" },
+    ], { at: 0, dur: 560, ease: "out", fill: "backwards" });
+    GFX.draw(GFX.$("#ring"), { at: circleAt, dur: 420, ease: "inOut" });
+    GFX.anim(GFX.$("#dtext"), [{ scale: "1" }, { scale: "1.12" }, { scale: "1" }], { at: circleAt - 80, dur: 360, ease: "out" });
+    if (P.note) GFX.in(note, "pop", { at: circleAt + 320, dur: 340, ease: "back" });
+    GFX.sfx("whoosh", 0, -18);
+    GFX.sfx("swipe", circleAt, -18);
+    if (P.note) GFX.sfx("pop", circleAt + 320, -16);
+    if (tearAt != null) {
+      GFX.anim(page, [
+        { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
+        { transform: "translate(40px,-40px) rotate(7deg)", opacity: 1, offset: 0.3 },
+        { transform: "translate(520px,420px) rotate(38deg)", opacity: 0 },
+      ], { at: tearAt, dur: Math.min(420, D - tearAt), ease: "in", fill: "forwards" });
+      GFX.anim(note, [{ opacity: 1 }, { opacity: 0 }], { at: tearAt, dur: 160, fill: "forwards" });
+      GFX.anim(GFX.$("#under"), [{ opacity: 1 }, { opacity: 0 }], { at: tearAt + 120, dur: 200, fill: "forwards" });
+      GFX.anim(GFX.$(".cp-rings"), [{ opacity: 1 }, { opacity: 0 }], { at: tearAt + 120, dur: 200, fill: "forwards" });
+      GFX.sfx("swipe", tearAt, -14);
+    }
+  })();
+</script>

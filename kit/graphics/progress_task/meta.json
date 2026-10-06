@@ -1,0 +1,88 @@
+{
+  "id": "progress_task",
+  "name": "Task in progress window",
+  "category": "mockup",
+  "kind": "fullscreen",
+  "description": "A white app card: a small app label chip and a spinner, a bold task line like 'Importing media…', a detail line like 'raw_take_03.mov · 1 of 1', a huge orange percentage counting up (optional time remaining beside it), and a striped orange progress bar with a moving sheen; an optional list of up to three steps shows done, running and waiting states. When slow, the bar crawls, stalls and stops at a low number.",
+  "use_when": "Lines about waiting on software or a slow step: importing, rendering, exporting, processing, syncing, 'it takes forever', 'then you wait for it to render'. With slow off and 100%, it shows a job that finishes quickly.",
+  "params": {
+    "app": {
+      "type": "text",
+      "default": "Editor",
+      "max_len": 18,
+      "help": "generic app name in the chip ('Editor', 'Render queue'); never a product name; '' hides it"
+    },
+    "task": {
+      "type": "text",
+      "required": true,
+      "max_len": 34,
+      "help": "what is happening, e.g. 'Importing media…', 'Rendering 4K…'"
+    },
+    "detail": {
+      "type": "text",
+      "default": "",
+      "max_len": 40,
+      "help": "small line under the task, e.g. 'raw_take_03.mov · 1 of 1'"
+    },
+    "percent_to": {
+      "type": "number",
+      "default": 7,
+      "help": "0-100: where the bar ends; low (3-15) with slow for 'takes forever', 100 with slow off for 'done in seconds'"
+    },
+    "slow": {
+      "type": "bool",
+      "default": true,
+      "help": "true: the bar crawls and stalls; false: it fills quickly (and shows a check at 100)"
+    },
+    "eta": {
+      "type": "text",
+      "default": "",
+      "max_len": 18,
+      "help": "optional time left shown right of the percentage, e.g. 'About 3 hours', '47 min'; '' hides it"
+    },
+    "stages": {
+      "type": "list",
+      "default": [],
+      "max_len": 3,
+      "help": "up to 3 short step names shown as a checklist under the bar, e.g. ['Reading file', 'Building previews', 'Conforming audio']"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.4,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.4,
+      "name": "tick",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "loading",
+    "progress",
+    "import",
+    "render",
+    "export",
+    "waiting",
+    "slow",
+    "software"
+  ],
+  "explains": [
+    "process",
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "progress_ring",
+  "version": "1"
+}

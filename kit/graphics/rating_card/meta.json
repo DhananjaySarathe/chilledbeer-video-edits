@@ -1,0 +1,68 @@
+{
+  "id": "rating_card",
+  "name": "Star rating card over the speaker",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A small white card near the top of the frame, over the speaker: a grey mono label on the left (e.g. RESULT) and five stars that fill in accent one by one up to the rating (half stars allowed; the rest stay light grey). An optional big white condensed quote word in curly quotes (e.g. “DECENT.”) then lands under the card with a soft shadow.",
+  "use_when": "Lines that judge or grade something: an okay-ish result, a verdict, a review, 'it was fine', 'not great', 'five stars', a rating out of five.",
+  "params": {
+    "label": {
+      "type": "text",
+      "default": "Result",
+      "max_len": 14,
+      "help": "grey mono label on the card"
+    },
+    "stars": {
+      "type": "number",
+      "required": true,
+      "help": "0-5, halves allowed (3.5)"
+    },
+    "quote": {
+      "type": "text",
+      "default": "",
+      "max_len": 16,
+      "help": "optional one or two words shown big in curly quotes under the card, e.g. 'Decent.'"
+    }
+  },
+  "duration": {
+    "min": 1.4,
+    "default": 2.0,
+    "max": 4.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "pop",
+      "gain_db": -18
+    },
+    {
+      "at": 0.3,
+      "name": "tick",
+      "gain_db": -20
+    },
+    {
+      "at": 0.76,
+      "name": "whoosh",
+      "gain_db": -22
+    }
+  ],
+  "tags": [
+    "rating",
+    "stars",
+    "review",
+    "verdict",
+    "result",
+    "overlay"
+  ],
+  "explains": [
+    "proof",
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "counter_big",
+  "version": "1"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "progress_ring",
+  "name": "Progress ring with percentage",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A white circular dial on the clean background with a thick accent ring that draws itself clockwise from the top to the value, a white dot riding its tip, and the percentage counting up in huge condensed type in the centre. A small spaced mono label sits above and a short condensed uppercase line below (e.g. 'of viewers drop off in 3 seconds').",
+  "use_when": "Lines that give one share or rate as a percentage: how many viewers leave or stay, how much is finished, a success or completion rate, 'most people...' with a number.",
+  "params": {
+    "value": {
+      "type": "number",
+      "required": true,
+      "help": "0-100; decimals allowed (12.5)"
+    },
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 26,
+      "help": "small spaced label above the dial, e.g. 'WATCH TIME'"
+    },
+    "label": {
+      "type": "text",
+      "default": "",
+      "max_len": 48,
+      "help": "short line under the dial that says what the percentage is; wraps to two lines"
+    }
+  },
+  "duration": {
+    "min": 1.6,
+    "default": 2.4,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.3,
+      "name": "riser",
+      "gain_db": -22
+    }
+  ],
+  "tags": [
+    "percentage",
+    "ring",
+    "progress",
+    "rate",
+    "share",
+    "numbers"
+  ],
+  "explains": [
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "progress_task",
+  "version": "1"
+}

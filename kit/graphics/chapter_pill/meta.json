@@ -1,0 +1,63 @@
+{
+  "id": "chapter_pill",
+  "name": "Chapter label pill (top-left)",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A small dark rounded label at the top-left over the speaker: an orange circle with the chapter number and a spaced uppercase name ('01  DIY EDITING'). It slides in, then stays still for the whole section; optionally, near the end, the name is struck through and greyed and a small orange chip like '× TOO SLOW' pops in beside it.",
+  "use_when": "Lay it over a whole section while the speaker talks through one option, step or approach; add done_text when the section ends by rejecting that option ('too slow', 'headache', 'too expensive').",
+  "params": {
+    "number": {
+      "type": "text",
+      "default": "01",
+      "max_len": 3,
+      "help": "chapter number shown in the orange circle, e.g. '01'; empty hides the circle"
+    },
+    "label": {
+      "type": "text",
+      "required": true,
+      "max_len": 22,
+      "help": "chapter name, 1-3 words, e.g. 'DIY editing'"
+    },
+    "done_text": {
+      "type": "text",
+      "default": "",
+      "max_len": 14,
+      "help": "verdict chip that appears at the end and strikes the label, e.g. 'too slow' (the × is added); empty = no strike"
+    },
+    "done_at": {
+      "type": "number",
+      "default": 0.75,
+      "help": "when the verdict appears, as a fraction of the scene (0-1); 0.75 = three quarters in"
+    }
+  },
+  "duration": {
+    "min": 1.5,
+    "default": 6.0,
+    "max": 20.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.06,
+      "name": "swipe",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "chapter",
+    "section",
+    "label",
+    "persistent",
+    "top-left",
+    "strike"
+  ],
+  "explains": [
+    "structure"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "section_card",
+  "version": "1"
+}

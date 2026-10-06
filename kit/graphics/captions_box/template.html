@@ -1,0 +1,48 @@
+<style>
+  .cb-page { position: absolute; left: 64px; right: 120px; }
+  .cb-line { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.06em 0.26em;
+    transform-origin: 50% 50%; }
+  .cb-w { position: relative; display: inline-block; font-weight: 700; text-transform: uppercase; line-height: 1.02;
+    color: #fff; padding: 0 0.09em; letter-spacing: 0.005em;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.7); }
+  .dark .cb-w { color: var(--ink); text-shadow: none; }
+  .cb-box, .cb-box > span { position: absolute; inset: 0; }
+  .cb-box > span > span { position: absolute; inset: -0.03em 0 -0.01em; display: flex; align-items: center;
+    justify-content: center; background: var(--accent); color: var(--accent-ink); border-radius: 0.07em; text-shadow: none; }
+</style>
+<div id="root"></div>
+<script>
+  (() => {
+    const P = GFX.params;
+    const root = GFX.$("#root");
+    const family = P.font === "display" ? "var(--display)" : "var(--condensed)";
+    const ms = (s) => Math.round(s * 1000);
+    // Every change is a 1 ms step animation, so the renderer knows all frames between events are identical.
+    const step = (el, from, to, at) => GFX.anim(el, [from, to], { at, dur: 1, ease: "linear" });
+    for (const pg of P.pages) {
+      const page = GFX.h("div", { class: "cb-page" + (pg.dark ? " dark" : "") });
+      const vanish = GFX.h("div");
+      const line = GFX.h("div", { class: "cb-line" });
+      page.style.fontFamily = family;
+      page.style.fontSize = P.size + "px";
+      page.style.top = Math.round((pg.y ?? P.y) - P.size * 0.56) + "px";   // a scene may move the band (meta caption_y)
+      page.append(vanish);
+      vanish.append(line);
+      root.append(page);
+      pg.words.forEach((w, k) => {
+        const word = GFX.h("span", { class: "cb-w", text: w.text });
+        const boxIn = GFX.h("span", { class: "cb-box" }), boxOut = GFX.h("span"), box = GFX.h("span", { text: w.text });
+        boxOut.append(box);
+        boxIn.append(boxOut);
+        word.append(boxIn);
+        line.append(word);
+        const endAt = k + 1 < pg.words.length ? pg.words[k + 1].start : pg.end;
+        step(boxIn, { opacity: 0 }, { opacity: 1 }, ms(w.start));
+        step(boxOut, { opacity: 1 }, { opacity: 0 }, ms(endAt));
+      });
+      step(page, { opacity: 0 }, { opacity: 1 }, ms(pg.start));
+      step(vanish, { opacity: 1 }, { opacity: 0 }, ms(pg.end) - 1);     // the end is exclusive: gone on that frame
+      GFX.anim(line, [{ transform: "scale(.84)" }, { transform: "scale(1)" }], { at: ms(pg.start), dur: 120, ease: "back" });
+    }
+  })();
+</script>

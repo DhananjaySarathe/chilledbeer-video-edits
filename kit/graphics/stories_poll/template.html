@@ -1,0 +1,80 @@
+<style>
+  .sp-card { position: absolute; left: 150px; top: 300px; width: 780px; padding: 30px 36px 36px; border-radius: 40px; }
+  .sp-tag { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--mono); font-weight: 700;
+    font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+  .sp-q { margin-top: 12px; text-align: center; font-family: var(--ui); font-weight: 800; font-size: 46px; line-height: 1.14;
+    letter-spacing: -0.01em; color: var(--ink); overflow-wrap: anywhere; }
+  .sp-opts { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .sp-row { position: relative; height: 96px; border-radius: 48px; background: var(--soft); overflow: hidden;
+    box-shadow: inset 0 0 0 2px rgba(17, 17, 17, 0.04); }
+  .sp-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 48px; overflow: hidden; background: rgba(17, 17, 17, 0.14); }
+  .sp-row.win .sp-fill { background: var(--accent); }
+  .sp-txt { position: absolute; left: 0; top: 0; width: 708px; height: 96px; display: flex; align-items: center; gap: 14px;
+    padding: 0 34px; color: var(--ink); }
+  .sp-row.win .sp-fill .sp-txt { color: var(--accent-ink); }
+  .sp-lab { flex: 0 1 auto; min-width: 0; font-family: var(--ui); font-weight: 700; font-size: 34px; white-space: nowrap; }
+  .sp-ck { flex: none; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: var(--accent); color: var(--accent-ink); }
+  .sp-fill .sp-ck { background: var(--accent-ink); color: var(--accent); }
+  .sp-pct { margin-left: auto; flex: none; min-width: 96px; text-align: right; font-family: var(--ui); font-weight: 800; font-size: 38px;
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .sp-row.win > .sp-txt .sp-pct { color: var(--accent); }
+</style>
+<div class="card sp-card" id="card">
+  <div class="sp-tag" id="tag"></div>
+  <div class="sp-q" id="q"></div>
+  <div class="sp-opts" id="opts"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const W = (s) => String(s ?? "").trim();
+
+    // shrink a one-line label until it fits its box; if it still doesn't, trim and add an ellipsis
+    const fitLine = (el, max, min) => GFX.layout(() => {
+      for (let fs = max; fs >= min; fs--) { el.style.fontSize = fs + "px"; if (el.scrollWidth <= el.clientWidth + 1) return; }
+      const full = el.textContent;
+      for (let n = full.length - 1; n > 0 && el.scrollWidth > el.clientWidth + 1; n--) el.textContent = full.slice(0, n).trimEnd() + "…";
+    });
+
+    GFX.$("#tag").innerHTML = GFX.icon("chart", { size: 22, width: 2.8 }) + "<span>Poll</span>";
+    const q = GFX.$("#q");
+    q.textContent = W(P.question);
+    GFX.fit(q, { height: 112, max: 46, min: 32 });
+
+    const opts = (P.options || []).slice(0, 2).map((o, i) => ({
+      label: W(o && o.label) || (i ? "No" : "Yes"),
+      pct: GFX.clamp(Number(o && o.percent) || 0, 0, 100),
+    }));
+    while (opts.length < 2) opts.push({ label: opts.length ? "No" : "Yes", pct: 50 });
+    const win = opts[0].pct === opts[1].pct ? -1 : opts[0].pct > opts[1].pct ? 0 : 1;
+    const dec = opts.some((o) => o.pct % 1) ? 1 : 0;
+
+    // bars fill from the left while both percentages count up; the winner gets a check and a small bump
+    const tFill = Math.round(GFX.clamp(D * 0.27, 500, 800));
+    const fillDur = Math.max(500, Math.min(1000, D - tFill - 650));
+    const box = GFX.$("#opts");
+    opts.forEach((o, i) => {
+      const txt = () => GFX.h("div", { class: "sp-txt" }, GFX.h("span", { class: "sp-lab", text: o.label }),
+        i === win ? GFX.h("i", { class: "sp-ck", html: GFX.icon("check", { size: 24, width: 3.6 }) }) : null,
+        GFX.h("span", { class: "sp-pct", text: "0%" }));
+      const inner = txt(), fill = GFX.h("div", { class: "sp-fill" }, inner), base = txt();
+      const row = GFX.h("div", { class: "sp-row" + (i === win ? " win" : "") }, base, fill);
+      box.append(row);
+      for (const t of [base, inner]) {
+        fitLine(t.querySelector(".sp-lab"), 34, 24);
+        GFX.count(t.querySelector(".sp-pct"), 0, o.pct, { at: tFill, dur: fillDur, decimals: dec, suffix: "%" });
+      }
+      GFX.anim(fill, [{ width: "0%" }, { width: o.pct + "%" }], { at: tFill, dur: fillDur, ease: "out" });
+      GFX.in(row, "rise", { at: 200 + i * 110, dur: 460, ease: "back" });
+      if (i === win) {
+        GFX.in(row.querySelectorAll(".sp-ck"), "pop", { at: tFill + fillDur - 80, dur: 380 });
+        GFX.anim(row, [{ scale: "1" }, { scale: "1.035" }, { scale: "1" }], { at: tFill + fillDur - 60, dur: 420, ease: "inOut" });
+      }
+    });
+
+    GFX.anim(GFX.$("#card"), [{ opacity: 0, transform: "translateY(50px) scale(.72)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+      { at: 0, dur: 500, ease: "snap" });
+    GFX.in(q, "rise", { at: 110, dur: 420 });
+  })();
+</script>

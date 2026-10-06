@@ -1,0 +1,71 @@
+VIDEO: how_i_edit_with_claude.mp4 (16:9, 2:54)
+
+TITLE (recommended)
+I Don't Use a Video Editor. Claude Edits My Videos (Full Workflow)
+
+TITLE (alternatives)
+How I Edit Every Video With Claude Code (No Premiere, No CapCut)
+My AI Video Editor Runs on Claude Code. Here's the Exact Workflow
+
+
+DESCRIPTION
+No editor. Just Claude.
+
+People keep asking how I edit my videos. One big "make it viral" prompt doesn't work. So last weekend I built my own AI editor that runs on my Claude Code credits. This is the exact workflow:
+
+→ record one take
+→ clean up the transcript (my skill file does this)
+→ plan the edit from presets
+→ pick animations from open-source GitHub libraries
+→ build every scene in code with HyperFrames
+→ render, then check it automatically
+
+It now edits a video in about 15–20 minutes (sometimes 10), and it gets faster every time because assets, animations and effects are saved and reused.
+
+Want the repo? Comment "repo" and I'll share it. Fair warning: it's tuned for my talking-head tech style, so it may not fit other genres yet.
+
+CHAPTERS
+0:00 No editor, just Claude
+0:15 My exact workflow
+0:38 Record → clean up → plan
+0:51 Finding animations on GitHub
+1:14 Building it in code (HyperFrames)
+1:31 The right library (and losing 2 days)
+1:51 15–20 minutes per video
+2:08 The repo (and an honest caveat)
+2:30 The 10-second launch film
+
+LINKS
+HyperFrames (open source, Apache-2.0): https://github.com/heygen-com/hyperframes
+HyperFrames catalog: https://hyperframes.heygen.com/catalog
+Awesome Claude Video Skills (200+ repos): https://github.com/zhuyansen/awesome-claude-video-skills
+NCS (copyright-free music): https://ncs.io
+
+MUSIC
+Music: LAKEY INSPIRED - Chill
+https://soundcloud.com/lakeyinspired
+
+Music: MokkaMusic - Drive
+
+Sound effects: Mixkit (free license).
+
+#claude #claudecode #aivideoediting #hyperframes #videoediting #ai
+
+
+TAGS
+claude code, claude ai, ai video editing, ai video editor, edit videos with ai, claude code video editing, hyperframes, heygen hyperframes, video editing workflow, no video editor, automate video editing, github video tools, awesome claude video skills, lofi, youtube editing workflow, ai tools for creators
+
+
+PINNED COMMENT
+Comment "repo" and I'll share the GitHub link 👇
+(Tuned for talking-head tech videos. Tell me your genre and I'll tell you if it fits.)
+
+
+UPLOAD SETTINGS
+Captions ............. Subtitles > Upload file > With timing > captions.srt
+Category ............. Science & Technology
+Audience ............. No, it's not made for kids
+Video language ....... English
+Altered content ...... No (real footage, colour graded)
+Paid promotion ....... No
+Thumbnail idea ....... you on the cream wall (graded frame), big serif "No editor." in ink with "Just Claude." in orange italic, a Claude Code window behind

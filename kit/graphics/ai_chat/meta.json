@@ -1,0 +1,102 @@
+{
+  "id": "ai_chat",
+  "name": "AI assistant chat",
+  "category": "mockup",
+  "kind": "speaker",
+  "description": "A white AI-assistant chat window (generic sparkle icon, no brand) on the clean background, with the speaker live in a round face bubble on its top-right corner. Either a prompt types into the composer piece by piece in sync with the voice and is sent (the text flies up as a dark bubble and a shimmering 'Thinking…' row starts), or the assistant's reply builds up under an earlier prompt: typed text, numbered step cards and an orange-bordered link card that pops with a ring.",
+  "use_when": "Lines about asking an AI something (the prompt he typed) or what the AI answered or suggested (a plan, steps, a link it gave).",
+  "params": {
+    "name": {
+      "type": "text",
+      "default": "Assistant",
+      "max_len": 20,
+      "help": "window title, generic"
+    },
+    "hello": {
+      "type": "text",
+      "default": "",
+      "max_len": 40,
+      "help": "greeting shown in the empty chat before the prompt is sent"
+    },
+    "hello_sub": {
+      "type": "text",
+      "default": "",
+      "max_len": 40
+    },
+    "prompt": {
+      "type": "list",
+      "default": [],
+      "max_len": 4,
+      "help": "[{text, at}] pieces typed into the composer, at = seconds from the scene start (when he says it); ~20-40 characters each"
+    },
+    "send_at": {
+      "type": "number",
+      "default": null,
+      "help": "seconds from the scene start when the prompt is sent; null keeps it in the composer"
+    },
+    "thinking": {
+      "type": "bool",
+      "default": true,
+      "help": "show the shimmering 'Thinking…' row after sending (when there is no reply)"
+    },
+    "thinking_text": {
+      "type": "text",
+      "default": "Thinking…",
+      "max_len": 24
+    },
+    "sent": {
+      "type": "text",
+      "default": "",
+      "max_len": 90,
+      "help": "an earlier prompt already in the chat (dimmed), for a reply scene"
+    },
+    "reply": {
+      "type": "list",
+      "default": [],
+      "max_len": 4,
+      "help": "[{kind: 'text'|'step'|'link', text, sub, at}] assistant items in order; step and link text <= 34 characters, sub <= 40"
+    },
+    "placeholder": {
+      "type": "text",
+      "default": "Message…",
+      "max_len": 24
+    },
+    "pip": {
+      "type": "bool",
+      "default": true,
+      "help": "the speaker's round face bubble on the window's corner"
+    }
+  },
+  "duration": {
+    "min": 2.0,
+    "default": 4.0,
+    "max": 7.5
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "ai",
+    "prompt",
+    "chatbot",
+    "assistant",
+    "ask",
+    "reply",
+    "plan"
+  ],
+  "explains": [
+    "conversation",
+    "instruction"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "chat_thread",
+  "version": "1"
+}

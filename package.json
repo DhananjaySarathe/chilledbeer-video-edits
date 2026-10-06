@@ -1,0 +1,12 @@
+{
+  "name": "video-shorts-gfx",
+  "private": true,
+  "description": "Chrome driver for rendering ChilledBeer Video Edits motion graphics (uses the installed Google Chrome; no browser download).",
+  "type": "module",
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "perfect-freehand": "^1.2.3",
+    "puppeteer-core": "^24.0.0",
+    "roughjs": "^4.6.6"
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!--HF:KIT-->
+  </head>
+  <body>
+    <div id="root" data-composition-id="motionreel" data-start="0" data-duration="__TOTAL__" data-width="1080" data-height="1920" style="position:relative;width:1080px;height:1920px;overflow:hidden">
+      <video id="aroll" class="clip" src="assets/aroll.mp4" muted playsinline data-start="0" data-duration="__TOTAL__" data-media-start="0" data-track-index="2"></video>
+    </div>
+    <script>
+      /*DATA*/
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        window.__timelines = window.__timelines || {};
+        window.__timelines["motionreel"] = tl;                                         // the linter looks for this line
+        const K = HF.kit({ tl, id: "motionreel", width: 1080, height: 1920, words: D.words, pieces: D.pieces });
+        const st = HF.stage(K, document.getElementById("root"), { aroll: "aroll" });
+        const P = HF.camera(K, st, { plan: D.camera });                                // panel + full-screen hook, reel rules
+        const hookEnd = P.shots[1].t0, C = HF.C, Q = K.Q;
+        // the top half: what the camera is doing, in big type (a demo; a real reel puts its graphics here)
+        const top = K.el(st.cards, "left:0;top:0;width:1080px;height:880px");
+        K.show(top, hookEnd, D.total + 1);
+        K.el(top, "left:0;top:0;width:1080px;height:880px", "", "hf-fill hf-paper");
+        const lb = K.el(top, "left:72px;top:150px", "Camera v2 · 9:16 panel", "hf-lbl hf-abs"); lb.style.fontSize = "26px";
+        D.labels.filter(([a]) => a >= hookEnd - 0.05).forEach(([a, b, , title, sub]) => {
+          const end = Math.min(D.total, Math.max(b, a + 1.4)) - 0.3;
+          const t = K.words(top, title, "left:66px;top:230px;font-size:120px;line-height:1.04");
+          K.rise(t.ws, t.ws.map((_, i) => a + 0.02 + i * 0.06), end);
+          const s = K.el(top, "left:72px;top:390px;opacity:0;font:600 36px Inter,sans-serif;color:" + C.ink2, HF.esc(sub));
+          tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: 0.3, immediateRender: false }, Q(a + 0.2));
+          tl.to(s, { opacity: 0, duration: 0.25 }, Q(end));
+        });
+        const seam = K.el(st.cards, "left:0;top:880px;width:1080px;height:46px;opacity:0;background:linear-gradient(rgba(241,235,226,.9),rgba(241,235,226,0))");
+        K.show(seam, hookEnd, D.total + 1);
+        // the hook: his face full screen and the line that frames the video
+        const H = K.el(st.top, "left:0;top:0;width:1080px;height:1920px");
+        H.innerHTML = `<div style="position:absolute;left:0;top:0;width:1080px;height:520px;background:linear-gradient(rgba(12,10,8,.7),rgba(12,10,8,0))"></div>` +
+          `<div class="hf-serif" style="position:absolute;left:0;width:1080px;top:120px;text-align:center;font-size:132px;line-height:1;color:#fff">Camera <i style="color:#ff7a4d">v2</i></div>` +
+          `<div style="position:absolute;left:0;width:1080px;top:280px;text-align:center;font:800 42px Inter,sans-serif;color:#fff">Every move, picked from the edit</div>`;
+        tl.set(H, { autoAlpha: 0 }, Q(hookEnd));                                       // on from frame 1, off at the cut
+        K.finish(D.total);
+      })();
+    </script>
+  </body>
+</html>

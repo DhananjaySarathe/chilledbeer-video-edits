@@ -1,0 +1,86 @@
+<style>
+  .ps-title { position: absolute; left: 60px; right: 60px; top: 292px; text-align: center; font-family: var(--condensed);
+    font-weight: 700; font-size: 84px; line-height: 1; text-transform: uppercase; color: var(--ink); }
+  .ps-disc { position: absolute; left: 190px; top: 390px; width: 520px; height: 520px; }
+  .ps-disc svg { overflow: visible; }
+  .ps-side { position: absolute; left: 740px; top: 450px; width: 300px; display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+  .ps-chip { position: relative; font-family: var(--condensed); font-weight: 700; font-size: 72px; line-height: 1;
+    text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .ps-chip.b { color: var(--accent); }
+  .ps-chip .x { position: absolute; left: -6px; right: -6px; top: 52%; height: 8px; background: var(--ink);
+    border-radius: 4px; transform-origin: left center; transform: scaleX(0); }
+  .ps-eq { font-family: var(--display); font-size: 110px; line-height: 0.8; color: var(--ink); }
+  .ps-note { position: absolute; left: 60px; right: 60px; top: 936px; text-align: center; font-family: var(--ui);
+    font-weight: 700; font-size: 46px; color: var(--ink-2); }
+  .ps-note b { color: var(--accent); }
+</style>
+<div class="ps-title" id="title"></div>
+<div class="ps-disc" id="disc"></div>
+<div class="ps-side" id="side">
+  <div class="ps-chip" id="la"><span id="lat"></span><i class="x" id="lax"></i></div>
+  <div class="ps-eq" id="eq">=</div>
+  <div class="ps-chip b" id="lb"></div>
+</div>
+<div class="ps-note" id="note"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const W = (s) => String(s ?? "").trim();
+    const A = Math.round(GFX.clamp(Number(P.first) || 8, 2, 16)), B = Math.round(GFX.clamp(Number(P.second) || 10, 2, 16));
+    const look = ["pizza", "plain"].includes(P.look) ? P.look : "dough";
+    const fill = { dough: ["#F6E7CC", "#E7C995", "#D8B27A"], pizza: ["#FFD27A", "#F4A93A", "#D9822B"],
+                   plain: ["#FF6A33", "#FC3B00", "#D93300"] }[look];
+    const line = look === "plain" ? "#FFFFFF" : "#8A5A2B";
+    const r = 250, c = 260;
+    // the portion: soft radial fill, darker rim, a few flour specks (dough) or toppings (pizza), then the cut lines
+    const rnd = GFX.rand(7);
+    let dots = "";
+    for (let i = 0; i < (look === "plain" ? 0 : 26); i++) {
+      const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * (r - 40);
+      const x = c + Math.cos(a) * d, y = c + Math.sin(a) * d;
+      dots += look === "pizza" ? `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(10 + rnd() * 8).toFixed(1)}" fill="#C0392B" opacity=".85"/>`
+                               : `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(2 + rnd() * 3).toFixed(1)}" fill="#FFFFFF" opacity=".7"/>`;
+    }
+    const spokes = (n, cls, rot) => Array.from({ length: n }, (_, i) => {
+      const a = rot + (i * 2 * Math.PI) / n;
+      return `<path class="${cls}" d="M${c} ${c} L${(c + Math.cos(a) * (r - 4)).toFixed(1)} ${(c + Math.sin(a) * (r - 4)).toFixed(1)}" ` +
+             `stroke="${line}" stroke-width="7" stroke-linecap="round" fill="none"/>`;
+    }).join("");
+    GFX.$("#disc").innerHTML = `<svg width="520" height="520" viewBox="0 0 520 520">
+      <defs><radialGradient id="g" cx="42%" cy="38%" r="70%"><stop offset="0" stop-color="${fill[0]}"/>
+        <stop offset=".75" stop-color="${fill[1]}"/><stop offset="1" stop-color="${fill[2]}"/></radialGradient></defs>
+      <circle cx="${c}" cy="${c + 16}" r="${r}" fill="rgba(0,0,0,.14)" filter="blur(0)"/>
+      <circle cx="${c}" cy="${c}" r="${r}" fill="url(#g)"/>${dots}
+      <g id="ga">${spokes(A, "sa", -Math.PI / 2)}</g><g id="gb">${spokes(B, "sb", -Math.PI / 2)}</g></svg>`;
+
+    const title = GFX.$("#title"), note = GFX.$("#note");
+    if (W(P.title)) { title.textContent = W(P.title); GFX.fit(title, { width: 960, max: 84, min: 44 }); } else title.remove();
+    if (W(P.note)) { note.textContent = W(P.note); GFX.fit(note, { width: 960, max: 46, min: 28, lines: 2 }); } else note.remove();
+    GFX.$("#lat").textContent = W(P.first_label) || `${A} pieces`;
+    GFX.$("#lb").textContent = W(P.second_label) || `${B} pieces`;
+    GFX.fitLine(GFX.$("#lat"), { width: 300, max: 72, min: 40 });
+    GFX.fitLine(GFX.$("#lb"), { width: 300, max: 72, min: 40 });
+
+    // timeline: portion pops in, first split draws, label; then the lines swing away and the second split draws
+    const disc = GFX.$("#disc");
+    GFX.in(disc, "pop", { at: 0, dur: 520, ease: "back" });
+    if (title.isConnected) GFX.in(title, "rise", { at: 120, dur: 380 });
+    const t1 = 520, t2 = Math.max(t1 + 900, D * 0.5);
+    GFX.$$(".sa").forEach((p, i) => { GFX.draw(p, { at: t1 + i * 40, dur: 220 }); });
+    GFX.sfx("click", t1, -16);
+    GFX.in(GFX.$("#la"), "left", { at: t1 + 200, dur: 360, ease: "back" });
+    GFX.anim(GFX.$("#ga"), [{ opacity: 1, transform: "rotate(0deg)" }, { opacity: 0, transform: "rotate(18deg)" }],
+      { at: t2 - 160, dur: 260, ease: "in", fill: "forwards" });
+    GFX.$("#ga").style.transformOrigin = `${c}px ${c}px`;
+    GFX.$$(".sb").forEach((p, i) => { GFX.draw(p, { at: t2 + i * 36, dur: 220 }); });
+    GFX.sfx("click", t2, -14);
+    GFX.anim(GFX.$("#lax"), [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { at: t2 - 120, dur: 260, ease: "out" });
+    GFX.anim(GFX.$("#la"), [{ opacity: 1 }, { opacity: 0.4 }], { at: t2, dur: 240, fill: "forwards" });
+    GFX.in(GFX.$("#eq"), "pop", { at: t2 + 120, dur: 320 });
+    GFX.in(GFX.$("#lb"), "left", { at: t2 + 260, dur: 380, ease: "back" });
+    GFX.sfx("ding", t2 + 300, -18);
+    GFX.anim(disc, [{ transform: "scale(1)" }, { transform: "scale(1.04)" }, { transform: "scale(1)" }],
+      { at: t2, dur: 420, ease: "out", fill: "none" });
+    if (note.isConnected) GFX.in(note, "rise", { at: t2 + 520, dur: 420 });
+  })();
+</script>

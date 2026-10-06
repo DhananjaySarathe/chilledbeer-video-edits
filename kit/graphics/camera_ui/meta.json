@@ -1,0 +1,62 @@
+{
+  "id": "camera_ui",
+  "name": "Camera viewfinder over the speaker",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A camera viewfinder laid over the speaker: four white corner brackets framing the picture, a blinking red dot with 'REC' top-left, a running timecode top-right, small mono camera specs bottom-left and a battery with '87%' bottom-right; an orange face-tracking bracket snaps onto the speaker's face with a 'FACE · AF LOCK' tag.",
+  "use_when": "Lines about recording, filming, being on camera, hitting record, shooting content or 'this is me recording right now'; it can run long under a whole section about filming.",
+  "params": {
+    "labels": {
+      "type": "text",
+      "default": "4K · 30FPS · ISO 400",
+      "max_len": 32,
+      "help": "mono camera specs bottom-left; empty hides the chip"
+    },
+    "face_lock": {
+      "type": "bool",
+      "default": true,
+      "help": "show the orange face-tracking bracket around the speaker's face"
+    },
+    "start_tc": {
+      "type": "number",
+      "default": 0,
+      "help": "seconds the timecode starts at (it counts up in real time)"
+    }
+  },
+  "duration": {
+    "min": 1.0,
+    "default": 3.0,
+    "max": 20.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "click",
+      "gain_db": -14
+    },
+    {
+      "at": 0.88,
+      "name": "tick",
+      "gain_db": -16
+    }
+  ],
+  "tags": [
+    "camera",
+    "recording",
+    "filming",
+    "viewfinder",
+    "rec",
+    "overlay"
+  ],
+  "explains": [
+    "emphasis",
+    "structure"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "speaker_card",
+  "version": "1"
+}

@@ -1,0 +1,74 @@
+<style>
+  .ns-wrap { position: absolute; inset: 0; transform-origin: 50% 20%; }
+  .ns-card { position: absolute; left: 72px; top: 0; width: 936px; height: 148px; display: flex; align-items: center; gap: 24px;
+    padding: 0 30px 0 26px; border-radius: 40px; background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.24), 0 6px 16px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    transform-origin: 50% 100%; }
+  .ns-ic { flex: none; width: 88px; height: 88px; border-radius: 22px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 78%, #fff), var(--accent));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04); color: var(--accent-ink); }
+  .ns-txt { flex: 1; min-width: 0; }
+  .ns-top { display: flex; align-items: center; gap: 16px; font-family: var(--ui); font-size: 23px; color: #7A7973; }
+  .ns-app { flex: 1; min-width: 0; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .ns-now { flex: none; font-weight: 500; }
+  .ns-title { margin-top: 3px; font-family: var(--ui); font-weight: 700; font-size: 33px; line-height: 1.2; color: var(--ink);
+    white-space: nowrap; }
+  .ns-body { font-family: var(--ui); font-weight: 400; font-size: 31px; line-height: 1.22; color: var(--ink-2); white-space: nowrap; }
+</style>
+<div class="ns-wrap" id="wrap"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const wrap = GFX.$("#wrap");
+
+    // shrink a one-line label until it fits its box; if it still doesn't, trim and add an ellipsis
+    const fitLine = (el, max, min) => GFX.layout(() => {
+      for (let fs = max; fs >= min; fs--) { el.style.fontSize = fs + "px"; if (el.scrollWidth <= el.clientWidth + 1) return; }
+      const full = el.textContent;
+      for (let n = full.length - 1; n > 0 && el.scrollWidth > el.clientWidth + 1; n--) el.textContent = full.slice(0, n).trimEnd() + "…";
+    });
+
+    const items = (P.items || []).filter((it) => it && (it.title || it.body)).slice(0, 4);
+    if (!items.length) return;
+
+    // slots: newest on top at y=TOP; older ones pushed down; beyond `full` they tuck behind as slivers
+    const TOP = 290, H = 148, GAP = 14;
+    const maxBottom = GFX.face ? Math.min(820, GFX.face.y + GFX.face.h * 0.45) : 800;
+    const full = Math.round(GFX.clamp(Math.floor((maxBottom - TOP + GAP - 24) / (H + GAP)), 1, 3));
+    const slot = (k) => {
+      if (k < full) return { y: TOP + k * (H + GAP), s: 1, o: 1 };
+      const e = k - full + 1;
+      return { y: TOP + (full - 1) * (H + GAP) + 22 * e, s: 1 - 0.05 * e, o: Math.max(0, 1 - 0.18 * e) };
+    };
+    const tf = (p) => ({ transform: `translateY(${p.y}px) scale(${p.s})`, opacity: p.o });
+
+    const n = items.length, t0 = 150;
+    const step = n > 1 ? GFX.clamp((D - 1100) / (n - 1), 300, 560) : 0;
+    const arrive = items.map((_, i) => Math.round(t0 + i * step));
+
+    items.forEach((it, i) => {
+      const card = GFX.h("div", { class: "ns-card", style: `z-index:${10 + i}` },
+        GFX.h("div", { class: "ns-ic", html: GFX.icon(it.icon || "bell", { size: 48, stroke: "#fff", width: 2.4 }) }),
+        GFX.h("div", { class: "ns-txt" },
+          GFX.h("div", { class: "ns-top" }, GFX.h("span", { class: "ns-app", text: String(it.app || "Notification") }),
+            GFX.h("span", { class: "ns-now", text: "now" })),
+          it.title ? GFX.h("div", { class: "ns-title", text: String(it.title) }) : null,
+          it.body ? GFX.h("div", { class: "ns-body", text: String(it.body) }) : null));
+      wrap.append(card);
+      fitLine(card.querySelector(".ns-app"), 23, 18);
+      if (it.title) fitLine(card.querySelector(".ns-title"), 33, 26);
+      if (it.body) fitLine(card.querySelector(".ns-body"), 31, 25);
+
+      // drop in at the top, then get pushed down each time a newer one arrives
+      const enter = { y: TOP - 150, s: 0.96, o: 0 };
+      GFX.anim(card, [tf(enter), tf(slot(0))], { at: arrive[i], dur: 520, ease: "back" });
+      GFX.in(card.firstChild, "pop", { at: arrive[i] + 90, dur: 380 });
+      for (let j = i + 1; j < n; j++) {
+        GFX.anim(card, [tf(slot(j - i - 1)), tf(slot(j - i))], { at: arrive[j], dur: 460, ease: "expo", fill: "forwards" });
+        // tucked behind the stack: only its edge shows, so its words must not ghost through the card in front
+        if (j - i === full) GFX.anim([...card.children], [{ opacity: 1 }, { opacity: 0 }], { at: arrive[j], dur: 200, fill: "forwards" });
+      }
+    });
+    GFX.anim(wrap, [{ scale: "1" }, { scale: "1.012" }], { at: 0, dur: D, ease: "linear" });
+  })();
+</script>

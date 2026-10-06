@@ -1,0 +1,12 @@
+sheet/vendor/
+sheet/assets/
+sheet/out/
+sheet/hyperframes.json
+demo/vendor/
+demo/assets/
+demo/out/
+demo/hyperframes.json
+demo2/vendor/
+demo2/assets/
+demo2/out/
+demo2/hyperframes.json

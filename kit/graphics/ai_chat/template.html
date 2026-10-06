@@ -1,0 +1,184 @@
+<style>
+  .ac-card { position: absolute; left: 64px; right: 64px; top: 500px; height: 580px; display: flex; flex-direction: column;
+    overflow: hidden; }
+  .ac-bar { flex: none; display: flex; align-items: center; gap: 16px; padding: 26px 34px 22px; border-bottom: 1px solid var(--line); }
+  .ac-logo { width: 54px; height: 54px; border-radius: 16px; background: var(--accent); color: #fff; display: flex;
+    align-items: center; justify-content: center; flex: none; }
+  .ac-name { font-family: var(--ui); font-weight: 800; font-size: 34px; color: var(--ink); white-space: nowrap; }
+  .ac-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--good); margin-left: 2px; }
+  .ac-body { position: relative; flex: 1; padding: 28px 34px 10px; overflow: hidden; }
+  .ac-feed { display: flex; flex-direction: column; gap: 22px; }
+  .ac-hello { position: absolute; left: 34px; right: 34px; top: 50%; transform: translateY(-60%); text-align: center;
+    font-family: var(--ui); font-weight: 700; font-size: 52px; line-height: 1.2; color: var(--ink); }
+  .ac-hello small { display: block; margin-top: 14px; font-weight: 500; font-size: 28px; color: var(--muted); }
+  .ac-me { align-self: flex-end; max-width: 86%; background: var(--ink); color: #fff; font-family: var(--ui); font-weight: 500;
+    font-size: 36px; line-height: 1.3; padding: 22px 30px; border-radius: 30px; border-bottom-right-radius: 10px; }
+  .ac-me.dim { opacity: 0.55; font-size: 27px; padding: 16px 24px; }
+  .ac-bot { display: flex; gap: 18px; align-items: flex-start; }
+  .ac-av { width: 50px; height: 50px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex;
+    align-items: center; justify-content: center; flex: none; margin-top: 2px; }
+  .ac-items { flex: 1; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .ac-think { font-family: var(--ui); font-weight: 600; font-size: 34px; color: var(--muted); padding-top: 8px;
+    background: linear-gradient(90deg, #6F6E69 0%, #6F6E69 35%, #D6D5D0 50%, #6F6E69 65%, #6F6E69 100%);
+    background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .ac-text { font-family: var(--ui); font-weight: 600; font-size: 34px; line-height: 1.3; color: var(--ink); padding-top: 6px; }
+  .ac-step { display: flex; gap: 18px; align-items: flex-start; background: var(--soft); border-radius: 22px; padding: 18px 22px; }
+  .ac-num { width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: #fff; font-family: var(--condensed);
+    font-weight: 700; font-size: 30px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .ac-step b { display: block; font-family: var(--ui); font-weight: 700; font-size: 34px; line-height: 1.22; color: var(--ink); }
+  .ac-step span { display: block; margin-top: 6px; font-family: var(--ui); font-weight: 500; font-size: 26px; color: var(--ink-2); }
+  .ac-link { display: flex; gap: 18px; align-items: center; border: 3px solid var(--accent); background: #fff; border-radius: 22px;
+    padding: 18px 22px; box-shadow: 0 12px 30px rgba(252, 59, 0, 0.16); }
+  .ac-link i { width: 58px; height: 58px; border-radius: 16px; background: var(--accent); color: #fff; display: flex;
+    align-items: center; justify-content: center; flex: none; }
+  .ac-link b { display: block; font-family: var(--ui); font-weight: 800; font-size: 32px; line-height: 1.2; color: var(--ink); }
+  .ac-link span { display: block; margin-top: 4px; font-family: var(--mono); font-weight: 500; font-size: 22px; color: var(--muted); }
+  .ac-comp { flex: none; margin: 10px 26px 26px; display: flex; align-items: flex-end; gap: 16px; background: var(--soft);
+    border: 2px solid var(--line); border-radius: 30px; padding: 20px 20px 20px 28px; min-height: 104px; }
+  .ac-input { flex: 1; font-family: var(--ui); font-weight: 500; font-size: 40px; line-height: 1.3; color: var(--ink); min-height: 47px;
+    padding-bottom: 4px; }
+  .ac-input.ph { color: var(--muted); }
+  .ac-send { width: 64px; height: 64px; border-radius: 50%; background: #CFCEC8; color: #fff; display: flex; align-items: center;
+    justify-content: center; flex: none; }
+  .ac-caret { display: inline-block; width: 3px; height: 1.05em; background: var(--accent); vertical-align: -0.16em; margin-left: 2px; }
+</style>
+<div class="card ac-card" id="card">
+  <div class="ac-bar"><div class="ac-logo" id="logo"></div><div class="ac-name" id="name"></div><i class="ac-dot"></i></div>
+  <div class="ac-body" id="body"><div class="ac-feed" id="feed"></div></div>
+  <div class="ac-comp" id="comp"><div class="ac-input" id="input"></div><div class="ac-send" id="send"></div></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const body = GFX.$("#body"), feed = GFX.$("#feed"), marks = [], input = GFX.$("#input"), send = GFX.$("#send"), comp = GFX.$("#comp");
+    GFX.$("#logo").innerHTML = GFX.icon("sparkle", { size: 32, stroke: "#fff", width: 2.6 });
+    GFX.$("#name").textContent = String(P.name || "Assistant");
+    send.innerHTML = GFX.icon("arrowUp", { size: 36, stroke: "#fff", width: 3.2 });
+    const sec = (v, lo, hi) => GFX.clamp(Number(v) * 1000, lo, Math.max(lo, hi));
+    const pieces = (P.prompt || []).slice(0, 4).map((p) => (typeof p === "string" ? { text: p } : p));
+    const reply = (P.reply || []).slice(0, 4);
+    const sendAt = P.send_at != null && pieces.length ? sec(P.send_at, 600, D - 350) : null;
+    const full = pieces.map((p) => p.text).join(" ");
+
+    // empty state: a greeting in the middle until the first message exists
+    let hello = null;
+    if (!P.sent && P.hello) {
+      hello = GFX.h("div", { class: "ac-hello", html: GFX.esc(P.hello) + (P.hello_sub ? `<small>${GFX.esc(P.hello_sub)}</small>` : "") });
+      body.append(hello);
+      GFX.in(hello, "fade", { at: 250, dur: 400 });
+    }
+    if (P.sent) {
+      const me = GFX.h("div", { class: "ac-me dim", text: P.sent });
+      feed.append(me);
+      GFX.in(me, "fade", { at: 150, dur: 300 });
+    }
+
+    // the prompt types into the composer piece by piece (each piece at its own time), with a blinking caret
+    input.classList.toggle("ph", !pieces.length);
+    if (!pieces.length) input.textContent = String(P.placeholder || "Message…");
+    if (pieces.length) {
+      let t = 500;
+      const plan = pieces.map((p, i) => {
+        const at = p.at != null ? sec(p.at, t, (sendAt ?? D) - 300) : t;
+        const dur = Math.min(1400, Math.max(260, (p.text.length / 26) * 1000));
+        t = at + dur + 60;
+        return { at, dur, from: pieces.slice(0, i).map((q) => q.text).join(" ").length + (i ? 1 : 0), text: p.text };
+      });
+      const caret = '<i class="ac-caret"></i>';
+      GFX.each((ms) => {
+        if (sendAt != null && ms >= sendAt) { input.innerHTML = `<span style="color:var(--muted)">${GFX.esc(P.placeholder || "Message…")}</span>`; return; }
+        let n = 0;
+        plan.forEach((p) => { if (ms >= p.at) n = p.from + Math.round(GFX.clamp((ms - p.at) / p.dur) * p.text.length); });
+        const blink = Math.floor(ms / 400) % 2 === 0 || plan.some((p) => ms >= p.at && ms < p.at + p.dur);
+        input.innerHTML = n ? GFX.esc(full.slice(0, n)) + (blink ? caret : "") : (blink ? caret : "");
+      }, 0, sendAt ?? D);
+      plan.forEach((p) => GFX.sfx("typing", p.at, -20));
+      // the send button lights up once there is text
+      GFX.anim(send, [{ background: "#CFCEC8" }, { background: getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#FC3B00" }],
+        { at: plan[0].at + 150, dur: 200, fill: "forwards" });
+    }
+
+    // send: button presses, the text flies up as my bubble, the assistant starts thinking
+    if (sendAt != null) {
+      GFX.anim(send, [{ scale: "1" }, { scale: "0.82" }, { scale: "1.08" }, { scale: "1" }], { at: sendAt - 160, dur: 360, ease: "out" });
+      GFX.anim(send, [{ opacity: 1 }, { opacity: 0.45 }], { at: sendAt + 200, dur: 200, fill: "forwards" });
+      const me = GFX.h("div", { class: "ac-me", text: full });
+      feed.append(me);
+      marks.push({ el: me, at: sendAt });
+      GFX.anim(me, [{ opacity: 0, transform: "translateY(260px) scale(.92)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+        { at: sendAt, dur: 420, ease: "expo", fill: "backwards" });
+      if (hello) GFX.anim(hello, [{ opacity: 1 }, { opacity: 0 }], { at: sendAt - 80, dur: 180, fill: "forwards" });
+      GFX.sfx("whoosh", sendAt, -16);
+      if (P.thinking !== false && !reply.length) {
+        const row = GFX.h("div", { class: "ac-bot" }, GFX.h("div", { class: "ac-av", html: GFX.icon("sparkle", { size: 28, width: 2.6 }) }),
+          GFX.h("div", { class: "ac-items" }, GFX.h("div", { class: "ac-think", text: String(P.thinking_text || "Thinking…") })));
+        feed.append(row);
+        marks.push({ el: row, at: sendAt + 380 });
+        GFX.in(row, "rise", { at: sendAt + 380, dur: 320 });
+        GFX.anim(row.querySelector(".ac-think"), [{ backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0" }],
+          { at: sendAt + 380, dur: 1100, iterations: Math.max(1, Math.ceil((D - sendAt) / 1100)), ease: "linear" });
+        GFX.anim(row.querySelector(".ac-av"), [{ rotate: "0deg" }, { rotate: "360deg" }], { at: sendAt + 380, dur: 1600,
+          iterations: Math.max(1, Math.ceil((D - sendAt) / 1600)), ease: "linear" });
+      }
+    }
+
+    // reply: the assistant's items appear one by one at their times; text items type in, cards pop
+    if (reply.length) {
+      const items = GFX.h("div", { class: "ac-items" });
+      const row = GFX.h("div", { class: "ac-bot" }, GFX.h("div", { class: "ac-av", html: GFX.icon("sparkle", { size: 28, width: 2.6 }) }), items);
+      feed.append(row);
+      const t0 = sendAt != null ? sendAt + 500 : 350;
+      GFX.in(row.querySelector(".ac-av"), "pop", { at: t0 - 150, dur: 300 });
+      let step = 0, t = t0;
+      reply.forEach((r, i) => {
+        const at = r.at != null ? sec(r.at, t, D - 300) : t0 + i * Math.max(500, (D - t0 - 500) / reply.length);
+        t = at + 250;
+        let el;
+        if (r.kind === "step") {
+          step += 1;
+          el = GFX.h("div", { class: "ac-step" }, GFX.h("div", { class: "ac-num", text: String(step) }),
+            GFX.h("div", {}, GFX.h("b", { text: r.text }), r.sub ? GFX.h("span", { text: r.sub }) : ""));
+          GFX.in(el, "left", { at, dur: 380, ease: "back" });
+          GFX.sfx("pop", at, -16);
+        } else if (r.kind === "link") {
+          el = GFX.h("div", { class: "ac-link" }, GFX.h("i", { html: GFX.icon("link", { size: 32, stroke: "#fff", width: 2.8 }) }),
+            GFX.h("div", {}, GFX.h("b", { text: r.text }), r.sub ? GFX.h("span", { text: r.sub }) : ""));
+          GFX.in(el, "pop", { at, dur: 420, ease: "back" });
+          GFX.anim(el, [{ boxShadow: "0 0 0 0 rgba(252,59,0,.45)" }, { boxShadow: "0 0 0 22px rgba(252,59,0,0)" }], { at: at + 300, dur: 700, ease: "out" });
+          GFX.sfx("ding", at, -16);
+        } else {
+          el = GFX.h("div", { class: "ac-text", text: r.text });   // full text so the scroll layout measures it
+          GFX.type(el, r.text, { at, cps: 42, caret: false });
+        }
+        items.append(el);
+        marks.push({ el, at });
+      });
+    }
+
+    // the chat scrolls like a real one: whenever a new item would fall below the fold, the feed slides up to show it
+    GFX.layout(() => {
+      const room = body.clientHeight - 38, top = feed.getBoundingClientRect().top;
+      let shift = 0;
+      const stops = [];
+      marks.forEach(({ el, at }) => {
+        const need = Math.max(0, el.getBoundingClientRect().bottom - top - room);
+        if (need > shift + 1) { stops.push({ at, from: shift, to: need }); shift = need; }
+      });
+      stops.forEach((st) => GFX.anim(feed, [{ transform: `translateY(${-st.from}px)` }, { transform: `translateY(${-st.to}px)` }],
+        { at: Math.max(0, st.at - 60), dur: 380, ease: "expo", fill: "forwards" }));
+    });
+
+    GFX.layout(() => {
+      GFX.fitLine(GFX.$("#name"), { width: 520, max: 34, min: 24 });
+      // long prompts shrink to fit three composer lines
+      if (pieces.length) {
+        input.textContent = full;
+        GFX.fit(input, { width: input.clientWidth || 700, max: 40, min: 28, lines: 3 });
+        input.textContent = "";
+      }
+    });
+
+    GFX.in(GFX.$("#card"), "rise", { at: 0, dur: 480, ease: "back" });
+    if (P.pip !== false) GFX.pip({ x: 726, y: 276, w: 290, h: 330, at: 160 });
+  })();
+</script>

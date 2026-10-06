@@ -1,0 +1,110 @@
+<style>
+  .fs-head { position: absolute; left: 64px; right: 64px; top: 290px; text-align: center; }
+  .fs-kick { font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-2); white-space: nowrap; }
+  .fs-title { margin-top: 12px; font-family: var(--display); font-size: 120px; line-height: 0.92; text-transform: uppercase;
+    color: var(--ink); white-space: nowrap; }
+  .fs-title em { font-style: normal; color: var(--accent); }
+  .fs-list { position: absolute; left: 90px; right: 90px; top: 500px; display: flex; flex-direction: column; gap: 46px; }
+  .fs-step { position: relative; display: flex; align-items: center; gap: 30px; background: #fff; border-radius: 30px;
+    padding: 24px 30px 24px 24px; box-shadow: var(--shadow); }
+  .fs-ico { position: relative; width: 108px; height: 108px; border-radius: 50%; flex: none; display: flex; align-items: center;
+    justify-content: center; background: var(--soft); color: var(--muted); border: 3px solid var(--line); }
+  .fs-ico .on { position: absolute; inset: -3px; border-radius: 50%; background: var(--accent); color: #fff; display: flex;
+    align-items: center; justify-content: center; opacity: 0; }
+  .fs-txt { flex: 1; min-width: 0; }
+  .fs-n { font-family: var(--mono); font-weight: 700; font-size: 22px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .fs-t { margin-top: 6px; font-family: var(--ui); font-weight: 800; font-size: 46px; line-height: 1.1; color: var(--ink); }
+  .fs-s { margin-top: 6px; font-family: var(--ui); font-weight: 500; font-size: 26px; color: var(--ink-2); }
+  .fs-chk { width: 56px; height: 56px; border-radius: 50%; background: var(--good); color: #fff; display: flex; align-items: center;
+    justify-content: center; flex: none; opacity: 0; }
+  .fs-link { position: absolute; left: 76px; width: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .fs-link i { position: absolute; left: 0; right: 0; top: 0; height: 100%; background: var(--accent); transform-origin: 50% 0; transform: scaleY(0); }
+  .fs-done { position: absolute; right: 70px; display: flex; align-items: center; gap: 12px; background: var(--ink); color: #fff;
+    font-family: var(--condensed); font-weight: 700; font-size: 44px; text-transform: uppercase; padding: 12px 30px 10px 22px;
+    border-radius: 999px; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3); white-space: nowrap; transform: rotate(-3deg); }
+  .fs-done i { display: flex; color: var(--accent); }
+</style>
+<div class="fs-head" id="head"><div class="fs-kick" id="kick"></div><div class="fs-title" id="title"></div></div>
+<div class="fs-list" id="list"></div>
+<div class="fs-done" id="done"><i id="dico"></i><span id="dtext"></span></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const steps = (P.steps || []).slice(0, 4).map((s) => (typeof s === "string" ? { text: s } : s));
+    const list = GFX.$("#list"), done = GFX.$("#done"), title = GFX.$("#title");
+    GFX.$("#kick").textContent = String(P.kicker || "");
+    if (!P.kicker) GFX.$("#kick").style.display = "none";
+    // the accent word(s) of the title go orange
+    const T = String(P.title || ""), A = String(P.accent || "");
+    const k = A ? T.toLowerCase().indexOf(A.toLowerCase()) : -1;
+    title.innerHTML = k < 0 ? GFX.esc(T) : GFX.esc(T.slice(0, k)) + `<em>${GFX.esc(T.slice(k, k + A.length))}</em>` + GFX.esc(T.slice(k + A.length));
+    if (!T) title.style.display = "none";
+    const icons = ["play", "sparkle", "file", "check"];
+    const els = steps.map((s, i) => {
+      const ico = GFX.h("div", { class: "fs-ico", html: GFX.icon(s.icon || icons[i], { size: 50, width: 2.6 }) },
+        GFX.h("div", { class: "on", html: GFX.icon(s.icon || icons[i], { size: 50, stroke: "#fff", width: 2.8 }) }));
+      const el = GFX.h("div", { class: "fs-step" }, ico,
+        GFX.h("div", { class: "fs-txt" }, GFX.h("div", { class: "fs-n", text: `Step ${i + 1}` }), GFX.h("div", { class: "fs-t", text: s.text }),
+          s.sub ? GFX.h("div", { class: "fs-s", text: s.sub }) : ""),
+        GFX.h("div", { class: "fs-chk", html: GFX.icon("check", { size: 32, stroke: "#fff", width: 3.6 }) }));
+      list.append(el);
+      return el;
+    });
+    const links = els.slice(1).map(() => { const l = GFX.h("div", { class: "fs-link" }, GFX.h("i")); list.append(l); return l; });
+    GFX.$("#dtext").textContent = String(P.done || "");
+    GFX.$("#dico").innerHTML = GFX.icon("arrowRight", { size: 40, width: 3.4 });
+    if (!P.done) done.style.display = "none";
+
+    const n = els.length;
+    const first = 700, last = Math.max(first, D - 900);
+    const times = steps.map((s, i) => (s.at != null ? GFX.clamp(Number(s.at) * 1000, 300, D - 400) : first + (n > 1 ? (i * (last - first)) / (n - 1) : 0)));
+    const doneAt = P.done ? GFX.clamp(Number(P.done_at ?? (times[n - 1] + 700) / 1000) * 1000, 300, D - 250) : null;
+
+    GFX.layout(() => {
+      GFX.fitLine(title, { width: 952, max: 120, min: 64 });
+      let fs = 46;
+      GFX.$$(".fs-t").forEach((t) => GFX.fit(t, { width: t.clientWidth, max: 46, min: 30, lines: 2 }));
+      // connectors run between the icon circles; the list moves up if it would reach the caption band
+      const lr = list.getBoundingClientRect();
+      els.slice(1).forEach((el, i) => {
+        const a = els[i].querySelector(".fs-ico").getBoundingClientRect(), b = el.querySelector(".fs-ico").getBoundingClientRect();
+        links[i].style.top = (a.bottom - lr.top + 6) + "px";
+        links[i].style.height = Math.max(8, b.top - a.bottom - 12) + "px";
+        links[i].style.left = (a.left + a.width / 2 - lr.left - 3) + "px";
+      });
+      const bottom = lr.top + list.offsetHeight;
+      if (bottom > 1080) {
+        const up = Math.min(bottom - 1080, 150);
+        list.style.top = (500 - up) + "px";
+        GFX.$("#head").style.top = (290 - Math.min(up, 20)) + "px";
+      }
+      const lb = list.getBoundingClientRect();
+      done.style.top = (lb.bottom - 34) + "px";
+    });
+
+    // beat: title punches in, cards land dimmed, then each step lights up on its word (icon fills orange, the
+    // connector from the previous step draws down, the previous step gets a green check); the result pill stamps last
+    GFX.in(GFX.$("#head"), "zoom", { at: 0, dur: 420, ease: "back" });
+    els.forEach((el, i) => {
+      GFX.in(el, "rise", { at: 180 + i * 90, dur: 420, ease: "back" });
+      GFX.anim(el, [{ opacity: 0.45 }, { opacity: 1 }], { at: times[i], dur: 200, fill: "backwards" });
+      GFX.anim(el, [{ scale: "1" }, { scale: "1.045" }, { scale: "1" }], { at: times[i], dur: 380, ease: "out" });
+      GFX.anim(el.querySelector(".on"), [{ opacity: 0, transform: "scale(.4)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: times[i], dur: 320, ease: "back", fill: "forwards" });
+      GFX.sfx("pop", times[i], -15);
+      if (i > 0) {
+        GFX.anim(links[i - 1].querySelector("i"), [{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { at: times[i] - 260, dur: 260, ease: "inOut", fill: "forwards" });
+        GFX.anim(els[i - 1].querySelector(".fs-chk"), [{ opacity: 0, transform: "scale(.3)" }, { opacity: 1, transform: "scale(1)" }],
+          { at: times[i] - 80, dur: 300, ease: "back", fill: "forwards" });
+      }
+    });
+    if (doneAt != null) {
+      GFX.anim(els[n - 1].querySelector(".fs-chk"), [{ opacity: 0, transform: "scale(.3)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: doneAt - 120, dur: 300, ease: "back", fill: "forwards" });
+      GFX.in(done, "stamp", { at: doneAt, dur: 380 });
+      GFX.sfx("ding", doneAt, -14);
+    }
+    GFX.sfx("whoosh", 0, -18);
+  })();
+</script>

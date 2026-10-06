@@ -1,0 +1,113 @@
+<style>
+  .sd-stage { display: flex; align-items: center; justify-content: center; }
+  .sd-card { position: relative; width: 920px; padding: 48px 50px 44px; }
+  .sd-kicker { font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); }
+  .sd-title { margin-top: 6px; font-family: var(--condensed); font-weight: 700; font-size: 100px; line-height: 1.02;
+    text-transform: uppercase; color: var(--ink); }
+  .sd-rows { margin-top: 38px; display: flex; flex-direction: column; gap: 18px; }
+  .sd-row { display: flex; gap: 14px; }
+  .sd-day { position: relative; flex: 1 1 0; min-width: 0; height: 150px; border-radius: 22px; background: var(--soft);
+    border: 3px dashed var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+  .sd-lab { font-family: var(--mono); font-weight: 700; font-size: 19px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); white-space: nowrap; }
+  .sd-num { font-family: var(--condensed); font-weight: 700; font-size: 62px; line-height: 1; color: var(--muted); }
+  .sd-fill { position: absolute; inset: -3px; border-radius: 22px; background: var(--accent); opacity: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    box-shadow: 0 12px 26px rgba(252, 59, 0, 0.32); }
+  .sd-fill .sd-lab { color: rgba(255, 255, 255, 0.85); }
+  .sd-fill svg { overflow: visible; }
+  .sd-fill path { fill: none; stroke: #fff; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .sd-ring { position: absolute; inset: -12px; border-radius: 30px; border: 4px solid var(--accent); opacity: 0; }
+  .sd-foot { margin-top: 30px; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+  .sd-count { font-family: var(--mono); font-weight: 700; font-size: 34px; color: var(--ink); white-space: nowrap;
+    font-variant-numeric: tabular-nums; }
+  .sd-count b { color: var(--accent); }
+  .sd-note { min-width: 0; font-family: var(--ui); font-weight: 600; font-size: 34px; color: var(--ink-2); text-align: right; }
+</style>
+<div class="stage sd-stage">
+  <div class="card sd-card" id="card">
+    <div class="sd-kicker" id="kicker"></div>
+    <div class="sd-title" id="title"></div>
+    <div class="sd-rows" id="rows"></div>
+    <div class="sd-foot"><div class="sd-count" id="count"></div><div class="sd-note" id="note"></div></div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const W = (s) => String(s ?? "").trim();
+    const n = Math.round(GFX.clamp(Number(P.days) || 7, 3, 14));
+    const done = Math.round(GFX.clamp(Number(P.done ?? 1), 0, n));
+    const fut = P.future == null ? "?" : W(P.future);
+    const labels = (P.labels || []).map(W);
+
+    const kicker = GFX.$("#kicker"), title = GFX.$("#title");
+    if (W(P.kicker ?? "Day streak")) kicker.textContent = W(P.kicker ?? "Day streak"); else kicker.remove();
+    title.textContent = W(P.title) || "Streak";
+    GFX.fit(title, { width: 820, max: 100, min: 48, lines: 2 });
+
+    // tiles: up to 7 per row, rows balanced (10 days -> 5 + 5)
+    const perRow = Math.ceil(n / Math.ceil(n / 7));
+    const rowsEl = GFX.$("#rows");
+    const CHECK = '<svg width="54" height="54" viewBox="0 0 54 54"><path d="M13 28l9.5 9.5L41 18" pathLength="100" ' +
+      'stroke-dasharray="100" stroke-dashoffset="100"/></svg>';
+    const tiles = [];
+    for (let i = 0; i < n; i++) {
+      if (i % perRow === 0) rowsEl.append(GFX.h("div", { class: "sd-row" }));
+      const isDone = i < done;
+      // label + mark: 'DAY 2' over '?', or 'DAY' over '2' when there is no future mark, or a custom label
+      const lab = labels[i] || (fut ? `Day ${i + 1}` : "Day");
+      const mark = labels[i] ? (isDone ? "" : fut) : (fut || String(i + 1));
+      const tile = GFX.h("div", { class: "sd-day" },
+        GFX.h("div", { class: "sd-lab", text: lab }),
+        GFX.h("div", { class: "sd-num", text: mark }),
+        isDone ? GFX.h("div", { class: "sd-fill", html: `<div class="sd-lab">${GFX.esc(labels[i] || "Day " + (i + 1))}</div>${CHECK}` }) : null,
+        i === done - 1 ? GFX.h("div", { class: "sd-ring" }) : null);
+      rowsEl.lastChild.append(tile);
+      tiles.push(tile);
+    }
+    if (perRow >= 7) GFX.$$(".sd-num").forEach((el) => { el.style.fontSize = "54px"; });
+
+    const count = GFX.$("#count"), note = GFX.$("#note");
+    if (W(P.note)) { note.textContent = W(P.note); GFX.fit(note, { width: 560, max: 34, min: 22, lines: 2 }); } else note.remove();
+
+    // timeline: card in, tiles stagger in, finished days fill one after another, then the future days bob
+    GFX.in(GFX.$("#card"), "rise", { at: 0, dur: 480, ease: "back" });
+    GFX.in([kicker, title].filter((e) => e.isConnected), "fade", { at: 120, dur: 320, stagger: 90 });
+    GFX.in(tiles, "rise", { at: 240, dur: 380, stagger: 45, ease: "out" });
+    const tFill = Math.min(820, D * 0.3);
+    const step = done > 1 ? Math.min(220, (D * 0.35) / (done - 1)) : 0;
+    tiles.slice(0, done).forEach((tile, i) => {
+      const at = tFill + i * step;
+      const fill = tile.querySelector(".sd-fill");
+      GFX.anim(fill, [{ opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "scale(1)" }], { at, dur: 320, ease: "back" });
+      GFX.anim(fill.querySelector("path"), [{ strokeDashoffset: 100 }, { strokeDashoffset: 0 }], { at: at + 110, dur: 260, ease: "out" });
+      GFX.sfx("tick", at + 40, -16);
+    });
+    const tCur = tFill + Math.max(0, done - 1) * step + 300;
+    const ring = GFX.$(".sd-ring");
+    if (ring) {
+      GFX.anim(ring, [{ opacity: 0, transform: "scale(1.25)" }, { opacity: 1, transform: "scale(1)" }], { at: tCur, dur: 380, ease: "back" });
+      GFX.anim(tiles[done - 1], [{ transform: "scale(1)" }, { transform: "scale(1.08)" }, { transform: "scale(1)" }],
+        { at: tCur, dur: 420, ease: "out", fill: "none" });
+      GFX.sfx("ding", tCur, -18);
+    }
+    // counter "1 / 7" counts with the fills
+    GFX.each((t) => {
+      const k = tiles.slice(0, done).filter((_, i) => t >= tFill + i * step + 60).length;
+      count.innerHTML = `<b>${k}</b> / ${n} days`;
+    }, 0, tFill + done * step + 80);
+    if (note.isConnected) GFX.in(note, "fade", { at: tCur + 160, dur: 360 });
+    GFX.in(count, "fade", { at: 300, dur: 300 });
+
+    // days to come: a wave of small bobs runs across them (finite)
+    const future = tiles.slice(done).map((t) => t.querySelector(".sd-num"));
+    const wave0 = tCur + 260, WAVE = 90 * future.length + 520;
+    const reps = Math.max(1, Math.floor((D - wave0) / WAVE));
+    for (let r = 0; r < reps; r++) {
+      future.forEach((el, i) => GFX.anim(el, [{ transform: "translateY(0)" }, { transform: "translateY(-12px)" }, { transform: "translateY(0)" }],
+        { at: wave0 + r * WAVE + i * 90, dur: 420, ease: "inOut", fill: "none" }));
+    }
+  })();
+</script>

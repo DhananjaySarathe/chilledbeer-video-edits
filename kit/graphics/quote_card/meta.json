@@ -1,0 +1,69 @@
+{
+  "id": "quote_card",
+  "name": "Big quote card with star rating",
+  "category": "title",
+  "kind": "fullscreen",
+  "description": "A white card on the clean background with huge orange quote marks hanging off its corners; the quote itself in big condensed uppercase black words that rise in one by one, an optional row of five stars above it that fill in orange one by one (empty ones stay light grey), an optional small spaced label like 'REVIEW', and an optional author line with an orange dash.",
+  "use_when": "Lines that quote someone or voice a verdict: what a client, viewer, friend or reviewer said ('they said it looked amateur'), a rating ('two stars, decent'), a testimonial the speaker reads out, or an inner thought.",
+  "params": {
+    "quote": {
+      "type": "text",
+      "required": true,
+      "max_len": 90,
+      "help": "the quoted words without quote marks, best under ~50 characters; wraps and shrinks to fit"
+    },
+    "label": {
+      "type": "text",
+      "default": "",
+      "max_len": 14,
+      "help": "small spaced label next to the stars, e.g. 'REVIEW', 'RESULT', 'CLIENT'; empty for none"
+    },
+    "stars": {
+      "type": "number",
+      "default": null,
+      "help": "rating 0-5 (halves allowed, e.g. 3.5) shown as five stars above the quote; leave unset for no stars"
+    },
+    "author": {
+      "type": "text",
+      "default": "",
+      "max_len": 28,
+      "help": "who said it, e.g. 'a client' or 'Sam, viewer'; empty for none"
+    }
+  },
+  "duration": {
+    "min": 1.6,
+    "default": 2.4,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.14,
+      "name": "stamp",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "quote",
+    "review",
+    "testimonial",
+    "rating",
+    "stars",
+    "feedback"
+  ],
+  "explains": [
+    "definition",
+    "proof"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "word_slam",
+  "version": "1"
+}

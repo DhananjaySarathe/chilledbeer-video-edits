@@ -1,0 +1,83 @@
+{
+  "id": "portion_split",
+  "name": "Same amount, split into more pieces",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A big round portion (a ball of dough, a pizza, or a plain orange disc) in the middle of a clean background. Cut lines draw themselves from the centre to split it into the first number of pieces with a label like '8 ROTI', then the lines swing and it is re-split into the second number ('10 ROTI') while a big '=' shows the total never changed; a small title sits above and a short note below.",
+  "use_when": "The same total divided differently: 'it's the same dough, just more rotis', slicing a pizza into more pieces, the same budget split more ways, 'same calories, smaller portions'.",
+  "params": {
+    "title": {
+      "type": "text",
+      "default": "",
+      "max_len": 24,
+      "help": "small line above, e.g. 'Same aata'"
+    },
+    "first": {
+      "type": "number",
+      "required": true,
+      "help": "pieces in the first split, 2-16"
+    },
+    "first_label": {
+      "type": "text",
+      "default": "",
+      "max_len": 12,
+      "help": "label for the first split, e.g. '8 roti'"
+    },
+    "second": {
+      "type": "number",
+      "required": true,
+      "help": "pieces in the second split, 2-16"
+    },
+    "second_label": {
+      "type": "text",
+      "default": "",
+      "max_len": 12,
+      "help": "label for the second split, e.g. '10 roti'"
+    },
+    "note": {
+      "type": "text",
+      "default": "",
+      "max_len": 36,
+      "help": "line under the portion, e.g. 'Pet mein same quantity'"
+    },
+    "look": {
+      "type": "text",
+      "default": "dough",
+      "max_len": 6,
+      "help": "'dough', 'pizza' or 'plain'"
+    }
+  },
+  "duration": {
+    "min": 2.4,
+    "default": 3.4,
+    "max": 6.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "portion",
+    "split",
+    "slices",
+    "same amount",
+    "pizza",
+    "roti",
+    "comparison",
+    "equal"
+  ],
+  "explains": [
+    "quantity",
+    "comparison"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "bar_compare",
+  "version": "1"
+}

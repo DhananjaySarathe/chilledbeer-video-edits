@@ -1,0 +1,98 @@
+<style>
+  .cr-box { position: absolute; left: 100px; width: 880px; top: 300px; }
+  .cr-label { display: inline-flex; max-width: 100%; margin: 0 0 16px 6px; font-size: 24px; padding: 12px 26px 12px 14px;
+    gap: 12px; transform-origin: 0 100%; }
+  .cr-label .cr-li { flex: none; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.22);
+    display: flex; align-items: center; justify-content: center; }
+  .cr-label span { min-width: 0; }
+  .cr-card { display: flex; align-items: flex-start; gap: 24px; padding: 30px 30px 32px 30px; border-radius: 36px;
+    transform-origin: 12% 0; }
+  .cr-av { flex: none; width: 86px; height: 86px; border-radius: 50%; background: var(--ink); color: #fff; display: flex;
+    align-items: center; justify-content: center; font-family: var(--ui); font-weight: 800; font-size: 38px; }
+  .cr-main { flex: 1; min-width: 0; padding-top: 2px; }
+  .cr-user { display: flex; align-items: baseline; gap: 12px; font-family: var(--ui); white-space: nowrap; }
+  .cr-user b { min-width: 0; font-weight: 700; font-size: 29px; color: var(--ink); }
+  .cr-user span { flex: none; font-weight: 500; font-size: 24px; color: var(--muted); }
+  .cr-text { margin-top: 8px; font-family: var(--ui); font-weight: 500; font-size: 38px; line-height: 1.28; color: var(--ink);
+    overflow-wrap: anywhere; }
+  .cr-like { flex: none; width: 88px; margin-right: -8px; padding-top: 18px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    color: var(--muted); }
+  .cr-heart { position: relative; width: 48px; height: 48px; }
+  .cr-heart > * { position: absolute; inset: 0; }
+  .cr-heart .on { color: var(--accent); }
+  .cr-burst { border-radius: 50%; border: 4px solid var(--accent); opacity: 0; inset: -10px !important; }
+  .cr-count { align-self: stretch; text-align: center; font-family: var(--ui); font-weight: 600; font-size: 24px;
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+</style>
+<div class="cr-box" id="box">
+  <div class="chip on cr-label" id="label"></div>
+  <div class="card cr-card" id="card">
+    <div class="cr-av" id="av"></div>
+    <div class="cr-main">
+      <div class="cr-user"><b id="user"></b><span>2h</span></div>
+      <div class="cr-text" id="text"></div>
+    </div>
+    <div class="cr-like">
+      <div class="cr-heart"><span id="hOff"></span><span class="on" id="hOn"></span><i class="cr-burst" id="burst"></i></div>
+      <div class="cr-count" id="count"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const W = (s) => String(s ?? "").trim();
+
+    // shrink a one-line label until it fits its box; if it still doesn't, trim and add an ellipsis
+    const fitLine = (el, max, min) => GFX.layout(() => {
+      for (let fs = max; fs >= min; fs--) { el.style.fontSize = fs + "px"; if (el.scrollWidth <= el.clientWidth + 1) return; }
+      const full = el.textContent;
+      for (let n = full.length - 1; n > 0 && el.scrollWidth > el.clientWidth + 1; n--) el.textContent = full.slice(0, n).trimEnd() + "…";
+    });
+
+    const name = W(P.username).replace(/^@+/, "") || "user";
+    GFX.$("#user").textContent = "@" + name;
+    GFX.$("#av").textContent = name.charAt(0).toUpperCase();
+    fitLine(GFX.$("#user"), 29, 22);
+    const text = GFX.$("#text");
+    text.textContent = W(P.text);
+    GFX.fit(text, { height: 152, max: 38, min: 28 });   // width = its column
+
+    // like count counts up to its value, then the heart gets tapped
+    GFX.$("#hOff").innerHTML = GFX.icon("heart", { size: 48, fill: "none", stroke: "currentColor", width: 2.1 })
+      .replace('fill="currentColor"', 'fill="none"').replace('stroke="none"', 'stroke="currentColor"');
+    GFX.$("#hOn").innerHTML = GFX.icon("heart", { size: 48 });
+    const count = GFX.$("#count"), likes = W(P.likes);
+    count.textContent = likes;
+    fitLine(count, 24, 16);
+    const tLike = Math.round(GFX.clamp(D * 0.5, 800, 1500));
+    const m = likes.match(/^(\D*?)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+    if (m) {
+      const to = parseFloat(m[2].replace(/,/g, "")), dec = (m[2].split(".")[1] || "").length;
+      GFX.count(count, to * 0.7, to, { at: 380, dur: tLike - 380, decimals: dec, prefix: m[1], suffix: m[3], group: m[2].includes(",") });
+    }
+    if (!likes) count.remove();
+    GFX.anim(GFX.$("#hOn"), [{ opacity: 0, transform: "scale(.4)" }, { opacity: 1, transform: "scale(1.35)", offset: 0.55 },
+      { opacity: 1, transform: "scale(1)" }], { at: tLike, dur: 420, ease: "out" });
+    GFX.anim(GFX.$("#hOff"), [{ opacity: 1 }, { opacity: 0 }], { at: tLike, dur: 120, fill: "forwards" });
+    GFX.anim(GFX.$("#burst"), [{ opacity: 0.9, transform: "scale(.4)" }, { opacity: 0, transform: "scale(1.5)" }],
+      { at: tLike + 60, dur: 420, ease: "out", fill: "forwards" });
+    GFX.anim(count, [{ color: getComputedStyle(count).color }, { color: getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() }],
+      { at: tLike, dur: 160, fill: "forwards" });
+
+    // label chip above the card (optional)
+    const label = GFX.$("#label");
+    if (W(P.label)) {
+      label.innerHTML = `<i class="cr-li">${GFX.icon("chat", { size: 22, stroke: "#fff", width: 2.8 })}</i><span>${GFX.esc(W(P.label))}</span>`;
+      fitLine(label.lastChild, 24, 17);
+      GFX.anim(label, [{ opacity: 0, transform: "translateY(24px) scale(.8)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+        { at: 170, dur: 420, ease: "back" });
+    } else label.remove();
+
+    const card = GFX.$("#card");
+    GFX.anim(card, [{ opacity: 0, transform: "translateY(40px) scale(.7)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+      { at: 0, dur: 480, ease: "snap" });
+    GFX.in(text, "rise", { at: 150, dur: 420 });
+    GFX.anim(GFX.$("#box"), [{ scale: "1" }, { scale: "1.015" }], { at: 0, dur: D, ease: "linear" });
+  })();
+</script>

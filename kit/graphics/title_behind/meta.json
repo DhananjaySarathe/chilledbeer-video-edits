@@ -1,0 +1,72 @@
+{
+  "id": "title_behind",
+  "name": "Big word behind the speaker",
+  "category": "title",
+  "kind": "speaker",
+  "description": "Huge condensed word printed on a clean background BEHIND the speaker, who is cut out and stays in front; a small spaced label sits above the word, and the word can be struck through.",
+  "use_when": "A hook or a punchy statement where one word carries the line (CANCEL, EDITING, TODAY); openings and closing calls to action.",
+  "params": {
+    "word": {
+      "type": "text",
+      "required": true,
+      "max_len": 14,
+      "help": "the one big word, 3-10 letters reads best"
+    },
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 28,
+      "help": "small label above the word, e.g. 'YOU CAN'"
+    },
+    "accent": {
+      "type": "bool",
+      "default": false,
+      "help": "word in the accent colour instead of ink"
+    },
+    "strike": {
+      "type": "bool",
+      "default": false,
+      "help": "strike the word through halfway (for 'not this')"
+    },
+    "speaker_scale": {
+      "type": "number",
+      "default": 0.84,
+      "help": "0.7-1.0; smaller shows more of the word"
+    },
+    "fade_from": {
+      "type": "number",
+      "default": null,
+      "help": "0.3-0.95: fade the cut-out body out from this height of the frame down (hides a mic, hand or prop near the lens); null keeps the full body"
+    }
+  },
+  "duration": {
+    "min": 1.2,
+    "default": 2.2,
+    "max": 4.5
+  },
+  "captions": "show",
+  "cutout": true,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -16
+    }
+  ],
+  "tags": [
+    "hook",
+    "title",
+    "cutout",
+    "opening",
+    "cta"
+  ],
+  "explains": [
+    "emphasis",
+    "definition"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "word_slam",
+  "version": "1"
+}

@@ -1,0 +1,100 @@
+<style>
+  .bc-wrap { position: absolute; left: var(--safe-left); right: var(--safe-left); top: var(--safe-top);
+    bottom: calc(1920px - var(--content-bottom)); display: flex; flex-direction: column; justify-content: center; gap: 40px; }
+  .bc-title { font-size: 124px; line-height: 0.92; color: var(--ink); overflow-wrap: break-word; }
+  .bc-card { --val: 84px; --track: 60px; --rgap: 40px; padding: 44px 50px 52px; display: flex; flex-direction: column;
+    gap: var(--rgap); }
+  .bc-card.n3 { --val: 72px; --track: 52px; --rgap: 32px; }
+  .bc-card.n4 { --val: 62px; --track: 44px; --rgap: 26px; padding: 36px 46px 44px; }
+  .bc-top { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 12px; }
+  .bc-label { font-family: var(--mono); font-weight: 700; font-size: 25px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2); white-space: nowrap; }
+  .bc-val { font-family: var(--display); font-size: var(--val); line-height: 1; color: var(--ink); white-space: nowrap; }
+  .bc-val .d { display: inline-block; width: var(--dw, 0.5em); text-align: center; }
+  .bc-val .word { font-size: 0.42em; margin-left: 0.18em; letter-spacing: 0.02em; }
+  .bc-track { height: var(--track); border-radius: 14px; background: color-mix(in srgb, var(--ink) 6%, var(--card)); overflow: hidden; }
+  .bc-fill { height: 100%; width: 0; border-radius: 14px; background: var(--ink); }
+  .bc-row.hi .bc-label { color: var(--ink); }
+  .bc-row.hi .bc-val { color: var(--accent); }
+  .bc-row.hi .bc-fill { background: var(--accent); }
+</style>
+<div class="bc-wrap" id="wrap">
+  <div class="display bc-title" id="title"></div>
+  <div class="card bc-card" id="card"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const title = GFX.$("#title"), card = GFX.$("#card");
+    title.textContent = P.title || "";
+
+    const bars = (P.bars || []).slice(0, 4).map((b) => ({ label: String(b.label ?? ""), value: Math.max(0, Number(b.value) || 0) }));
+    card.classList.add("n" + Math.max(2, bars.length));
+    const max = Math.max(...bars.map((b) => b.value), 0) || 1;
+    let hi = Number.isInteger(P.highlight) && P.highlight >= 0 && P.highlight < bars.length ? P.highlight : -1;
+    if (hi < 0) bars.forEach((b, i) => { if (hi < 0 || b.value > bars[hi].value) hi = i; });
+    const places = (x) => (Number.isInteger(x) ? 0 : Math.min(2, (String(x).split(".")[1] || "").length));
+    const suffix = String(P.suffix || "");
+    const wordSuffix = suffix.trim().length > 2;
+    const fmt = (v, decimals) => [...v.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })]
+      .map((c) => (c >= "0" && c <= "9" ? `<span class="d">${c}</span>` : c)).join("")
+      + (suffix ? (wordSuffix ? `<span class="word">${GFX.esc(suffix.trim())}</span>` : GFX.esc(suffix)) : "");
+
+    // rows grow one after another; values count with their bar
+    const tBars = 420, grow = 700;
+    const gap = bars.length > 1 ? Math.max(120, Math.min(240, (D - tBars - grow - 500) / (bars.length - 1))) : 0;
+    const vals = [], fills = [], others = [];
+    bars.forEach((b, i) => {
+      const val = GFX.h("div", { class: "bc-val" });
+      const fill = GFX.h("div", { class: "bc-fill" });
+      const row = GFX.h("div", { class: "bc-row" + (i === hi ? " hi" : "") },
+        GFX.h("div", { class: "bc-top" }, GFX.h("div", { class: "bc-label", text: b.label }), val),
+        GFX.h("div", { class: "bc-track" }, fill));
+      card.append(row);
+      vals.push(val); fills.push(fill);
+      if (i !== hi) others.push(fill);
+      const at = tBars + i * gap;
+      const pct = b.value > 0 ? Math.max(2.5, (100 * b.value) / max) : 0;
+      const dec = places(b.value);           // each value keeps its own precision: 8h, 1.5h
+      val.innerHTML = fmt(0, dec);
+      GFX.tween((v) => { val.innerHTML = fmt(v, dec); }, { at, dur: grow, ease: "expo", from: 0, to: b.value });
+      GFX.anim(fill, [{ width: "0%" }, { width: pct + "%" }], { at, dur: grow, ease: "expo" });
+      GFX.in(val, "rise", { at: at - 40, dur: 260 });
+    });
+
+    // fixed-width digits (display fonts have proportional figures), measured on layout widths
+    GFX.layout(() => {
+      if (!vals.length) return;
+      const probe = GFX.h("span", { style: "position:absolute;display:inline-block;visibility:hidden;white-space:pre" });
+      vals[0].append(probe);
+      let w = 0;
+      for (const d of "0123456789") { probe.textContent = d.repeat(10); w = Math.max(w, probe.offsetWidth / 10); }
+      card.style.setProperty("--dw", (0.95 * w / parseFloat(getComputedStyle(probe).fontSize)).toFixed(4) + "em");
+      probe.remove();
+    });
+
+    // the title takes the room the card leaves: as big as fits, up to 124 px
+    GFX.layout(() => {
+      const wrap = GFX.$("#wrap");
+      const room = wrap.clientHeight - card.offsetHeight - parseFloat(getComputedStyle(wrap).rowGap || 0);
+      let lo = 48, hi = 124;
+      for (let k = 0; k < 16; k++) {
+        const mid = (lo + hi) / 2;
+        title.style.fontSize = mid + "px";
+        if (title.scrollWidth <= 952 && title.offsetHeight <= room) lo = mid; else hi = mid;
+      }
+      title.style.fontSize = Math.floor(lo) + "px";
+    });
+
+    // once every bar is in: the highlight punches and the others step back to grey
+    const done = tBars + (bars.length - 1) * gap + grow;
+    if (vals[hi]) GFX.anim(vals[hi], [{ transform: "scale(1)" }, { transform: "scale(1.14)", offset: 0.4 }, { transform: "scale(1)" }],
+      { at: done - 120, dur: 420, ease: "out", fill: "none" });
+    if (vals[hi]) vals[hi].style.transformOrigin = "100% 70%";
+    GFX.anim(others, [{ background: "var(--ink)" }, { background: "color-mix(in srgb, var(--ink) 22%, var(--card))" }],
+      { at: done - 60, dur: 380, ease: "inOut" });
+
+    GFX.in(title, "rise", { at: 0, dur: 480 });
+    GFX.in(card, "rise", { at: 140, dur: 520, ease: "back" });
+  })();
+</script>

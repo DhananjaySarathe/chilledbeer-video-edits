@@ -1,0 +1,98 @@
+<style>
+  .um { position: absolute; left: 110px; width: 860px; top: 290px; display: flex; flex-direction: column; align-items: center; }
+  .um-card { width: 100%; padding: 30px 38px 32px; border-radius: 34px; background: #fff;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38), 0 6px 16px rgba(0, 0, 0, 0.18); }
+  .um-top { display: flex; align-items: center; gap: 18px; }
+  .um-ico { width: 60px; height: 60px; border-radius: 18px; background: var(--accent); color: #fff; display: flex;
+    align-items: center; justify-content: center; flex: none; }
+  .um-title { font-family: var(--ui); font-weight: 800; font-size: 38px; color: var(--ink); white-space: nowrap; }
+  .um-chip { margin-left: auto; font-family: var(--mono); font-weight: 700; font-size: 22px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-2); background: var(--soft); border: 2px solid var(--line);
+    padding: 8px 16px 6px; border-radius: 999px; white-space: nowrap; }
+  .um-row { display: flex; align-items: baseline; justify-content: space-between; margin: 26px 2px 12px; }
+  .um-label { font-family: var(--mono); font-weight: 700; font-size: 24px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); white-space: nowrap; }
+  .um-pct { font-family: var(--condensed); font-weight: 700; font-size: 58px; line-height: 1; color: var(--ink);
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .um-pct small { font-family: var(--ui); font-weight: 600; font-size: 24px; color: var(--muted); margin-left: 8px; }
+  .um-track { position: relative; height: 34px; border-radius: 999px; background: #ECEBE6; overflow: hidden; }
+  .um-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; border-radius: 999px; background: var(--accent);
+    transform-origin: 0 50%; }
+  .um-shine { position: absolute; top: 0; bottom: 0; width: 160px; left: -200px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0)); }
+  .um-status { position: relative; height: 40px; margin-top: 18px; }
+  .um-status span { position: absolute; left: 2px; top: 0; display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    font-family: var(--ui); font-weight: 600; font-size: 28px; color: var(--ink-2); }
+  .um-status .after { color: var(--good); font-weight: 700; opacity: 0; }
+  .um-badge { margin-top: 22px; display: flex; align-items: center; gap: 14px; background: var(--accent); color: var(--accent-ink);
+    font-family: var(--condensed); font-weight: 700; font-size: 50px; letter-spacing: 0.02em; text-transform: uppercase;
+    padding: 12px 34px 10px 22px; border-radius: 999px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); white-space: nowrap;
+    transform: rotate(-3deg); }
+  .um-badge i { display: flex; }
+</style>
+<div class="um" id="um">
+  <div class="um-card" id="card">
+    <div class="um-top">
+      <div class="um-ico" id="ico"></div>
+      <div class="um-title" id="title"></div>
+      <div class="um-chip" id="chip"></div>
+    </div>
+    <div class="um-row"><span class="um-label" id="label"></span><span class="um-pct"><b id="pct"></b><small id="used">used</small></span></div>
+    <div class="um-track"><div class="um-fill" id="fill"></div><div class="um-shine" id="shine"></div></div>
+    <div class="um-status"><span class="before" id="before"></span><span class="after" id="after"></span></div>
+  </div>
+  <div class="um-badge" id="badge"><i id="bico"></i><span id="btext"></span></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const um = GFX.$("#um"), card = GFX.$("#card"), fill = GFX.$("#fill"), pct = GFX.$("#pct"), badge = GFX.$("#badge");
+    const from = GFX.clamp(Number(P.from ?? 100), 0, 100), to = GFX.clamp(Number(P.to ?? 0), 0, 100);
+    const resetAt = GFX.clamp(Number(P.reset_at ?? 0.9) * 1000, 350, Math.max(350, D - 500));
+    const badgeAt = P.badge ? GFX.clamp(Number(P.badge_at ?? resetAt / 1000 + 1.0) * 1000, resetAt + 250, Math.max(resetAt + 250, D - 300)) : null;
+    GFX.$("#ico").innerHTML = GFX.icon("sparkle", { size: 36, stroke: "#fff", width: 2.6 });
+    GFX.$("#title").textContent = String(P.title || "");
+    GFX.$("#chip").textContent = String(P.chip || "");
+    if (!P.chip) GFX.$("#chip").style.display = "none";
+    GFX.$("#label").textContent = String(P.label || "");
+    GFX.$("#before").innerHTML = GFX.icon("clock", { size: 28, width: 2.6 }) + `<b style="font-weight:600">${GFX.esc(P.before || "")}</b>`;
+    GFX.$("#after").innerHTML = GFX.icon("check", { size: 30, width: 3.4 }) + `<b>${GFX.esc(P.after || "")}</b>`;
+    GFX.$("#btext").textContent = String(P.badge || "");
+    GFX.$("#bico").innerHTML = GFX.icon("bolt", { size: 44, stroke: "#fff", width: 2.8 });
+    if (!P.badge) badge.style.display = "none";
+
+    GFX.layout(() => {
+      GFX.fitLine(GFX.$("#title"), { width: 520, max: 38, min: 26 });
+      GFX.fitLine(GFX.$("#label"), { width: 520, max: 24, min: 18 });
+      GFX.fitLine(GFX.$("#btext"), { width: 700, max: 50, min: 30 });
+      // above the eyes when the face is known (the badge may sit over the hair, never over the eyes)
+      const h = card.offsetHeight;
+      let top = 290;
+      if (GFX.face) top = Math.min(top, GFX.face.y + GFX.face.h * 0.3 - h);
+      um.style.top = Math.round(Math.max(270, top)) + "px";
+    });
+
+    // beat: card rises in full (limit hit), holds, then at the reset the bar drains to empty with a shine,
+    // the number counts down, the status flips to the green line, and a badge pops under it
+    GFX.in(card, "drop", { at: 0, dur: 460, ease: "back" });
+    pct.textContent = Math.round(from) + "%";
+    fill.style.transform = `scaleX(${from / 100})`;
+    GFX.anim(fill, [{ opacity: 1 }, { opacity: 0.55 }, { opacity: 1 }], { at: 300, dur: 520, iterations: Math.max(1, Math.floor((resetAt - 300) / 520)), ease: "inOut" });
+    GFX.anim(fill, [{ transform: `scaleX(${from / 100})` }, { transform: `scaleX(${Math.max(0.0001, to / 100)})` }],
+      { at: resetAt, dur: 620, ease: "expo", fill: "forwards" });
+    GFX.anim(fill, [{ background: getComputedStyle(fill).backgroundColor }, { background: "#16A34A" }], { at: resetAt + 200, dur: 300, fill: "forwards" });
+    GFX.count(pct, from, to, { at: resetAt, dur: 620, suffix: "%" });
+    GFX.anim(GFX.$("#shine"), [{ left: "-200px" }, { left: "900px" }], { at: resetAt + 380, dur: 520, ease: "inOut" });
+    GFX.anim(GFX.$("#before"), [{ opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(-24px)" }],
+      { at: resetAt + 120, dur: 240, ease: "in", fill: "forwards" });
+    GFX.anim(GFX.$("#after"), [{ opacity: 0, transform: "translateY(24px)" }, { opacity: 1, transform: "translateY(0)" }],
+      { at: resetAt + 260, dur: 300, ease: "back", fill: "forwards" });
+    GFX.anim(card, [{ scale: "1" }, { scale: "1.035" }, { scale: "1" }], { at: resetAt + 520, dur: 360, ease: "out" });
+    if (badgeAt != null) GFX.in(badge, "stamp", { at: badgeAt, dur: 380 });
+    GFX.anim(um, [{ translate: "0 0" }, { translate: "0 -10px" }], { at: 500, dur: Math.max(400, D - 500), ease: "linear" });
+
+    GFX.sfx("whoosh", 0, -18);
+    GFX.sfx("ding", resetAt + 250, -12);
+    if (badgeAt != null) GFX.sfx("pop", badgeAt, -12);
+  })();
+</script>

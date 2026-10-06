@@ -1,0 +1,70 @@
+<style>
+  .ct-card { position: absolute; left: 90px; right: 90px; top: 360px; min-height: 640px; padding: 0 0 40px; overflow: hidden; }
+  .ct-head { display: flex; align-items: center; gap: 20px; padding: 30px 36px; border-bottom: 1px solid var(--line); }
+  .ct-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--ink); color: #fff; display: flex;
+    align-items: center; justify-content: center; font-family: var(--ui); font-weight: 700; font-size: 34px; }
+  .ct-name { font-family: var(--ui); font-weight: 700; font-size: 36px; }
+  .ct-status { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 24px; color: var(--good); }
+  .ct-status i { width: 12px; height: 12px; border-radius: 50%; background: var(--good); }
+  .ct-body { display: flex; flex-direction: column; gap: 18px; padding: 34px 36px 0; }
+  .ct-msg { max-width: 74%; padding: 22px 30px; border-radius: 34px; font-family: var(--ui); font-weight: 500;
+    font-size: 36px; line-height: 1.25; }
+  .ct-msg.me { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 10px; }
+  .ct-msg.them { align-self: flex-start; background: var(--soft); color: var(--ink); border-bottom-left-radius: 10px; }
+  .ct-seen { align-self: flex-end; margin-top: -8px; font-family: var(--ui); font-size: 20px; color: var(--muted); }
+  .ct-typing { align-self: flex-start; display: flex; gap: 10px; padding: 26px 30px; border-radius: 34px;
+    background: var(--soft); border-bottom-left-radius: 10px; }
+  .ct-typing i { width: 16px; height: 16px; border-radius: 50%; background: var(--muted); }
+  .ct-divider { align-self: center; font-family: var(--mono); font-weight: 700; font-size: 22px; letter-spacing: .3em;
+    text-transform: uppercase; color: var(--muted); padding: 10px 0; }
+</style>
+<div class="card ct-card" id="card">
+  <div class="ct-head">
+    <div class="ct-avatar" id="avatar"></div>
+    <div><div class="ct-name" id="name"></div><div class="ct-status"><i></i><span id="status"></span></div></div>
+  </div>
+  <div class="ct-body" id="body"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    GFX.$("#name").textContent = P.name;
+    GFX.$("#status").textContent = P.status;
+    GFX.$("#avatar").textContent = (P.name || "?").trim().charAt(0).toUpperCase();
+    const body = GFX.$("#body");
+    const msgs = (P.messages || []).slice(0, 6);
+    // timeline: card in, then items spread over the scene; their replies get a short typing bubble first
+    const items = [];
+    msgs.forEach((m, i) => {
+      if (m.from === "them" && P.typing) items.push({ typing: true });
+      items.push({ msg: m });
+      if (P.divider && P.divider.after === i) items.push({ divider: P.divider.text });
+    });
+    const t0 = 380, span = Math.max(600, D - t0 - 450);
+    const step = span / Math.max(1, items.length);
+    let at = t0;
+    items.forEach((it, k) => {
+      if (it.typing) {
+        const tb = GFX.h("div", { class: "ct-typing" }, GFX.h("i"), GFX.h("i"), GFX.h("i"));
+        body.append(tb);
+        GFX.in(tb, "pop", { at, dur: 260 });
+        tb.querySelectorAll("i").forEach((dot, j) =>
+          GFX.anim(dot, [{ transform: "translateY(0)" }, { transform: "translateY(-8px)" }, { transform: "translateY(0)" }],
+            { at: at + j * 120, dur: 420, iterations: Math.max(1, Math.floor(step / 420)), ease: "inOut" }));
+        // the reply replaces the typing bubble
+        GFX.anim(tb, [{ opacity: 1, height: "68px", padding: "26px 30px" }, { opacity: 0, height: "0px", padding: "0px 30px" }],
+          { at: at + step * 0.9, dur: 120, fill: "forwards", ease: "in" });
+      } else if (it.divider) {
+        const dv = GFX.h("div", { class: "ct-divider", text: "— " + it.divider + " —" });
+        body.append(dv);
+        GFX.in(dv, "fade", { at, dur: 300 });
+      } else {
+        const m = GFX.h("div", { class: "ct-msg " + (it.msg.from === "me" ? "me" : "them"), text: it.msg.text });
+        body.append(m);
+        GFX.in(m, it.msg.from === "me" ? "right" : "left", { at, dur: 340, ease: "back" });
+      }
+      at += step;
+    });
+    GFX.in(GFX.$("#card"), "rise", { at: 0, dur: 480, ease: "back" });
+  })();
+</script>

@@ -1,0 +1,74 @@
+<style>
+  .sx-under, .sx-panel { position: absolute; inset: 0; }
+  .sx-under { background: var(--ink); }
+  .sx-panel { background: var(--accent); color: var(--accent-ink); overflow: hidden; }
+  .sx.ink .sx-under { background: var(--accent); }
+  .sx.ink .sx-panel { background: var(--dark); color: #fff; }
+  .sx-ring { position: absolute; left: -60px; top: 200px; width: 1200px; height: 1200px; overflow: visible; }
+  .sx-ring circle { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 64; stroke-linecap: round; }
+  .sx.ink .sx-ring circle { stroke: rgba(255, 255, 255, 0.05); }
+  .sx-group { position: absolute; left: 64px; right: 64px; top: 300px; height: 1000px; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .sx-kicker { font-family: var(--mono); font-weight: 700; font-size: 40px; letter-spacing: 0.42em;
+    text-transform: uppercase; white-space: nowrap; padding-left: 0.42em; margin-bottom: 18px; }
+  .sx-num { font-family: var(--display); font-size: 460px; line-height: 0.84; white-space: nowrap;
+    font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .sx.ink .sx-num { color: var(--accent); }
+  .sx-title { width: 952px; margin-top: 34px; font-family: var(--condensed); font-weight: 700; font-size: 150px;
+    line-height: 0.94; text-transform: uppercase; text-wrap: balance; }
+  .sx-title.solo { font-family: var(--display); line-height: 0.98; margin-top: 0; }
+</style>
+<div class="sx" id="root">
+  <div class="sx-under" id="under"></div>
+  <div class="sx-panel" id="panel">
+    <svg class="sx-ring" viewBox="0 0 1200 1200"><circle id="ring" cx="600" cy="600" r="540" pathLength="1000"
+      stroke-dasharray="1000" stroke-dashoffset="1000" transform="rotate(-90 600 600)"/></svg>
+    <div class="sx-group" id="group">
+      <div class="sx-kicker" id="kicker"></div>
+      <div class="sx-num" id="num"></div>
+      <div class="sx-title" id="title"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const root = GFX.$("#root"), kicker = GFX.$("#kicker"), num = GFX.$("#num"), title = GFX.$("#title");
+    if (P.tone === "ink") root.classList.add("ink");
+    const hasNum = !!String(P.number ?? "").trim();
+    title.textContent = P.title || "";
+    if (P.kicker) kicker.textContent = P.kicker; else kicker.remove();
+    if (hasNum) num.textContent = String(P.number).trim(); else { num.remove(); title.classList.add("solo"); }
+
+    // Title: one line if it stays big, otherwise two balanced lines (never more).
+    // (scrollHeight includes the glyphs' overhang below a tight line-height, hence the +0.5em allowance)
+    const fitTitle = (el, W, max, min, lh) => GFX.layout(() => {
+      const fits = (s, lines) => { el.style.fontSize = s + "px"; return el.scrollWidth <= W && el.scrollHeight <= (lines * lh + 0.5) * s; };
+      const search = (lines) => { let lo = min, hi = max; for (let k = 0; k < 16; k++) { const m = (lo + hi) / 2; if (fits(m, lines)) lo = m; else hi = m; } return Math.floor(lo); };
+      let s = search(1);
+      if (s < max * 0.7) s = Math.max(s, search(2));
+      el.style.fontSize = s + "px";
+    });
+    if (hasNum) {
+      GFX.fit(num, { width: 952, max: 460, min: 200 });
+      fitTitle(title, 952, 150, 64, 0.94);
+    } else fitTitle(title, 952, 230, 80, 0.98);
+
+    const k = Math.min(1, D / 1300);   // short scenes play the same beats faster
+    // 1. the panel slides in from the right over a contrasting under-layer
+    GFX.anim(GFX.$("#under"), [{ transform: "translateX(100%)" }, { transform: "translateX(0)" }], { at: 0, dur: 360 * k, ease: "expo" });
+    GFX.anim(GFX.$("#panel"), [{ transform: "translateX(100%)" }, { transform: "translateX(0)" }], { at: 70 * k, dur: 420 * k, ease: "expo" });
+    // 2. a faint ring draws itself around the frame for the whole beat
+    GFX.anim(GFX.$("#ring"), [{ strokeDashoffset: 1000 }, { strokeDashoffset: 28 }], { at: 160 * k, dur: Math.max(500, D - 260 * k), ease: "inOut" });
+    // 3. kicker tracks in, the number punches, the title rises out of a mask
+    if (P.kicker) GFX.anim(kicker, [{ opacity: 0, letterSpacing: "0.9em", paddingLeft: "0.9em" },
+      { opacity: 1, letterSpacing: "0.42em", paddingLeft: "0.42em" }], { at: 200 * k, dur: 460 * k, ease: "expo" });
+    if (hasNum) GFX.anim(num, [{ opacity: 0, transform: "scale(1.7)", filter: "blur(10px)" },
+      { opacity: 1, transform: "scale(1)", filter: "blur(0px)" }], { at: 250 * k, dur: 380 * k, ease: "snap" });
+    const tTitle = (hasNum ? 380 : 260) * k;
+    GFX.anim(title, [{ transform: "translateY(100%)", clipPath: "inset(0 0 100% 0)" },
+      { transform: "translateY(0)", clipPath: "inset(0 0 0% 0)" }], { at: tTitle, dur: 460 * k, ease: "expo" });
+    // 4. slow push so the beat never freezes
+    GFX.anim(GFX.$("#group"), [{ scale: "1" }, { scale: "1.035" }], { at: 250, dur: Math.max(400, D - 250), ease: "linear" });
+  })();
+</script>

@@ -1,0 +1,94 @@
+{
+  "id": "usage_meter",
+  "name": "Usage meter reset",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A white app card drops into the top band over the speaker: an orange sparkle icon, a title like 'Plan usage' and a day chip, a mono label ('WEEKLY LIMIT') with a big percentage, and a thick bar that sits full and pulsing; at the reset moment the bar drains to empty with a shine and turns green, the number counts down to 0%, the status line flips from a clock line to a green check line, and an orange tilted badge ('LOTS OF TOKENS') stamps in under the card.",
+  "use_when": "Lines about limits, quotas, credits or tokens running out or resetting (AI plan limits, a free tier, data caps), or a fresh start with a full tank.",
+  "params": {
+    "title": {
+      "type": "text",
+      "default": "Plan usage",
+      "max_len": 22,
+      "help": "card title, generic (no product names)"
+    },
+    "chip": {
+      "type": "text",
+      "default": "",
+      "max_len": 10,
+      "help": "small chip on the right, e.g. 'SUN'"
+    },
+    "label": {
+      "type": "text",
+      "default": "Weekly limit",
+      "max_len": 22
+    },
+    "from": {
+      "type": "number",
+      "default": 100,
+      "help": "percent used before the reset"
+    },
+    "to": {
+      "type": "number",
+      "default": 0,
+      "help": "percent used after the reset"
+    },
+    "reset_at": {
+      "type": "number",
+      "default": 0.9,
+      "help": "seconds from the scene start when the bar drains (the word 'reset')"
+    },
+    "before": {
+      "type": "text",
+      "default": "Resets Sunday",
+      "max_len": 30
+    },
+    "after": {
+      "type": "text",
+      "default": "Reset. All yours",
+      "max_len": 30
+    },
+    "badge": {
+      "type": "text",
+      "default": "",
+      "max_len": 20,
+      "help": "optional tilted badge under the card, e.g. 'Lots of tokens'"
+    },
+    "badge_at": {
+      "type": "number",
+      "default": null,
+      "help": "seconds from the scene start when the badge stamps in"
+    }
+  },
+  "duration": {
+    "min": 1.6,
+    "default": 2.8,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "limit",
+    "quota",
+    "tokens",
+    "credits",
+    "reset",
+    "usage",
+    "ai"
+  ],
+  "explains": [
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "progress_ring",
+  "version": "1"
+}

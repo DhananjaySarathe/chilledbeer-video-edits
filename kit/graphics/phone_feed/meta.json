@@ -1,0 +1,105 @@
+{
+  "id": "phone_feed",
+  "name": "Phone feed, scrolled past",
+  "category": "mockup",
+  "kind": "speaker",
+  "description": "A black phone on the clean background shows a vertical-video feed ('For You' tab) playing the speaker's own video with a heart / comment / share column and counts, a username and caption; a finger swipes it up and away to a dim loading next video, then a white card pops over the phone's lower right with a small label, a low value (e.g. 0.4%) falling, a red '▼ 82%' chip and a falling sparkline.",
+  "use_when": "Lines about content that flops or gets skipped: 'people scroll right past it', 'nobody watches', 'you won't get the engagement', low views, low reach, weak hooks.",
+  "params": {
+    "username": {
+      "type": "text",
+      "default": "@creator",
+      "max_len": 20,
+      "help": "handle shown on the video; '@' is added if missing"
+    },
+    "caption": {
+      "type": "text",
+      "default": "new video just dropped",
+      "max_len": 40,
+      "help": "one caption line under the username (an 'original sound' line follows it)"
+    },
+    "likes": {
+      "type": "text",
+      "default": "12",
+      "max_len": 5,
+      "help": "count under the heart, e.g. '12' or '4.1K'"
+    },
+    "comments": {
+      "type": "text",
+      "default": "0",
+      "max_len": 5,
+      "help": "count under the comment bubble"
+    },
+    "shares": {
+      "type": "text",
+      "default": "1",
+      "max_len": 5,
+      "help": "count under the share arrow"
+    },
+    "swipe": {
+      "type": "bool",
+      "default": true,
+      "help": "the viewer swipes the video away, leaving a dim next item"
+    },
+    "card_label": {
+      "type": "text",
+      "default": "Engagement",
+      "max_len": 18,
+      "help": "small label on the card"
+    },
+    "card_value": {
+      "type": "text",
+      "default": "0.4%",
+      "max_len": 7,
+      "help": "the value on the card; if it is a number it counts down to it"
+    },
+    "card_delta": {
+      "type": "text",
+      "default": "82%",
+      "max_len": 6,
+      "help": "size of the drop shown in the red chip ('82%'); empty = no card"
+    }
+  },
+  "duration": {
+    "min": 2.2,
+    "default": 2.8,
+    "max": 4.5
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.78,
+      "name": "swipe",
+      "gain_db": -14
+    },
+    {
+      "at": 1.22,
+      "name": "pop",
+      "gain_db": -16
+    }
+  ],
+  "tags": [
+    "feed",
+    "scroll",
+    "phone",
+    "engagement",
+    "flop",
+    "views",
+    "reach",
+    "social"
+  ],
+  "explains": [
+    "proof"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "phone_post",
+  "version": "1"
+}

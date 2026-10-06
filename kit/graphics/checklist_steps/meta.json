@@ -1,0 +1,64 @@
+{
+  "id": "checklist_steps",
+  "name": "Checklist of steps finishing one by one",
+  "category": "list",
+  "kind": "fullscreen",
+  "description": "A white app card on the clean background: an app name and an 'INPUT' chip with a file name at the top, then a list of steps, each with a spinning orange ring; the rings turn into orange check marks one after another, the finished step text goes dark while pending ones stay grey, and a thin orange bar along the bottom fills up.",
+  "use_when": "A tool or process doing several things for you: 'it transcribes, finds B-roll and edits the video', 'upload, and it handles the rest', a pipeline, an onboarding, or any 'first this, then this' automation.",
+  "params": {
+    "title": {
+      "type": "text",
+      "default": "Processing",
+      "max_len": 20,
+      "help": "app or tool name in the card header, e.g. 'NORTHWIND'"
+    },
+    "chip": {
+      "type": "text",
+      "default": "",
+      "max_len": 22,
+      "help": "file name shown in the 'INPUT' chip, e.g. 'raw_take.mov'; empty = no chip"
+    },
+    "steps": {
+      "type": "list",
+      "required": true,
+      "max_len": 5,
+      "help": "step labels in order (strings), 3-4 read best; keep each under ~26 characters"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.8,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "caption_y": 0.63,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.85,
+      "name": "tick",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "checklist",
+    "steps",
+    "process",
+    "automation",
+    "loading",
+    "pipeline"
+  ],
+  "explains": [
+    "process"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "flow_steps",
+  "version": "1"
+}

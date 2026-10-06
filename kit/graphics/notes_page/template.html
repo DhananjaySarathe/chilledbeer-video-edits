@@ -1,0 +1,123 @@
+<style>
+  .np-win { position: absolute; left: 64px; right: 64px; top: 400px; }
+  .np-url { flex: 1; display: flex; align-items: center; gap: 10px; margin: 0 300px 0 18px; height: 38px; padding: 0 16px;
+    border-radius: 999px; background: var(--soft); font-family: var(--mono); font-size: 19px; color: var(--ink-2); white-space: nowrap;
+    overflow: hidden; }
+  .np-url svg { flex: none; color: var(--good); }
+  .np-page { padding: 34px 44px 38px; }
+  .np-label { font-family: var(--mono); font-weight: 700; font-size: 23px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); white-space: nowrap; }
+  .np-title { position: relative; display: inline-block; margin-top: 12px; font-family: var(--ui); font-weight: 800; font-size: 54px;
+    line-height: 1.1; color: var(--ink); white-space: nowrap; }
+  .np-mark { position: absolute; left: -6px; right: -6px; bottom: 4px; height: 0.42em; background: rgba(252, 59, 0, 0.22);
+    border-radius: 6px; transform-origin: 0 50%; transform: scaleX(0); z-index: -1; }
+  .np-rows { margin-top: 24px; border-top: 2px solid var(--line); }
+  .np-row { display: flex; align-items: center; gap: 18px; padding: 20px 0; border-bottom: 2px solid var(--line); }
+  .np-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--ink); flex: none; }
+  .np-text { flex: 1; min-width: 0; font-family: var(--ui); font-weight: 600; font-size: 36px; line-height: 1.2; color: var(--ink);
+    white-space: nowrap; overflow: hidden; }
+  .np-chip { flex: none; display: flex; align-items: center; gap: 8px; background: var(--ink); color: #fff; font-family: var(--mono);
+    font-weight: 700; font-size: 24px; padding: 10px 16px 9px 12px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+  .np-chip svg { color: var(--accent); }
+  .np-player { margin-top: 28px; display: flex; align-items: center; gap: 22px; background: var(--dark); border-radius: 24px;
+    padding: 18px; color: #fff; }
+  .np-thumb { position: relative; width: 200px; height: 112px; border-radius: 14px; flex: none; overflow: hidden;
+    background: linear-gradient(135deg, #3A3A38, #1C1C1B); display: flex; align-items: center; justify-content: center; }
+  .np-thumb b { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; align-items: center;
+    justify-content: center; }
+  .np-pinfo { flex: 1; min-width: 0; }
+  .np-ptitle { font-family: var(--ui); font-weight: 700; font-size: 30px; white-space: nowrap; overflow: hidden; }
+  .np-track { position: relative; height: 10px; border-radius: 999px; background: #3A3A38; margin: 18px 0 12px; }
+  .np-prog { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--accent); width: 0%; }
+  .np-knob { position: absolute; top: 50%; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: #fff;
+    left: 0%; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
+  .np-time { font-family: var(--mono); font-weight: 700; font-size: 22px; color: #BDBCB6; white-space: nowrap; }
+  .np-time i { font-style: normal; color: var(--accent); }
+</style>
+<div class="window np-win" id="win">
+  <div class="bar"><i></i><i></i><i></i><div class="np-url" id="url"></div></div>
+  <div class="np-page">
+    <div class="np-label" id="label"></div>
+    <div class="np-title" id="title"><span id="ttext"></span><i class="np-mark" id="mark"></i></div>
+    <div class="np-rows" id="rows"></div>
+    <div class="np-player" id="player">
+      <div class="np-thumb"><b id="play"></b></div>
+      <div class="np-pinfo"><div class="np-ptitle" id="ptitle"></div>
+        <div class="np-track"><div class="np-prog" id="prog"></div><div class="np-knob" id="knob"></div></div>
+        <div class="np-time" id="ptime"></div></div>
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const sec = (v, lo, hi) => GFX.clamp(Number(v) * 1000, lo, Math.max(lo, hi));
+    const notes = (P.notes || []).slice(0, 4).map((n) => (typeof n === "string" ? { text: n } : n));
+    const notesAt = sec(P.notes_at ?? 0.8, 250, D - 800);
+    const linkAt = sec(P.link_at ?? notesAt / 1000 + 1.4, notesAt + 300, D - 600);
+    GFX.$("#url").innerHTML = GFX.icon("lock", { size: 20, width: 2.6 }) + `<span>${GFX.esc(P.url || "")}</span>`;
+    GFX.$("#label").textContent = String(P.label || "");
+    GFX.$("#ttext").textContent = String(P.title || "");
+    GFX.$("#ptitle").textContent = String(P.player || "");
+    GFX.$("#play").innerHTML = GFX.icon("play", { size: 28, fill: "#fff", stroke: "#fff", width: 2 });
+    const rows = GFX.$("#rows"), chips = [];
+    notes.forEach((n) => {
+      const chip = n.time ? GFX.h("div", { class: "np-chip", html: GFX.icon("play", { size: 20, fill: "currentColor", width: 2 }) + GFX.esc(n.time) }) : null;
+      const row = GFX.h("div", { class: "np-row" }, GFX.h("i", { class: "np-dot" }), GFX.h("div", { class: "np-text", text: n.text }), chip || "");
+      rows.append(row);
+      chips.push(chip);
+    });
+
+    GFX.layout(() => {
+      GFX.fitLine(GFX.$("#url span"), { width: 520, max: 19, min: 15 });
+      GFX.fitLine(GFX.$("#label"), { max: 23, min: 16 });
+      GFX.fitLine(GFX.$("#ttext"), { width: 640, max: 54, min: 34 });
+      GFX.fitLine(GFX.$("#ptitle"), { max: 30, min: 20 });
+      // every note row shares one font size so the list reads evenly
+      let fs = 36;
+      GFX.$$(".np-text").forEach((t) => { for (let i = 0; i < 14 && t.scrollWidth > t.clientWidth; i++) { fs -= 1; t.style.fontSize = fs + "px"; } });
+      GFX.$$(".np-text").forEach((t) => { t.style.fontSize = fs + "px"; });
+    });
+
+    // beat: page slides up, title gets a marker swipe, notes write in one by one, then each note gets its
+    // video timestamp chip; a cursor clicks the first chip and the player below jumps to that moment
+    GFX.in(GFX.$("#win"), "rise", { at: 0, dur: 500, ease: "back" });
+    GFX.anim(GFX.$("#mark"), [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { at: 420, dur: 380, ease: "out", fill: "forwards" });
+    const rowEls = GFX.$$(".np-row");
+    const gap = Math.min(380, Math.max(160, (linkAt - notesAt - 200) / Math.max(1, rowEls.length)));
+    rowEls.forEach((r, i) => {
+      GFX.anim(r.querySelector(".np-text"), [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)" }],
+        { at: notesAt + i * gap, dur: 420, ease: "out", fill: "backwards" });
+      GFX.in(r.querySelector(".np-dot"), "pop", { at: notesAt + i * gap, dur: 260 });
+      GFX.sfx("tick", notesAt + i * gap, -20);
+    });
+    chips.forEach((c, i) => {
+      if (!c) return;
+      GFX.in(c, "pop", { at: linkAt + i * 140, dur: 340, ease: "back" });
+      GFX.sfx("pop", linkAt + i * 140, -17);
+    });
+    const player = GFX.$("#player"), first = chips.findIndex(Boolean);
+    const clickAt = Math.min(D - 700, linkAt + chips.filter(Boolean).length * 140 + 380);
+    GFX.in(player, "rise", { at: linkAt, dur: 420, ease: "back" });
+    const frac = GFX.clamp(Number(P.progress ?? 0.32), 0.05, 0.95);
+    const t0 = notes[first] && notes[first].time ? notes[first].time : "";
+    GFX.$("#ptime").innerHTML = `<i>▶</i> ${GFX.esc(P.player_status || "Playing from")} ${GFX.esc(t0)}`;
+    GFX.anim(GFX.$("#ptime"), [{ opacity: 0 }, { opacity: 1 }], { at: clickAt + 120, dur: 220, fill: "backwards" });
+    GFX.anim(GFX.$("#prog"), [{ width: "0%" }, { width: frac * 100 + "%" }], { at: clickAt + 80, dur: 460, ease: "expo", fill: "forwards" });
+    GFX.anim(GFX.$("#knob"), [{ left: "0%" }, { left: frac * 100 + "%" }], { at: clickAt + 80, dur: 460, ease: "expo", fill: "forwards" });
+    GFX.anim(GFX.$("#play"), [{ scale: "1" }, { scale: "1.18" }, { scale: "1" }], { at: clickAt + 80, dur: 400, ease: "out" });
+    if (first >= 0 && P.click !== false) {
+      GFX.layout(() => {
+        const r = chips[first].getBoundingClientRect();
+        const x = r.left + r.width * 0.55, y = r.top + r.height * 0.6;
+        GFX.cursor([{ x: x + 170, y: y + 260, at: linkAt }, { x, y, at: clickAt - 60 }, { x, y, at: clickAt, click: true }, { x: x + 30, y: y + 40, at: D }]);
+      });
+      GFX.anim(chips[first], [{ background: "#111" }, { background: getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#FC3B00" }],
+        { at: clickAt, dur: 160, fill: "forwards" });
+      GFX.anim(chips[first].querySelector("svg"), [{ color: "#FC3B00" }, { color: "#FFFFFF" }], { at: clickAt, dur: 160, fill: "forwards" });
+      GFX.sfx("click", clickAt, -12);
+    }
+    if (P.pip !== false) GFX.pip({ x: 726, y: 276, w: 290, h: 330, at: 160 });
+    GFX.sfx("whoosh", 0, -18);
+  })();
+</script>

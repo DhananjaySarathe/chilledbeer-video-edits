@@ -1,0 +1,118 @@
+<style>
+  .dd { position: absolute; left: 0; top: 0; }
+  .dd svg { display: block; overflow: visible; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .28)); }
+  .dd path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .dd .halo path { stroke: #fff; }
+  .dd .a { stroke: var(--accent); }
+  .dd .i { stroke: var(--ink); }
+  .dd .a.fill { fill: var(--accent); fill-opacity: 0; }
+  .dd .i.fill { fill: var(--ink); fill-opacity: 0; }
+  .dd .halo .fill { fill: #fff; fill-opacity: 0; }
+  .dd path.sq { stroke-linecap: butt; }
+  .dd-tag { position: absolute; left: 0; top: 0; padding: 10px 20px; border-radius: 16px; background: #fff; color: var(--ink);
+    font-family: var(--ui); font-weight: 800; font-size: 36px; line-height: 1; letter-spacing: -.01em; white-space: nowrap;
+    font-variant-numeric: tabular-nums; box-shadow: 0 12px 28px rgba(0, 0, 0, .26), 0 3px 8px rgba(0, 0, 0, .14); }
+</style>
+<div id="layer"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const layer = GFX.$("#layer");
+    const r = GFX.rand(Math.round(Number(P.seed) || 3));
+    const count = Math.max(5, Math.min(8, Math.round(Number(P.count) || 7)));
+
+    // hand-drawn doodles on a 100x100 grid: [path, colour (a = accent, i = ink), stroke width, extra class]
+    const star = (() => {
+      const pts = [];
+      for (let k = 0; k < 10; k++) {
+        const a = -Math.PI / 2 + (k * Math.PI) / 5, rr = k % 2 ? 18 : 42;
+        pts.push((50 + rr * Math.cos(a)).toFixed(1) + " " + (54 + rr * Math.sin(a)).toFixed(1));
+      }
+      return "M" + pts.join(" L") + " Z";
+    })();
+    const LIB = {
+      bars: [["M20 90 V60", "a", 18, "sq"], ["M50 90 V32", "i", 18, "sq"], ["M80 90 V10", "a", 18, "sq"]],
+      plus: [["M50 14 V86", "a", 13], ["M14 50 H86", "a", 13]],
+      triangle: [["M50 14 L90 84 L10 84 Z", "i", 10]],
+      squiggle: [["M6 58 C 20 18, 38 18, 50 50 S 80 84, 94 42", "i", 10]],
+      star: [[star, "i", 7, "fill"]],
+      sparkle: [["M50 8 Q54 46 92 50 Q54 54 50 92 Q46 54 8 50 Q46 46 50 8 Z", "a", 6, "fill"]],
+      loop: [["M82 30 C 62 4, 14 12, 13 50 C 12 86, 62 96, 84 72 C 99 54, 90 24, 58 17", "a", 8]],
+      arrow: [["M12 84 C 26 46, 52 30, 84 26", "i", 9], ["M68 12 L86 26 L70 42", "i", 9]],
+      arc: [["M80 30 A 34 34 0 1 0 82 72", "i", 17]],
+      burst: [["M18 34 L34 46", "a", 9], ["M50 10 V32", "a", 9], ["M82 34 L66 46", "a", 9]],
+    };
+    const others = Object.keys(LIB).filter((k) => k !== "bars");
+    for (let k = others.length - 1; k > 0; k--) { const j = Math.floor(r() * (k + 1)); [others[k], others[j]] = [others[j], others[k]]; }
+
+    // slots around the head, in the order they fill; the bar chart always takes the left-cheek slot
+    const f = GFX.face || { x: 300, y: 390, w: 480, h: 620 };
+    const S = (u, v) => [f.x + u * f.w, f.y + v * f.h];
+    const slots = [S(-0.3, 0.45), S(0.88, -0.14), S(1.26, 0.45), S(-0.2, 0.85), S(1.18, 0.85), S(0.12, -0.14), S(1.2, 0.05), S(-0.22, 0.05)];
+    const mouth = { x0: f.x + f.w * 0.18, x1: f.x + f.w * 0.82, y0: f.y + f.h * 0.6, y1: f.y + f.h * 1.02 };
+    const kinds = ["bars", ...others].slice(0, count);
+
+    const t0 = 60, step = Math.min(120, 780 / count);
+    let tagAt = null, tagPos = null;
+    kinds.forEach((kind, i) => {
+      const size = kind === "bars" ? 188 : 136 + r() * 34;
+      let [cx, cy] = slots[i];
+      cx += (r() - 0.5) * 44; cy += (r() - 0.5) * 44;
+      // keep clear of the mouth, the frame edges and the like/comment column
+      if (cx > mouth.x0 - size / 2 && cx < mouth.x1 + size / 2 && cy > mouth.y0 - size / 2 && cy < mouth.y1 + size / 2)
+        cx = cx < f.x + f.w / 2 ? mouth.x0 - size / 2 - 10 : mouth.x1 + size / 2 + 10;
+      cx = Math.min(Math.max(cx, 40 + size / 2), 1040 - size / 2);
+      cy = Math.min(Math.max(cy, 290 + size / 2), 1080 - size / 2);
+      if (cy + size / 2 > 880) cx = Math.min(cx, 945 - size / 2);
+      const rot = (r() - 0.5) * 28 + (kind === "arc" ? -60 : 0);   // the arc reads as a ring, not a letter
+
+      const paths = LIB[kind];
+      const mk = (halo) => paths.map(([d, c, w, extra]) =>
+        `<path d="${d}" pathLength="1" class="${halo ? "" : c} ${extra || ""}" stroke-width="${halo ? w + 8 : w}"
+          stroke-dasharray="1 1.1" stroke-dashoffset="1.04"/>`).join("");
+      const el = GFX.h("div", { class: "dd", html: `<svg viewBox="0 0 100 100" width="${size}" height="${size}">
+        <g class="halo">${mk(true)}</g><g>${mk(false)}</g></svg>` });
+      el.style.left = (cx - size / 2).toFixed(1) + "px"; el.style.top = (cy - size / 2).toFixed(1) + "px";
+      layer.append(el);
+      const svg = el.querySelector("svg");
+
+      const at = t0 + i * step;
+      GFX.anim(svg, [
+        { opacity: 0, transform: `scale(.55) rotate(${rot - 18}deg)` },
+        { opacity: 1, transform: `scale(1.06) rotate(${rot + 3}deg)`, offset: 0.6 },
+        { opacity: 1, transform: `scale(1) rotate(${rot}deg)` },
+      ], { at, dur: 380, ease: "out" });
+      // strokes draw themselves (halo and colour together), one after another inside a doodle
+      const halo = GFX.$$(".halo path", el), ink = GFX.$$("g:not(.halo) path", el);
+      const drawDur = kind === "bars" ? 300 : 420;
+      paths.forEach((p, k) => {
+        const s = at + 40 + k * (kind === "bars" ? 90 : 120);
+        GFX.anim([halo[k], ink[k]], [{ strokeDashoffset: 1.04 }, { strokeDashoffset: 0 }], { at: s, dur: drawDur, ease: "inOut" });
+        if (p[3] === "fill") GFX.anim([halo[k], ink[k]], [{ fillOpacity: 0 }, { fillOpacity: 1 }], { at: s + drawDur - 80, dur: 200 });
+      });
+      // then a slow wobble so the picture keeps living
+      const sway = (i % 2 ? 1 : -1) * (4 + r() * 3);
+      GFX.anim(el, [{ rotate: "0deg", translate: "0 0" }, { rotate: `${sway}deg`, translate: `0 ${-6 - r() * 6}px` }],
+        { at: at + 380, dur: Math.max(300, D - at - 380), ease: "inOut" });
+
+      if (kind === "bars") { tagAt = at + 420; tagPos = [cx, cy, size]; }
+    });
+
+    // optional stat tag, tucked under the bar chart on the side facing the speaker
+    if (P.tag && tagPos) {
+      const tag = GFX.h("div", { class: "dd-tag", text: P.tag });
+      layer.append(tag);
+      GFX.layout(() => {
+        const [cx, cy, size] = tagPos, w = tag.offsetWidth;
+        const toward = cx < f.x + f.w / 2 ? 1 : -1;
+        let x = cx - w / 2 + toward * size * 0.45, y = cy + size * 0.5 + 6;
+        x = Math.min(Math.max(x, 40), 1040 - w);
+        tag.style.left = x.toFixed(1) + "px"; tag.style.top = y.toFixed(1) + "px";
+      });
+      GFX.anim(tag, [
+        { opacity: 0, scale: ".3", rotate: "-20deg" }, { opacity: 1, scale: "1.12", rotate: "-4deg", offset: 0.6 },
+        { opacity: 1, scale: "1", rotate: "-7deg" },
+      ], { at: tagAt, dur: 420, ease: "out" });
+    }
+  })();
+</script>

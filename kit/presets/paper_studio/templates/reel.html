@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Regular.ttf"); font-weight: 400; font-style: normal; font-display: block; }
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Italic.ttf"); font-weight: 400; font-style: italic; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-600.ttf"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-700.ttf"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-800.ttf"); font-weight: 800 900; font-display: block; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #f3eee6; font-family: "Inter", sans-serif; color: #1b1815; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #f3eee6; }
+      .abs { position: absolute; }
+      .fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+      .paper { background: radial-gradient(120% 80% at 50% 25%, #f8f4ed 0%, #f1ebe2 60%, #e9e2d7 100%); }
+      .grain { background-image: radial-gradient(rgba(27, 24, 21, 0.05) 1px, transparent 1.2px); background-size: 36px 36px; }
+      .serif { font-family: "InstrumentSerif", serif; font-weight: 400; letter-spacing: -0.01em; line-height: 0.98; white-space: nowrap; }
+      .lbl { font: 700 24px "Inter", sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: #e2562b; white-space: nowrap; }
+      .m { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.06em 0.06em 0.2em; margin: -0.06em -0.06em -0.2em; }
+      .wi { display: inline-block; }
+      .pill { position: absolute; display: inline-flex; align-items: center; gap: 14px; border-radius: 999px; padding: 18px 30px; font: 700 34px "Inter", sans-serif; white-space: nowrap;
+        background: #fff; color: #1b1815; box-shadow: 0 14px 40px rgba(60, 40, 20, 0.16); }
+      #face { position: absolute; left: 0; top: 880px; width: 1080px; height: 1040px; overflow: hidden; z-index: 2; }
+      #wrap { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      #aroll { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #seam { position: absolute; left: 0; top: 880px; width: 1080px; height: 60px; z-index: 3; background: linear-gradient(#f1ebe2, rgba(241, 235, 226, 0)); }
+      #gfx { z-index: 4; }
+      #caps { z-index: 6; }
+      #full { z-index: 8; }
+      .cap { position: absolute; left: 60px; width: 960px; top: 730px; text-align: center; font: 800 66px/1.12 "Inter", sans-serif; letter-spacing: -0.02em; color: #1b1815; }
+      .cap b { color: #e2562b; font-weight: 800; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="__TOTAL__" data-width="1080" data-height="1920">
+      <div class="fill paper"></div>
+      <div class="fill grain" style="opacity: 0.6"></div>
+      <div id="face"><div id="wrap"><!--AROLL--></div></div>
+      <div id="seam"></div>
+      <div id="gfx" class="fill"></div>
+      <div id="caps" class="fill"></div>
+      <div id="full" class="fill"></div>
+    </div>
+    <script>
+      /*DATA*/
+      (function () {
+        const C = { ink: "#1b1815", ink2: "#4a443d", mute: "#8a8178", acc: "#e2562b", ok: "#2f8a5b" };
+        const $ = (id) => document.getElementById(id);
+        const el = (parent, style, html = "", cls = "abs") => { const d = document.createElement("div"); d.className = cls; d.style.cssText = style; d.innerHTML = html; parent.append(d); return d; };
+        const P = D.pieces, Wd = D.words;
+        const span = (tag) => { const p = P.find((x) => x.tag === tag); return [p.out_a, p.out_b]; };
+        const W = (i) => { const w = Wd.find((x) => x.i === i); if (!w) throw new Error("word " + i); return w.t; };
+        const tl = gsap.timeline({ paused: true });
+        const Q = (t) => Math.round(t * 30) / 30;
+        window.__CUES = [];
+        const sfx = (name, t, db) => window.__CUES.push({ name, at: Math.round(t * 1000) / 1000, gain_db: db });
+        const S = { swish: "whoosh/whoosh__air-woosh__mixkit-1489", pop: "ui/ui__bubble-pop-up-alert-notification__mixkit-2357", hit: "impact/impact__short-bass-hit__mixkit-2299",
+          type: "typing/typing__typing-on-a-laptop-keyboard__mixkit-2531", check: "ui/ui__modern-click-box-check__mixkit-1120" };
+        const show = (e, a, b) => { tl.set(e, { autoAlpha: 0 }, 0); tl.set(e, { autoAlpha: 1 }, Q(a)); if (b != null) tl.set(e, { autoAlpha: 0 }, Q(b)); };
+        const enter = (e, t, from = {}) => tl.fromTo(e, { opacity: 0, y: 30, filter: "blur(8px)", ...from }, { opacity: 1, y: 0, x: 0, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, Q(t));
+        function words(parent, str, style) {
+          const box = el(parent, style, "", "serif abs"), ws = [];
+          str.split("|").forEach((line, li) => {
+            if (li) box.append(document.createElement("br"));
+            line.trim().split(/\s+/).forEach((tok, i, arr) => {
+              const m = document.createElement("span"); m.className = "m";
+              const w = document.createElement("span"); w.className = "wi"; w.textContent = tok.replace(/^\*/, "");
+              if (tok[0] === "*") { w.style.fontStyle = "italic"; w.style.color = C.acc; }
+              m.append(w); box.append(m); if (i < arr.length - 1) box.append(" ");
+              ws.push(w);
+            });
+          });
+          return { box, ws };
+        }
+        const rise = (ws, ts) => ws.forEach((w, k) => {
+          const t = ts[Math.min(k, ts.length - 1)] + (k >= ts.length ? (k - ts.length + 1) * 0.06 : 0);
+          if (t <= 0) { tl.set(w, { yPercent: 0 }, 0); return; }                 // the hook is finished on frame 1
+          tl.fromTo(w, { yPercent: 115 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, Q(t));
+        });
+        function typeText(e, text, t, cps) {
+          const o = { n: 0 };
+          tl.set(e, { textContent: "▍" }, 0);
+          tl.to(o, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { e.textContent = text.slice(0, Math.round(o.n)) + (o.n < text.length ? "▍" : ""); } }, Q(t));
+        }
+        const G = $("gfx");
+        function panel(a, b) { const L = el(G, "left:0;top:0;width:1080px;height:880px"); show(L, a, b); return L; }
+
+        // ================================================ face: a sharp crop (1:1 of the 16:9 take), a new framing on every line
+        {
+          const wrap = $("wrap");
+          P.forEach((p, i) => {
+            const [cx, cy] = p.face, s = i % 2 ? 1.12 : 1.0;
+            const x = Math.min(0, Math.max(1080 - 1920 * s, 540 - cx * s)), y = Math.min(0, Math.max(1040 - 1080 * s, 470 - cy * s));
+            const end = i + 1 < P.length ? P[i + 1].out_a : D.total;          // hold the framing (with a slow push) until the next line
+            tl.fromTo(wrap, { x, y, scale: s }, { x: x - 540 * s * 0.03, y: y - 450 * s * 0.03, scale: s * 1.03, duration: Math.max(0.3, end - p.out_a), ease: "none", immediateRender: i === 0 }, Q(p.out_a));
+          });
+        }
+        // ================================================ word captions (the speaker's words only), 3 words a page, active word in orange
+        {
+          const CAP = $("caps");
+          const pages = [];
+          let cur = [];
+          Wd.forEach((w, k) => {
+            cur.push(w);
+            const nxt = Wd[k + 1];
+            if (cur.length === 3 || !nxt || nxt.tag !== w.tag || /[.,?!]$/.test(w.text)) { pages.push(cur); cur = []; }
+          });
+          pages.forEach((pg, k) => {
+            const a = pg[0].t, nx = pages[k + 1], b = nx && nx[0].tag === pg[0].tag ? nx[0].t - 0.04 : pg[pg.length - 1].e + 0.15;
+            const c = el(CAP, "", "", "cap");
+            show(c, a - 0.04, b);                                              // pages hand over on the same frame, never overlap
+            pg.forEach((w, j) => {
+              const sp = document.createElement("span"); sp.textContent = w.text.replace(/[,.]$/, "") + (j < pg.length - 1 ? " " : "");
+              c.append(sp);
+              tl.set(sp, { color: C.ink }, 0); tl.set(sp, { color: C.acc }, Q(w.t)); if (j < pg.length - 1) tl.set(sp, { color: C.ink }, Q(pg[j + 1].t));
+            });
+            tl.fromTo(c, { scale: 0.94 }, { scale: 1, duration: 0.18, ease: "power2.out" }, Q(a - 0.04));
+          });
+        }
+        // ================================================ HOOK: finished on frame 1
+        {
+          const [a, b] = span("hook"), L = panel(0, b + 0.05);
+          const w1 = words(L, "No editor.", "left:0;width:1080px;top:200px;text-align:center;font-size:170px;color:#8a8178");
+          rise(w1.ws, [0, 0]);
+          const w2 = words(L, "Just *Claude.", "left:0;width:1080px;top:390px;text-align:center;font-size:200px");
+          rise(w2.ws, [W(34) - 0.03, W(36) - 0.06]);
+          sfx(S.hit, W(36) - 0.05, -14);
+        }
+        // ================================================ "last weekend I built an AI editor, on my Claude Code credits"
+        {
+          const [a, b] = span("built"), L = panel(a, b + 0.05);
+          const lb = el(L, "left:0;width:1080px;top:170px;text-align:center", "Last weekend I built", "lbl abs");
+          enter(lb, a);
+          const w = words(L, "an AI|*video editor", "left:0;width:1080px;top:230px;text-align:center;font-size:150px;line-height:1");
+          rise(w.ws, [W(150) - 0.05, W(151) - 0.05, W(152) - 0.05]);
+          const p = el(L, "left:0;width:1080px;top:560px;display:flex;justify-content:center;opacity:0", `<span class="pill" style="position:relative">⚡ runs on my Claude Code credits</span>`);
+          enter(p, W(157) - 0.1);
+          sfx(S.swish, W(151) - 0.1, -18); sfx(S.pop, W(157) - 0.05, -20);
+        }
+        // ================================================ two days ... gone
+        {
+          const [a, b] = span("lost"), L = panel(a, b + 0.05);
+          const w = words(L, "2 days", "left:0;width:1080px;top:170px;text-align:center;font-size:230px");
+          rise(w.ws, [W(515) - 0.05, W(516) - 0.05]);
+          const s = el(L, "left:0;width:1080px;top:440px;text-align:center;font:600 38px Inter,sans-serif;color:#4a443d;opacity:0", "of work with my agent… then");
+          enter(s, W(523) - 0.1);
+          const g = words(L, "*gone.", "left:0;width:1080px;top:500px;text-align:center;font-size:170px");
+          rise(g.ws, [W(531) - 0.05]);
+          tl.to(w.box, { opacity: 0.3, duration: 0.3 }, Q(W(531)));
+          sfx(S.hit, W(531) - 0.04, -13);
+        }
+        {
+          const [a, b] = span("again"), L = panel(a, b + 0.05);
+          const w = words(L, "So I *rebuilt it.", "left:0;width:1080px;top:300px;text-align:center;font-size:160px");
+          rise(w.ws, [a, a + 0.08, W(536) - 0.05, W(537)]);
+        }
+        // ================================================ 15-20 minutes, sometimes 10
+        {
+          const [a, b] = span("minutes"), L = panel(a, b + 0.05);
+          const lb = el(L, "left:0;width:1080px;top:150px;text-align:center", "Now an edit takes", "lbl abs");
+          enter(lb, a);
+          const n = words(L, "15–20", "left:0;width:1080px;top:200px;text-align:center;font-size:250px");
+          rise(n.ws, [W(556) - 0.05]);
+          const u = words(L, "*minutes", "left:0;width:1080px;top:440px;text-align:center;font-size:150px");
+          rise(u.ws, [W(559) - 0.05]);
+          const p = el(L, "left:0;width:1080px;top:620px;display:flex;justify-content:center;opacity:0", `<span class="pill" style="position:relative">sometimes 10</span>`);
+          enter(p, W(562) - 0.1);
+          sfx(S.swish, W(556) - 0.1, -17);
+        }
+        // ================================================ the launch film: a few seconds of it, full screen
+        {
+          const [a, b] = D.launch, F = el($("full"), "left:0;top:0;width:1080px;height:1920px;background:#1b1815");
+          show(F, a - 0.02, b);
+          const lb = el(F, "left:0;width:1080px;top:470px;text-align:center;font:700 40px Inter,sans-serif;color:#f3eee6;opacity:0", "Then I asked it for a<br><span style='font-family:InstrumentSerif;font-weight:400;font-style:italic;font-size:84px;color:#e2562b'>10-second launch film:</span>");
+          enter(lb, a);
+          const v = el(F, "left:0;top:760px;width:1080px;height:608px;overflow:hidden");
+          v.innerHTML = `<video id="launchclip" class="clip" src="assets/launch.mp4" muted playsinline data-start="${a.toFixed(3)}" data-duration="${(b - a).toFixed(3)}" data-media-start="0" data-track-index="5" style="width:100%;height:100%;display:block"></video>`;
+          tl.fromTo(v, { scale: 1 }, { scale: 1.06, duration: b - a, ease: "none", immediateRender: false }, Q(a));   // keeps the excerpt moving
+          tl.fromTo(lb, { y: 0 }, { y: -24, duration: b - a, ease: "none", immediateRender: false }, Q(a + 0.5));
+          sfx(S.swish, a - 0.1, -16);
+        }
+        // ================================================ CTA: comment "repo"; the full video is on the channel
+        {
+          const [a, b] = span("cta"), L = panel(a, D.total);
+          const lb = el(L, "left:0;width:1080px;top:150px;text-align:center", "Want my editor?", "lbl abs");
+          enter(lb, a);
+          const box = el(L, "left:140px;top:210px;width:800px;padding:34px 40px;border-radius:28px;background:#fff;box-shadow:0 20px 50px rgba(60,40,20,.15);opacity:0",
+            `<div style="display:flex;gap:20px;align-items:center"><span style="width:60px;height:60px;border-radius:50%;background:#e9c9b4;display:inline-block"></span><span style="font:600 30px Inter,sans-serif;color:#8a8178">Add a comment…</span></div><div class="ct" style="margin-top:22px;font:700 70px Inter,sans-serif"></div>`);
+          enter(box, W(717) - 0.1);
+          typeText(box.querySelector(".ct"), "repo", W(721), 7);
+          sfx(S.type, W(721), -20);
+          const p = el(L, "left:0;width:1080px;top:520px;display:flex;justify-content:center;opacity:0", `<span class="pill" style="position:relative;background:#e2562b;color:#fff">Full workflow on my channel ↗</span>`);
+          enter(p, W(726) - 0.1);
+          sfx(S.pop, W(726) - 0.05, -19);
+        }
+        // ================================================ end: the long video
+        {
+          const t0 = span("cta")[1] + 0.05, F = el($("full"), "left:0;top:0;width:1080px;height:1920px;opacity:0");
+          el(F, "", "", "fill paper");
+          tl.to(F, { opacity: 1, duration: 0.3 }, Q(t0));
+          const w = words(F, "Full video|*on my channel", "left:0;width:1080px;top:700px;text-align:center;font-size:140px;line-height:1.02");
+          rise(w.ws, [t0 + 0.1, t0 + 0.16, t0 + 0.3, t0 + 0.36, t0 + 0.42]);
+          const h = el(F, "left:0;width:1080px;top:1060px;text-align:center;font:600 40px Inter,sans-serif;color:#8a8178;opacity:0", "@yourhandle");
+          enter(h, t0 + 0.6);
+        }
+        window.__timelines = window.__timelines || {};
+        window.__timelines["reel"] = tl;
+      })();
+    </script>
+  </body>
+</html>

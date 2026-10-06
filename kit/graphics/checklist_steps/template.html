@@ -1,0 +1,119 @@
+<style>
+  .cs-stage { display: flex; align-items: center; justify-content: center; }
+  .cs-card { position: relative; width: 900px; overflow: hidden; }
+  .cs-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 36px 44px 34px;
+    border-bottom: 2px solid var(--line); }
+  .cs-head.stack { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .cs-title { flex: 1 1 auto; min-width: 0; font-size: 60px; white-space: nowrap; letter-spacing: 0.01em; }
+  .cs-chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 12px; padding: 8px 18px 8px 8px;
+    border-radius: 12px; background: var(--soft); font-family: var(--mono); font-weight: 500; font-size: 24px;
+    color: var(--ink-2); white-space: nowrap; }
+  .cs-chip b { padding: 5px 10px 4px; border-radius: 7px; background: var(--accent); color: var(--accent-ink);
+    font-weight: 700; font-size: 19px; letter-spacing: 0.14em; }
+  .cs-list { padding: 12px 44px 30px; }
+  .cs-row { display: flex; align-items: center; gap: 30px; padding: 30px 0; border-bottom: 2px solid var(--soft); }
+  .cs-list.tight .cs-row { padding: 25px 0; }
+  .cs-row:last-child { border-bottom: 0; }
+  .cs-mark { position: relative; flex: 0 0 auto; width: 66px; height: 66px; }
+  .cs-mark svg { position: absolute; inset: 0; overflow: visible; }
+  .cs-track { fill: none; stroke: var(--line); stroke-width: 5.5; }
+  .cs-arc { fill: none; stroke: var(--accent); stroke-width: 5.5; stroke-linecap: round; }
+  .cs-check { position: absolute; inset: 0; border-radius: 50%; background: var(--accent); opacity: 0;
+    box-shadow: 0 8px 18px rgba(252, 59, 0, 0.3); }
+  .cs-check path { fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  .cs-text { font-family: var(--ui); font-weight: 600; font-size: 46px; line-height: 1.18; color: var(--muted); }
+  .cs-bar { position: absolute; left: 0; bottom: 0; height: 8px; width: 100%; background: var(--accent);
+    transform-origin: 0 50%; transform: scaleX(0); }
+</style>
+<div class="stage cs-stage">
+  <div class="card cs-card" id="card">
+    <div class="cs-head" id="head">
+      <div class="condensed cs-title" id="title"></div>
+      <div class="cs-chip" id="chip"><b>INPUT</b><span id="chipText"></span></div>
+    </div>
+    <div class="cs-list" id="list"></div>
+    <div class="cs-bar" id="bar"></div>
+  </div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const title = GFX.$("#title"), chip = GFX.$("#chip"), head = GFX.$("#head"), list = GFX.$("#list");
+    title.textContent = P.title || "";
+    GFX.$("#chipText").textContent = P.chip || "";
+    if (!P.chip) chip.remove();
+    if (!P.title && !P.chip) head.remove();
+    // the title takes what the chip leaves
+    // the title takes what the chip leaves; if that would make it small, the chip moves under the title
+    GFX.layout(() => {
+      if (!P.title) return;
+      title.style.flex = "0 0 auto";
+      const shrink = (room) => {
+        let px = 60;
+        title.style.fontSize = px + "px";
+        while (px > 28 && title.scrollWidth > room) title.style.fontSize = (px -= 1) + "px";
+        return px;
+      };
+      if (chip.isConnected && shrink(812 - chip.offsetWidth - 24) < 44) {
+        head.classList.add("stack");
+        shrink(812);
+      }
+      title.style.flex = "";
+    });
+    // five long steps can outgrow the content box (y 270-1090): shrink the whole card to fit
+    GFX.layout(() => {
+      const card = GFX.$("#card"), h = card.offsetHeight;
+      if (h > 790) card.style.scale = (790 / h).toFixed(3);
+    });
+
+    const steps = (P.steps || []).slice(0, 5).map((s) => (typeof s === "string" ? s : (s && s.text) || ""));
+    const n = Math.max(1, steps.length);
+    if (n >= 5) list.classList.add("tight");
+    const R = 26, C = 2 * Math.PI * R;
+    const rows = steps.map((text) => {
+      const row = GFX.h("div", { class: "cs-row" },
+        GFX.h("div", { class: "cs-mark", html:
+          `<svg viewBox="0 0 58 58" width="66" height="66"><circle class="cs-track" cx="29" cy="29" r="${R}"/>` +
+          `<circle class="cs-arc" cx="29" cy="29" r="${R}" stroke-dasharray="${(C * 0.28).toFixed(1)} ${C.toFixed(1)}"/></svg>` +
+          `<div class="cs-check"><svg viewBox="0 0 58 58" width="66" height="66"><path d="M18 30l7.5 7.5L41 22" ` +
+          `pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg></div>` }),
+        GFX.h("div", { class: "cs-text", text }));
+      list.append(row);
+      return row;
+    });
+
+    // timeline: card in, rows stagger in, every ring spins, then the steps finish one after another
+    GFX.in(GFX.$("#card"), "rise", { at: 0, dur: 480, ease: "back" });
+    if (head.isConnected) GFX.in([...head.children], "fade", { at: 140, dur: 320, stagger: 80 });
+    const tFirst = Math.min(850, D * 0.32), tLast = Math.max(tFirst, D - 560);
+    const gap = n > 1 ? (tLast - tFirst) / (n - 1) : 0;
+    const done = rows.map((_, i) => (n > 1 ? tFirst + gap * i : (tFirst + tLast) / 2));
+    const SPIN = 760;
+    rows.forEach((row, i) => {
+      const at = 180 + i * 90;
+      GFX.in(row, "rise", { at, dur: 420, ease: "out" });
+      const svg = row.querySelector(".cs-mark > svg"), check = row.querySelector(".cs-check");
+      // finite spin: it stops (hidden) the moment the step is done
+      const spinFrom = at, spinDur = Math.max(200, done[i] - spinFrom);
+      const turn0 = i * 70;
+      GFX.anim(svg, [{ transform: `rotate(${turn0}deg)` }, { transform: `rotate(${turn0 + 360 * (spinDur / SPIN)}deg)` }],
+        { at: spinFrom, dur: spinDur, ease: "linear" });
+      GFX.anim(svg, [{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.6)" }],
+        { at: done[i], dur: 140, ease: "in", fill: "forwards" });
+      GFX.anim(check, [{ opacity: 0, transform: "scale(.4)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: done[i] + 40, dur: 340, ease: "back" });
+      GFX.anim(check.querySelector("path"), [{ strokeDashoffset: 100 }, { strokeDashoffset: 0 }],
+        { at: done[i] + 120, dur: 240, ease: "out" });
+      GFX.anim(row.querySelector(".cs-text"), [{ color: "var(--muted)" }, { color: "var(--ink)" }],
+        { at: done[i] + 40, dur: 220, ease: "out" });
+    });
+
+    // progress bar along the card's bottom edge fills as each step finishes
+    const bar = GFX.$("#bar");
+    GFX.each((t) => {
+      let p = 0;
+      for (const d of done) p += GFX.ease.out(GFX.clamp((t - d) / 320));
+      bar.style.transform = `scaleX(${(p / n).toFixed(4)})`;
+    }, done[0] || 0, (done[done.length - 1] || 0) + 320);
+  })();
+</script>

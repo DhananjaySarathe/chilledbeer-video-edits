@@ -1,0 +1,63 @@
+<style>
+  .fz { position: absolute; inset: 0; overflow: hidden; background: #000; }
+  .fz img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .fz-live { z-index: 1; }
+  .fz-still { z-index: 2; opacity: 0; filter: grayscale(1) contrast(1.12) brightness(0.92); transform-origin: 50% 38%; }
+  .fz-vig { position: absolute; inset: 0; z-index: 3; opacity: 0;
+    background: radial-gradient(ellipse 75% 60% at 50% 42%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.62) 100%); }
+  .fz-flash { position: absolute; inset: 0; z-index: 6; background: #fff; opacity: 0; }
+  .fz-mid { position: absolute; left: 64px; width: 886px; top: 330px; z-index: 5; display: flex; flex-direction: column; align-items: center; }
+  .fz-stamp { font-family: var(--display); font-size: 170px; line-height: 1.02; text-transform: uppercase; white-space: nowrap;
+    background: var(--accent); color: var(--accent-ink); padding: 0.06em 0.18em 0.02em; border-radius: 0.07em;
+    box-shadow: 0 0.08em 0.3em rgba(0, 0, 0, 0.45); }
+  .fz-line { margin-top: 26px; font-family: var(--condensed); font-weight: 700; font-size: 70px; line-height: 1.05; color: #fff;
+    text-transform: uppercase; text-align: center; text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7); white-space: nowrap; }
+  .fz-kick { position: absolute; left: 76px; top: 290px; z-index: 5; font-family: var(--mono); font-weight: 700; font-size: 30px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #fff; background: rgba(0, 0, 0, 0.55); padding: 10px 18px 8px;
+    border-radius: 10px; }
+</style>
+<div class="fz" id="fz">
+  <img class="speaker fz-live" id="live" alt="">
+  <img class="fz-still" id="still" alt="">
+  <div class="fz-vig" id="vig"></div>
+  <div class="fz-kick" id="kick"></div>
+  <div class="fz-mid" id="mid"><div class="fz-stamp" id="stamp"></div><div class="fz-line" id="line"></div></div>
+  <div class="fz-flash" id="flash"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const fz = GFX.$("#fz"), live = GFX.$("#live"), still = GFX.$("#still"), vig = GFX.$("#vig"), flash = GFX.$("#flash"),
+      mid = GFX.$("#mid"), stamp = GFX.$("#stamp"), line = GFX.$("#line"), kick = GFX.$("#kick");
+    const at = Math.max(0, Math.min(D - 400, (Number(P.freeze_at) || 0) * 1000));
+    GFX.speaker(live);
+    GFX.still(still, { at });
+    stamp.textContent = String(P.stamp || "Plot twist");
+    line.textContent = String(P.line || "");
+    if (!P.line) line.style.display = "none";
+    kick.textContent = String(P.kicker || "");
+    if (!P.kicker) kick.style.display = "none";
+    GFX.layout(() => {
+      GFX.fitLine(stamp, { width: 860, max: 170, min: 90 });
+      GFX.fitLine(line, { width: 880, max: 70, min: 40 });
+      if (GFX.face) mid.style.top = Math.round(Math.max(290, Math.min(330, GFX.face.y + GFX.face.h * 0.3 - mid.offsetHeight))) + "px";
+    });
+
+    // freeze: flash, the still drains to grey and pushes in slowly, vignette closes in
+    GFX.anim(flash, [{ opacity: 0.85 }, { opacity: 0 }], { at, dur: 180, ease: "out" });
+    GFX.anim(still, [{ opacity: 1 }, { opacity: 1 }], { at, dur: 1 });
+    GFX.anim(still, [{ transform: "scale(1)" }, { transform: "scale(1.07)" }], { at, dur: Math.max(300, D - at), ease: "out" });
+    GFX.anim(vig, [{ opacity: 0 }, { opacity: 1 }], { at, dur: 260, ease: "out" });
+    // stamp slams with a shake, the line rises under it
+    const hit = at + 220;
+    GFX.anim(stamp, [
+      { opacity: 0, transform: "scale(2.4) rotate(-9deg)", easing: "cubic-bezier(.55,0,.9,.4)" },
+      { opacity: 1, transform: "scale(.94) rotate(-4deg)", offset: 0.55, easing: "cubic-bezier(.2,.9,.3,1)" },
+      { opacity: 1, transform: "scale(1) rotate(-4deg)" },
+    ], { at: hit, dur: 320, ease: "linear" });
+    GFX.anim(mid, [{ translate: "0 0" }, { translate: "-12px 8px" }, { translate: "10px -6px" }, { translate: "-5px 3px" }, { translate: "0 0" }],
+      { at: hit + 170, dur: 300, ease: "out" });
+    if (P.line) GFX.in(line, "rise", { at: hit + 260, dur: 320 });
+    if (P.kicker) GFX.in(kick, "left", { at: at + 80, dur: 260 });
+  })();
+</script>

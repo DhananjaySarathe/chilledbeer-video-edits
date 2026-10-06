@@ -1,0 +1,83 @@
+{
+  "id": "streak_days",
+  "name": "Day streak tracker",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A white card on the clean background: a small spaced label and a big condensed title, then a row (or two) of day tiles. The finished days fill orange one after another with a white check that draws itself, the current day pops with a ring, and the days still to come stay as dashed outlines with a grey question mark that bobs in a wave; a mono counter like '1 / 7' and an optional short note sit underneath.",
+  "use_when": "Habits, challenges and streaks: 'day 1 of trying this', 'I've done this for 5 days straight', 'first day is easy, let's see if it lasts', a 30-day challenge, a routine being tested.",
+  "params": {
+    "title": {
+      "type": "text",
+      "required": true,
+      "max_len": 22,
+      "help": "what is being tracked, e.g. 'Focus hack' or 'No sugar'"
+    },
+    "kicker": {
+      "type": "text",
+      "default": "Day streak",
+      "max_len": 24,
+      "help": "small spaced label above the title"
+    },
+    "days": {
+      "type": "number",
+      "default": 7,
+      "help": "how many day tiles, 3-14 (up to 7 per row)"
+    },
+    "done": {
+      "type": "number",
+      "default": 1,
+      "help": "how many days are finished (0 to days)"
+    },
+    "future": {
+      "type": "text",
+      "default": "?",
+      "max_len": 2,
+      "help": "mark on the days still to come; '' shows their numbers in grey"
+    },
+    "labels": {
+      "type": "list",
+      "default": [],
+      "max_len": 14,
+      "help": "optional short tile labels instead of 'DAY n', e.g. ['Mon', 'Tue', ...]; up to 4 characters each"
+    },
+    "note": {
+      "type": "text",
+      "default": "",
+      "max_len": 40,
+      "help": "short line under the counter, e.g. 'Day 2? Let's see.'; '' hides it"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.8,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "streak",
+    "habit",
+    "challenge",
+    "day 1",
+    "tracker",
+    "routine",
+    "progress",
+    "calendar"
+  ],
+  "explains": [
+    "chronology",
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "calendar_page",
+  "version": "1"
+}

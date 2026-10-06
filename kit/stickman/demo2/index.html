@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <script src="vendor/stickman.js"></script>
+    <style>
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Regular.ttf"); font-style: normal; font-display: block; }
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Italic.ttf"); font-style: italic; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-600.ttf"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-800.ttf"); font-weight: 800; font-display: block; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body, #root { width: 1920px; height: 1080px; overflow: hidden; background: #f3eee6; font-family: "Inter", sans-serif; color: #1b1815; }
+      .paper { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 35%, #f8f4ed 0%, #f1ebe2 60%, #e9e2d7 100%); }
+      .grain { position: absolute; inset: 0; opacity: .6; background-image: radial-gradient(rgba(27,24,21,.05) 1px, transparent 1.2px); background-size: 36px 36px; }
+      .serif { position: absolute; font-family: "InstrumentSerif", serif; line-height: .98; white-space: nowrap; }
+      .m { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em .06em .2em; margin: -.06em -.06em -.2em; }
+      .wi { display: inline-block; }
+      .pill { position: absolute; display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 999px; background: #fff;
+        box-shadow: 0 12px 34px rgba(60,40,20,.14); font: 600 28px "Inter", sans-serif; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="stickdemo2" data-start="0" data-duration="6.5" data-width="1920" data-height="1080">
+      <div class="paper"></div><div class="grain"></div>
+      <div id="world" style="position:absolute;inset:0;transform-origin:45% 70%"></div>
+      <div id="txt" style="position:absolute;inset:0"></div>
+    </div>
+    <script>
+      // "One big prompt": the raw video goes into a magic box ... and junk comes out. (kit/stickman demo 2)
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = { stickdemo2: tl };
+      const Q = (t) => Math.round(t * 30) / 30;
+      const NS = "http://www.w3.org/2000/svg", { ACC, INK, MUTE } = Stickman.COLORS;
+      const world = document.getElementById("world");
+      const svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("width", 1920); svg.setAttribute("height", 1080); svg.style.cssText = "position:absolute;left:0;top:0;overflow:visible";
+      world.append(svg);
+      const mk = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.append(e); return e; };
+      const GROUND = 880;
+      mk("path", { d: `M300 ${GROUND + 6} L1500 ${GROUND + 6}`, stroke: "rgba(27,24,21,.14)", "stroke-width": 4, "stroke-linecap": "round" });
+
+      // the magic box (its lid pops), with its promise on the front
+      const BX = 1010, BW = 250, BH = 180;
+      const boxPos = mk("g", { transform: `translate(${BX + BW / 2} ${GROUND})` });
+      const boxG = mk("g", {}, boxPos);                                         // animate this one (shake)
+      mk("rect", { x: -BW / 2, y: -BH, width: BW, height: BH, rx: 12, fill: "#fff", stroke: INK, "stroke-width": 9 }, boxG);
+      const lbl = mk("text", { x: 0, y: -BH / 2 + 14, "text-anchor": "middle", "font-family": "Inter, sans-serif", "font-weight": 800, "font-size": 30, fill: INK }, boxG);
+      lbl.textContent = "make it viral";
+      const spark0 = Stickman.emote(boxG, "spark", 0, -BH / 2 - 34, 0.45);
+      const lidPos = mk("g", { transform: `translate(0 ${-BH})` }, boxG);
+      const lid = mk("g", {}, lidPos);
+      mk("rect", { x: -BW / 2 - 14, y: -32, width: BW + 28, height: 32, rx: 9, fill: ACC, stroke: INK, "stroke-width": 9 }, lid);
+
+      // the figure, holding his raw video
+      const fig = Stickman.create(svg, { x: 520, ground: GROUND, scale: 1.4 });
+      const file = Stickman.props.file("raw.mp4");
+      fig.set("holdOut").hold(file, "handR", -1e9, 1.92, { dx: -4, dy: -6 });
+      fig.to(0.5, { x: 800 }, 1.1, "power1.inOut").loop("walk", 0.5, 1.6, 0.9);
+      fig.to(1.62, { ...Stickman.POSES.presentRight, shR: 110, elR: 10 }, 0.28, "power2.out");    // reach over the box
+      fig.to(2.05, "stand", 0.35);
+      fig.to(2.25, { neck: 10, torso: 2 }, 0.4);                                                 // leans in, watching
+      fig.to(3.0, { ...Stickman.POSES.handsOnHead, lift: 16 }, 0.16, "power3.out");
+      fig.to(3.18, { lift: 0 }, 0.25, "power2.in");
+      fig.loop("shake", 3.1, 3.55, 1);
+      fig.to(3.75, "shrug", 0.4);
+      fig.loop("nod", 4.4, 6.5, 0.8);                                                           // shakes his head: never a still
+      Stickman.drive(tl, 6.5);
+
+      // the toss: the file arcs from his hand into the box
+      const h = fig.at(1.92, "handR");
+      const flyPos = mk("g", { transform: `translate(${h[0]} ${h[1]})` });
+      const fly = mk("g", {}, flyPos);
+      const f2 = Stickman.props.file("raw.mp4"); f2.setAttribute("transform", "scale(1.4)"); fly.append(f2);
+      tl.set(fly, { opacity: 0 }, 0); tl.set(fly, { opacity: 1 }, Q(1.92));
+      const dx = BX + BW / 2 - h[0], dy = GROUND - BH - 20 - h[1];
+      tl.to(fly, { x: dx, duration: 0.42, ease: "none" }, Q(1.92));
+      tl.to(fly, { keyframes: { y: [0, -150, dy] }, duration: 0.42, ease: "none" }, Q(1.92));
+      tl.to(fly, { rotation: 200, scale: 0.6, svgOrigin: "0 -30", duration: 0.42, ease: "none" }, Q(1.92));
+      tl.set(fly, { opacity: 0 }, Q(2.34));
+
+      // the box does its magic: shake + sparkles
+      tl.fromTo(boxG, { rotation: 0 }, { keyframes: { rotation: [0, -4, 4, -5, 5, -3, 3, 0] }, duration: 0.6, ease: "none", svgOrigin: "0 0" }, Q(2.35));
+      [[-150, -230, 0.5], [150, -250, 0.6], [0, -300, 0.7]].forEach(([x, y, s], k) => {
+        const e = Stickman.emote(boxG, "spark", x, y, s);
+        tl.set(e, { opacity: 0 }, 0);
+        tl.fromTo(e, { opacity: 0, scale: 0.2, svgOrigin: "0 0" }, { opacity: 1, scale: 1, duration: 0.2, ease: "power3.out" }, Q(2.4 + k * 0.12));
+        tl.to(e, { opacity: 0, duration: 0.2 }, Q(2.85));
+      });
+      // ... the lid pops and junk flies out
+      tl.to(lid, { y: -70, rotation: -24, svgOrigin: "-130 0", duration: 0.22, ease: "power3.out" }, Q(2.95));
+      tl.to(lid, { y: 0, rotation: 0, duration: 0.45, ease: "bounce.out" }, Q(4.5));                          // ... and drops shut
+      const junk = [
+        (g) => { mk("circle", { r: 26, fill: "#fff", stroke: INK, "stroke-width": 6 }, g); mk("path", { d: "M-14 -8 L6 4 L-6 14 M8 -14 L-4 -2 L14 6", stroke: MUTE, "stroke-width": 4, fill: "none", "stroke-linecap": "round" }, g); },
+        (g) => { mk("path", { d: "M-30 0 C-20 -30 0 30 10 -10 S30 20 34 -6 S10 -30 -10 6", stroke: INK, "stroke-width": 6, fill: "none", "stroke-linecap": "round" }, g); },
+        (g) => { mk("rect", { x: -34, y: -24, width: 30, height: 48, rx: 4, fill: "#fff", stroke: INK, "stroke-width": 5, transform: "rotate(-12)" }, g);
+                 mk("rect", { x: 6, y: -20, width: 30, height: 48, rx: 4, fill: "#fff", stroke: INK, "stroke-width": 5, transform: "rotate(16)" }, g);
+                 mk("path", { d: "M-2 -26 L2 -8 L-4 6 L2 28", stroke: ACC, "stroke-width": 5, fill: "none" }, g); },
+      ];
+      // ball lands between him and the box, the scribble drops back into the box, the broken clip lands right of it
+      [[-215, -300, -160, BH + 4], [0, -430, 200, 0], [150, -220, 250, BH + 4]].forEach(([tx, ty, rot, land], k) => {
+        const p = mk("g", { transform: `translate(${BX + BW / 2} ${GROUND - BH - 10})` }), g = mk("g", { opacity: 0 }, p);
+        junk[k](g);
+        const t0 = 2.98 + k * 0.07;
+        tl.set(g, { opacity: 1 }, Q(t0));
+        tl.fromTo(g, { x: 0, rotation: 0, scale: 0.4, svgOrigin: "0 0" }, { x: tx, rotation: rot, scale: 1.5, duration: 1.1, ease: "power1.out" }, Q(t0));
+        tl.fromTo(g, { y: 0 }, { y: ty, duration: 0.45, ease: "power2.out" }, Q(t0));
+        tl.to(g, { y: land - (land ? 26 : -10), duration: 0.65, ease: "power2.in" }, Q(t0 + 0.45));                   // gravity: lands on the floor
+        if (!land) tl.set(g, { opacity: 0 }, Q(t0 + 1.1));                                                        // (back into the box)
+      });
+      const q = fig.at(3.9, "head"), qe = Stickman.emote(svg, "question", q[0] + 70, q[1] - 30, 1.0);
+      tl.set(qe, { opacity: 0 }, 0); tl.fromTo(qe, { opacity: 0, scale: 0.3, svgOrigin: "0 0" }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out" }, Q(3.85));
+      const ex = Stickman.emote(svg, "shock", fig.at(3.05, "head")[0], fig.at(3.05, "head")[1] - 58, 1.0);
+      tl.set(ex, { opacity: 0 }, 0); tl.fromTo(ex, { opacity: 0, scale: 0.4, svgOrigin: "0 0" }, { opacity: 1, scale: 1, duration: 0.2 }, Q(3.02)); tl.to(ex, { opacity: 0, duration: 0.2 }, Q(3.6));
+      tl.set(spark0, { opacity: 1 }, 0); tl.to(spark0, { opacity: 0, duration: 0.2 }, Q(2.95));
+
+      // words
+      const T = document.getElementById("txt");
+      const pill = document.createElement("div"); pill.className = "pill"; pill.style.cssText = "left:150px;top:150px;opacity:0";
+      pill.innerHTML = `<span style="width:12px;height:12px;border-radius:50%;background:${ACC};display:inline-block"></span>One big prompt`; T.append(pill);
+      tl.fromTo(pill, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, Q(0.15));
+      const words = (str, style) => {
+        const b = document.createElement("div"); b.className = "serif"; b.style.cssText = style; T.append(b);
+        return str.split(" ").map((w, i, a) => { const m = document.createElement("span"); m.className = "m"; const s = document.createElement("span"); s.className = "wi";
+          if (w[0] === "*") { s.style.fontStyle = "italic"; s.style.color = ACC; w = w.slice(1); } s.textContent = w; m.append(s); b.append(m); if (i < a.length - 1) b.append(" "); return s; });
+      };
+      const w1 = words("Magic edit?", "left:1370px;top:300px;font-size:120px"), w2 = words("*Not quite.", "left:1370px;top:440px;font-size:120px");
+      w1.forEach((s, k) => tl.fromTo(s, { yPercent: 115 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, Q(2.4 + k * 0.08)));
+      w2.forEach((s, k) => tl.fromTo(s, { yPercent: 115 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, Q(3.9 + k * 0.08)));
+      tl.to(w1, { opacity: 0.35, duration: 0.4 }, Q(3.9));
+      tl.fromTo(world, { scale: 1.03 }, { scale: 1.16, duration: 6.5, ease: "none" }, 0);   // the shot never sits still
+    </script>
+  </body>
+</html>

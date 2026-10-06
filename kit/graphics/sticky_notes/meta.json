@@ -1,0 +1,41 @@
+{
+  "id": "sticky_notes",
+  "name": "Sticky notes slap on",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "One to four paper sticky notes (yellow, white, orange, mint) with a strip of tape slap onto the picture around the speaker's head one after another, big and tilted, landing with a squash and a thud: a hand-written word or two on each, with an optional emoji; they stay in the top band above the eyes (a fourth goes lower left) and breathe slowly.",
+  "use_when": "A spoken list of two to four short things (what you get, what's inside, features, examples), said one by one while the face should stay on screen.",
+  "params": {
+    "notes": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "[{text, emoji, at}] 1-2 words each (<= 14 characters); at = seconds from the scene start (when he says it); emoji optional"
+    }
+  },
+  "duration": {
+    "min": 1.4,
+    "default": 3.0,
+    "max": 6.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [],
+  "tags": [
+    "list",
+    "notes",
+    "items",
+    "examples",
+    "features",
+    "sticky"
+  ],
+  "explains": [
+    "definition",
+    "process"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "notes_page",
+  "version": "1"
+}

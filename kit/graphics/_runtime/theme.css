@@ -1,0 +1,126 @@
+/* ChilledBeer Video Edits graphics theme.
+   Every template uses these tokens and components so all graphics in a short read as one system.
+   A video's style.json overrides the tokens (accent, bg, ink, fonts) through the host page. */
+
+@font-face { font-family: "Anton"; src: url("../../fonts/Anton-400.ttf"); font-weight: 400; }
+@font-face { font-family: "Bebas Neue"; src: url("../../fonts/BebasNeue-400.ttf"); font-weight: 400; }
+@font-face { font-family: "Oswald"; src: url("../../fonts/Oswald-500.ttf"); font-weight: 500; }
+@font-face { font-family: "Oswald"; src: url("../../fonts/Oswald-600.ttf"); font-weight: 600; }
+@font-face { font-family: "Oswald"; src: url("../../fonts/Oswald-700.ttf"); font-weight: 700; }
+@font-face { font-family: "Inter"; src: url("../../fonts/Inter-400.ttf"); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url("../../fonts/Inter-500.ttf"); font-weight: 500; }
+@font-face { font-family: "Inter"; src: url("../../fonts/Inter-600.ttf"); font-weight: 600; }
+@font-face { font-family: "Inter"; src: url("../../fonts/Inter-700.ttf"); font-weight: 700; }
+@font-face { font-family: "Inter"; src: url("../../fonts/Inter-800.ttf"); font-weight: 800; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/JetBrainsMono-500.ttf"); font-weight: 500; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/JetBrainsMono-700.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("../../fonts/Caveat-700.ttf"); font-weight: 700; }
+@font-face { font-family: "Montserrat"; src: url("../../fonts/Montserrat-800.ttf"); font-weight: 800; }
+@font-face { font-family: "Montserrat"; src: url("../../fonts/Montserrat-900.ttf"); font-weight: 900; }
+@font-face { font-family: "Poppins"; src: url("../../fonts/Poppins-700.ttf"); font-weight: 700; }
+@font-face { font-family: "DM Sans"; src: url("../../fonts/DMSans-700.ttf"); font-weight: 700; }
+
+:root {
+  /* colour */
+  --bg: #EDEDE8;          /* page cream */
+  --ink: #111111;         /* primary text */
+  --ink-2: #3B3B38;       /* secondary text */
+  --muted: #8E8D87;       /* labels, placeholders */
+  --line: #DAD9D3;        /* hairlines, empty states */
+  --soft: #F5F4F0;        /* inset panels inside cards */
+  --card: #FFFFFF;
+  --accent: #FC3B00;      /* the one loud colour */
+  --accent-ink: #FFFFFF;  /* text on the accent */
+  --accent-soft: rgba(252, 59, 0, 0.12);
+  --good: #16A34A;
+  --dark: #141414;        /* dark UI surfaces (editor windows) */
+  --dark-2: #232322;
+  /* type */
+  --display: "Anton", "Oswald", sans-serif;       /* huge titles */
+  --condensed: "Oswald", "Anton", sans-serif;     /* headings, numbers */
+  --ui: "Inter", system-ui, sans-serif;           /* app mockups */
+  --mono: "JetBrains Mono", ui-monospace, monospace; /* small spaced labels */
+  --hand: "Caveat", cursive;                      /* hand-written notes */
+  /* shape */
+  --radius: 34px;
+  --radius-sm: 18px;
+  --shadow: 0 30px 80px rgba(17, 17, 17, 0.16), 0 6px 18px rgba(17, 17, 17, 0.08);
+  --shadow-sm: 0 10px 28px rgba(17, 17, 17, 0.12);
+  /* safe area (1080x1920): platform UI covers the top 14% and bottom 35%; captions sit just above 1248px */
+  --safe-top: 270px;
+  --content-bottom: 1090px;   /* keep fullscreen content above the caption band */
+  --safe-left: 64px;
+  --safe-right: 130px;        /* right edge holds the like/comment buttons */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+body { font-family: var(--ui); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+body.kind-fullscreen, body.kind-speaker { background: var(--bg); }
+
+/* layout helpers */
+.abs { position: absolute; }
+.fill { position: absolute; inset: 0; }
+.center { display: flex; align-items: center; justify-content: center; }
+.stage { position: absolute; top: var(--safe-top); bottom: calc(1920px - var(--content-bottom));
+  left: var(--safe-left); right: var(--safe-left); }
+.row { display: flex; align-items: center; }
+.col { display: flex; flex-direction: column; }
+
+/* type */
+.display { font-family: var(--display); text-transform: uppercase; line-height: 0.86; letter-spacing: -0.005em; }
+.condensed { font-family: var(--condensed); font-weight: 700; text-transform: uppercase; line-height: 0.95; }
+.kicker { font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink); }
+.label { font-family: var(--mono); font-weight: 500; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.hand { font-family: var(--hand); font-weight: 700; }
+.accent { color: var(--accent); }
+.hl { background: var(--accent); color: var(--accent-ink); padding: 0 0.14em; border-radius: 0.06em; }
+
+/* surfaces */
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); }
+.inset { background: var(--soft); border-radius: var(--radius-sm); }
+.pill { display: inline-flex; align-items: center; gap: 14px; background: var(--ink); color: #fff;
+  border-radius: 999px; padding: 10px 26px 10px 10px; font-family: var(--mono); font-weight: 700;
+  font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+.pill .num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+  border-radius: 50%; background: var(--accent); color: var(--accent-ink); letter-spacing: 0; font-size: 20px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; padding: 10px 22px;
+  background: var(--card); box-shadow: var(--shadow-sm); font-family: var(--mono); font-weight: 700;
+  font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+.chip.on { background: var(--accent); color: var(--accent-ink); }
+.badge { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: var(--accent-ink);
+  border-radius: 18px; padding: 12px 26px; font-family: var(--condensed); font-weight: 700; font-size: 56px;
+  text-transform: uppercase; box-shadow: var(--shadow-sm); }
+
+/* app window (light or dark) */
+.window { background: var(--card); border-radius: 28px; box-shadow: var(--shadow); overflow: hidden; }
+.window.dark { background: var(--dark); color: #EEE; }
+.window .bar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07); font-family: var(--mono); font-size: 18px; color: var(--muted); }
+.window.dark .bar { border-bottom-color: rgba(255, 255, 255, 0.08); }
+.window .bar i { width: 16px; height: 16px; border-radius: 50%; background: #D9D8D2; display: inline-block; }
+.window.dark .bar i { background: #3A3A38; }
+.window .bar b { margin-left: 14px; font-weight: 500; }
+
+/* phone */
+.phone { position: absolute; width: 440px; height: 900px; border-radius: 70px; background: #0E0E0E;
+  padding: 16px; box-shadow: var(--shadow); }
+.phone .screen { position: relative; width: 100%; height: 100%; border-radius: 56px; overflow: hidden; background: #000; }
+.phone .notch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 130px; height: 36px;
+  border-radius: 20px; background: #0E0E0E; z-index: 5; }
+
+/* speaker image slot: object-fit keeps his framing */
+.speaker { position: absolute; object-fit: cover; }
+
+/* strike-through line (animate its scaleX from 0 to 1) */
+.strike { position: absolute; left: -4%; right: -4%; top: 52%; height: 0.09em; background: var(--accent);
+  transform-origin: left center; border-radius: 0.05em; }
+
+/* pointer cursor */
+.cursor { position: absolute; width: 54px; height: 54px; z-index: 50; filter: drop-shadow(0 4px 8px rgba(0,0,0,.25)); }
+.ripple { position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%;
+  border: 5px solid var(--accent); opacity: 0; z-index: 49; }
+
+/* face window (GFX.pip): the live speaker in a rounded portrait box with a white rim over a mockup */
+.pip { position: absolute; border-radius: 30px; overflow: hidden; background: #222; z-index: 40;
+  box-shadow: 0 0 0 8px #fff, 0 24px 60px rgba(17, 17, 17, 0.3); }

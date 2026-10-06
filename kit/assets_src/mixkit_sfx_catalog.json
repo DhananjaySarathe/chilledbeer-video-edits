@@ -1,0 +1,4232 @@
+{
+ "whoosh": [
+  {
+   "id": "1489",
+   "kind": "sfx",
+   "title": "Air woosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1489/1489-preview.mp3"
+  },
+  {
+   "id": "1492",
+   "kind": "sfx",
+   "title": "Cinematic whoosh fast transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1492/1492-preview.mp3"
+  },
+  {
+   "id": "1491",
+   "kind": "sfx",
+   "title": "Arrow whoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1491/1491-preview.mp3"
+  },
+  {
+   "id": "1714",
+   "kind": "sfx",
+   "title": "Fast rocket whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1714/1714-preview.mp3"
+  },
+  {
+   "id": "1490",
+   "kind": "sfx",
+   "title": "Fast whoosh transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1490/1490-preview.mp3"
+  },
+  {
+   "id": "1486",
+   "kind": "sfx",
+   "title": "Cinematic tunnel reverb woosh",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1486/1486-preview.mp3"
+  },
+  {
+   "id": "2350",
+   "kind": "sfx",
+   "title": "Magic sparkle whoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2350/2350-preview.mp3"
+  },
+  {
+   "id": "3005",
+   "kind": "sfx",
+   "title": "Explainer video pops whoosh light pop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3005/3005-preview.mp3"
+  },
+  {
+   "id": "1485",
+   "kind": "sfx",
+   "title": "Metal hit woosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1485/1485-preview.mp3"
+  },
+  {
+   "id": "787",
+   "kind": "sfx",
+   "title": "Cinematic whoosh stutter",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/787/787-preview.mp3"
+  },
+  {
+   "id": "2623",
+   "kind": "sfx",
+   "title": "Ghostly whoosh passing",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2623/2623-preview.mp3"
+  },
+  {
+   "id": "2918",
+   "kind": "sfx",
+   "title": "Epic movie trailer whoosh impact",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2918/2918-preview.mp3"
+  },
+  {
+   "id": "2596",
+   "kind": "sfx",
+   "title": "Electric whoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2596/2596-preview.mp3"
+  },
+  {
+   "id": "2408",
+   "kind": "sfx",
+   "title": "Storm coming whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2408/2408-preview.mp3"
+  },
+  {
+   "id": "2650",
+   "kind": "sfx",
+   "title": "Engine slow spinning whoosh",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2650/2650-preview.mp3"
+  },
+  {
+   "id": "2903",
+   "kind": "sfx",
+   "title": "Movie whoosh impact presentation",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2903/2903-preview.mp3"
+  },
+  {
+   "id": "1493",
+   "kind": "sfx",
+   "title": "Swirling whoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1493/1493-preview.mp3"
+  },
+  {
+   "id": "3024",
+   "kind": "sfx",
+   "title": "Meteor whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3024/3024-preview.mp3"
+  },
+  {
+   "id": "1721",
+   "kind": "sfx",
+   "title": "Rocket landing whoosh",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1721/1721-preview.mp3"
+  },
+  {
+   "id": "2651",
+   "kind": "sfx",
+   "title": "Flickering insect whoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2651/2651-preview.mp3"
+  }
+ ],
+ "swoosh": [
+  {
+   "id": "166",
+   "kind": "sfx",
+   "title": "Fast small sweep transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/166/166-preview.mp3"
+  },
+  {
+   "id": "1486",
+   "kind": "sfx",
+   "title": "Cinematic tunnel reverb woosh",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1486/1486-preview.mp3"
+  },
+  {
+   "id": "1474",
+   "kind": "sfx",
+   "title": "Transition windy swoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1474/1474-preview.mp3"
+  },
+  {
+   "id": "1465",
+   "kind": "sfx",
+   "title": "Vacuum swoosh transition",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1465/1465-preview.mp3"
+  },
+  {
+   "id": "1471",
+   "kind": "sfx",
+   "title": "Cinematic wind swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1471/1471-preview.mp3"
+  },
+  {
+   "id": "1461",
+   "kind": "sfx",
+   "title": "Short wind swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1461/1461-preview.mp3"
+  },
+  {
+   "id": "1487",
+   "kind": "sfx",
+   "title": "Dagger woosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1487/1487-preview.mp3"
+  },
+  {
+   "id": "869",
+   "kind": "sfx",
+   "title": "Fairy sparkle whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/869/869-preview.mp3"
+  },
+  {
+   "id": "3115",
+   "kind": "sfx",
+   "title": "Fast transitions swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3115/3115-preview.mp3"
+  },
+  {
+   "id": "1345",
+   "kind": "sfx",
+   "title": "Short fire whoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1345/1345-preview.mp3"
+  },
+  {
+   "id": "1469",
+   "kind": "sfx",
+   "title": "Flying fast swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1469/1469-preview.mp3"
+  },
+  {
+   "id": "1482",
+   "kind": "sfx",
+   "title": "Ending wind swoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1482/1482-preview.mp3"
+  },
+  {
+   "id": "1328",
+   "kind": "sfx",
+   "title": "Fire swoosh burning",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1328/1328-preview.mp3"
+  },
+  {
+   "id": "1467",
+   "kind": "sfx",
+   "title": "Cinematic laser swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1467/1467-preview.mp3"
+  },
+  {
+   "id": "1476",
+   "kind": "sfx",
+   "title": "Sword slash swoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1476/1476-preview.mp3"
+  },
+  {
+   "id": "1576",
+   "kind": "sfx",
+   "title": "Landing jet flying whoosh",
+   "dur": "0:11",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1576/1576-preview.mp3"
+  },
+  {
+   "id": "2901",
+   "kind": "sfx",
+   "title": "Epic movie impact",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2901/2901-preview.mp3"
+  },
+  {
+   "id": "1478",
+   "kind": "sfx",
+   "title": "Karate hit whoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1478/1478-preview.mp3"
+  },
+  {
+   "id": "1484",
+   "kind": "sfx",
+   "title": "Speeding swoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1484/1484-preview.mp3"
+  },
+  {
+   "id": "174",
+   "kind": "sfx",
+   "title": "Fast sweep transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/174/174-preview.mp3"
+  },
+  {
+   "id": "2411",
+   "kind": "sfx",
+   "title": "Storm wind",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2411/2411-preview.mp3"
+  },
+  {
+   "id": "168",
+   "kind": "sfx",
+   "title": "Fast air sweep transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/168/168-preview.mp3"
+  },
+  {
+   "id": "3205",
+   "kind": "sfx",
+   "title": "Robot positive item acquired",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3205/3205-preview.mp3"
+  },
+  {
+   "id": "1463",
+   "kind": "sfx",
+   "title": "Spellcaster fairy swoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1463/1463-preview.mp3"
+  },
+  {
+   "id": "164",
+   "kind": "sfx",
+   "title": "Fast sweeping transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/164/164-preview.mp3"
+  },
+  {
+   "id": "169",
+   "kind": "sfx",
+   "title": "Futuristic sweep pass by",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/169/169-preview.mp3"
+  },
+  {
+   "id": "1468",
+   "kind": "sfx",
+   "title": "Cinematic transition wind swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1468/1468-preview.mp3"
+  },
+  {
+   "id": "2050",
+   "kind": "sfx",
+   "title": "Punch with a hard whistle",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2050/2050-preview.mp3"
+  },
+  {
+   "id": "1340",
+   "kind": "sfx",
+   "title": "Ghost fire swoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1340/1340-preview.mp3"
+  },
+  {
+   "id": "3161",
+   "kind": "sfx",
+   "title": "Transition flying swoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3161/3161-preview.mp3"
+  },
+  {
+   "id": "1473",
+   "kind": "sfx",
+   "title": "Long hit swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1473/1473-preview.mp3"
+  },
+  {
+   "id": "1167",
+   "kind": "sfx",
+   "title": "Swoosh wind passing",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1167/1167-preview.mp3"
+  },
+  {
+   "id": "863",
+   "kind": "sfx",
+   "title": "Fairy water spell",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/863/863-preview.mp3"
+  },
+  {
+   "id": "3218",
+   "kind": "sfx",
+   "title": "Positive tech alert",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3218/3218-preview.mp3"
+  },
+  {
+   "id": "576",
+   "kind": "sfx",
+   "title": "Atmospheric wind drum roll swoosh",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/576/576-preview.mp3"
+  },
+  {
+   "id": "1344",
+   "kind": "sfx",
+   "title": "Catapult fire whoosh",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1344/1344-preview.mp3"
+  }
+ ],
+ "impact": [
+  {
+   "id": "1143",
+   "kind": "sfx",
+   "title": "Cinematic whoosh deep impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1143/1143-preview.mp3"
+  },
+  {
+   "id": "2908",
+   "kind": "sfx",
+   "title": "Movie trailer epic impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2908/2908-preview.mp3"
+  },
+  {
+   "id": "788",
+   "kind": "sfx",
+   "title": "Big cinematic impact",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/788/788-preview.mp3"
+  },
+  {
+   "id": "2198",
+   "kind": "sfx",
+   "title": "Strong punches to the body",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2198/2198-preview.mp3"
+  },
+  {
+   "id": "2782",
+   "kind": "sfx",
+   "title": "Epic impact afar explosion",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2782/2782-preview.mp3"
+  },
+  {
+   "id": "2589",
+   "kind": "sfx",
+   "title": "Shot light energy flowing",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2589/2589-preview.mp3"
+  },
+  {
+   "id": "1687",
+   "kind": "sfx",
+   "title": "Dramatic metal explosion impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1687/1687-preview.mp3"
+  },
+  {
+   "id": "2902",
+   "kind": "sfx",
+   "title": "Movie impact intro presentation",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2902/2902-preview.mp3"
+  },
+  {
+   "id": "2150",
+   "kind": "sfx",
+   "title": "Impact of a blow",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2150/2150-preview.mp3"
+  },
+  {
+   "id": "784",
+   "kind": "sfx",
+   "title": "Reverse cinematic impact trailer",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/784/784-preview.mp3"
+  },
+  {
+   "id": "2182",
+   "kind": "sfx",
+   "title": "Wood hard hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2182/2182-preview.mp3"
+  },
+  {
+   "id": "2152",
+   "kind": "sfx",
+   "title": "Quick knife slice cutting",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2152/2152-preview.mp3"
+  },
+  {
+   "id": "3046",
+   "kind": "sfx",
+   "title": "Golem stomp c",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3046/3046-preview.mp3"
+  },
+  {
+   "id": "2804",
+   "kind": "sfx",
+   "title": "Bomb drop impact",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2804/2804-preview.mp3"
+  },
+  {
+   "id": "2900",
+   "kind": "sfx",
+   "title": "Movie logo intro impact",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2900/2900-preview.mp3"
+  },
+  {
+   "id": "498",
+   "kind": "sfx",
+   "title": "Deep heartbeat impact",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/498/498-preview.mp3"
+  },
+  {
+   "id": "833",
+   "kind": "sfx",
+   "title": "Metal hammer hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/833/833-preview.mp3"
+  },
+  {
+   "id": "2779",
+   "kind": "sfx",
+   "title": "8-bit explosion gun",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2779/2779-preview.mp3"
+  },
+  {
+   "id": "1279",
+   "kind": "sfx",
+   "title": "Fast thunder impact",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1279/1279-preview.mp3"
+  },
+  {
+   "id": "2180",
+   "kind": "sfx",
+   "title": "Exciting fast hit",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2180/2180-preview.mp3"
+  },
+  {
+   "id": "263",
+   "kind": "sfx",
+   "title": "Gore video game blood splash",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/263/263-preview.mp3"
+  },
+  {
+   "id": "2780",
+   "kind": "sfx",
+   "title": "Drums of war call",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2780/2780-preview.mp3"
+  },
+  {
+   "id": "2901",
+   "kind": "sfx",
+   "title": "Epic movie impact",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2901/2901-preview.mp3"
+  },
+  {
+   "id": "2199",
+   "kind": "sfx",
+   "title": "Body cutting impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2199/2199-preview.mp3"
+  },
+  {
+   "id": "774",
+   "kind": "sfx",
+   "title": "Space impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/774/774-preview.mp3"
+  },
+  {
+   "id": "2600",
+   "kind": "sfx",
+   "title": "Electricity static power up",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2600/2600-preview.mp3"
+  },
+  {
+   "id": "2183",
+   "kind": "sfx",
+   "title": "Glass hitting a metal",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2183/2183-preview.mp3"
+  },
+  {
+   "id": "773",
+   "kind": "sfx",
+   "title": "Horror impact",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/773/773-preview.mp3"
+  },
+  {
+   "id": "772",
+   "kind": "sfx",
+   "title": "Quick zoom impact",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/772/772-preview.mp3"
+  },
+  {
+   "id": "2655",
+   "kind": "sfx",
+   "title": "Fast impact blow",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2655/2655-preview.mp3"
+  },
+  {
+   "id": "781",
+   "kind": "sfx",
+   "title": "Cinematic impact waves",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/781/781-preview.mp3"
+  },
+  {
+   "id": "782",
+   "kind": "sfx",
+   "title": "Laser gun impact destruction",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/782/782-preview.mp3"
+  },
+  {
+   "id": "2599",
+   "kind": "sfx",
+   "title": "Heavy electric shockwave impact",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2599/2599-preview.mp3"
+  },
+  {
+   "id": "2784",
+   "kind": "sfx",
+   "title": "Drums of war",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2784/2784-preview.mp3"
+  },
+  {
+   "id": "2777",
+   "kind": "sfx",
+   "title": "Masive explosion in battle",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2777/2777-preview.mp3"
+  },
+  {
+   "id": "1686",
+   "kind": "sfx",
+   "title": "Underground explosion impact echo",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1686/1686-preview.mp3"
+  }
+ ],
+ "hit": [
+  {
+   "id": "788",
+   "kind": "sfx",
+   "title": "Big cinematic impact",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/788/788-preview.mp3"
+  },
+  {
+   "id": "2198",
+   "kind": "sfx",
+   "title": "Strong punches to the body",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2198/2198-preview.mp3"
+  },
+  {
+   "id": "2047",
+   "kind": "sfx",
+   "title": "Martial arts fast punch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2047/2047-preview.mp3"
+  },
+  {
+   "id": "677",
+   "kind": "sfx",
+   "title": "Cinematic glass hit suspense",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/677/677-preview.mp3"
+  },
+  {
+   "id": "746",
+   "kind": "sfx",
+   "title": "Cartoon dazzle hit and birds",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/746/746-preview.mp3"
+  },
+  {
+   "id": "565",
+   "kind": "sfx",
+   "title": "Hard horror hit drum",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/565/565-preview.mp3"
+  },
+  {
+   "id": "2155",
+   "kind": "sfx",
+   "title": "Impact of a strong punch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2155/2155-preview.mp3"
+  },
+  {
+   "id": "2150",
+   "kind": "sfx",
+   "title": "Impact of a blow",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2150/2150-preview.mp3"
+  },
+  {
+   "id": "2161",
+   "kind": "sfx",
+   "title": "Air in a hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2161/2161-preview.mp3"
+  },
+  {
+   "id": "784",
+   "kind": "sfx",
+   "title": "Reverse cinematic impact trailer",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/784/784-preview.mp3"
+  },
+  {
+   "id": "2182",
+   "kind": "sfx",
+   "title": "Wood hard hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2182/2182-preview.mp3"
+  },
+  {
+   "id": "2152",
+   "kind": "sfx",
+   "title": "Quick knife slice cutting",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2152/2152-preview.mp3"
+  },
+  {
+   "id": "2151",
+   "kind": "sfx",
+   "title": "Soft quick punch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2151/2151-preview.mp3"
+  },
+  {
+   "id": "498",
+   "kind": "sfx",
+   "title": "Deep heartbeat impact",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/498/498-preview.mp3"
+  },
+  {
+   "id": "2637",
+   "kind": "sfx",
+   "title": "Fast air transition sweep",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2637/2637-preview.mp3"
+  },
+  {
+   "id": "833",
+   "kind": "sfx",
+   "title": "Metal hammer hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/833/833-preview.mp3"
+  },
+  {
+   "id": "2299",
+   "kind": "sfx",
+   "title": "Short bass hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2299/2299-preview.mp3"
+  },
+  {
+   "id": "2073",
+   "kind": "sfx",
+   "title": "Game ball tap",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2073/2073-preview.mp3"
+  },
+  {
+   "id": "2907",
+   "kind": "sfx",
+   "title": "Epic blockbuster movie transition",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2907/2907-preview.mp3"
+  },
+  {
+   "id": "2180",
+   "kind": "sfx",
+   "title": "Exciting fast hit",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2180/2180-preview.mp3"
+  },
+  {
+   "id": "2141",
+   "kind": "sfx",
+   "title": "Punch through air",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2141/2141-preview.mp3"
+  },
+  {
+   "id": "2160",
+   "kind": "sfx",
+   "title": "Metallic sword strike",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2160/2160-preview.mp3"
+  },
+  {
+   "id": "2112",
+   "kind": "sfx",
+   "title": "Hitting soccer ball",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2112/2112-preview.mp3"
+  },
+  {
+   "id": "2199",
+   "kind": "sfx",
+   "title": "Body cutting impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2199/2199-preview.mp3"
+  },
+  {
+   "id": "2072",
+   "kind": "sfx",
+   "title": "Small hit in a game",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2072/2072-preview.mp3"
+  },
+  {
+   "id": "2167",
+   "kind": "sfx",
+   "title": "Short slap or clap",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2167/2167-preview.mp3"
+  },
+  {
+   "id": "2183",
+   "kind": "sfx",
+   "title": "Glass hitting a metal",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2183/2183-preview.mp3"
+  },
+  {
+   "id": "2795",
+   "kind": "sfx",
+   "title": "Heavy sword smashes metal",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2795/2795-preview.mp3"
+  },
+  {
+   "id": "2153",
+   "kind": "sfx",
+   "title": "Body punch quick hit",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2153/2153-preview.mp3"
+  },
+  {
+   "id": "487",
+   "kind": "sfx",
+   "title": "Cinematic ancient drums heartbeat",
+   "dur": "0:39",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/487/487-preview.mp3"
+  },
+  {
+   "id": "2108",
+   "kind": "sfx",
+   "title": "Soccer ball quick kick",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2108/2108-preview.mp3"
+  },
+  {
+   "id": "2148",
+   "kind": "sfx",
+   "title": "Weak hit impact",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2148/2148-preview.mp3"
+  },
+  {
+   "id": "2765",
+   "kind": "sfx",
+   "title": "Sword strikes armor",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2765/2765-preview.mp3"
+  },
+  {
+   "id": "2144",
+   "kind": "sfx",
+   "title": "Fast blow",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2144/2144-preview.mp3"
+  },
+  {
+   "id": "2055",
+   "kind": "sfx",
+   "title": "Boxer getting hit",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2055/2055-preview.mp3"
+  },
+  {
+   "id": "2300",
+   "kind": "sfx",
+   "title": "Knocking sub bass",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2300/2300-preview.mp3"
+  }
+ ],
+ "boom": [
+  {
+   "id": "2902",
+   "kind": "sfx",
+   "title": "Movie impact intro presentation",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2902/2902-preview.mp3"
+  },
+  {
+   "id": "490",
+   "kind": "sfx",
+   "title": "Human single heart beat",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/490/490-preview.mp3"
+  },
+  {
+   "id": "2779",
+   "kind": "sfx",
+   "title": "8-bit explosion gun",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2779/2779-preview.mp3"
+  },
+  {
+   "id": "2759",
+   "kind": "sfx",
+   "title": "Arcade game explosion",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2759/2759-preview.mp3"
+  },
+  {
+   "id": "2778",
+   "kind": "sfx",
+   "title": "8-bit game shots",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2778/2778-preview.mp3"
+  },
+  {
+   "id": "567",
+   "kind": "sfx",
+   "title": "Tribal ritual drums",
+   "dur": "0:20",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/567/567-preview.mp3"
+  },
+  {
+   "id": "1151",
+   "kind": "sfx",
+   "title": "Intro news sound",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1151/1151-preview.mp3"
+  },
+  {
+   "id": "1150",
+   "kind": "sfx",
+   "title": "Introduction bell sound",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1150/1150-preview.mp3"
+  },
+  {
+   "id": "1690",
+   "kind": "sfx",
+   "title": "Distant explosion",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1690/1690-preview.mp3"
+  },
+  {
+   "id": "1694",
+   "kind": "sfx",
+   "title": "Short explosion",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1694/1694-preview.mp3"
+  },
+  {
+   "id": "1699",
+   "kind": "sfx",
+   "title": "Arcade game explosion",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1699/1699-preview.mp3"
+  },
+  {
+   "id": "572",
+   "kind": "sfx",
+   "title": "Tribal drumming ambience",
+   "dur": "0:40",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/572/572-preview.mp3"
+  },
+  {
+   "id": "1261",
+   "kind": "sfx",
+   "title": "Bad weather heavy rain and thunder",
+   "dur": "0:25",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1261/1261-preview.mp3"
+  },
+  {
+   "id": "1698",
+   "kind": "sfx",
+   "title": "Arcade game explosion echo",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1698/1698-preview.mp3"
+  },
+  {
+   "id": "1692",
+   "kind": "sfx",
+   "title": "Pixel chiptune explosion",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1692/1692-preview.mp3"
+  },
+  {
+   "id": "2942",
+   "kind": "sfx",
+   "title": "System break",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2942/2942-preview.mp3"
+  },
+  {
+   "id": "1688",
+   "kind": "sfx",
+   "title": "Fast game explosion",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1688/1688-preview.mp3"
+  }
+ ],
+ "rise": [],
+ "riser": [
+  {
+   "id": "790",
+   "kind": "sfx",
+   "title": "Cinematic trailer riser",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/790/790-preview.mp3"
+  },
+  {
+   "id": "1144",
+   "kind": "sfx",
+   "title": "Short space stutter intro riser",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1144/1144-preview.mp3"
+  },
+  {
+   "id": "2719",
+   "kind": "sfx",
+   "title": "Cinematic riser helicopter engine",
+   "dur": "0:13",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2719/2719-preview.mp3"
+  },
+  {
+   "id": "632",
+   "kind": "sfx",
+   "title": "Cinematic drama riser",
+   "dur": "0:31",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/632/632-preview.mp3"
+  },
+  {
+   "id": "794",
+   "kind": "sfx",
+   "title": "Tech choir cinematic riser",
+   "dur": "0:17",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/794/794-preview.mp3"
+  },
+  {
+   "id": "2283",
+   "kind": "sfx",
+   "title": "Cinematic mysterious riser brass",
+   "dur": "0:27",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2283/2283-preview.mp3"
+  },
+  {
+   "id": "645",
+   "kind": "sfx",
+   "title": "Cinematic synth riser",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/645/645-preview.mp3"
+  }
+ ],
+ "transition": [
+  {
+   "id": "1492",
+   "kind": "sfx",
+   "title": "Cinematic whoosh fast transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1492/1492-preview.mp3"
+  },
+  {
+   "id": "166",
+   "kind": "sfx",
+   "title": "Fast small sweep transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/166/166-preview.mp3"
+  },
+  {
+   "id": "1714",
+   "kind": "sfx",
+   "title": "Fast rocket whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1714/1714-preview.mp3"
+  },
+  {
+   "id": "2290",
+   "kind": "sfx",
+   "title": "Epic orchestra transition",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2290/2290-preview.mp3"
+  },
+  {
+   "id": "2608",
+   "kind": "sfx",
+   "title": "Air zoom vacuum",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2608/2608-preview.mp3"
+  },
+  {
+   "id": "1490",
+   "kind": "sfx",
+   "title": "Fast whoosh transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1490/1490-preview.mp3"
+  },
+  {
+   "id": "1486",
+   "kind": "sfx",
+   "title": "Cinematic tunnel reverb woosh",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1486/1486-preview.mp3"
+  },
+  {
+   "id": "2909",
+   "kind": "sfx",
+   "title": "Cool impact movie trailer",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2909/2909-preview.mp3"
+  },
+  {
+   "id": "2908",
+   "kind": "sfx",
+   "title": "Movie trailer epic impact",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2908/2908-preview.mp3"
+  },
+  {
+   "id": "1287",
+   "kind": "sfx",
+   "title": "Cinematic laser gun thunder",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1287/1287-preview.mp3"
+  },
+  {
+   "id": "1146",
+   "kind": "sfx",
+   "title": "Intro transition",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1146/1146-preview.mp3"
+  },
+  {
+   "id": "1474",
+   "kind": "sfx",
+   "title": "Transition windy swoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1474/1474-preview.mp3"
+  },
+  {
+   "id": "1465",
+   "kind": "sfx",
+   "title": "Vacuum swoosh transition",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1465/1465-preview.mp3"
+  },
+  {
+   "id": "2630",
+   "kind": "sfx",
+   "title": "Terror sweep of darkness",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2630/2630-preview.mp3"
+  },
+  {
+   "id": "3120",
+   "kind": "sfx",
+   "title": "Technology transition slide",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3120/3120-preview.mp3"
+  },
+  {
+   "id": "175",
+   "kind": "sfx",
+   "title": "Short transition sweep",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/175/175-preview.mp3"
+  },
+  {
+   "id": "2719",
+   "kind": "sfx",
+   "title": "Cinematic riser helicopter engine",
+   "dur": "0:13",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2719/2719-preview.mp3"
+  },
+  {
+   "id": "3115",
+   "kind": "sfx",
+   "title": "Fast transitions swoosh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3115/3115-preview.mp3"
+  },
+  {
+   "id": "2638",
+   "kind": "sfx",
+   "title": "Magic transition sweep presentation",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2638/2638-preview.mp3"
+  },
+  {
+   "id": "2289",
+   "kind": "sfx",
+   "title": "Warfare horn",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2289/2289-preview.mp3"
+  },
+  {
+   "id": "1168",
+   "kind": "sfx",
+   "title": "Woosh wind",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1168/1168-preview.mp3"
+  },
+  {
+   "id": "2295",
+   "kind": "sfx",
+   "title": "Pulsating bass transition",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2295/2295-preview.mp3"
+  },
+  {
+   "id": "2408",
+   "kind": "sfx",
+   "title": "Storm coming whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2408/2408-preview.mp3"
+  },
+  {
+   "id": "3114",
+   "kind": "sfx",
+   "title": "Fast sci fi transition sweep",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3114/3114-preview.mp3"
+  },
+  {
+   "id": "2282",
+   "kind": "sfx",
+   "title": "Cinematic transition brass hum",
+   "dur": "0:20",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2282/2282-preview.mp3"
+  },
+  {
+   "id": "2907",
+   "kind": "sfx",
+   "title": "Epic blockbuster movie transition",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2907/2907-preview.mp3"
+  },
+  {
+   "id": "3057",
+   "kind": "sfx",
+   "title": "Apocalyptic stomp impact",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3057/3057-preview.mp3"
+  },
+  {
+   "id": "2639",
+   "kind": "sfx",
+   "title": "Quick metal transition sweep",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2639/2639-preview.mp3"
+  },
+  {
+   "id": "2919",
+   "kind": "sfx",
+   "title": "Movie trailer whoosh hit",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2919/2919-preview.mp3"
+  },
+  {
+   "id": "2615",
+   "kind": "sfx",
+   "title": "Mighty mysterious swoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2615/2615-preview.mp3"
+  },
+  {
+   "id": "3089",
+   "kind": "sfx",
+   "title": "Television news report transition",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3089/3089-preview.mp3"
+  },
+  {
+   "id": "2297",
+   "kind": "sfx",
+   "title": "Bass rumble hum",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2297/2297-preview.mp3"
+  },
+  {
+   "id": "1695",
+   "kind": "sfx",
+   "title": "Whoosh transition explosion echo",
+   "dur": "0:11",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1695/1695-preview.mp3"
+  },
+  {
+   "id": "3121",
+   "kind": "sfx",
+   "title": "Technology alert transition",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3121/3121-preview.mp3"
+  },
+  {
+   "id": "2291",
+   "kind": "sfx",
+   "title": "Eerie trailer horn transition",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2291/2291-preview.mp3"
+  },
+  {
+   "id": "3111",
+   "kind": "sfx",
+   "title": "Warfare horn trailer hit",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3111/3111-preview.mp3"
+  }
+ ],
+ "click": [
+  {
+   "id": "1133",
+   "kind": "sfx",
+   "title": "Camera shutter click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1133/1133-preview.mp3"
+  },
+  {
+   "id": "275",
+   "kind": "sfx",
+   "title": "Fast double click on mouse",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/275/275-preview.mp3"
+  },
+  {
+   "id": "900",
+   "kind": "sfx",
+   "title": "Sci fi click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/900/900-preview.mp3"
+  },
+  {
+   "id": "1109",
+   "kind": "sfx",
+   "title": "Select click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1109/1109-preview.mp3"
+  },
+  {
+   "id": "2531",
+   "kind": "sfx",
+   "title": "Typing on a laptop keyboard",
+   "dur": "0:19",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2531/2531-preview.mp3"
+  },
+  {
+   "id": "3124",
+   "kind": "sfx",
+   "title": "Modern technology select",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3124/3124-preview.mp3"
+  },
+  {
+   "id": "1660",
+   "kind": "sfx",
+   "title": "Handgun click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1660/1660-preview.mp3"
+  },
+  {
+   "id": "1113",
+   "kind": "sfx",
+   "title": "Mouse click close",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1113/1113-preview.mp3"
+  },
+  {
+   "id": "2568",
+   "kind": "sfx",
+   "title": "Cool interface click tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"
+  },
+  {
+   "id": "1137",
+   "kind": "sfx",
+   "title": "Old camera shutter click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1137/1137-preview.mp3"
+  },
+  {
+   "id": "211",
+   "kind": "sfx",
+   "title": "Retro arcade casino notification",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/211/211-preview.mp3"
+  },
+  {
+   "id": "1117",
+   "kind": "sfx",
+   "title": "Classic click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1117/1117-preview.mp3"
+  },
+  {
+   "id": "2585",
+   "kind": "sfx",
+   "title": "On or off light switch tap",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2585/2585-preview.mp3"
+  },
+  {
+   "id": "269",
+   "kind": "sfx",
+   "title": "Quick win video game notification",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/269/269-preview.mp3"
+  },
+  {
+   "id": "1125",
+   "kind": "sfx",
+   "title": "Typewriter soft click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1125/1125-preview.mp3"
+  },
+  {
+   "id": "2577",
+   "kind": "sfx",
+   "title": "Interface device click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2577/2577-preview.mp3"
+  },
+  {
+   "id": "1119",
+   "kind": "sfx",
+   "title": "Hard typewriter click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1119/1119-preview.mp3"
+  },
+  {
+   "id": "1124",
+   "kind": "sfx",
+   "title": "Plastic bubble click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1124/1124-preview.mp3"
+  },
+  {
+   "id": "216",
+   "kind": "sfx",
+   "title": "Arcade game jump coin",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/216/216-preview.mp3"
+  },
+  {
+   "id": "1110",
+   "kind": "sfx",
+   "title": "Click error",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1110/1110-preview.mp3"
+  },
+  {
+   "id": "2569",
+   "kind": "sfx",
+   "title": "Negative tone interface tap",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2569/2569-preview.mp3"
+  },
+  {
+   "id": "901",
+   "kind": "sfx",
+   "title": "Sci fi interface robot click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/901/901-preview.mp3"
+  },
+  {
+   "id": "2997",
+   "kind": "sfx",
+   "title": "Clear mouse clicks",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3"
+  },
+  {
+   "id": "2858",
+   "kind": "sfx",
+   "title": "Gear metallic lock sound",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2858/2858-preview.mp3"
+  },
+  {
+   "id": "2578",
+   "kind": "sfx",
+   "title": "Opening software interface",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3"
+  },
+  {
+   "id": "1111",
+   "kind": "sfx",
+   "title": "Mouse hard clicking",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1111/1111-preview.mp3"
+  },
+  {
+   "id": "265",
+   "kind": "sfx",
+   "title": "Quick positive video game notification interface",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/265/265-preview.mp3"
+  },
+  {
+   "id": "1120",
+   "kind": "sfx",
+   "title": "Modern click box check",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1120/1120-preview.mp3"
+  },
+  {
+   "id": "2995",
+   "kind": "sfx",
+   "title": "Stapling paper",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2995/2995-preview.mp3"
+  },
+  {
+   "id": "221",
+   "kind": "sfx",
+   "title": "Positive interface beep",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/221/221-preview.mp3"
+  },
+  {
+   "id": "2857",
+   "kind": "sfx",
+   "title": "Gear fast lock tap",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2857/2857-preview.mp3"
+  },
+  {
+   "id": "902",
+   "kind": "sfx",
+   "title": "Water sci fi bleep",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/902/902-preview.mp3"
+  },
+  {
+   "id": "268",
+   "kind": "sfx",
+   "title": "Game quick warning notification",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/268/268-preview.mp3"
+  },
+  {
+   "id": "237",
+   "kind": "sfx",
+   "title": "Video game retro click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/237/237-preview.mp3"
+  },
+  {
+   "id": "234",
+   "kind": "sfx",
+   "title": "Video game mystery alert",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/234/234-preview.mp3"
+  },
+  {
+   "id": "1114",
+   "kind": "sfx",
+   "title": "Game click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1114/1114-preview.mp3"
+  }
+ ],
+ "pop": [
+  {
+   "id": "2358",
+   "kind": "sfx",
+   "title": "Long pop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"
+  },
+  {
+   "id": "2364",
+   "kind": "sfx",
+   "title": "Hard pop click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2364/2364-preview.mp3"
+  },
+  {
+   "id": "2354",
+   "kind": "sfx",
+   "title": "Message pop alert",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3"
+  },
+  {
+   "id": "3005",
+   "kind": "sfx",
+   "title": "Explainer video pops whoosh light pop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3005/3005-preview.mp3"
+  },
+  {
+   "id": "2357",
+   "kind": "sfx",
+   "title": "Bubble pop up alert notification",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2357/2357-preview.mp3"
+  },
+  {
+   "id": "2356",
+   "kind": "sfx",
+   "title": "Dry pop up notification alert",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2356/2356-preview.mp3"
+  },
+  {
+   "id": "2925",
+   "kind": "sfx",
+   "title": "Soap bubble sound",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2925/2925-preview.mp3"
+  },
+  {
+   "id": "2363",
+   "kind": "sfx",
+   "title": "Game blood pop slide",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2363/2363-preview.mp3"
+  },
+  {
+   "id": "2361",
+   "kind": "sfx",
+   "title": "Video game blood pop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2361/2361-preview.mp3"
+  },
+  {
+   "id": "2359",
+   "kind": "sfx",
+   "title": "Silly pop cluster",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2359/2359-preview.mp3"
+  },
+  {
+   "id": "2365",
+   "kind": "sfx",
+   "title": "Electric pop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2365/2365-preview.mp3"
+  }
+ ],
+ "notification": [
+  {
+   "id": "2870",
+   "kind": "sfx",
+   "title": "Correct answer tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3"
+  },
+  {
+   "id": "2358",
+   "kind": "sfx",
+   "title": "Long pop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"
+  },
+  {
+   "id": "933",
+   "kind": "sfx",
+   "title": "Bell notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/933/933-preview.mp3"
+  },
+  {
+   "id": "2354",
+   "kind": "sfx",
+   "title": "Message pop alert",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3"
+  },
+  {
+   "id": "900",
+   "kind": "sfx",
+   "title": "Sci fi click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/900/900-preview.mp3"
+  },
+  {
+   "id": "2574",
+   "kind": "sfx",
+   "title": "Software interface start",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2574/2574-preview.mp3"
+  },
+  {
+   "id": "2575",
+   "kind": "sfx",
+   "title": "Software interface back",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2575/2575-preview.mp3"
+  },
+  {
+   "id": "937",
+   "kind": "sfx",
+   "title": "Happy bells notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/937/937-preview.mp3"
+  },
+  {
+   "id": "914",
+   "kind": "sfx",
+   "title": "Sci Fi confirmation",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/914/914-preview.mp3"
+  },
+  {
+   "id": "951",
+   "kind": "sfx",
+   "title": "Positive notification",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/951/951-preview.mp3"
+  },
+  {
+   "id": "2867",
+   "kind": "sfx",
+   "title": "Confirmation tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2867/2867-preview.mp3"
+  },
+  {
+   "id": "2848",
+   "kind": "sfx",
+   "title": "Gaming lock",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2848/2848-preview.mp3"
+  },
+  {
+   "id": "2310",
+   "kind": "sfx",
+   "title": "Melodical flute music notification",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2310/2310-preview.mp3"
+  },
+  {
+   "id": "2357",
+   "kind": "sfx",
+   "title": "Bubble pop up alert notification",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2357/2357-preview.mp3"
+  },
+  {
+   "id": "946",
+   "kind": "sfx",
+   "title": "Wrong answer fail notification",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/946/946-preview.mp3"
+  },
+  {
+   "id": "2573",
+   "kind": "sfx",
+   "title": "Interface option select",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3"
+  },
+  {
+   "id": "2356",
+   "kind": "sfx",
+   "title": "Dry pop up notification alert",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2356/2356-preview.mp3"
+  },
+  {
+   "id": "2576",
+   "kind": "sfx",
+   "title": "Software interface remove",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2576/2576-preview.mp3"
+  },
+  {
+   "id": "2344",
+   "kind": "sfx",
+   "title": "Magic notification ring",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2344/2344-preview.mp3"
+  },
+  {
+   "id": "2976",
+   "kind": "sfx",
+   "title": "Urgent simple tone loop",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2976/2976-preview.mp3"
+  },
+  {
+   "id": "2861",
+   "kind": "sfx",
+   "title": "Clear announce tones",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2861/2861-preview.mp3"
+  },
+  {
+   "id": "911",
+   "kind": "sfx",
+   "title": "Interface hint notification",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/911/911-preview.mp3"
+  },
+  {
+   "id": "987",
+   "kind": "sfx",
+   "title": "Game notification wave alarm",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/987/987-preview.mp3"
+  },
+  {
+   "id": "2489",
+   "kind": "sfx",
+   "title": "Arabian mystery harp notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3"
+  },
+  {
+   "id": "952",
+   "kind": "sfx",
+   "title": "Correct answer reward",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/952/952-preview.mp3"
+  },
+  {
+   "id": "2864",
+   "kind": "sfx",
+   "title": "Doorbell tone",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2864/2864-preview.mp3"
+  },
+  {
+   "id": "2580",
+   "kind": "sfx",
+   "title": "Light button",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2580/2580-preview.mp3"
+  },
+  {
+   "id": "2863",
+   "kind": "sfx",
+   "title": "Elevator tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2863/2863-preview.mp3"
+  },
+  {
+   "id": "896",
+   "kind": "sfx",
+   "title": "Sci-Fi reject notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/896/896-preview.mp3"
+  },
+  {
+   "id": "2320",
+   "kind": "sfx",
+   "title": "Guitar notification alert",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2320/2320-preview.mp3"
+  },
+  {
+   "id": "2866",
+   "kind": "sfx",
+   "title": "Digital quick tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2866/2866-preview.mp3"
+  },
+  {
+   "id": "960",
+   "kind": "sfx",
+   "title": "Tile game reveal",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/960/960-preview.mp3"
+  },
+  {
+   "id": "2820",
+   "kind": "sfx",
+   "title": "Magic marimba",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2820/2820-preview.mp3"
+  },
+  {
+   "id": "2317",
+   "kind": "sfx",
+   "title": "Uplifting flute notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2317/2317-preview.mp3"
+  },
+  {
+   "id": "2841",
+   "kind": "sfx",
+   "title": "Atm cash machine key press",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2841/2841-preview.mp3"
+  },
+  {
+   "id": "333",
+   "kind": "sfx",
+   "title": "Doorbell single press",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/333/333-preview.mp3"
+  }
+ ],
+ "typing": [
+  {
+   "id": "1386",
+   "kind": "sfx",
+   "title": "Keyboard typing",
+   "dur": "0:26",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1386/1386-preview.mp3"
+  },
+  {
+   "id": "2531",
+   "kind": "sfx",
+   "title": "Typing on a laptop keyboard",
+   "dur": "0:19",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2531/2531-preview.mp3"
+  },
+  {
+   "id": "2532",
+   "kind": "sfx",
+   "title": "Slow typing on a keyboard",
+   "dur": "0:23",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2532/2532-preview.mp3"
+  },
+  {
+   "id": "1393",
+   "kind": "sfx",
+   "title": "Smartphone typing",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1393/1393-preview.mp3"
+  },
+  {
+   "id": "1372",
+   "kind": "sfx",
+   "title": "Old typewriter typing",
+   "dur": "0:24",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1372/1372-preview.mp3"
+  },
+  {
+   "id": "1396",
+   "kind": "sfx",
+   "title": "Soft typing on a digital keyboard",
+   "dur": "0:26",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1396/1396-preview.mp3"
+  },
+  {
+   "id": "1392",
+   "kind": "sfx",
+   "title": "Fast laptop keyboard typing",
+   "dur": "0:19",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1392/1392-preview.mp3"
+  },
+  {
+   "id": "2538",
+   "kind": "sfx",
+   "title": "Hard laptop keyboard typing",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2538/2538-preview.mp3"
+  },
+  {
+   "id": "1387",
+   "kind": "sfx",
+   "title": "Fast keyboard typing",
+   "dur": "0:25",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1387/1387-preview.mp3"
+  },
+  {
+   "id": "1395",
+   "kind": "sfx",
+   "title": "Typing text on a smartphone",
+   "dur": "0:19",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1395/1395-preview.mp3"
+  },
+  {
+   "id": "1376",
+   "kind": "sfx",
+   "title": "Typing on an electronic device",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1376/1376-preview.mp3"
+  },
+  {
+   "id": "1391",
+   "kind": "sfx",
+   "title": "Keyboard slow typing",
+   "dur": "0:23",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1391/1391-preview.mp3"
+  },
+  {
+   "id": "1377",
+   "kind": "sfx",
+   "title": "Typing on an electric typewriter",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1377/1377-preview.mp3"
+  },
+  {
+   "id": "1388",
+   "kind": "sfx",
+   "title": "Keyboard random typing",
+   "dur": "0:35",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1388/1388-preview.mp3"
+  },
+  {
+   "id": "1397",
+   "kind": "sfx",
+   "title": "Electronic typing",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1397/1397-preview.mp3"
+  },
+  {
+   "id": "2539",
+   "kind": "sfx",
+   "title": "Laptop backspace typing sequence",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2539/2539-preview.mp3"
+  },
+  {
+   "id": "1389",
+   "kind": "sfx",
+   "title": "Typing on plastic keyboard",
+   "dur": "0:21",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1389/1389-preview.mp3"
+  },
+  {
+   "id": "2537",
+   "kind": "sfx",
+   "title": "Laptop keyboard typing sequence",
+   "dur": "0:13",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2537/2537-preview.mp3"
+  },
+  {
+   "id": "1390",
+   "kind": "sfx",
+   "title": "Hard typing",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1390/1390-preview.mp3"
+  }
+ ],
+ "interface": [
+  {
+   "id": "2574",
+   "kind": "sfx",
+   "title": "Software interface start",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2574/2574-preview.mp3"
+  },
+  {
+   "id": "1109",
+   "kind": "sfx",
+   "title": "Select click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1109/1109-preview.mp3"
+  },
+  {
+   "id": "2575",
+   "kind": "sfx",
+   "title": "Software interface back",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2575/2575-preview.mp3"
+  },
+  {
+   "id": "2573",
+   "kind": "sfx",
+   "title": "Interface option select",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3"
+  },
+  {
+   "id": "2568",
+   "kind": "sfx",
+   "title": "Cool interface click tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"
+  },
+  {
+   "id": "2576",
+   "kind": "sfx",
+   "title": "Software interface remove",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2576/2576-preview.mp3"
+  },
+  {
+   "id": "2577",
+   "kind": "sfx",
+   "title": "Interface device click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2577/2577-preview.mp3"
+  },
+  {
+   "id": "1107",
+   "kind": "sfx",
+   "title": "Page forward single chime",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1107/1107-preview.mp3"
+  },
+  {
+   "id": "1110",
+   "kind": "sfx",
+   "title": "Click error",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1110/1110-preview.mp3"
+  },
+  {
+   "id": "2569",
+   "kind": "sfx",
+   "title": "Negative tone interface tap",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2569/2569-preview.mp3"
+  },
+  {
+   "id": "2578",
+   "kind": "sfx",
+   "title": "Opening software interface",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3"
+  },
+  {
+   "id": "1108",
+   "kind": "sfx",
+   "title": "Page back chime",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1108/1108-preview.mp3"
+  },
+  {
+   "id": "2570",
+   "kind": "sfx",
+   "title": "Game user interface tone",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3"
+  },
+  {
+   "id": "1106",
+   "kind": "sfx",
+   "title": "Page turn chime",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1106/1106-preview.mp3"
+  },
+  {
+   "id": "2567",
+   "kind": "sfx",
+   "title": "Game interface sound",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2567/2567-preview.mp3"
+  }
+ ],
+ "camera": [
+  {
+   "id": "1133",
+   "kind": "sfx",
+   "title": "Camera shutter click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1133/1133-preview.mp3"
+  },
+  {
+   "id": "1430",
+   "kind": "sfx",
+   "title": "Camera shutter hard click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1430/1430-preview.mp3"
+  },
+  {
+   "id": "1438",
+   "kind": "sfx",
+   "title": "Vintage camera shutter",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1438/1438-preview.mp3"
+  },
+  {
+   "id": "1440",
+   "kind": "sfx",
+   "title": "Classic camera click",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1440/1440-preview.mp3"
+  },
+  {
+   "id": "1432",
+   "kind": "sfx",
+   "title": "Camera digital shutter",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1432/1432-preview.mp3"
+  },
+  {
+   "id": "1431",
+   "kind": "sfx",
+   "title": "Camera long shutter",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1431/1431-preview.mp3"
+  },
+  {
+   "id": "1433",
+   "kind": "sfx",
+   "title": "Camera lens shutter",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1433/1433-preview.mp3"
+  },
+  {
+   "id": "1434",
+   "kind": "sfx",
+   "title": "Nikon camera shutter",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1434/1434-preview.mp3"
+  },
+  {
+   "id": "432",
+   "kind": "sfx",
+   "title": "Reporters crowd and camera flashes",
+   "dur": "0:16",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/432/432-preview.mp3"
+  },
+  {
+   "id": "1437",
+   "kind": "sfx",
+   "title": "Camera lens autofocus",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1437/1437-preview.mp3"
+  },
+  {
+   "id": "1436",
+   "kind": "sfx",
+   "title": "Camera auto focus",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1436/1436-preview.mp3"
+  },
+  {
+   "id": "1439",
+   "kind": "sfx",
+   "title": "Camera closing lens",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1439/1439-preview.mp3"
+  }
+ ],
+ "cash-register": [],
+ "money": [
+  {
+   "id": "1993",
+   "kind": "sfx",
+   "title": "Clinking coins",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1993/1993-preview.mp3"
+  },
+  {
+   "id": "1999",
+   "kind": "sfx",
+   "title": "Gold coin prize",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1999/1999-preview.mp3"
+  },
+  {
+   "id": "1996",
+   "kind": "sfx",
+   "title": "Slot machine payout alarm",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1996/1996-preview.mp3"
+  },
+  {
+   "id": "2841",
+   "kind": "sfx",
+   "title": "Atm cash machine key press",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2841/2841-preview.mp3"
+  },
+  {
+   "id": "1939",
+   "kind": "sfx",
+   "title": "Coins handling",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1939/1939-preview.mp3"
+  },
+  {
+   "id": "1936",
+   "kind": "sfx",
+   "title": "Magical coin win",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1936/1936-preview.mp3"
+  },
+  {
+   "id": "1989",
+   "kind": "sfx",
+   "title": "Money bag drop",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1989/1989-preview.mp3"
+  },
+  {
+   "id": "2003",
+   "kind": "sfx",
+   "title": "Coins sound",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"
+  },
+  {
+   "id": "1992",
+   "kind": "sfx",
+   "title": "Coin win notification",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1992/1992-preview.mp3"
+  },
+  {
+   "id": "2000",
+   "kind": "sfx",
+   "title": "Melodic gold price",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"
+  },
+  {
+   "id": "1997",
+   "kind": "sfx",
+   "title": "Classic winner alarm",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1997/1997-preview.mp3"
+  },
+  {
+   "id": "1991",
+   "kind": "sfx",
+   "title": "Casino jackpot alarm and coins",
+   "dur": "0:17",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1991/1991-preview.mp3"
+  },
+  {
+   "id": "1990",
+   "kind": "sfx",
+   "title": "Casino win alarm and coins",
+   "dur": "0:16",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1990/1990-preview.mp3"
+  },
+  {
+   "id": "2846",
+   "kind": "sfx",
+   "title": "Entering pin in a cash machine",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2846/2846-preview.mp3"
+  }
+ ],
+ "scratch": [
+  {
+   "id": "702",
+   "kind": "sfx",
+   "title": "Record player vinyl scratch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/702/702-preview.mp3"
+  },
+  {
+   "id": "711",
+   "kind": "sfx",
+   "title": "Vinyl record slow down",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/711/711-preview.mp3"
+  },
+  {
+   "id": "703",
+   "kind": "sfx",
+   "title": "Vinyl forward and back fast scratch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/703/703-preview.mp3"
+  },
+  {
+   "id": "708",
+   "kind": "sfx",
+   "title": "DJ record swipe",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/708/708-preview.mp3"
+  },
+  {
+   "id": "704",
+   "kind": "sfx",
+   "title": "Vinyl stop fast scratch",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/704/704-preview.mp3"
+  },
+  {
+   "id": "705",
+   "kind": "sfx",
+   "title": "Vinyl forward and back scratch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/705/705-preview.mp3"
+  },
+  {
+   "id": "709",
+   "kind": "sfx",
+   "title": "Swell vinyl record scratch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/709/709-preview.mp3"
+  },
+  {
+   "id": "710",
+   "kind": "sfx",
+   "title": "Vinyl record small scratch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/710/710-preview.mp3"
+  },
+  {
+   "id": "706",
+   "kind": "sfx",
+   "title": "Slow vinyl record scratch",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/706/706-preview.mp3"
+  },
+  {
+   "id": "707",
+   "kind": "sfx",
+   "title": "Vinyl record swipe",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/707/707-preview.mp3"
+  },
+  {
+   "id": "701",
+   "kind": "sfx",
+   "title": "Record player needle drop on vinyl",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/701/701-preview.mp3"
+  },
+  {
+   "id": "712",
+   "kind": "sfx",
+   "title": "Vinyl record distorted scratch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/712/712-preview.mp3"
+  }
+ ],
+ "glitch": [
+  {
+   "id": "2595",
+   "kind": "sfx",
+   "title": "Small electric glitch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2595/2595-preview.mp3"
+  },
+  {
+   "id": "2566",
+   "kind": "sfx",
+   "title": "Terror radio frequency",
+   "dur": "0:25",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2566/2566-preview.mp3"
+  },
+  {
+   "id": "1457",
+   "kind": "sfx",
+   "title": "Glitch static",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1457/1457-preview.mp3"
+  },
+  {
+   "id": "1033",
+   "kind": "sfx",
+   "title": "Glitch roar",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1033/1033-preview.mp3"
+  },
+  {
+   "id": "2563",
+   "kind": "sfx",
+   "title": "Broken radio frequency signal",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2563/2563-preview.mp3"
+  },
+  {
+   "id": "679",
+   "kind": "sfx",
+   "title": "Glitchy cinematic suspense hit",
+   "dur": "0:13",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/679/679-preview.mp3"
+  },
+  {
+   "id": "2594",
+   "kind": "sfx",
+   "title": "Electric buzz glitch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2594/2594-preview.mp3"
+  },
+  {
+   "id": "2596",
+   "kind": "sfx",
+   "title": "Electric whoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2596/2596-preview.mp3"
+  },
+  {
+   "id": "1039",
+   "kind": "sfx",
+   "title": "Futuristic glitch robot",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1039/1039-preview.mp3"
+  },
+  {
+   "id": "1093",
+   "kind": "sfx",
+   "title": "Glitch sci fi rewind transition",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1093/1093-preview.mp3"
+  },
+  {
+   "id": "2950",
+   "kind": "sfx",
+   "title": "Intro text glitch",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2950/2950-preview.mp3"
+  },
+  {
+   "id": "686",
+   "kind": "sfx",
+   "title": "Glitchy Sci Fi bass suspense",
+   "dur": "1:34",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/686/686-preview.mp3"
+  },
+  {
+   "id": "1022",
+   "kind": "sfx",
+   "title": "Cinematic sci fi glitch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1022/1022-preview.mp3"
+  },
+  {
+   "id": "1044",
+   "kind": "sfx",
+   "title": "Glitch crackles",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1044/1044-preview.mp3"
+  },
+  {
+   "id": "2558",
+   "kind": "sfx",
+   "title": "Creepy radio frequency",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2558/2558-preview.mp3"
+  },
+  {
+   "id": "2685",
+   "kind": "sfx",
+   "title": "Tech weird glitch",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2685/2685-preview.mp3"
+  },
+  {
+   "id": "2946",
+   "kind": "sfx",
+   "title": "Virtual quick glitch",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2946/2946-preview.mp3"
+  },
+  {
+   "id": "1041",
+   "kind": "sfx",
+   "title": "Radio waves glitch white noise",
+   "dur": "0:40",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1041/1041-preview.mp3"
+  },
+  {
+   "id": "1035",
+   "kind": "sfx",
+   "title": "Robotic glitch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1035/1035-preview.mp3"
+  },
+  {
+   "id": "1021",
+   "kind": "sfx",
+   "title": "Cinematic glitch trailer",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1021/1021-preview.mp3"
+  },
+  {
+   "id": "1030",
+   "kind": "sfx",
+   "title": "Small sci fi glitch",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1030/1030-preview.mp3"
+  },
+  {
+   "id": "2564",
+   "kind": "sfx",
+   "title": "Horror radio signal transmission",
+   "dur": "0:24",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2564/2564-preview.mp3"
+  },
+  {
+   "id": "2940",
+   "kind": "sfx",
+   "title": "Electronic glitch sound",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2940/2940-preview.mp3"
+  },
+  {
+   "id": "3066",
+   "kind": "sfx",
+   "title": "Arcade glitch touch",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3066/3066-preview.mp3"
+  },
+  {
+   "id": "332",
+   "kind": "sfx",
+   "title": "Robotic insect buzz",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/332/332-preview.mp3"
+  },
+  {
+   "id": "2939",
+   "kind": "sfx",
+   "title": "Futuristic device fail",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2939/2939-preview.mp3"
+  },
+  {
+   "id": "2548",
+   "kind": "sfx",
+   "title": "Digital signal interference",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2548/2548-preview.mp3"
+  },
+  {
+   "id": "1032",
+   "kind": "sfx",
+   "title": "Sci fi glitch confirmation",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1032/1032-preview.mp3"
+  },
+  {
+   "id": "2951",
+   "kind": "sfx",
+   "title": "Digital glitch break",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2951/2951-preview.mp3"
+  },
+  {
+   "id": "687",
+   "kind": "sfx",
+   "title": "Chill choir glitchy suspense",
+   "dur": "1:36",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/687/687-preview.mp3"
+  },
+  {
+   "id": "2952",
+   "kind": "sfx",
+   "title": "Break tech impact",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2952/2952-preview.mp3"
+  },
+  {
+   "id": "1034",
+   "kind": "sfx",
+   "title": "Glitch communication sound",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1034/1034-preview.mp3"
+  },
+  {
+   "id": "2688",
+   "kind": "sfx",
+   "title": "Console glitch",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2688/2688-preview.mp3"
+  },
+  {
+   "id": "2565",
+   "kind": "sfx",
+   "title": "Bad and creepy radio transmission",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2565/2565-preview.mp3"
+  },
+  {
+   "id": "1038",
+   "kind": "sfx",
+   "title": "Musical electronic glitch",
+   "dur": "4:00",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1038/1038-preview.mp3"
+  },
+  {
+   "id": "651",
+   "kind": "sfx",
+   "title": "Glitchy synth intro",
+   "dur": "0:20",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/651/651-preview.mp3"
+  }
+ ],
+ "laugh": [
+  {
+   "id": "2882",
+   "kind": "sfx",
+   "title": "Cartoon laugh voice",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2882/2882-preview.mp3"
+  },
+  {
+   "id": "424",
+   "kind": "sfx",
+   "title": "Crowd laugh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/424/424-preview.mp3"
+  },
+  {
+   "id": "414",
+   "kind": "sfx",
+   "title": "Laughing cartoon creature",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/414/414-preview.mp3"
+  },
+  {
+   "id": "422",
+   "kind": "sfx",
+   "title": "Small crowd laugh and applause",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/422/422-preview.mp3"
+  },
+  {
+   "id": "343",
+   "kind": "sfx",
+   "title": "Cartoon voice laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/343/343-preview.mp3"
+  },
+  {
+   "id": "429",
+   "kind": "sfx",
+   "title": "Laughing teenagers",
+   "dur": "0:11",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/429/429-preview.mp3"
+  },
+  {
+   "id": "2885",
+   "kind": "sfx",
+   "title": "Funny Giggling",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2885/2885-preview.mp3"
+  },
+  {
+   "id": "2265",
+   "kind": "sfx",
+   "title": "Happy child laughing",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2265/2265-preview.mp3"
+  },
+  {
+   "id": "368",
+   "kind": "sfx",
+   "title": "People in fair ambience and laughter",
+   "dur": "0:15",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/368/368-preview.mp3"
+  },
+  {
+   "id": "2873",
+   "kind": "sfx",
+   "title": "Creepy little creature",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2873/2873-preview.mp3"
+  },
+  {
+   "id": "460",
+   "kind": "sfx",
+   "title": "Big crowd laughing",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/460/460-preview.mp3"
+  },
+  {
+   "id": "410",
+   "kind": "sfx",
+   "title": "Woman hilarious laughing",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/410/410-preview.mp3"
+  },
+  {
+   "id": "2264",
+   "kind": "sfx",
+   "title": "Busy park playground with kids playing",
+   "dur": "1:00",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2264/2264-preview.mp3"
+  },
+  {
+   "id": "409",
+   "kind": "sfx",
+   "title": "Troll warrior laugh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/409/409-preview.mp3"
+  },
+  {
+   "id": "416",
+   "kind": "sfx",
+   "title": "Female cheerful laughter",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/416/416-preview.mp3"
+  },
+  {
+   "id": "107",
+   "kind": "sfx",
+   "title": "Cartoon monkey mocking laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/107/107-preview.mp3"
+  },
+  {
+   "id": "512",
+   "kind": "sfx",
+   "title": "Light applause with laughter audience",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/512/512-preview.mp3"
+  },
+  {
+   "id": "2263",
+   "kind": "sfx",
+   "title": "Child laughing happily",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2263/2263-preview.mp3"
+  },
+  {
+   "id": "2883",
+   "kind": "sfx",
+   "title": "Person nasal laugh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2883/2883-preview.mp3"
+  },
+  {
+   "id": "431",
+   "kind": "sfx",
+   "title": "Kid giggle laugh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/431/431-preview.mp3"
+  },
+  {
+   "id": "2993",
+   "kind": "sfx",
+   "title": "Firework rockets exploding in the sky",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2993/2993-preview.mp3"
+  },
+  {
+   "id": "421",
+   "kind": "sfx",
+   "title": "Evil dwarf laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/421/421-preview.mp3"
+  },
+  {
+   "id": "427",
+   "kind": "sfx",
+   "title": "Laughing children indoors",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/427/427-preview.mp3"
+  },
+  {
+   "id": "423",
+   "kind": "sfx",
+   "title": "Small man crowd laughing",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/423/423-preview.mp3"
+  },
+  {
+   "id": "2872",
+   "kind": "sfx",
+   "title": "Funny little creature laughing",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2872/2872-preview.mp3"
+  },
+  {
+   "id": "425",
+   "kind": "sfx",
+   "title": "Females laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/425/425-preview.mp3"
+  },
+  {
+   "id": "739",
+   "kind": "sfx",
+   "title": "Small cartoon character laughing",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/739/739-preview.mp3"
+  },
+  {
+   "id": "411",
+   "kind": "sfx",
+   "title": "Human male casual laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/411/411-preview.mp3"
+  },
+  {
+   "id": "2261",
+   "kind": "sfx",
+   "title": "Kids playing and laughing",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2261/2261-preview.mp3"
+  },
+  {
+   "id": "419",
+   "kind": "sfx",
+   "title": "Hyena cartoon laugh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/419/419-preview.mp3"
+  },
+  {
+   "id": "10",
+   "kind": "sfx",
+   "title": "Little cartoon creature hiccup",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/10/10-preview.mp3"
+  },
+  {
+   "id": "2254",
+   "kind": "sfx",
+   "title": "Children voices in school",
+   "dur": "2:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2254/2254-preview.mp3"
+  },
+  {
+   "id": "743",
+   "kind": "sfx",
+   "title": "Cartoon giggle",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/743/743-preview.mp3"
+  },
+  {
+   "id": "428",
+   "kind": "sfx",
+   "title": "Laughing teenager",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/428/428-preview.mp3"
+  },
+  {
+   "id": "2874",
+   "kind": "sfx",
+   "title": "Funny cartoon laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2874/2874-preview.mp3"
+  },
+  {
+   "id": "420",
+   "kind": "sfx",
+   "title": "Dwarf creature laugh",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/420/420-preview.mp3"
+  }
+ ],
+ "applause": [
+  {
+   "id": "518",
+   "kind": "sfx",
+   "title": "Small group cheer and applause",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/518/518-preview.mp3"
+  },
+  {
+   "id": "478",
+   "kind": "sfx",
+   "title": "Ending show audience clapping",
+   "dur": "0:24",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/478/478-preview.mp3"
+  },
+  {
+   "id": "422",
+   "kind": "sfx",
+   "title": "Small crowd laugh and applause",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/422/422-preview.mp3"
+  },
+  {
+   "id": "476",
+   "kind": "sfx",
+   "title": "Conference audience clapping strongly",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/476/476-preview.mp3"
+  },
+  {
+   "id": "362",
+   "kind": "sfx",
+   "title": "Stadium crowd light applause",
+   "dur": "0:11",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/362/362-preview.mp3"
+  },
+  {
+   "id": "610",
+   "kind": "sfx",
+   "title": "Cheering crowd loud whistle",
+   "dur": "0:14",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/610/610-preview.mp3"
+  },
+  {
+   "id": "485",
+   "kind": "sfx",
+   "title": "Medium size crowd applause",
+   "dur": "0:11",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/485/485-preview.mp3"
+  },
+  {
+   "id": "3035",
+   "kind": "sfx",
+   "title": "Small crowd clapping",
+   "dur": "0:15",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3035/3035-preview.mp3"
+  },
+  {
+   "id": "502",
+   "kind": "sfx",
+   "title": "Auditorium moderate applause and cheering",
+   "dur": "0:17",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/502/502-preview.mp3"
+  },
+  {
+   "id": "512",
+   "kind": "sfx",
+   "title": "Light applause with laughter audience",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/512/512-preview.mp3"
+  },
+  {
+   "id": "510",
+   "kind": "sfx",
+   "title": "Girls audience applause",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/510/510-preview.mp3"
+  },
+  {
+   "id": "482",
+   "kind": "sfx",
+   "title": "One man clapping",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/482/482-preview.mp3"
+  },
+  {
+   "id": "477",
+   "kind": "sfx",
+   "title": "End of show clapping crowd",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/477/477-preview.mp3"
+  },
+  {
+   "id": "484",
+   "kind": "sfx",
+   "title": "Crowd in church applauding",
+   "dur": "0:18",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/484/484-preview.mp3"
+  },
+  {
+   "id": "523",
+   "kind": "sfx",
+   "title": "Animated small group applause",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/523/523-preview.mp3"
+  },
+  {
+   "id": "103",
+   "kind": "sfx",
+   "title": "Cartoon monkey applause",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/103/103-preview.mp3"
+  },
+  {
+   "id": "437",
+   "kind": "sfx",
+   "title": "Small crowd ovation",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/437/437-preview.mp3"
+  },
+  {
+   "id": "522",
+   "kind": "sfx",
+   "title": "Rhythmic audience clapping loop",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/522/522-preview.mp3"
+  },
+  {
+   "id": "506",
+   "kind": "sfx",
+   "title": "Classroom long applause and whistle",
+   "dur": "0:19",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/506/506-preview.mp3"
+  },
+  {
+   "id": "3039",
+   "kind": "sfx",
+   "title": "Clapping indoors",
+   "dur": "0:22",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3039/3039-preview.mp3"
+  },
+  {
+   "id": "354",
+   "kind": "sfx",
+   "title": "Audience light applause",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/354/354-preview.mp3"
+  },
+  {
+   "id": "442",
+   "kind": "sfx",
+   "title": "Crowd clapping",
+   "dur": "0:10",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/442/442-preview.mp3"
+  },
+  {
+   "id": "504",
+   "kind": "sfx",
+   "title": "Rhythmic applause and cheering",
+   "dur": "0:14",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/504/504-preview.mp3"
+  },
+  {
+   "id": "3036",
+   "kind": "sfx",
+   "title": "Small young crowd clapping",
+   "dur": "0:16",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3036/3036-preview.mp3"
+  },
+  {
+   "id": "500",
+   "kind": "sfx",
+   "title": "Classroom spontaneous applause",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/500/500-preview.mp3"
+  },
+  {
+   "id": "517",
+   "kind": "sfx",
+   "title": "Small group light applause",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/517/517-preview.mp3"
+  },
+  {
+   "id": "509",
+   "kind": "sfx",
+   "title": "Football team applause",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/509/509-preview.mp3"
+  },
+  {
+   "id": "507",
+   "kind": "sfx",
+   "title": "Concert hall stomping applause",
+   "dur": "0:16",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/507/507-preview.mp3"
+  },
+  {
+   "id": "515",
+   "kind": "sfx",
+   "title": "Girls crowd cheer, scream, and applause",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/515/515-preview.mp3"
+  },
+  {
+   "id": "513",
+   "kind": "sfx",
+   "title": "Applause ambience loop",
+   "dur": "0:13",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/513/513-preview.mp3"
+  },
+  {
+   "id": "516",
+   "kind": "sfx",
+   "title": "Medium size group applause and laugh",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/516/516-preview.mp3"
+  },
+  {
+   "id": "439",
+   "kind": "sfx",
+   "title": "Clapping male crowd",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/439/439-preview.mp3"
+  },
+  {
+   "id": "519",
+   "kind": "sfx",
+   "title": "Theatre audience light applause",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/519/519-preview.mp3"
+  },
+  {
+   "id": "505",
+   "kind": "sfx",
+   "title": "Small group moderate applause",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/505/505-preview.mp3"
+  },
+  {
+   "id": "521",
+   "kind": "sfx",
+   "title": "Small audience weak applause",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/521/521-preview.mp3"
+  },
+  {
+   "id": "508",
+   "kind": "sfx",
+   "title": "Stand up club audience applause",
+   "dur": "0:20",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/508/508-preview.mp3"
+  }
+ ],
+ "room": [
+  {
+   "id": "3081",
+   "kind": "sfx",
+   "title": "Dark cinematic room tone",
+   "dur": "1:15",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3081/3081-preview.mp3"
+  },
+  {
+   "id": "3199",
+   "kind": "sfx",
+   "title": "Cinematic room tone loop",
+   "dur": "0:12",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3199/3199-preview.mp3"
+  },
+  {
+   "id": "3080",
+   "kind": "sfx",
+   "title": "Cinematic room tone",
+   "dur": "1:00",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3080/3080-preview.mp3"
+  },
+  {
+   "id": "2503",
+   "kind": "sfx",
+   "title": "Futuristic technology room ambience",
+   "dur": "0:52",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2503/2503-preview.mp3"
+  }
+ ],
+ "city": [
+  {
+   "id": "2930",
+   "kind": "sfx",
+   "title": "City traffic background ambience",
+   "dur": "1:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2930/2930-preview.mp3"
+  },
+  {
+   "id": "1554",
+   "kind": "sfx",
+   "title": "Passing car and urban ambience",
+   "dur": "0:14",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1554/1554-preview.mp3"
+  },
+  {
+   "id": "2465",
+   "kind": "sfx",
+   "title": "Urban ambient sound",
+   "dur": "1:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2465/2465-preview.mp3"
+  },
+  {
+   "id": "2463",
+   "kind": "sfx",
+   "title": "Road traffic sound",
+   "dur": "1:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2463/2463-preview.mp3"
+  },
+  {
+   "id": "2678",
+   "kind": "sfx",
+   "title": "Urban city ambience at night",
+   "dur": "2:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2678/2678-preview.mp3"
+  },
+  {
+   "id": "2932",
+   "kind": "sfx",
+   "title": "Urban park and traffic",
+   "dur": "1:49",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2932/2932-preview.mp3"
+  },
+  {
+   "id": "1242",
+   "kind": "sfx",
+   "title": "Driving in the rain",
+   "dur": "1:48",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1242/1242-preview.mp3"
+  },
+  {
+   "id": "2710",
+   "kind": "sfx",
+   "title": "Bus departure zone",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2710/2710-preview.mp3"
+  },
+  {
+   "id": "358",
+   "kind": "sfx",
+   "title": "Walking crowd at subway station loop",
+   "dur": "0:11",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/358/358-preview.mp3"
+  },
+  {
+   "id": "2929",
+   "kind": "sfx",
+   "title": "Urban ambience with traffic",
+   "dur": "0:46",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2929/2929-preview.mp3"
+  },
+  {
+   "id": "2680",
+   "kind": "sfx",
+   "title": "Subway interior ambience",
+   "dur": "0:32",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2680/2680-preview.mp3"
+  },
+  {
+   "id": "2708",
+   "kind": "sfx",
+   "title": "Bus station ambience",
+   "dur": "0:21",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2708/2708-preview.mp3"
+  },
+  {
+   "id": "2709",
+   "kind": "sfx",
+   "title": "Hydraulic bus door",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2709/2709-preview.mp3"
+  },
+  {
+   "id": "2931",
+   "kind": "sfx",
+   "title": "City traffic ambience",
+   "dur": "0:49",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2931/2931-preview.mp3"
+  },
+  {
+   "id": "2681",
+   "kind": "sfx",
+   "title": "Old subway train arrives",
+   "dur": "0:18",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2681/2681-preview.mp3"
+  },
+  {
+   "id": "2926",
+   "kind": "sfx",
+   "title": "Future city urban ambience",
+   "dur": "1:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2926/2926-preview.mp3"
+  },
+  {
+   "id": "2676",
+   "kind": "sfx",
+   "title": "Urban tram station ambience",
+   "dur": "0:09",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2676/2676-preview.mp3"
+  },
+  {
+   "id": "2677",
+   "kind": "sfx",
+   "title": "Train station ambience",
+   "dur": "0:17",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2677/2677-preview.mp3"
+  },
+  {
+   "id": "2679",
+   "kind": "sfx",
+   "title": "Subway old depart ambience",
+   "dur": "0:17",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2679/2679-preview.mp3"
+  },
+  {
+   "id": "2927",
+   "kind": "sfx",
+   "title": "Metal sewer lid opened",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2927/2927-preview.mp3"
+  },
+  {
+   "id": "2928",
+   "kind": "sfx",
+   "title": "Sewer lid closed with echo",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2928/2928-preview.mp3"
+  }
+ ],
+ "magic": [
+  {
+   "id": "2350",
+   "kind": "sfx",
+   "title": "Magic sparkle whoosh",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2350/2350-preview.mp3"
+  },
+  {
+   "id": "2589",
+   "kind": "sfx",
+   "title": "Shot light energy flowing",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2589/2589-preview.mp3"
+  },
+  {
+   "id": "2344",
+   "kind": "sfx",
+   "title": "Magic notification ring",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2344/2344-preview.mp3"
+  },
+  {
+   "id": "869",
+   "kind": "sfx",
+   "title": "Fairy sparkle whoosh",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/869/869-preview.mp3"
+  },
+  {
+   "id": "871",
+   "kind": "sfx",
+   "title": "Fairy magic sparkle",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/871/871-preview.mp3"
+  },
+  {
+   "id": "2638",
+   "kind": "sfx",
+   "title": "Magic transition sweep presentation",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2638/2638-preview.mp3"
+  },
+  {
+   "id": "867",
+   "kind": "sfx",
+   "title": "Fairy glitter",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/867/867-preview.mp3"
+  },
+  {
+   "id": "270",
+   "kind": "sfx",
+   "title": "Fantasy game success notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3"
+  },
+  {
+   "id": "2353",
+   "kind": "sfx",
+   "title": "Magic glitter shot",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2353/2353-preview.mp3"
+  },
+  {
+   "id": "2633",
+   "kind": "sfx",
+   "title": "Sweeping sparkle presentation intro",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2633/2633-preview.mp3"
+  },
+  {
+   "id": "2628",
+   "kind": "sfx",
+   "title": "Relaxing harp sweep",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2628/2628-preview.mp3"
+  },
+  {
+   "id": "2342",
+   "kind": "sfx",
+   "title": "Arcade magic notification",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2342/2342-preview.mp3"
+  },
+  {
+   "id": "598",
+   "kind": "sfx",
+   "title": "Horror bell cartoon transition",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/598/598-preview.mp3"
+  },
+  {
+   "id": "2583",
+   "kind": "sfx",
+   "title": "Magical light transition",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2583/2583-preview.mp3"
+  },
+  {
+   "id": "2352",
+   "kind": "sfx",
+   "title": "Magic glitter or particles",
+   "dur": "0:06",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2352/2352-preview.mp3"
+  },
+  {
+   "id": "3062",
+   "kind": "sfx",
+   "title": "Magic wand sparkle",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3062/3062-preview.mp3"
+  },
+  {
+   "id": "1463",
+   "kind": "sfx",
+   "title": "Spellcaster fairy swoosh",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1463/1463-preview.mp3"
+  },
+  {
+   "id": "2629",
+   "kind": "sfx",
+   "title": "Magic astral sweep effect",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2629/2629-preview.mp3"
+  },
+  {
+   "id": "870",
+   "kind": "sfx",
+   "title": "Sparkling fairy glow",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/870/870-preview.mp3"
+  },
+  {
+   "id": "2584",
+   "kind": "sfx",
+   "title": "Magical light moving",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2584/2584-preview.mp3"
+  },
+  {
+   "id": "2345",
+   "kind": "sfx",
+   "title": "Magic spell mystery whoosh",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2345/2345-preview.mp3"
+  },
+  {
+   "id": "2586",
+   "kind": "sfx",
+   "title": "Magical light sweep",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2586/2586-preview.mp3"
+  },
+  {
+   "id": "1528",
+   "kind": "sfx",
+   "title": "Magical stone slide",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1528/1528-preview.mp3"
+  },
+  {
+   "id": "873",
+   "kind": "sfx",
+   "title": "Light spell",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/873/873-preview.mp3"
+  },
+  {
+   "id": "2407",
+   "kind": "sfx",
+   "title": "Strong wild wind in a storm",
+   "dur": "0:13",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2407/2407-preview.mp3"
+  },
+  {
+   "id": "255",
+   "kind": "sfx",
+   "title": "Fantasy game sweep notification",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/255/255-preview.mp3"
+  },
+  {
+   "id": "2343",
+   "kind": "sfx",
+   "title": "Cinematic whoosh magic gust",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2343/2343-preview.mp3"
+  },
+  {
+   "id": "939",
+   "kind": "sfx",
+   "title": "Christmas magic bell hit",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/939/939-preview.mp3"
+  },
+  {
+   "id": "868",
+   "kind": "sfx",
+   "title": "Fairy teleport",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/868/868-preview.mp3"
+  },
+  {
+   "id": "2587",
+   "kind": "sfx",
+   "title": "Magic whistle",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2587/2587-preview.mp3"
+  },
+  {
+   "id": "3082",
+   "kind": "sfx",
+   "title": "Magic sparkle poof hit",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3082/3082-preview.mp3"
+  },
+  {
+   "id": "863",
+   "kind": "sfx",
+   "title": "Fairy water spell",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/863/863-preview.mp3"
+  },
+  {
+   "id": "930",
+   "kind": "sfx",
+   "title": "Bell of promise",
+   "dur": "0:08",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/930/930-preview.mp3"
+  },
+  {
+   "id": "658",
+   "kind": "sfx",
+   "title": "Choir magic shine",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/658/658-preview.mp3"
+  },
+  {
+   "id": "2999",
+   "kind": "sfx",
+   "title": "Magic bubbles spell",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2999/2999-preview.mp3"
+  },
+  {
+   "id": "2984",
+   "kind": "sfx",
+   "title": "Funny melody audio logo",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/2984/2984-preview.mp3"
+  }
+ ],
+ "tape": [
+  {
+   "id": "1092",
+   "kind": "sfx",
+   "title": "Fast tape rewind cinematic transition",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1092/1092-preview.mp3"
+  },
+  {
+   "id": "1095",
+   "kind": "sfx",
+   "title": "Reel to reel rewind",
+   "dur": "0:03",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1095/1095-preview.mp3"
+  },
+  {
+   "id": "3096",
+   "kind": "sfx",
+   "title": "Tape switch",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3096/3096-preview.mp3"
+  },
+  {
+   "id": "3097",
+   "kind": "sfx",
+   "title": "Cassette tape stretch",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3097/3097-preview.mp3"
+  },
+  {
+   "id": "1088",
+   "kind": "sfx",
+   "title": "Tape rewind cinematic transition",
+   "dur": "0:04",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1088/1088-preview.mp3"
+  },
+  {
+   "id": "810",
+   "kind": "sfx",
+   "title": "Tape measure extend",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/810/810-preview.mp3"
+  },
+  {
+   "id": "1089",
+   "kind": "sfx",
+   "title": "Slow tape rewind cinematic transition",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1089/1089-preview.mp3"
+  },
+  {
+   "id": "3102",
+   "kind": "sfx",
+   "title": "Duct tape bandage",
+   "dur": "0:02",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/3102/3102-preview.mp3"
+  },
+  {
+   "id": "1090",
+   "kind": "sfx",
+   "title": "Horror tape rewind cinematic transition",
+   "dur": "0:07",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1090/1090-preview.mp3"
+  },
+  {
+   "id": "1091",
+   "kind": "sfx",
+   "title": "Tape rewind transition",
+   "dur": "0:05",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/1091/1091-preview.mp3"
+  },
+  {
+   "id": "839",
+   "kind": "sfx",
+   "title": "Tape measurement retract",
+   "dur": "0:01",
+   "artist": "",
+   "preview": "https://assets.mixkit.co/active_storage/sfx/839/839-preview.mp3"
+  }
+ ]
+}

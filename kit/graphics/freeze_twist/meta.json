@@ -1,0 +1,68 @@
+{
+  "id": "freeze_twist",
+  "name": "Record-scratch freeze frame",
+  "category": "speaker",
+  "kind": "speaker",
+  "description": "The record-scratch freeze frame: the picture stops dead on the speaker with a white flash, drains to black-and-white with a dark vignette and a slow push-in, a tilted orange stamp ('PLOT TWIST') slams on with a shake, and a white condensed line underneath says what just happened ('Opus 5.5 dropped'); the voice keeps talking over the freeze.",
+  "use_when": "The one turning point of a story, used once per video: 'then X happened', 'and then this dropped', 'plot twist', 'that's when everything changed', 'yep, that's me'.",
+  "params": {
+    "stamp": {
+      "type": "text",
+      "default": "Plot twist",
+      "max_len": 14,
+      "help": "the stamped words, 1-2 words"
+    },
+    "line": {
+      "type": "text",
+      "default": "",
+      "max_len": 32,
+      "help": "what just happened, shown under the stamp, e.g. 'Opus 5.5 dropped'; empty for none"
+    },
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 20,
+      "help": "small mono label top-left, e.g. 'MEANWHILE'; empty for none"
+    },
+    "freeze_at": {
+      "type": "number",
+      "default": 0.1,
+      "help": "seconds into the scene where the picture freezes"
+    }
+  },
+  "duration": {
+    "min": 1.2,
+    "default": 2.2,
+    "max": 3.5
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.05,
+      "name": "scratch",
+      "gain_db": -12
+    },
+    {
+      "at": 0.32,
+      "name": "stamp",
+      "gain_db": -12
+    }
+  ],
+  "tags": [
+    "freeze",
+    "plot twist",
+    "record scratch",
+    "turning point",
+    "meme",
+    "speaker"
+  ],
+  "explains": [
+    "story"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "word_slam",
+  "version": "1"
+}

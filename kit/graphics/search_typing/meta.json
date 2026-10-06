@@ -1,0 +1,68 @@
+{
+  "id": "search_typing",
+  "name": "Search bar with typed query and suggestions",
+  "category": "mockup",
+  "kind": "fullscreen",
+  "description": "A large white rounded search bar (search icon, no logo) in the middle of the frame; a query types in letter by letter with an orange caret, then the bar rises and up to four suggestion rows slide in below it (search icon, typed words in bold); a cursor hovers one row and clicks it, turning it orange-tinted.",
+  "use_when": "Lines about looking something up or asking the internet: 'so you google how to...', 'I searched for...', 'everyone is searching for...', tutorials, research, 'how do I' questions.",
+  "params": {
+    "query": {
+      "type": "text",
+      "required": true,
+      "max_len": 40,
+      "help": "what gets typed, lower case reads most natural, e.g. 'how to edit videos faster'"
+    },
+    "suggestions": {
+      "type": "list",
+      "default": [],
+      "max_len": 4,
+      "help": "up to 4 suggestion lines; include the query words so they show in bold; under ~45 characters each; [] shows only the typing"
+    },
+    "pick": {
+      "type": "number",
+      "default": 0,
+      "help": "index of the suggestion the cursor clicks (0 = first)"
+    }
+  },
+  "duration": {
+    "min": 2.0,
+    "default": 2.6,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "pop",
+      "gain_db": -18
+    },
+    {
+      "at": 0.32,
+      "name": "typing",
+      "gain_db": -16
+    },
+    {
+      "at": 2.0,
+      "name": "click",
+      "gain_db": -14
+    }
+  ],
+  "tags": [
+    "search",
+    "google",
+    "question",
+    "typing",
+    "research",
+    "how to",
+    "internet"
+  ],
+  "explains": [
+    "instruction"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "ai_chat",
+  "version": "1"
+}

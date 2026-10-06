@@ -1,0 +1,110 @@
+<style>
+  .ec-col { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .ec-markwrap { position: relative; width: 176px; height: 176px; margin-bottom: 40px; }
+  .ec-glow { position: absolute; left: 50%; top: 50%; width: 720px; height: 720px; margin: -360px 0 0 -360px;
+    border-radius: 50%; background: radial-gradient(circle, rgba(252, 59, 0, 0.30) 0%, rgba(252, 59, 0, 0.12) 34%,
+    rgba(252, 59, 0, 0) 68%); }
+  .ec-mark { position: absolute; inset: 0; border-radius: 44px; background: var(--accent); color: var(--accent-ink);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 22px 50px rgba(252, 59, 0, 0.35); }
+  .ec-mark svg { display: block; }
+  .ec-name { font-family: var(--display); text-transform: uppercase; line-height: 1; letter-spacing: 0.005em;
+    white-space: nowrap; color: var(--ink); padding-top: 0.04em; }
+  .ec-name .accent { color: var(--accent); }
+  .ec-tag { margin-top: 30px; max-width: 900px; font-family: var(--ui); font-weight: 700; font-size: 50px;
+    line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); text-wrap: balance; }
+  .ec-tag .w { display: inline-block; }
+  .ec-tag .accent { color: var(--accent); }
+  .ec-btn { position: relative; margin-top: 54px; display: inline-flex; align-items: center; gap: 18px;
+    padding: 26px 40px 26px 46px; border-radius: 30px; background: var(--ink); color: #fff; overflow: hidden;
+    font-family: var(--mono); font-weight: 700; font-size: 36px; letter-spacing: 0.01em; white-space: nowrap;
+    box-shadow: 0 22px 48px rgba(17, 17, 17, 0.28), 0 6px 14px rgba(17, 17, 17, 0.16); }
+  .ec-arrow { display: block; flex: 0 0 auto; color: var(--accent); }
+  .ec-arrow svg { display: block; }
+  .ec-shine { position: absolute; top: -20%; bottom: -20%; left: 0; width: 120px;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.55), rgba(255,255,255,0));
+    transform: translateX(-160px) skewX(-18deg); }
+  .ec-small { margin-top: 30px; max-width: 900px; font-family: var(--mono); font-weight: 500; font-size: 24px;
+    letter-spacing: 0.06em; line-height: 1.4; color: var(--muted); }
+</style>
+<div class="stage ec-col" id="col">
+  <div class="ec-markwrap" id="markwrap"><div class="ec-glow" id="glow"></div><div class="ec-mark" id="mark"></div></div>
+  <div class="ec-name" id="name"></div>
+  <div class="ec-tag" id="tag"></div>
+  <div class="ec-btn" id="btn"><span id="url"></span><div class="ec-shine" id="shine"></div></div>
+  <div class="ec-small" id="small"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const mark = GFX.$("#mark"), glow = GFX.$("#glow"), name = GFX.$("#name"), tag = GFX.$("#tag");
+    const btn = GFX.$("#btn"), small = GFX.$("#small");
+
+    mark.innerHTML = GFX.icon(P.icon || "play", { size: 88, stroke: "#fff", width: 2.6 });
+    // wordmark: the first split_at characters in ink, the rest in the accent
+    const brand = String(P.brand || "").trim();
+    let cut = Number.isFinite(P.split_at) ? Math.max(0, Math.min(brand.length, Math.round(P.split_at))) : brand.lastIndexOf(" ");
+    if (cut < 0) cut = brand.length;
+    name.append(brand.slice(0, cut));
+    if (cut < brand.length) name.append(GFX.h("span", { class: "accent", text: brand.slice(cut) }));
+    GFX.fit(name, { width: 900, max: 176, min: 70 });
+
+    // tagline, word by word; the words overlapping `highlight` turn accent
+    const tagline = String(P.tagline || "").trim();
+    const hlAt = P.highlight ? tagline.toLowerCase().indexOf(String(P.highlight).trim().toLowerCase()) : -1;
+    const hlEnd = hlAt + String(P.highlight || "").trim().length;
+    const tagWords = [];
+    tagline.replace(/\S+/g, (w, i) => {
+      if (tagWords.length) tag.append(" ");
+      const el = GFX.h("span", { class: "w" + (hlAt >= 0 && i < hlEnd && i + w.length > hlAt ? " accent" : ""), text: w });
+      tag.append(el);
+      tagWords.push(el);
+      return w;
+    });
+    if (!tagline) tag.remove();
+
+    GFX.$("#url").textContent = P.url || "";
+    if (P.url) btn.insertAdjacentHTML("beforeend", `<span class="ec-arrow">${GFX.icon("arrowRight", { size: 38, width: 3 })}</span>`);
+    else btn.remove();
+    small.textContent = P.small || "";
+    if (!P.small) small.remove();
+
+    // timeline: mark, name, tagline words, button, then the cursor clicks it
+    GFX.anim(mark, [{ opacity: 0, transform: "scale(.3) rotate(-16deg)" }, { opacity: 1, transform: "scale(1) rotate(0deg)" }],
+      { at: 0, dur: 520, ease: "back" });
+    GFX.anim(glow, [{ opacity: 0, transform: "scale(.4)" }, { opacity: 1, transform: "scale(1)" }], { at: 60, dur: 800, ease: "out" });
+    GFX.anim(glow, [{ scale: "1" }, { scale: "1.1" }, { scale: "1" }], { at: 860, dur: Math.max(600, D - 860), ease: "inOut" });
+    GFX.in(name, "blur", { at: 140, dur: 480 });
+    const stag = tagWords.length ? Math.min(110, 560 / tagWords.length) : 0;
+    const tagEnd = tagWords.length ? GFX.in(tagWords, "rise", { at: 480, dur: 380, ease: "out", stagger: stag }) : 600;
+    const tBtn = Math.min(1100, D - 1000);          // fixed beats, so the click sound (1.8 s) lands on the click
+    if (btn.isConnected) {
+      GFX.in(btn, "pop", { at: tBtn, dur: 420 });
+      const tClick = Math.min(tBtn + 700, D - 480);
+      GFX.anim(btn, [{ scale: "1" }, { scale: ".93" }, { scale: "1" }], { at: tClick - 40, dur: 260, ease: "inOut" });
+      if (small.isConnected) GFX.in(small, "fade", { at: tClick + 120, dur: 360 });
+      // the pointer glides in from the lower right and clicks near the arrow (tip is ~10px right, 7px down of x/y)
+      GFX.layout(() => {
+        let x = 0, y = 0;
+        for (let el = btn; el && el !== document.body; el = el.offsetParent) { x += el.offsetLeft; y += el.offsetTop; }
+        const tx = x + btn.offsetWidth - 64, ty = y + btn.offsetHeight / 2 + 4;
+        const cur = GFX.cursor([
+          { x: Math.min(tx + 190, 900), y: ty + 330, at: tBtn + 160 },
+          { x: tx - 10, y: ty - 7, at: tClick - 60 },
+          { x: tx - 10, y: ty - 7, at: tClick, click: true },
+        ]);
+        // runtime workarounds: (1) the click ripple fills backwards, so it would sit on screen as a small ring before
+        // the click; (2) the click squash scales the cursor's whole translate, so it jumps toward the top-left.
+        // Keep the ripple hidden until it plays, and squash the arrow itself around its tip instead.
+        GFX.$$(".ripple").forEach((r) => r.getAnimations().forEach((a) => a.effect.updateTiming({ fill: "forwards" })));
+        cur.getAnimations().filter((a) => a.effect.getKeyframes().some((k) => k.scale)).forEach((a) => a.cancel());
+        const arrow = cur.firstElementChild;
+        arrow.style.transformOrigin = "20% 12%";
+        GFX.anim(arrow, [{ transform: "scale(1)" }, { transform: "scale(.82)" }, { transform: "scale(1)" }],
+          { at: tClick - 40, dur: 200, ease: "inOut", fill: "none" });
+        // a gloss sweeps across the button as it is clicked
+        GFX.anim(GFX.$("#shine"), [{ transform: "translateX(-160px) skewX(-18deg)" },
+          { transform: `translateX(${btn.offsetWidth + 60}px) skewX(-18deg)` }], { at: tClick + 20, dur: 520, ease: "inOut" });
+      });
+    } else if (small.isConnected) GFX.in(small, "fade", { at: tagEnd, dur: 360 });
+  })();
+</script>

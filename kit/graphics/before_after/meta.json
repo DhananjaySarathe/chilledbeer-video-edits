@@ -1,0 +1,81 @@
+{
+  "id": "before_after",
+  "name": "Before-after value flip over the speaker",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A hook overlay in the upper third over the speaker: a small dark pill label, then an old value in big white condensed type that gets a thick orange strike-through drawn across it, a bold down-arrow, and the new value slamming in underneath on a tilted orange box with a shake and a deep hit; an optional white chip below adds the context ('in 1 week').",
+  "use_when": "A change the whole video is about, stated as two values: a price that crashed ('₹1500 → ₹400'), a time that shrank ('8 hours → 20 min'), a count that jumped; best as the opening hook or a cold open, before the story explains it.",
+  "params": {
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 28,
+      "help": "small label in a dark pill above, e.g. 'EDITOR KA RATE'; empty for none"
+    },
+    "before": {
+      "type": "text",
+      "required": true,
+      "max_len": 12,
+      "help": "the old value, e.g. '₹1500'; it gets struck through"
+    },
+    "after": {
+      "type": "text",
+      "required": true,
+      "max_len": 12,
+      "help": "the new value, e.g. '₹400'; it slams in on the orange box"
+    },
+    "tag": {
+      "type": "text",
+      "default": "",
+      "max_len": 20,
+      "help": "small white chip under the new value, e.g. 'IN 1 WEEK'; empty for none"
+    },
+    "tilt": {
+      "type": "number",
+      "default": 3,
+      "help": "tilt of the orange box in degrees, -6 to 6"
+    }
+  },
+  "duration": {
+    "min": 1.2,
+    "default": 2.4,
+    "max": 4.5
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "swipe",
+      "gain_db": -16
+    },
+    {
+      "at": 0.42,
+      "name": "scratch",
+      "gain_db": -15
+    },
+    {
+      "at": 0.72,
+      "name": "boom",
+      "gain_db": -11
+    }
+  ],
+  "tags": [
+    "hook",
+    "before",
+    "after",
+    "price",
+    "drop",
+    "change",
+    "compare",
+    "overlay"
+  ],
+  "explains": [
+    "comparison"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "split_screen",
+  "version": "1"
+}

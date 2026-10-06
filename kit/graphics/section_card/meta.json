@@ -1,0 +1,68 @@
+{
+  "id": "section_card",
+  "name": "Section / chapter transition card",
+  "category": "title",
+  "kind": "overlay",
+  "description": "A full-frame orange (or near-black) panel slides in from the right over the speaker's video (the footage stays visible until the panel covers it), then a small spaced label (e.g. 'OPTION'), a huge white number ('02') and a bold condensed title ('CAPTION & SHIP') punch in, centred, while a faint ring draws itself behind them.",
+  "use_when": "The moment the speaker moves to the next part, step, option or reason ('option two', 'step three', 'the second mistake', 'now the fun part'); a hard chapter break between sections.",
+  "params": {
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 16,
+      "help": "small spaced label above the number, e.g. 'OPTION', 'STEP', 'PART'; leave empty for none"
+    },
+    "number": {
+      "type": "text",
+      "default": "",
+      "max_len": 4,
+      "help": "the big number, e.g. '02' or '3'; leave empty for a title-only card"
+    },
+    "title": {
+      "type": "text",
+      "required": true,
+      "max_len": 28,
+      "help": "the section name, 1-4 words, e.g. 'CAPTION & SHIP'; wraps to two lines when long"
+    },
+    "tone": {
+      "type": "text",
+      "default": "accent",
+      "help": "'accent' (orange panel, white text) or 'ink' (near-black panel, orange number)"
+    }
+  },
+  "duration": {
+    "min": 0.8,
+    "default": 1.3,
+    "max": 3.0
+  },
+  "captions": "hide",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -14
+    },
+    {
+      "at": 0.26,
+      "name": "thud",
+      "gain_db": -16
+    }
+  ],
+  "tags": [
+    "section",
+    "chapter",
+    "transition",
+    "option",
+    "step",
+    "wipe"
+  ],
+  "explains": [
+    "structure"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "chapter_pill",
+  "version": "1"
+}

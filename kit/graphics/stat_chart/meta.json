@@ -1,0 +1,97 @@
+{
+  "id": "stat_chart",
+  "name": "Metric card with count-up and chart",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A white analytics card on the clean background: a metric label, a big number that counts up (or down), a line chart that draws itself, up to three small stat tiles that count too, and optional floating hearts.",
+  "use_when": "Any line about results, growth, engagement, views, money, or a drop in performance (going up or down).",
+  "params": {
+    "label": {
+      "type": "text",
+      "default": "Engagement",
+      "max_len": 22
+    },
+    "period": {
+      "type": "text",
+      "default": "Last 7 days",
+      "max_len": 18
+    },
+    "from": {
+      "type": "number",
+      "default": 0.4
+    },
+    "to": {
+      "type": "number",
+      "required": true
+    },
+    "decimals": {
+      "type": "number",
+      "default": 1
+    },
+    "prefix": {
+      "type": "text",
+      "default": "",
+      "max_len": 2
+    },
+    "suffix": {
+      "type": "text",
+      "default": "%",
+      "max_len": 3
+    },
+    "trend": {
+      "type": "text",
+      "default": "up",
+      "help": "up or down: shape of the line and colour of the delta chip"
+    },
+    "delta": {
+      "type": "text",
+      "default": "",
+      "max_len": 10,
+      "help": "chip next to the number, e.g. '29x' or '-82%'"
+    },
+    "stats": {
+      "type": "list",
+      "default": [],
+      "max_len": 3,
+      "help": "[{label, from, to, prefix?, suffix?, compact?}] small tiles under the chart"
+    },
+    "hearts": {
+      "type": "bool",
+      "default": false
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.8,
+    "max": 5.0
+  },
+  "captions": "dark",
+  "caption_y": 0.62,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.3,
+      "name": "riser",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "numbers",
+    "growth",
+    "analytics",
+    "results"
+  ],
+  "explains": [
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "counter_big",
+  "version": "1"
+}

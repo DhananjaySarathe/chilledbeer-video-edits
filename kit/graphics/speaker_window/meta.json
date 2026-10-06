@@ -1,0 +1,84 @@
+{
+  "id": "speaker_window",
+  "name": "Speaker in a floating window, headline or dialogue above",
+  "category": "speaker",
+  "kind": "speaker",
+  "description": "The speaker's full-frame video smoothly shrinks into a floating rounded window (white rim, soft shadow, framed on the face) over the lower part of a clean background, then grows back to full frame at the end, so it flows in and out of the plain footage. Above the window: either a big condensed headline with an optional small label and an orange highlighted word, or up to three speech bubbles that pop in one by one (quoted dialogue, with a small name tag). An optional emoji sticker pops on the window's corner.",
+  "use_when": "The speaker keeps talking but the line deserves a visual frame: a quoted exchange ('he asked: how many rotis?', 'I said ten'), a topic title, a question to the viewer, a reaction. Keeps the face on screen (unlike full-screen mockups) and avoids the squeezed look.",
+  "params": {
+    "headline": {
+      "type": "text",
+      "default": "",
+      "max_len": 40,
+      "help": "big title above the window, 2-6 words; '' when using bubbles"
+    },
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 24,
+      "help": "small spaced label above the headline, e.g. 'EVERY DAY'"
+    },
+    "highlight": {
+      "type": "text",
+      "default": "",
+      "max_len": 24,
+      "help": "word(s) of the headline set on an orange box"
+    },
+    "bubbles": {
+      "type": "list",
+      "default": [],
+      "max_len": 3,
+      "help": "[{from: 'them'|'me', text, name, at}] speech bubbles in order; text <= 40 characters; name is a small tag on 'them' bubbles ('COOK'); at = seconds from the scene start (default: spread out)"
+    },
+    "sticker": {
+      "type": "text",
+      "default": "",
+      "max_len": 4,
+      "help": "one emoji that pops on the window's top-right corner, e.g. '🤯' or '😂'"
+    },
+    "morph_in": {
+      "type": "bool",
+      "default": true,
+      "help": "start full-frame and shrink into the window (use when the previous shot is the plain speaker)"
+    },
+    "morph_out": {
+      "type": "bool",
+      "default": true,
+      "help": "grow back to full frame at the end (use when the next shot is the plain speaker)"
+    }
+  },
+  "duration": {
+    "min": 1.6,
+    "default": 3.0,
+    "max": 7.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "speaker",
+    "window",
+    "frame",
+    "dialogue",
+    "speech bubble",
+    "quote",
+    "headline",
+    "title",
+    "pip"
+  ],
+  "explains": [
+    "story",
+    "emphasis"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "speaker_card",
+  "version": "1"
+}

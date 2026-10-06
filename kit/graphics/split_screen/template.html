@@ -1,0 +1,112 @@
+<style>
+  .ss-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 960px; overflow: hidden; background: #2A2A28; }
+  .ss-bottom .speaker { left: 0; top: 0; width: 100%; height: 100%; }
+  .ss-panel { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; overflow: hidden;
+    background: var(--bg); color: var(--ink); box-shadow: 0 24px 60px rgba(17, 17, 17, 0.28); }
+  .ss-panel.accent { background: var(--accent); color: var(--accent-ink); }
+  .ss-panel.dark { background: var(--dark); color: #fff; }
+  /* content sits below the platform's top bar (y 270) */
+  .ss-content { position: absolute; left: 70px; right: 70px; top: 262px; bottom: 58px; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .ss-icon { position: relative; width: 150px; height: 150px; margin-bottom: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--accent-ink); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 16px 36px rgba(252, 59, 0, 0.32); }
+  .ss-ring { position: absolute; inset: 0; border-radius: 50%; border: 5px solid var(--accent); opacity: 0; }
+  .ss-kicker { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 26px; font-size: 28px; }
+  .ss-kicker i { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+  .ss-panel.dark .ss-kicker { color: var(--accent); }
+  .ss-panel.accent .ss-kicker { color: var(--accent-ink); opacity: 0.85; }
+  .ss-panel.accent .ss-kicker i { background: var(--accent-ink); }
+  .ss-head { font-family: var(--condensed); font-weight: 700; text-transform: uppercase; line-height: 0.95;
+    letter-spacing: 0.005em; text-wrap: balance; overflow-wrap: normal; }
+  .ss-panel.accent .ss-head { font-family: var(--display); line-height: 0.88; }
+  .ss-head .w { display: inline-block; }
+  .ss-glow { position: absolute; left: 50%; top: 56%; width: 760px; height: 760px; margin: -380px 0 0 -380px;
+    border-radius: 50%; border: 6px solid rgba(255, 255, 255, 0.4); opacity: 0; }
+  .ss-divider { position: absolute; left: 0; top: 956px; width: 1080px; height: 8px; background: var(--accent);
+    transform-origin: 50% 50%; }
+  .ss-divider.light { background: #fff; }
+</style>
+<div class="ss-bottom" id="bottom"><img class="speaker" id="me" alt=""></div>
+<div class="ss-panel" id="panel">
+  <div class="ss-glow" id="glow"></div>
+  <div class="ss-content" id="content">
+    <div class="ss-icon" id="icon"><div class="ss-ring"></div><div class="ss-ring"></div></div>
+    <div class="kicker ss-kicker" id="kicker"><i></i><span id="kickerText"></span></div>
+    <div class="ss-head" id="head"></div>
+  </div>
+</div>
+<div class="ss-divider" id="divider"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const tone = ["light", "accent", "dark"].includes(P.tone) ? P.tone : "light";
+    const panel = GFX.$("#panel"), bottom = GFX.$("#bottom"), me = GFX.$("#me");
+    const head = GFX.$("#head"), kicker = GFX.$("#kicker"), icon = GFX.$("#icon"), glow = GFX.$("#glow");
+    const divider = GFX.$("#divider");
+    if (tone !== "light") panel.classList.add(tone);
+    if (tone === "accent") divider.classList.add("light");
+
+    // speaker: keep the face in the bottom half (face box if known, else the upper-middle of the frame)
+    GFX.speaker(me);
+    const faceY = GFX.face ? GFX.face.y + GFX.face.h / 2 : 1920 * 0.4;
+    me.style.objectPosition = `50% ${(GFX.clamp((faceY - 560) / 960) * 100).toFixed(1)}%`;
+
+    // words: one span per word so they can land one after another
+    const words = String(P.headline || "").trim().split(/\s+/).filter(Boolean);
+    words.forEach((w, i) => { if (i) head.append(" "); head.append(GFX.h("span", { class: "w", text: w })); });
+    GFX.$("#kickerText").textContent = P.kicker || "";
+    if (!P.kicker) kicker.remove();
+    if (tone === "accent" || !P.icon) icon.remove();
+    else icon.insertAdjacentHTML("beforeend", GFX.icon(P.icon, { size: 78, stroke: "#fff", width: 2.4 }));
+    if (tone !== "accent") glow.remove();
+
+    // fit the headline: as big as possible in at most two lines. Measured with offset* metrics, which ignore
+    // the words' entrance transforms (scrollHeight would count them).
+    const big = tone === "accent";
+    const maxH = big ? (P.kicker ? 520 : 600) : (icon.isConnected ? 300 : 360);
+    GFX.layout(() => {
+      const spans = GFX.$$(".w", head);
+      if (!spans.length) return;
+      head.style.width = "940px";
+      const fits = (px) => {
+        head.style.fontSize = px + "px";
+        const tops = new Set(spans.map((s) => s.offsetTop));
+        const right = Math.max(...spans.map((s) => s.offsetLeft + s.offsetWidth));
+        const last = spans[spans.length - 1];
+        return tops.size <= 2 && right <= 941 && last.offsetTop + last.offsetHeight - spans[0].offsetTop <= maxH;
+      };
+      let lo = big ? 90 : 60, hi = big ? 400 : 190;
+      for (let k = 0; k < 18; k++) { const mid = (lo + hi) / 2; if (fits(mid)) lo = mid; else hi = mid; }
+      head.style.fontSize = Math.floor(lo) + "px";
+      head.style.width = "auto";
+      head.style.maxWidth = "940px";
+    });
+
+    // 1. the panel slides down and pushes the speaker into the bottom half
+    const slide = 520, push = "cubic-bezier(.55,0,.1,1)";
+    GFX.anim(panel, [{ transform: "translateY(-100%)" }, { transform: "translateY(0)" }], { at: 0, dur: slide, ease: push });
+    GFX.anim(bottom, [{ height: "1920px" }, { height: "960px" }], { at: 0, dur: slide, ease: push });
+    GFX.anim(divider, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { at: slide - 140, dur: 420, ease: "expo" });
+
+    // 2. content lands
+    const w = GFX.$$(".w", head);
+    if (big) {
+      GFX.anim(head, [{ opacity: 0, transform: "scale(1.35)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: 260, dur: 420, ease: "snap" });
+      GFX.anim(head, [{ scale: "1" }, { scale: "1.05" }], { at: 680, dur: Math.max(300, D - 680), ease: "linear" });
+      GFX.anim(glow, [{ opacity: 0.9, transform: "scale(.35)" }, { opacity: 0, transform: "scale(1.25)" }],
+        { at: 300, dur: 900, ease: "out", fill: "forwards" });
+    } else {
+      GFX.in(w, "rise", { at: 360, dur: 440, ease: "back", stagger: 70 });
+      GFX.anim(head, [{ scale: "1" }, { scale: "1.03" }], { at: 360, dur: Math.max(300, D - 360), ease: "linear" });
+    }
+    if (kicker.isConnected) GFX.in(kicker, "fade", { at: 300, dur: 360 });
+    if (icon.isConnected) {
+      GFX.in(icon, "pop", { at: 280, dur: 460 });
+      // then it keeps pulsing, so the scene never freezes
+      GFX.$$(".ss-ring", icon).forEach((r, i) => GFX.anim(r, [{ opacity: 0.7, transform: "scale(1)" }, { opacity: 0, transform: "scale(1.75)" }],
+        { at: 760 + i * 520, dur: 900, ease: "out", fill: "forwards" }));
+    }
+  })();
+</script>

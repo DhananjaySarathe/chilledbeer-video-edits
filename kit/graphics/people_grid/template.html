@@ -1,0 +1,130 @@
+<style>
+  .pg-dots { position: absolute; inset: 0;
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--ink) 10%, transparent) 1.7px, transparent 2.4px);
+    background-size: 40px 40px; background-position: 20px 20px; }
+  .pg-wrap { position: absolute; left: var(--safe-left); right: var(--safe-left); top: var(--safe-top);
+    bottom: calc(1920px - var(--content-bottom)); display: flex; flex-direction: column; align-items: center;
+    justify-content: center; }
+  .pg-kicker { font-size: 30px; letter-spacing: 0.34em; text-indent: 0.34em; white-space: nowrap; margin-top: 6px; }
+  .pg-num { font-family: var(--display); font-size: 184px; line-height: 1; color: var(--accent); white-space: nowrap;
+    margin-top: 6px; }
+  .pg-num .d { display: inline-block; width: var(--dw, 0.5em); text-align: center; }
+  .pg-grid { display: grid; grid-template-columns: repeat(var(--cols), var(--pitch)); grid-auto-rows: var(--pitch);
+    margin-top: 22px; --pitch: 70px; }
+  .pg-p { display: flex; align-items: center; justify-content: center; color: var(--ink); }
+  .pg-p svg { width: 72%; height: 72%; overflow: visible; }
+</style>
+<div class="pg-dots"></div>
+<div class="pg-wrap" id="wrap">
+  <div class="kicker pg-kicker" id="kicker"></div>
+  <div class="pg-num" id="num"></div>
+  <div class="pg-grid" id="grid"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const clamp = GFX.clamp;
+    const cols = Math.round(clamp(Number(P.cols) || 10, 5, 14)), rows = Math.round(clamp(Number(P.rows) || 8, 3, 10));
+    const N = cols * rows;
+    const from = clamp(Number(P.from ?? 100), 0, 100), to = clamp(Number(P.to) || 0, 0, 100);
+    const kicker = GFX.$("#kicker"), num = GFX.$("#num"), grid = GFX.$("#grid");
+    kicker.textContent = P.kicker || "";
+    if (!P.kicker) kicker.remove();
+
+    // percentage with fixed-width digit cells so the count doesn't wobble
+    const decimals = Number.isInteger(to) && Number.isInteger(from) ? 0 : 1;
+    const suffix = String(P.suffix ?? "");
+    const fmt = (v) => [...v.toFixed(decimals)].map((c) => (c >= "0" && c <= "9" ? `<span class="d">${c}</span>` : c)).join("")
+      + GFX.esc(suffix);
+    GFX.layout(() => {
+      const probe = GFX.h("span", { style: "position:absolute;display:inline-block;visibility:hidden;white-space:pre" });
+      num.append(probe);
+      let w = 0;
+      for (const d of "0123456789") { probe.textContent = d.repeat(10); w = Math.max(w, probe.offsetWidth / 10); } // layout width: entrance transforms don't skew it
+      num.style.setProperty("--dw", (0.95 * w / parseFloat(getComputedStyle(probe).fontSize)).toFixed(4) + "em");
+      probe.remove();
+    });
+
+    // grid: the pitch fills the room left under the number (measured once fonts are in)
+    grid.style.setProperty("--cols", cols);
+    const icon = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="6.4" r="4.7"/>' +
+      '<path d="M2.4 24c0-6.3 4.3-10.1 9.6-10.1s9.6 3.8 9.6 10.1z"/></svg>';
+    const cells = [];
+    for (let i = 0; i < N; i++) { const el = GFX.h("div", { class: "pg-p", html: icon }); grid.append(el); cells.push(el); }
+    GFX.layout(() => {
+      const outer = (el) => { const cs = getComputedStyle(el); return el.offsetHeight + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom); };
+      const head = [...GFX.$("#wrap").children].filter((el) => el !== grid).reduce((h, el) => h + outer(el), 0);
+      const room = GFX.$("#wrap").clientHeight - head - parseFloat(getComputedStyle(grid).marginTop);
+      const pitch = Math.floor(Math.min(952 / cols, room / rows, 140));
+      grid.style.setProperty("--pitch", pitch + "px");
+    });
+
+    // keep order: best-candidate sampling, so the survivors (lowest ranks) spread evenly and the rest leave scattered
+    const r = GFX.rand(7 + N);
+    const pos = cells.map((_, i) => [i % cols, Math.floor(i / cols)]);
+    const rank = new Array(N), used = new Array(N).fill(false), picked = [];
+    for (let q = 0; q < N; q++) {
+      let best = -1, bestD = -1;
+      for (let k = 0; k < 10; k++) {
+        let c = Math.floor(r() * N);
+        while (used[c]) c = (c + 1) % N;
+        let dmin = Infinity;
+        for (const p of picked) dmin = Math.min(dmin, (pos[c][0] - pos[p][0]) ** 2 + (pos[c][1] - pos[p][1]) ** 2);
+        if (dmin > bestD) { bestD = dmin; best = c; }
+      }
+      used[best] = true; picked.push(best); rank[best] = q;
+    }
+
+    // timeline
+    const tCount = 820, tEnd = Math.max(tCount + 600, D - 560), FADE = 240;
+    const ease = GFX.ease.out;
+    const valueAt = (t) => from + (to - from) * ease(clamp((t - tCount) / (tEnd - tCount)));
+    const V = (t) => (N * valueAt(t)) / 100;
+    const keep = Math.round((N * to) / 100);
+    const nAccent = keep <= 12 ? keep : Math.round(clamp(keep * 0.15, 4, 12));
+    // when each icon crosses the line (sampled at 4x the frame rate: deterministic, seek-safe)
+    const cross = new Array(N).fill(null);
+    const down = to < from;
+    for (let t = tCount; t <= tEnd + 1; t += 1000 / GFX.fps / 4) {
+      const v = V(t);
+      for (let i = 0; i < N; i++) {
+        if (cross[i] !== null) continue;
+        const q = rank[i];
+        if (down ? v < q + 0.5 : v > q + 0.5) cross[i] = t;
+      }
+    }
+    const startOn = (i) => rank[i] + 0.5 < V(0);
+
+    num.innerHTML = fmt(from);
+    GFX.tween((v) => { num.innerHTML = fmt(v); }, { at: tCount, dur: tEnd - tCount, ease: "out", from, to });
+
+    const last = new Array(N).fill("");
+    GFX.each((t) => {
+      const p = ease(clamp((t - tCount) / (tEnd - tCount)));
+      for (let i = 0; i < N; i++) {
+        let on = startOn(i) ? 1 : 0;
+        if (cross[i] !== null) {
+          const f = clamp((t - cross[i]) / FADE);
+          on = down ? 1 - f : f;
+        }
+        let css = `color-mix(in srgb, var(--ink) ${(18 + on * 82).toFixed(1)}%, var(--bg))`;
+        if (rank[i] < nAccent) css = `color-mix(in srgb, var(--accent) ${(p * on * 100).toFixed(1)}%, ${css})`;
+        if (css !== last[i]) { cells[i].style.color = css; last[i] = css; }
+      }
+    }, tCount, tEnd + FADE);
+
+    // entrances: label, number, then the grid pops out from the centre
+    if (P.kicker) GFX.in(kicker, "rise", { at: 0, dur: 420 });
+    GFX.in(num, "pop", { at: 60, dur: 480 });
+    const cx = (cols - 1) / 2, cy = (rows - 1) / 2, dmax = Math.hypot(cx, cy) || 1;
+    cells.forEach((el, i) => {
+      const d = Math.hypot(pos[i][0] - cx, pos[i][1] - cy) / dmax;
+      GFX.in(el, "pop", { at: 160 + d * 380 + r() * 60, dur: 340 });
+    });
+    // the survivors land with a small bump
+    cells.forEach((el, i) => {
+      if (rank[i] < nAccent) GFX.anim(el, [{ transform: "scale(1)" }, { transform: "scale(1.22)", offset: 0.4 }, { transform: "scale(1)" }],
+        { at: tEnd - 60 + rank[i] * 30, dur: 380, ease: "out", fill: "none" });
+    });
+  })();
+</script>

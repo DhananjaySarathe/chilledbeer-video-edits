@@ -1,0 +1,63 @@
+{
+  "id": "stories_poll",
+  "name": "Two-option poll sticker",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A white social 'poll' sticker card pops up in the upper third over the speaker: a small POLL tag, the question in bold, and two rounded option bars that fill from the left while their percentages count up; the winning option fills orange and gets a check.",
+  "use_when": "Lines that ask the viewer a question or compare two choices: 'be honest, do you…', 'most people pick…', 'I asked my followers', 'this or that', survey results with a clear majority.",
+  "params": {
+    "question": {
+      "type": "text",
+      "required": true,
+      "max_len": 60,
+      "help": "the poll question; wraps to up to 2 lines"
+    },
+    "options": {
+      "type": "list",
+      "required": true,
+      "max_len": 2,
+      "help": "exactly 2 [{label, percent}]; label ≤ 22 chars, percent 0-100 (the higher one wins)"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.4,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "pop",
+      "gain_db": -16
+    },
+    {
+      "at": 0.65,
+      "name": "riser",
+      "gain_db": -22
+    },
+    {
+      "at": 1.57,
+      "name": "ding",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "poll",
+    "question",
+    "survey",
+    "choice",
+    "this or that",
+    "overlay"
+  ],
+  "explains": [
+    "ask",
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "rating_card",
+  "version": "1"
+}

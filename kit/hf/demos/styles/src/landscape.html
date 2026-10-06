@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <!--HF:KIT-->
+    <style>
+      .hd-n { position: absolute; left: 96px; top: 74px; font: 700 22px "Inter", sans-serif; letter-spacing: 0.22em; color: #e2562b; white-space: nowrap; }
+      .hd-s { position: absolute; left: 98px; top: 214px; font: 600 30px "Inter", sans-serif; color: #4a443d; white-space: nowrap; }
+      .cap { position: absolute; left: 0; width: 1920px; text-align: center; white-space: nowrap; }
+      .cap span.pg { display: inline-block; padding: 14px 30px 16px; border-radius: 22px; background: #fffdf8; box-shadow: 0 14px 34px rgba(40, 25, 10, 0.28);
+        font: 800 50px/1 "Inter", sans-serif; letter-spacing: -0.02em; color: #1b1815; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="styles16" data-start="0" data-duration="__TOTAL__" data-width="1920" data-height="1080" style="position:relative;width:1920px;height:1080px;overflow:hidden"></div>
+    <script>
+      /*DATA*/
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        window.__timelines = window.__timelines || {};
+        window.__timelines["styles16"] = tl;                                               // the linter looks for this line
+        const K = HF.kit({ tl, id: "styles16", width: 1920, height: 1080 });
+        const C = HF.C, Q = K.Q, rootEl = document.getElementById("root");
+        K.el(rootEl, "", "", "hf-fill hf-paper"); K.el(rootEl, "", "", "hf-fill hf-grain");
+        const L0 = K.el(rootEl, "left:0;top:0;width:1920px;height:1080px");
+        const TOP = K.el(rootEl, "left:0;top:0;width:1920px;height:1080px;z-index:6");
+        const B = D.beats;
+
+        const header = (n, title, sub, a, b, card) => {
+          const g = K.el(TOP, card ? "left:56px;top:40px;width:760px;height:240px;border-radius:28px;background:rgba(255,253,248,.94);box-shadow:0 20px 50px rgba(40,25,10,.22)" : "left:0;top:0;width:1100px;height:280px");
+          const dx = card ? -40 : 0, dy = card ? -36 : 0;
+          const nn = K.el(g, `left:${96 + dx}px;top:${74 + dy}px`, `0${n} / 04 · STYLE`, "hd-n");
+          const tt = K.words(g, title, `left:${90 + dx}px;top:${104 + dy}px;font-size:100px`);
+          const ss = K.el(g, `left:${98 + dx}px;top:${214 + dy}px`, HF.esc(sub), "hd-s");
+          if (a <= 0) K.rise(tt.ws, tt.ws.map(() => 0));
+          else { K.fade(nn, a); K.rise(tt.ws, [a + 0.05, a + 0.12, a + 0.19]); tl.fromTo(ss, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, Q(a + 0.3)); }
+          if (b != null) tl.to(g, { opacity: 0, y: -14, duration: 0.3, ease: "power2.in" }, Q(b - 0.32));
+          return g;
+        };
+        const layer = (a, b) => { const l = K.el(L0, "left:0;top:0;width:1920px;height:1080px"); if (a > 0) K.show(l, a, b); else if (b != null) tl.set(l, { autoAlpha: 0 }, Q(b)); return l; };
+
+        // ================================================================== scribble outline: full bleed, the hook
+        {
+          const [a, b] = B.scribble, at = D.clip.at, dur = D.clip.dur;
+          header(D.order.scribble, "Scribble *outline", "a hand-drawn line that follows you", a, b, true);
+          const L = layer(a, b);
+          const inner = K.el(L, "left:0;top:0;width:1920px;height:1080px;transform-origin:42% 40%");
+          const box = [0, 0, 1920, 1080];
+          inner.innerHTML = `<video id="${K.vid("cr")}" class="clip" src="assets/creator.mp4" muted playsinline data-start="${at.toFixed(3)}" data-duration="${dur.toFixed(3)}" data-media-start="0" data-track-index="3"` +
+            ` style="position:absolute;left:0;top:0;width:1920px;height:1080px"></video>`;
+          tl.fromTo(inner, { scale: 1 }, { scale: 1.05, duration: b - a, ease: "none", immediateRender: false }, Q(a));
+          HF.scribble(K, inner, S, { at, box, from: at + 0.25, until: b - 0.3, width: 7, draw: 0.75, erase: 0.3, zoom: 1.02 });
+          K.sfx("swish", at + 0.25, -26);
+          const cap = K.el(TOP, "left:0;top:0;width:1920px;height:1080px");
+          D.clip.pages.forEach((pg, k) => {
+            const p0 = pg.ws[0].t, p1 = k + 1 < D.clip.pages.length ? D.clip.pages[k + 1].ws[0].t : at + dur - 0.05;
+            const c = K.el(cap, "top:900px", `<span class="pg">${pg.ws.map((w) => `<span>${HF.esc(w.w)}</span>`).join(" ")}</span>`, "cap");
+            K.show(c, p0 - 0.03, p1 - 0.03);
+            const sp = [...c.querySelectorAll(".pg > span")];
+            sp.forEach((e, i) => { tl.set(e, { color: C.acc }, Q(pg.ws[i].t)); if (i + 1 < sp.length) tl.set(e, { color: C.ink }, Q(pg.ws[i + 1].t)); });
+          });
+          tl.to(inner, { opacity: 0, duration: 0.3, ease: "power2.in" }, Q(b - 0.32));
+        }
+
+        // ================================================================== sketch diagram: the agent loop as a row
+        {
+          const [a, b] = B.sketch;
+          header(D.order.sketch, "Sketch *diagrams", "flows that draw themselves", a, b);
+          const L = layer(a, b);
+          const sk = HF.sketch(K, L, { x: 0, y: 0, w: 1920, h: 1080, seed: 7 });
+          const peach = "#f0a98d", mint = "#86c4a0", Y = 530;
+          sk.node("read", { x: 330, y: Y, w: 320, h: 170, label: "Read", fill: peach, size: 64 });
+          sk.node("plan", { x: 750, y: Y, w: 320, h: 170, label: "Plan", fill: peach, size: 64 });
+          sk.node("edit", { x: 1170, y: Y, w: 320, h: 170, label: "Edit", fill: peach, size: 64 });
+          sk.node("check", { x: 1590, y: Y, w: 320, h: 170, label: "Check", fill: mint, size: 64 });
+          sk.arrow("a1", "read", "plan", { bend: 0.06 });
+          sk.arrow("a2", "plan", "edit", { bend: 0.06 });
+          sk.arrow("a3", "edit", "check", { bend: 0.06 });
+          sk.arrow("a4", "check", "read", { bend: -0.16, gap: 22 });
+          sk.text("mid", 960, 860, "loop until the tests pass", { size: 46, color: C.ink2 });
+          sk.ring("ring", "check", { color: C.acc, pad: 16 });
+          const T = [0.15, 0.68, 1.02, 1.55, 1.9, 2.43, 2.78, 3.32].map((x) => a + x);
+          ["read", "a1", "plan", "a2", "edit", "a3", "check", "a4"].forEach((id, k) => { sk.draw(id, T[k], id === "a4" ? { dur: 0.7 } : {}); K.sfx(id[0] === "a" ? "swish" : "click", T[k], id[0] === "a" ? -31 : -27); });
+          sk.draw("mid", a + 4.0);
+          sk.draw("ring", a + 4.5, { dur: 0.55 }); K.sfx("swish", a + 4.5, -27);
+          sk.boil(a + 4.0, b);
+          sk.hide(Object.keys(sk.items), b - 0.32, 0.3);
+          L.style.transformOrigin = "50% 55%"; K.drift(L, a, b, 1.04);
+        }
+
+        // ================================================================== marker notes: screenshot left, code right
+        {
+          const [a, b] = B.annotate;
+          header(D.order.annotate, "Marker *notes", "circle it, highlight it, scratch it out", a, b);
+          const L = layer(a, b);
+          const SX = 330, SY = 200, S = 1.452, WX = 96, WY = 300;
+          const G1 = K.el(L, "left:0;top:0;width:1920px;height:1080px");
+          const win = HF.win(K, G1, WX, WY, 900, 690, "", null); win.style.opacity = 1;
+          K.el(win.view, `left:${-SX * S}px;top:${-SY * S}px;width:${1728 * S}px;height:${941 * S}px`, `<img src="assets/shot.jpg" alt="" style="width:100%;display:block">`);
+          K.enter(G1, a + 0.15, { y: 40 });
+          const an = HF.annotate(K, G1, { x: WX - SX * S, y: WY + 46 - SY * S, w: 1728 * S, h: 941 * S, srcW: 1728, seed: 5 });
+          const t0 = a + 0.75;
+          an.underline([419, 295, 92, 15], t0, { size: 9 });
+          an.circle([815, 516, 72, 24], t0 + 0.55, { pad: 14 });
+          an.note(372, 344, "split 2 ways", t0 + 1.2, { size: 52, rotate: -3 });
+          an.arrow([598, 382], [797, 507], t0 + 1.55, { bend: 0.22, size: 8 });
+          const lines = ["// boil: redraw on twos, never at random", "function boil(t) {", "  const wobble = Math.random() * 4;", "  const ts = Math.floor(t * 12) / 12;", "  return variants[Math.round(ts * 12) % 3];", "}"];
+          const CX = 1040, CY = 380, FS = 26, CW = FS * 0.6;
+          const G2 = K.el(L, "left:0;top:0;width:1920px;height:1080px");
+          const cw = HF.code(K, G2, { x: CX, y: CY, w: 800, h: 340, title: "boil.js", size: FS, lines });
+          cw.show(a + 2.6);
+          const LH = Math.round(FS * 1.62), ly = (k) => CY + 46 + 22 + (k - 1) * LH, cx = (col) => CX + 92 + col * CW;
+          const ac = HF.annotate(K, G2, { x: 0, y: 0, w: 1920, h: 1080, seed: 9 });
+          const t1 = a + 3.25;
+          ac.highlight([cx(13), ly(4) + 5, 23 * CW, LH - 10], t1);
+          ac.scribble([cx(17), ly(3) + 7, 17 * CW, LH - 14], t1 + 0.75, { size: 7, dur: 0.65 });
+          ac.note(cx(17) + 80, ly(3) - 60, "not seekable", t1 + 1.45, { size: 48, rotate: -4 });
+          const c3 = "  return variants[Math.round(ts * 12) ".length;
+          ac.circle([cx(c3), ly(5) + 7, 3 * CW, LH - 14], t1 + 2.2, { pad: 10, size: 7 });
+          K.sfx("swish", t1, -30);
+          tl.to([G1, G2], { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, Q(b - 0.32));
+          L.style.transformOrigin = "50% 50%"; K.drift(L, a, b, 1.05);
+        }
+
+        // ================================================================== paper collage
+        {
+          const [a, b] = B.collage;
+          header(D.order.collage, "Paper *collage", "torn screenshots, tape, a little parallax", a, null);
+          const L = layer(a, null);
+          const cg = HF.collage(K, L, { w: 1920, h: 1080, seed: 23, grainOpacity: 0.42 });
+          cg.show(a);
+          const dot = cg.halftone({ x: 980, y: 600, r: 380, z: -120, spacing: 15, color: C.acc });
+          const A = cg.piece({ x: 540, y: 290, w: 420, h: 640, z: 20, rot: -5, img: "assets/low.jpg", torn: "tb", tape: ["top"], print: 0.2 });
+          const Bp = cg.piece({ x: 1000, y: 320, w: 420, h: 640, z: 60, rot: 4, img: "assets/ultra.jpg", torn: "tb", tape: [{ side: "tl" }, { side: "br" }], print: 0.2 });
+          const s1 = cg.strip("Same prompt.", { x: 1190, y: 214, size: 92, rot: 3, z: 120, w: 520, h: 136 });
+          const s2 = cg.strip("six effort levels", { x: 150, y: 750, size: 86, rot: -2.5, z: 140, italic: true, color: C.acc, w: 600, h: 130 });
+          const tag = { size: 30, h: 58, font: "'Inter', sans-serif", weight: 800, track: ".14em", color: "#fffdf8", amp: 2.5 };
+          const tA = cg.strip("LOW", { ...tag, x: 600, y: 300, rot: -7, z: 165, w: 140, bg: C.ink, paper: C.ink });
+          const tB = cg.strip("ULTRACODE", { ...tag, x: 1190, y: 900, rot: -4, z: 170, w: 250, bg: C.acc, paper: C.acc });
+          cg.enter(dot, a + 0.2, { from: "pop", dur: 0.5 });
+          cg.enter(A, a + 0.45, { from: "drop" });
+          cg.enter(Bp, a + 0.8, { from: "drop" });
+          cg.enter(s1, a + 1.25, { from: "right", dur: 0.5 });
+          cg.enter(s2, a + 1.65, { from: "left", dur: 0.5 });
+          cg.enter(tA, a + 2.15, { from: "pop", dur: 0.3 });
+          cg.enter(tB, a + 2.4, { from: "pop", dur: 0.3 });
+          cg.move(a, { x: 24, y: 8, z: 0, ry: 3, rx: -1.5, dur: 0.05 });
+          cg.move(a + 0.05, { x: -10, y: -6, z: 50, ry: -2.5, rx: 1.5, rz: -0.4, dur: b - a - 0.05, ease: "sine.inOut" });
+        }
+        K.finish(D.total);
+      })();
+    </script>
+  </body>
+</html>

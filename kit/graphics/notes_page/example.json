@@ -1,0 +1,4 @@
+{"url": "notes / namaste-js / s1-ep03", "label": "Season 1 · Episode 3", "title": "Hoisting in JavaScript",
+ "notes": [{"text": "var → hoisted as undefined", "time": "04:12"}, {"text": "Functions → hoisted whole", "time": "07:30"},
+           {"text": "Arrow fns act like vars", "time": "11:05"}],
+ "notes_at": 0.9, "link_at": 2.4, "player": "Namaste JavaScript · Ep 03", "progress": 0.3}

@@ -1,0 +1,83 @@
+{
+  "id": "file_list",
+  "name": "Folder of exports, last one flagged",
+  "category": "mockup",
+  "kind": "fullscreen",
+  "description": "A white file-browser window titled 'exports': video files appear one by one down the list (dark play-icon tile, filename in mono, day label on the right like Mon, Tue, Wed), then the last file is highlighted with a soft tint and a tilted chip is stamped under it: red '✗ STILL NOT IT', or green '✓ APPROVED'.",
+  "use_when": "Lines about endless revisions, versions piling up, never getting the right result, or finally getting sign-off: 'final_v2, final_FINAL...', 'you still don't get what you wanted', 'draft after draft'.",
+  "params": {
+    "title": {
+      "type": "text",
+      "default": "exports",
+      "max_len": 24,
+      "help": "window title, a folder name"
+    },
+    "files": {
+      "type": "list",
+      "required": true,
+      "max_len": 6,
+      "help": "filenames in order, oldest first, e.g. ['final.mp4', 'final_v2.mp4']; keep each under ~26 characters"
+    },
+    "days": {
+      "type": "list",
+      "default": null,
+      "max_len": 7,
+      "help": "labels on the right, one per file; default Mon, Tue, Wed...; [] hides them"
+    },
+    "final_tag": {
+      "type": "text",
+      "default": null,
+      "max_len": 18,
+      "help": "chip under the last file; default 'Still not it' (bad) or 'Approved' (good); '' shows no chip"
+    },
+    "final_tone": {
+      "type": "text",
+      "default": "bad",
+      "help": "'bad' (red chip, orange tint) or 'good' (green chip and tint)"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.4,
+    "max": 4.5
+  },
+  "captions": "dark",
+  "caption_y": 0.62,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.35,
+      "name": "tick",
+      "gain_db": -18
+    },
+    {
+      "at": 1.7,
+      "name": "stamp",
+      "gain_db": -14
+    }
+  ],
+  "tags": [
+    "files",
+    "versions",
+    "revisions",
+    "exports",
+    "final",
+    "editor",
+    "feedback",
+    "approval"
+  ],
+  "explains": [
+    "proof",
+    "instruction"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "file_upload",
+  "version": "1"
+}

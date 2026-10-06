@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!--HF:KIT-->
+  </head>
+  <body>
+    <div id="root" data-composition-id="kinetic" data-start="0" data-duration="12" data-width="1080" data-height="1920" style="position:relative;width:1080px;height:1920px;overflow:hidden;background:#f3eee6">
+    </div>
+    <script>
+      /*DATA*/
+      (function () {
+        // The same 12 s beat sheet twice: D.mode "before" = the v7 vocabulary (K.rise, K.enter, a sound when a move
+        // starts), "after" = kit/hf/kinetic.js (kinetic type, springs, multi-property entrances, sound on the landing).
+        const tl = gsap.timeline({ paused: true });
+        window.__timelines = window.__timelines || {};
+        window.__timelines["kinetic"] = tl;
+        const K = HF.kit({ tl, id: "kinetic", width: 1080, height: 1920 });
+        const R = document.getElementById("root"), C = HF.C, NEW = D.mode === "after";
+        // a layer visible from frame 1 gets no set at time 0 (kit/hf README "Never at time 0"): only its end is set
+        const layer = (a, b) => { const l = K.el(R, "left:0;top:0;width:1080px;height:1920px"); if (a > 0) K.show(l, a, b); else tl.set(l, { autoAlpha: 0 }, K.Q(b)); return l; };
+
+        // label (top, inside the safe zone)
+        K.el(R, "left:60px;top:300px;padding:10px 22px;border-radius:40px;background:#1b1815;color:#f3eee6;font:700 26px Inter;letter-spacing:.16em",
+          NEW ? "NEW · v8 MOTION" : "NOW · v7 KIT");
+
+        // 0.3-3.7  the hook: two lines
+        const L1 = layer(0, 3.9);
+        if (NEW) {
+          const a = HF.kinetic(K, L1, { text: "Most people spend *4 hours* editing", at: 0.3, style: "slam", y: 560, size: 150, per: 4 / 30 });
+          const b = HF.kinetic(K, L1, { text: "one minute of video.", at: 1.6, style: "track", y: 1080, size: 64, color: C.ink2 });
+          a.out(3.4); b.out(3.45);
+        } else {
+          const a = K.words(L1, "Most people spend *4 *hours editing", "left:60px;top:560px;width:960px;font-size:150px;text-align:center;white-space:normal");
+          K.rise(a.ws, [0.3, 0.42, 0.54, 0.66, 0.78, 0.9]);
+          K.sfx("hit", 0.66);
+          const b = K.words(L1, "one minute of video.", "left:60px;top:1010px;width:960px;font-size:72px;text-align:center;color:#4a443d");
+          K.rise(b.ws, [1.6, 1.68, 1.76, 1.84]);
+          K.sfx("swish", 1.6);
+          K.exit(a.box, 3.4); K.exit(b.box, 3.45);
+        }
+
+        // 3.9-7.7  the stat card and a badge
+        const L2 = layer(3.9, 7.9);
+        const card = K.el(L2, "left:140px;top:640px;width:800px;height:560px;border-radius:36px;background:#fff;box-shadow:0 22px 60px rgba(60,40,20,.14)");
+        K.el(card, "left:0;top:70px;width:800px;text-align:center;font:700 30px Inter;letter-spacing:.2em;color:#8a8178", "MY EDIT, START TO FINISH");
+        const num = K.el(card, `left:0;top:150px;width:800px;text-align:center;font:400 270px ${NEW ? "Anton" : "InstrumentSerif"};color:#1b1815;line-height:1`, "0");
+        K.el(card, "left:0;top:440px;width:800px;text-align:center;font:600 34px Inter;color:#4a443d", "minutes, not hours");
+        const badge = K.el(L2, "left:720px;top:560px;padding:18px 34px;border-radius:60px;background:#2f8a5b;color:#fff;font:800 50px Inter", "−96%");
+        if (NEW) {
+          HF.land(K, card, 4.0, { spring: "ui", from: { y: 120, scale: 0.94, blur: 12 }, sfx: "swish" });
+          const o = { v: 0 };
+          tl.set(num, { textContent: "0" }, 0);
+          tl.to(o, { v: 10, duration: 0.9, ease: HF.E.emph, onUpdate: () => { num.textContent = Math.round(o.v); } }, K.Q(4.25));
+          HF.land(K, badge, 5.3, { spring: "thrown", from: { y: 30, scale: 0.4, rotation: -14, blur: 0 }, sfx: "pop" });
+          HF.leave(K, card, 7.4); HF.leave(K, badge, 7.36);
+        } else {
+          K.enter(card, 4.0); K.sfx("swish", 4.0);
+          K.countUp(num, 0, 10, 4.25, 0.9);
+          K.enter(badge, 5.3, { scale: 0.8 }); K.sfx("pop", 5.3);
+          K.exit(card, 7.4); K.exit(badge, 7.36);
+        }
+
+        // 7.9-12  three rules, one per beat
+        const L3 = layer(7.9, 12.1);
+        const title = NEW ? HF.kinetic(K, L3, { text: "The *whole* system", at: 8.0, style: "rise", y: 520, size: 120 })
+                          : (() => { const w = K.words(L3, "The *whole system", "left:60px;top:520px;width:960px;font-size:120px;text-align:center"); K.rise(w.ws, [8.0, 8.1, 8.2]); return w; })();
+        const rows = ["Cut every long pause", "Captions big and clear", "Never cut mid-sentence"].map((txt, k) => {
+          const r = K.el(L3, `left:120px;top:${780 + k * 190}px;width:840px;height:150px;border-radius:28px;background:#fff;box-shadow:0 14px 40px rgba(60,40,20,.12)`);
+          K.el(r, "left:36px;top:39px;width:72px;height:72px;border-radius:50%;background:#e2562b;color:#fff;font:800 36px Inter;display:flex;align-items:center;justify-content:center", String(k + 1));
+          K.el(r, "left:140px;top:47px;font:700 46px Inter;color:#1b1815", txt);
+          return r;
+        });
+        if (NEW) {
+          const offs = HF.stagger(3, 5 / 30);
+          rows.forEach((r, k) => HF.land(K, r, 8.7 + k * 0.6 + offs[0], { spring: "ui", from: { x: -60, y: 0, scale: 0.97, blur: 10 }, sfx: "click" }));
+        } else {
+          rows.forEach((r, k) => { K.enter(r, 8.7 + k * 0.6); K.sfx("click", 8.7 + k * 0.6); });
+        }
+        K.finish(12);
+      })();
+    </script>
+  </body>
+</html>

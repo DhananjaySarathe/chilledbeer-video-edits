@@ -1,0 +1,70 @@
+{
+  "id": "comment_reply",
+  "name": "Viewer comment to reply to",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A white social-media comment card pops up in the upper third over the speaker: round avatar with an initial, bold @username, the comment text (up to three lines) and a heart with a like count that ticks up and turns orange as the heart gets tapped; an optional orange chip above it reads like 'Reply to @user's comment'.",
+  "use_when": "When the speaker answers or reacts to a viewer: 'someone commented…', 'a lot of you asked…', 'replying to this comment', quoting a question, a hater or a DM.",
+  "params": {
+    "username": {
+      "type": "text",
+      "required": true,
+      "max_len": 24,
+      "help": "commenter's handle, without or with '@'"
+    },
+    "text": {
+      "type": "text",
+      "required": true,
+      "max_len": 90,
+      "help": "the comment itself; wraps to up to 3 lines"
+    },
+    "likes": {
+      "type": "text",
+      "default": "",
+      "max_len": 7,
+      "help": "like count such as '248' or '1.2K'; counts up if it is a number; empty = no count"
+    },
+    "label": {
+      "type": "text",
+      "default": "",
+      "max_len": 40,
+      "help": "optional chip above the card, e.g. \"Reply to @sam's comment\""
+    }
+  },
+  "duration": {
+    "min": 1.6,
+    "default": 2.4,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "pop",
+      "gain_db": -16
+    },
+    {
+      "at": 1.2,
+      "name": "tick",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "comment",
+    "reply",
+    "question",
+    "viewer",
+    "social",
+    "overlay"
+  ],
+  "explains": [
+    "conversation",
+    "ask"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "chat_thread",
+  "version": "1"
+}

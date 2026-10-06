@@ -1,0 +1,67 @@
+{
+  "id": "split_screen",
+  "name": "Split screen: headline panel over the speaker",
+  "category": "speaker",
+  "kind": "speaker",
+  "description": "A panel slides down over the top half and pushes the speaker into the bottom half, with a thin divider between them. The panel is either cream with a small spaced label, a big condensed headline and an optional icon in an orange circle; solid orange with one huge white word; or near-black with a white headline.",
+  "use_when": "Naming a topic, step, option or claim while the speaker keeps talking: 'option two', 'hire an editor', 'the real problem', 'step three: post it'. Use 'accent' for one punchy word, 'dark' for a serious or negative point.",
+  "params": {
+    "headline": {
+      "type": "text",
+      "required": true,
+      "max_len": 28,
+      "help": "2-4 words read best; fitted to at most two lines (accent tone: ideally one word)"
+    },
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 24,
+      "help": "small spaced label above the headline, e.g. 'OPTION 02' or 'STEP 3'"
+    },
+    "icon": {
+      "type": "text",
+      "default": "",
+      "help": "optional GFX icon name shown in an orange circle (light and dark tones), e.g. 'users', 'clock', 'scissors'"
+    },
+    "tone": {
+      "type": "text",
+      "default": "light",
+      "help": "'light' (cream panel), 'accent' (orange panel, huge white word) or 'dark' (near-black panel)"
+    }
+  },
+  "duration": {
+    "min": 1.4,
+    "default": 2.4,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "swipe",
+      "gain_db": -16
+    },
+    {
+      "at": 0.3,
+      "name": "pop",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "speaker",
+    "split",
+    "headline",
+    "topic",
+    "option",
+    "step"
+  ],
+  "explains": [
+    "comparison"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "before_after",
+  "version": "1"
+}

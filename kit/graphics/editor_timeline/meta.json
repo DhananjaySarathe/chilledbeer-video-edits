@@ -1,0 +1,59 @@
+{
+  "id": "editor_timeline",
+  "name": "Editor timeline with the speaker in the preview",
+  "category": "mockup",
+  "kind": "speaker",
+  "description": "A dark video-editor window: a small 9:16 preview monitor at the top plays the speaker's own video with a running timecode under it; below it a timeline with track labels V2, V1, A1, A2, orange clip blocks, grey picture clips, a green audio waveform and a red playhead that a cursor grabs and drags back and forth (scrubbing) while the timecode jumps.",
+  "use_when": "Lines about editing footage yourself or sitting in an editing app: 'then you scrub through the timeline', 'hours in the editor', 'cutting it all together', 'finding the good take'.",
+  "params": {
+    "title": {
+      "type": "text",
+      "default": "Timeline — raw_take_03",
+      "max_len": 32,
+      "help": "window title, e.g. 'Timeline — raw_take_03'"
+    },
+    "scrub": {
+      "type": "bool",
+      "default": true,
+      "help": "true: the cursor drags the playhead back and forth; false: it just plays forward"
+    }
+  },
+  "duration": {
+    "min": 1.8,
+    "default": 2.6,
+    "max": 4.5
+  },
+  "captions": "dark",
+  "caption_y": 0.62,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.7,
+      "name": "click",
+      "gain_db": -16
+    }
+  ],
+  "tags": [
+    "editing",
+    "timeline",
+    "editor",
+    "scrub",
+    "footage",
+    "workflow",
+    "speaker"
+  ],
+  "explains": [
+    "instruction",
+    "process"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "progress_task",
+  "version": "1"
+}

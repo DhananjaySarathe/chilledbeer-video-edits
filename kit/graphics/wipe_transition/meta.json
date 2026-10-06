@@ -1,0 +1,51 @@
+{
+  "id": "wipe_transition",
+  "name": "Wipe transition over a cut",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A bold diagonal orange band with a thin dark trailing edge sweeps across the whole frame in about half a second, fully covering the picture at its midpoint, with a whoosh. Centre it on a jump cut (start = cut time - half the duration) and the cut disappears under the sweep.",
+  "use_when": "A topic change or a big jump in the footage (walking selfies): hides the cut and marks a new section. Use at most once or twice per video.",
+  "params": {
+    "tone": {
+      "type": "text",
+      "default": "accent",
+      "max_len": 8,
+      "help": "'accent' (orange band), 'ink' (black band) or 'cream'"
+    },
+    "direction": {
+      "type": "text",
+      "default": "left",
+      "max_len": 6,
+      "help": "'left' (sweeps right to left) or 'right'"
+    }
+  },
+  "duration": {
+    "min": 0.4,
+    "default": 0.56,
+    "max": 0.9
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -12
+    }
+  ],
+  "tags": [
+    "transition",
+    "wipe",
+    "swipe",
+    "cut",
+    "section"
+  ],
+  "explains": [
+    "structure"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "section_card",
+  "version": "1"
+}

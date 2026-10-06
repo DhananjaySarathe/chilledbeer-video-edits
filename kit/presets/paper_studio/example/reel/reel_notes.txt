@@ -1,0 +1,25 @@
+REEL: reel_how_i_edit.mp4 (9:16, 0:31) — teaser for the long video "I Don't Use a Video Editor. Claude Edits My Videos"
+
+INSTAGRAM CAPTION
+No editor. Just Claude.
+I built my own AI video editor on my Claude Code credits. Lost 2 days of work, rebuilt it, and now an edit takes 15–20 minutes.
+Full workflow on my YouTube channel (link in bio). Comment "repo" and I'll send you the GitHub link.
+
+#claudecode #claude #aivideoediting #videoediting #aitools #contentcreator
+
+YOUTUBE SHORTS
+Title: No editor. Just Claude. (my AI video editor)
+Description: The full workflow is on my channel → link the long video as the Shorts "Related video" (Shorts upload > Related video), so viewers can tap through.
+Comment "repo" for the GitHub link.
+#shorts #claudecode #aivideoediting
+
+PINNED COMMENT (both)
+Full video: [link to the long video]. Comment "repo" for the GitHub link 👇
+
+MUSIC CREDIT
+Music: MokkaMusic - Drive
+Sound effects: Mixkit (free license).
+
+POSTING TIPS
+- Post the reel 1–2 days after the long video goes live, so the "Related video" link and the bio link have something to point at.
+- Cover frame: the first frame ("No editor." over your face) works as the cover; no separate thumbnail needed.

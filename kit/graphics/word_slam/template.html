@@ -1,0 +1,92 @@
+<style>
+  .ws { position: absolute; left: 90px; right: 90px; top: 520px; text-align: center; }
+  .ws-line { width: 900px; font-family: var(--display); font-size: 200px; line-height: 1.16; text-transform: uppercase;
+    color: #fff; text-wrap: balance; }
+  .ws-seg { display: inline-block; position: relative; vertical-align: top; white-space: nowrap; }
+  .ws-word { text-shadow: 0 0.015em 0 rgba(0, 0, 0, 0.18), 0 0.03em 0.16em rgba(0, 0, 0, 0.45); }
+  .ws-box { background: var(--accent); color: var(--accent-ink); padding: 0.07em 0.15em 0.03em; margin: 0 0.02em;
+    border-radius: 0.07em; box-shadow: 0 0.08em 0.28em rgba(0, 0, 0, 0.3); }
+  .ws-spark { position: absolute; width: 0.32em; height: 0.06em; margin-top: -0.03em; border-radius: 0.03em;
+    background: #fff; transform-origin: 0 50%; opacity: 0; box-shadow: 0 0.01em 0.06em rgba(0, 0, 0, 0.3); }
+</style>
+<div class="ws" id="ws"><div class="ws-line" id="line"></div></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const ws = GFX.$("#ws"), line = GFX.$("#line");
+    const words = String(P.text || "").trim().split(/\s+/).filter(Boolean);
+    const norm = (w) => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+    // which words sit on the accent box: the accent_word (one word or a run of words), else the whole phrase
+    const key = String(P.accent_word || "").trim().split(/\s+/).map(norm).filter(Boolean);
+    let from = 0, to = words.length;
+    if (key.length) {
+      const i = words.findIndex((_, s) => key.every((k, j) => norm(words[s + j] || "") === k));
+      if (i >= 0) { from = i; to = i + key.length; }
+    }
+    const tilt = Number.isFinite(Number(P.tilt)) ? Number(P.tilt) : -3;
+    const segs = [];
+    words.slice(0, from).forEach((w) => segs.push({ text: w }));
+    segs.push({ text: words.slice(from, to).join(" "), box: true });
+    words.slice(to).forEach((w) => segs.push({ text: w }));
+    segs.forEach((s, i) => {
+      s.el = GFX.h("span", { class: "ws-seg " + (s.box ? "ws-box" : "ws-word"), text: s.text });
+      if (i) line.append(" ");
+      line.append(s.el);
+    });
+
+    // fit: one line if it stays big, else two balanced lines; then place it (clear of the mouth when the face is known)
+    GFX.layout(() => {
+      const W = 900, max = 210, min = 80;
+      // measured on layout boxes (offset*), so the entrance transforms and sparks don't count
+      const fits = (s, n) => {
+        line.style.fontSize = s + "px";
+        const tops = new Set(segs.map((g) => g.el.offsetTop));
+        return tops.size <= n && segs.every((g) => g.el.offsetLeft >= -1 && g.el.offsetLeft + g.el.offsetWidth <= W + 1);
+      };
+      const search = (n) => { let lo = min, hi = max; for (let k = 0; k < 16; k++) { const m = (lo + hi) / 2; if (fits(m, n)) lo = m; else hi = m; } return Math.floor(lo); };
+      let s = search(1);
+      if (s < max * 0.72) s = Math.max(s, Math.min(180, search(2)));
+      line.style.fontSize = s + "px";
+      const h = line.offsetHeight;
+      let cy = P.position === "middle" ? 740 : 620;
+      let top = cy - h / 2;
+      if (GFX.face) top = Math.min(top, GFX.face.y + GFX.face.h * 0.68 - h - 20);
+      ws.style.top = Math.round(Math.max(290, top)) + "px";
+    });
+
+    // slam: each segment drops in from big to a hard stop, one after another; the box keeps its tilt
+    const step = Math.min(130, 520 / Math.max(1, segs.length));
+    let impact = 0;
+    segs.forEach((s, i) => {
+      const r = s.box ? tilt : 0, at = 40 + i * step;
+      GFX.anim(s.el, [
+        { opacity: 0, transform: `scale(2.4) rotate(${r * 2.5}deg)`, easing: "cubic-bezier(.55,0,.9,.4)" },
+        { opacity: 1, transform: `scale(.93) rotate(${r}deg)`, offset: 0.55, easing: "cubic-bezier(.2,.9,.3,1)" },
+        { opacity: 1, transform: `scale(1) rotate(${r}deg)` },
+      ], { at, dur: 330, ease: "linear" });
+      if (s.box) impact = at + 180;
+    });
+    const lastImpact = 40 + (segs.length - 1) * step + 180;
+
+    // impact: small shake of the whole group and sparks flying off the box corners
+    GFX.anim(ws, [{ translate: "0 0" }, { translate: "-12px 7px" }, { translate: "10px -6px" }, { translate: "-6px 4px" },
+      { translate: "3px -2px" }, { translate: "0 0" }], { at: impact, dur: 300, ease: "out" });
+    const box = segs.find((s) => s.box).el;
+    // three marks radiate from the top-right corner, three from the bottom-left one
+    [[1, 0, -75], [1, 0, -42], [1, 0, -10], [0, 1, 105], [0, 1, 138], [0, 1, 170]]
+      .forEach(([x, y, ang], k) => {
+        const sp = GFX.h("i", { class: "ws-spark" });
+        sp.style.left = (x * 100) + "%"; sp.style.top = (y * 100) + "%";
+        sp.style.rotate = ang + "deg";
+        box.append(sp);
+        GFX.anim(sp, [
+          { opacity: 1, transform: "translateX(0.08em) scaleX(.1)" },
+          { opacity: 1, transform: "translateX(0.12em) scaleX(1)", offset: 0.35 },
+          { opacity: 0, transform: "translateX(0.3em) scaleX(.2)" },
+        ], { at: impact + (k % 3) * 25, dur: 420, ease: "out" });
+      });
+
+    // settle into a slow push for the rest of the beat
+    GFX.anim(ws, [{ scale: "1" }, { scale: "1.05" }], { at: lastImpact, dur: Math.max(300, D - lastImpact), ease: "out" });
+  })();
+</script>

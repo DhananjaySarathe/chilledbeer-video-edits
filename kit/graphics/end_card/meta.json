@@ -1,0 +1,90 @@
+{
+  "id": "end_card",
+  "name": "End card with logo, tagline and clicked link button",
+  "category": "brand",
+  "kind": "fullscreen",
+  "description": "Closing brand card on the clean background: a rounded orange logo square with a white icon and a soft orange glow, the brand name in big condensed letters, a tagline with one word in orange, then a black rounded link button ('example.com →') that a mouse pointer glides to and clicks, with a small grey line of fine print underneath.",
+  "use_when": "The last line of the video: the call to action, 'try it out', 'link in bio', 'book a call', 'go to example.com', or a sign-off with the product name.",
+  "params": {
+    "brand": {
+      "type": "text",
+      "required": true,
+      "max_len": 16,
+      "help": "wordmark under the logo mark"
+    },
+    "split_at": {
+      "type": "number",
+      "default": null,
+      "help": "characters of the brand shown in ink; the rest is orange (e.g. 5 for 'PUNCHEDIT'). Empty = colour the last word, or all ink for one word"
+    },
+    "tagline": {
+      "type": "text",
+      "default": "",
+      "max_len": 40,
+      "help": "one short line under the name, e.g. 'Save time in editing.'"
+    },
+    "highlight": {
+      "type": "text",
+      "default": "",
+      "max_len": 20,
+      "help": "the word (or words) of the tagline to colour orange, e.g. 'time'"
+    },
+    "url": {
+      "type": "text",
+      "default": "",
+      "max_len": 26,
+      "help": "text on the button, e.g. 'example.com'; empty = no button and no click"
+    },
+    "small": {
+      "type": "text",
+      "default": "",
+      "max_len": 52,
+      "help": "fine print under the button, e.g. 'Book a call · first video free'"
+    },
+    "icon": {
+      "type": "text",
+      "default": "sparkle",
+      "help": "GFX icon name inside the logo mark"
+    }
+  },
+  "duration": {
+    "min": 2.0,
+    "default": 2.6,
+    "max": 5.0
+  },
+  "captions": "hide",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "pop",
+      "gain_db": -14
+    },
+    {
+      "at": 0.15,
+      "name": "whoosh",
+      "gain_db": -20
+    },
+    {
+      "at": 1.8,
+      "name": "click",
+      "gain_db": -12
+    }
+  ],
+  "tags": [
+    "brand",
+    "cta",
+    "outro",
+    "end",
+    "logo",
+    "link"
+  ],
+  "explains": [
+    "ask"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": null,
+  "version": "1"
+}

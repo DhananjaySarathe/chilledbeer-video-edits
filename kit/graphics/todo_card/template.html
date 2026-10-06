@@ -1,0 +1,85 @@
+<style>
+  .td { position: absolute; left: 90px; right: 90px; top: 300px; padding: 30px 34px 22px; border-radius: 34px; background: #fff;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.18); }
+  .td-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .td-title { font-family: var(--mono); font-weight: 700; font-size: 24px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--muted); white-space: nowrap; }
+  .td-count { margin-left: auto; font-family: var(--mono); font-weight: 700; font-size: 22px; color: var(--muted);
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .td-row { position: relative; display: flex; align-items: center; gap: 24px; padding: 18px 16px; margin: 0 -16px; border-radius: 22px; }
+  .td-row + .td-row { border-top: 2px solid var(--line); }
+  .td-hi { position: absolute; inset: 4px 0; border-radius: 22px; background: var(--accent-soft); opacity: 0; }
+  .td-box { position: relative; width: 58px; height: 58px; border-radius: 16px; border: 4px solid #CFCEC8; flex: none; }
+  .td-fill { position: absolute; inset: -4px; border-radius: 16px; background: var(--accent); color: #fff; display: flex;
+    align-items: center; justify-content: center; opacity: 0; }
+  .td-text { position: relative; flex: 1; min-width: 0; font-family: var(--ui); font-weight: 700; font-size: 42px; line-height: 1.15;
+    color: var(--ink); }
+  .td-text span { position: relative; }
+  .td-text .strike { top: 54%; height: 5px; background: var(--ink-2); }
+  .td-go { display: flex; color: var(--accent); flex: none; opacity: 0; }
+  .td-go svg { transform: rotate(180deg); }   /* points back at the item */
+</style>
+<div class="td" id="td">
+  <div class="td-head"><div class="td-title" id="title"></div><div class="td-count" id="count"></div></div>
+  <div id="rows"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const td = GFX.$("#td"), rows = GFX.$("#rows"), count = GFX.$("#count");
+    const items = (P.items || []).slice(0, 3).map((it) => (typeof it === "string" ? { text: it } : it));
+    GFX.$("#title").textContent = String(P.title || "");
+    const els = items.map((it) => {
+      const text = GFX.h("span", { text: it.text });
+      const row = GFX.h("div", { class: "td-row" }, GFX.h("i", { class: "td-hi" }),
+        GFX.h("div", { class: "td-box" }, GFX.h("div", { class: "td-fill", html: GFX.icon("check", { size: 36, stroke: "#fff", width: 3.8 }) })),
+        GFX.h("div", { class: "td-text" }, text),
+        GFX.h("div", { class: "td-go", html: GFX.icon("arrowRight", { size: 50, width: 3.4 }) }));
+      rows.append(row);
+      return { row, text, it };
+    });
+    const done0 = items.filter((it) => it.checked).length;
+    const setCount = (n) => { count.textContent = `${n}/${items.length}`; };
+    setCount(done0);
+
+    GFX.layout(() => {
+      GFX.fitLine(GFX.$("#title"), { width: 600, max: 24, min: 18 });
+      GFX.$$(".td-text").forEach((t) => GFX.fit(t, { width: t.clientWidth, max: 42, min: 28, lines: 2 }));
+      // above the eyes when the face is known
+      const h = td.offsetHeight;
+      let top = 300;
+      if (GFX.face) top = Math.min(top, GFX.face.y + GFX.face.h * 0.3 - h);
+      td.style.top = Math.round(Math.max(270, top)) + "px";
+    });
+
+    // beat: the card drops in; 'done' items tick (orange box, check, strike-through, counter goes up);
+    // 'next' items light up instead: soft orange band, bold pulse and an arrow nudging at them
+    GFX.in(td, "drop", { at: 0, dur: 460, ease: "back" });
+    const ticks = [];
+    const t0 = 400, span = Math.max(300, D - t0 - 500);
+    els.forEach(({ row, text, it }, i) => {
+      const at = it.at != null ? GFX.clamp(Number(it.at) * 1000, 250, Math.max(250, D - 250)) : t0 + (els.length > 1 ? (i * span) / (els.length - 1) : 0);
+      const fill = row.querySelector(".td-fill");
+      if (it.checked) { fill.style.opacity = 1; row.querySelector(".td-text").style.color = "var(--muted)"; return; }
+      if (it.next) {
+        GFX.anim(row.querySelector(".td-hi"), [{ opacity: 0 }, { opacity: 1 }], { at, dur: 220, fill: "forwards" });
+        GFX.anim(row, [{ scale: "1" }, { scale: "1.05" }, { scale: "1" }], { at, dur: 420, ease: "back" });
+        GFX.anim(row.querySelector(".td-box"), [{ borderColor: "#CFCEC8" }, { borderColor: "#FC3B00" }], { at, dur: 200, fill: "forwards" });
+        const go = row.querySelector(".td-go");
+        GFX.anim(go, [{ opacity: 0, transform: "translateX(30px)" }, { opacity: 1, transform: "translateX(0)" }], { at: at + 120, dur: 280, ease: "back", fill: "forwards" });
+        GFX.anim(go, [{ translate: "0 0" }, { translate: "-12px 0" }, { translate: "0 0" }], { at: at + 420, dur: 520,
+          iterations: Math.max(1, Math.floor((D - at - 420) / 520)), ease: "inOut" });
+        GFX.sfx("pop", at, -14);
+        return;
+      }
+      GFX.anim(fill, [{ opacity: 0, transform: "scale(.4)" }, { opacity: 1, transform: "scale(1)" }], { at, dur: 280, ease: "back", fill: "forwards" });
+      const st = GFX.h("i", { class: "strike" });
+      text.append(st);
+      GFX.anim(st, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { at: at + 120, dur: 300, ease: "inOut", fill: "backwards" });
+      GFX.anim(row.querySelector(".td-text"), [{ color: "#111111" }, { color: "#8E8D87" }], { at: at + 200, dur: 240, fill: "forwards" });
+      ticks.push(at);
+      GFX.sfx("tick", at, -12);
+    });
+    GFX.each((t) => setCount(done0 + ticks.filter((a) => t >= a).length), 0, D);
+  })();
+</script>

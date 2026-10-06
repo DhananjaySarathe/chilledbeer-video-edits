@@ -1,0 +1,143 @@
+<style>
+  /* phone 404 x 820 on the left of the content box (y 268-1088); counter card on the right */
+  .pa-phone { left: 96px; top: 268px; width: 404px; height: 820px; padding: 14px; border-radius: 64px; }
+  .pa-phone .screen { border-radius: 51px;
+    background: radial-gradient(120% 70% at 85% 8%, rgba(252, 59, 0, 0.55), rgba(252, 59, 0, 0) 60%),
+                radial-gradient(90% 60% at 0% 100%, rgba(255, 170, 120, 0.22), rgba(0, 0, 0, 0) 70%),
+                linear-gradient(180deg, #221A16 0%, #121110 100%); }
+  .pa-status { position: absolute; left: 0; right: 0; top: 0; height: 58px; display: flex; align-items: center;
+    justify-content: space-between; padding: 8px 34px 0 40px; color: #fff; font-family: var(--ui); font-weight: 700; font-size: 19px; }
+  .pa-status .ic { display: flex; align-items: center; gap: 8px; }
+  .pa-clock { position: absolute; left: 0; right: 0; top: 78px; text-align: center; color: #fff; }
+  .pa-time { font-family: var(--condensed); font-weight: 600; font-size: 118px; line-height: 1; letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums; }
+  .pa-date { margin-top: 6px; font-family: var(--ui); font-weight: 600; font-size: 20px; color: rgba(255, 255, 255, 0.75); }
+  .pa-grid { position: absolute; left: 14px; right: 14px; top: 272px; display: grid; grid-template-columns: repeat(4, 1fr);
+    row-gap: 22px; }
+  .pa-app { position: relative; display: flex; flex-direction: column; align-items: center; gap: 9px; }
+  .pa-tile { position: relative; width: 70px; height: 70px; border-radius: 20px; background: #F4F3EF; color: var(--ink);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35); }
+  .pa-app.gone .pa-tile { background: #F4F3EF; }
+  .pa-app.star .pa-tile { background: var(--accent); color: var(--accent-ink); }
+  .pa-name { width: 86px; text-align: center; font-family: var(--ui); font-weight: 600; font-size: 17px; color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+  .pa-ghost { position: absolute; left: 50%; top: 0; width: 70px; height: 70px; margin-left: -35px; border-radius: 20px;
+    border: 2.5px dashed rgba(255, 255, 255, 0.34); opacity: 0; }
+  .pa-minus { position: absolute; left: -9px; top: -9px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+    border: 3px solid #fff; display: flex; align-items: center; justify-content: center; opacity: 0; z-index: 2; }
+  .pa-minus i { width: 12px; height: 3.5px; border-radius: 2px; background: #fff; }
+  .pa-ring { position: absolute; left: 50%; top: -9px; width: 88px; height: 88px; margin-left: -44px; border-radius: 27px;
+    border: 4px solid var(--accent); opacity: 0; }
+  .pa-home { position: absolute; left: 50%; bottom: 12px; width: 130px; height: 5px; margin-left: -65px; border-radius: 3px;
+    background: rgba(255, 255, 255, 0.8); }
+  /* counter card */
+  .pa-card { position: absolute; left: 548px; top: 470px; width: 436px; padding: 34px 38px 34px; }
+  .pa-label { font-family: var(--mono); font-weight: 700; font-size: 24px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-2); }
+  .pa-count { display: flex; align-items: baseline; margin-top: 4px; font-family: var(--condensed); font-weight: 700;
+    font-size: 210px; line-height: 1; color: var(--ink); }
+  .pa-count span { display: inline-block; width: 0.56em; text-align: center; }
+  .pa-count.zero { color: var(--accent); }
+  .pa-note { margin-top: 8px; font-family: var(--ui); font-weight: 600; font-size: 32px; color: var(--muted); }
+</style>
+<div class="phone pa-phone" id="phone">
+  <div class="screen">
+    <div class="notch"></div>
+    <div class="pa-status"><span id="stime"></span><span class="ic" id="sicons"></span></div>
+    <div class="pa-clock"><div class="pa-time" id="time"></div><div class="pa-date" id="date"></div></div>
+    <div class="pa-grid" id="grid"></div>
+    <div class="pa-home"></div>
+  </div>
+</div>
+<div class="card pa-card" id="card">
+  <div class="pa-label" id="label"></div>
+  <div class="pa-count" id="count"></div>
+  <div class="pa-note" id="note"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const W = (s) => String(s ?? "").trim();
+    const time = W(P.time) || "9:41";
+    GFX.$("#time").textContent = time;
+    GFX.$("#stime").textContent = time;
+    if (W(P.date)) GFX.$("#date").textContent = W(P.date); else GFX.$("#date").remove();
+    GFX.$("#sicons").innerHTML = GFX.icon("wifi", { size: 22, width: 2.6 }) + GFX.icon("battery", { size: 26, width: 2.2 });
+
+    const apps = (P.apps || []).slice(0, 12).map((a) => (typeof a === "string" ? { label: a } : a || {}));
+    const grid = GFX.$("#grid");
+    const items = apps.map((a) => {
+      const tile = GFX.h("div", { class: "pa-tile", html: GFX.icon(W(a.icon) || "image", { size: 36, width: 2.3 }) },
+        a.remove ? GFX.h("div", { class: "pa-minus", html: "<i></i>" }) : null);
+      const name = GFX.h("div", { class: "pa-name", text: W(a.label) || "App" });
+      const el = GFX.h("div", { class: "pa-app" + (a.star ? " star" : "") },
+        GFX.h("div", { class: "pa-ghost" }), a.star ? GFX.h("div", { class: "pa-ring" }) : null, tile, name);
+      grid.append(el);
+      GFX.fitLine(name, { width: 86, max: 17, min: 13 });
+      return { a, el, tile, name };
+    });
+
+    // timeline: phone and card arrive, apps pop in, the doomed ones jiggle, then pop away one by one
+    const phone = GFX.$("#phone");
+    GFX.in(phone, "rise", { at: 0, dur: 540, ease: "back" });
+    GFX.anim(phone, [{ scale: "1" }, { scale: "1.015" }], { at: 0, dur: D, ease: "linear" });
+    GFX.in(items.map((x) => x.el), "pop", { at: 220, dur: 360, stagger: 32 });
+
+    const doomed = items.filter((x) => x.a.remove);
+    const n = doomed.length;
+    const t1 = Math.min(1000, D * 0.28), t2 = Math.max(t1 + 200, D - 900);
+    const gap = n > 1 ? (t2 - t1) / (n - 1) : 0;
+    const when = doomed.map((_, i) => (n > 1 ? t1 + gap * i : (t1 + t2) / 2) + 260);
+    const JIG = 240;
+    doomed.forEach((x, i) => {
+      const start = t1 - 200;
+      const reps = Math.max(1, Math.floor((when[i] - start) / JIG));
+      const dir = i % 2 ? -1 : 1;
+      GFX.anim(x.tile, [{ rotate: `${-2.6 * dir}deg` }, { rotate: `${2.6 * dir}deg` }, { rotate: `${-2.6 * dir}deg` }],
+        { at: start, dur: JIG, iterations: reps, ease: "inOut" });
+      GFX.anim(x.tile.querySelector(".pa-minus"), [{ opacity: 0, transform: "scale(.3)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: start + 60 + i * 40, dur: 260, ease: "back" });
+      // gone: tile and label shrink away, the empty slot stays behind as a dashed outline
+      GFX.anim(x.tile, [{ opacity: 1, transform: "scale(1)" }, { opacity: 1, transform: "scale(1.12)", offset: 0.3 },
+        { opacity: 0, transform: "scale(0)" }], { at: when[i], dur: 300, ease: "in", fill: "forwards" });
+      GFX.anim(x.name, [{ opacity: 1 }, { opacity: 0 }], { at: when[i], dur: 200, fill: "forwards" });
+      GFX.anim(x.el.querySelector(".pa-ghost"), [{ opacity: 0, transform: "scale(.8)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: when[i] + 160, dur: 280, ease: "back" });
+      GFX.sfx("pop", when[i] + 60, -15);
+    });
+
+    // counter card: counts the doomed apps down to zero as each one goes
+    const card = GFX.$("#card"), count = GFX.$("#count");
+    const label = W(P.label ?? "Social apps"), note = W(P.note);
+    if (!label || !n) card.remove();
+    else {
+      GFX.$("#label").textContent = label;
+      GFX.fitLine(GFX.$("#label"), { width: 360, max: 24, min: 16 });
+      if (note) GFX.$("#note").textContent = note; else GFX.$("#note").remove();
+      if (note) GFX.fitLine(GFX.$("#note"), { width: 360, max: 32, min: 20 });
+      GFX.in(card, "right", { at: 260, dur: 520, ease: "expo" });
+      const digits = (v) => String(v).split("").map((c) => `<span>${c}</span>`).join("");
+      let shown = -1;
+      GFX.each((t) => {
+        const left = n - when.filter((w) => t >= w + 80).length;
+        if (left === shown) return;
+        shown = left;
+        count.innerHTML = digits(left);
+        count.classList.toggle("zero", left === 0);
+      }, 0, when[n - 1] + 120);
+      when.forEach((w) => GFX.anim(count, [{ transform: "scale(1)" }, { transform: "scale(1.1)" }, { transform: "scale(1)" }],
+        { at: w + 80, dur: 260, ease: "out", fill: "none" }));
+    }
+
+    // the kept app ends on an orange ring
+    const tEnd = (when[n - 1] ?? t1) + 380;
+    items.filter((x) => x.a.star).forEach((x) => {
+      const ring = x.el.querySelector(".pa-ring");
+      GFX.anim(ring, [{ opacity: 0, transform: "scale(1.35)" }, { opacity: 1, transform: "scale(1)" }],
+        { at: tEnd, dur: 380, ease: "back" });
+      GFX.anim(x.tile, [{ transform: "scale(1)" }, { transform: "scale(1.12)" }, { transform: "scale(1)" }],
+        { at: tEnd, dur: 420, ease: "out", fill: "none" });
+      GFX.sfx("ding", tEnd, -18);
+    });
+  })();
+</script>

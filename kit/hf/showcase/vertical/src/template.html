@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!--HF:KIT-->
+  </head>
+  <body>
+    <div id="root" data-composition-id="hfvertical" data-start="0" data-duration="15" data-width="1080" data-height="1920" style="position:relative;width:1080px;height:1920px;overflow:hidden">
+      <video id="aroll" class="clip" src="assets/aroll.mp4" muted playsinline data-start="0" data-duration="15" data-media-start="0" data-track-index="2"></video>
+    </div>
+    <script>
+      /*DATA*/
+      (function () {
+        // 9:16 check of the kit: face panel below (camera mode "panel"), components in the top panel (0..880)
+        const tl = gsap.timeline({ paused: true });
+        window.__timelines = window.__timelines || {};
+        window.__timelines["hfvertical"] = tl;
+        const K = HF.kit({ tl, id: "hfvertical", width: 1080, height: 1920, pieces: D.pieces });
+        const st = HF.stage(K, document.getElementById("root"), { aroll: "aroll" });
+        HF.camera(K, st, { mode: "panel", top: 880, until: 15 });
+        const top = K.el(st.cards, "left:0;top:0;width:1080px;height:880px");
+        // 0-5: a living diagram, vertical layout
+        const L1 = K.el(top, "left:0;top:0;width:1080px;height:880px"); K.show(L1, 0, 5);
+        const dg = HF.diagram(K, L1, { w: 1080, h: 880, layout: "row", rowY: 0.5, pad: 0.16, shape: "card", cardW: 250, cardH: 110, steps: false,
+          nodes: [{ id: "a", label: "Plan", icon: "map" }, { id: "b", label: "Find", icon: "search" }, { id: "c", label: "Build", icon: "code" }], edges: [["a", "b"], ["b", "c"]] });
+        dg.show(0.1, 5).reveal(["a", "b", "c"], 0.3).connectAll(1.0).focus("b", 2.2, { zoom: 1.6 }).flow("a", "b", 2.6, { dur: 1 }).done(["a", "b"], 3.6);
+        // 5-10: a screen demo as a zoomed crop (a full desktop is unreadable on a phone)
+        const L2 = K.el(top, "left:0;top:0;width:1080px;height:880px"); K.show(L2, 5, 10);
+        const sd = HF.screen(K, L2, { x: 40, y: 120, w: 1000, h: 700, chrome: "browser", url: "github.com/heygen-com/hyperframes", src: "assets/screen.mp4", start: 5, dur: 5.2, mediaStart: 0, srcW: 1920, srcH: 1080 }).show(5.0);
+        sd.zoom(5.1, [1260, 190, 620, 250], { dur: 0.01 }).highlight(5.6, [1288, 236, 268, 60], { label: "What it is", until: 9.5 }).cursor([{ t: 6.2, x: 1500, y: 420 }, { t: 7.4, x: 1420, y: 260 }], { clicks: [7.6] });
+        // 10-15: a code window, short lines
+        const L3 = K.el(top, "left:0;top:0;width:1080px;height:880px"); K.show(L3, 10, 15);
+        const cw = HF.code(K, L3, { x: 40, y: 120, w: 1000, h: 700, title: "plan.js", lang: "js", size: 34, lines: ["const tpl = registry.get(id);", "if (!tpl.ratios.includes(r))", "  id = tpl.fallback;", "render(tpl, inputs);"] });
+        cw.show(10.1).highlight(11.4, [2, 3], { until: 13.8, note: "wrong ratio → fallback", noteW: 420 }).add(12.6, 3, ["const key = cacheKey(tpl);"]);
+        K.finish(15);
+      })();
+    </script>
+  </body>
+</html>

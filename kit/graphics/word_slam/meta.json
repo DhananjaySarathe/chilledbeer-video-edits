@@ -1,0 +1,62 @@
+{
+  "id": "word_slam",
+  "name": "Word slam over the speaker",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "One to three huge white condensed uppercase words slam onto the picture one after another in the upper-middle of the frame, over the speaker; the key word (or the whole phrase) sits on a slightly tilted orange box, and the impact gives a small shake with white sparks flying off the box.",
+  "use_when": "A short punchy phrase the speaker stresses and the viewer should feel ('ANYONE', 'IS HARD.', 'NOT AGAIN', 'ZERO SKILLS'): a punchline, a reveal, an emphatic word in a hook.",
+  "params": {
+    "text": {
+      "type": "text",
+      "required": true,
+      "max_len": 24,
+      "help": "1-3 words, e.g. 'editing is hard.'; fitted to 900 px, wraps to two lines if long"
+    },
+    "accent_word": {
+      "type": "text",
+      "default": "",
+      "max_len": 20,
+      "help": "the word (or run of words) from text that gets the orange box, e.g. 'hard.'; empty = the whole phrase on the box"
+    },
+    "tilt": {
+      "type": "number",
+      "default": -3,
+      "help": "tilt of the orange box in degrees, -6 to 6 (negative leans up to the right)"
+    },
+    "position": {
+      "type": "text",
+      "default": "upper",
+      "help": "'upper' (centred near y 620, over the forehead and eyes) or 'middle' (near y 740); kept above the mouth when the face is known"
+    }
+  },
+  "duration": {
+    "min": 0.8,
+    "default": 1.4,
+    "max": 3.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.1,
+      "name": "thud",
+      "gain_db": -12
+    }
+  ],
+  "tags": [
+    "emphasis",
+    "punch",
+    "hook",
+    "word",
+    "slam",
+    "overlay"
+  ],
+  "explains": [
+    "emphasis"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "title_behind",
+  "version": "1"
+}

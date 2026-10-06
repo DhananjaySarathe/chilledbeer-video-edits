@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Regular.ttf"); font-weight: 400; font-style: normal; font-display: block; }
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Italic.ttf"); font-weight: 400; font-style: italic; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-500.ttf"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-600.ttf"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-700.ttf"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-800.ttf"); font-weight: 800 900; font-display: block; }
+      @font-face { font-family: "JBMono"; src: url("assets/fonts/JetBrainsMono-500.ttf"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "JBMono"; src: url("assets/fonts/JetBrainsMono-700.ttf"); font-weight: 700; font-display: block; }
+      :root { --paper: #f3eee6; --card: #ffffff; --ink: #1b1815; --ink2: #4a443d; --mute: #8a8178; --line: rgba(27, 24, 21, 0.1); --acc: #e2562b; --ok: #2f8a5b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); font-family: "Inter", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
+      .abs { position: absolute; }
+      .fill { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      .paper { background: radial-gradient(120% 90% at 50% 35%, #f8f4ed 0%, #f1ebe2 60%, #e9e2d7 100%); }
+      .grain { background-image: radial-gradient(rgba(27, 24, 21, 0.05) 1px, transparent 1.2px); background-size: 36px 36px; }
+      .serif { font-family: "InstrumentSerif", serif; font-weight: 400; letter-spacing: -0.01em; line-height: 0.98; white-space: nowrap; }
+      .serif i, i.acc { font-style: italic; color: var(--acc); }
+      .lbl { font: 700 20px "Inter", sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--acc); white-space: nowrap; }
+      .m { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.06em 0.06em 0.2em; margin: -0.06em -0.06em -0.2em; }
+      .wi { display: inline-block; }
+      .card { position: absolute; border-radius: 26px; background: var(--card); box-shadow: 0 1px 0 rgba(27, 24, 21, 0.04), 0 22px 60px rgba(60, 40, 20, 0.14); border: 1px solid rgba(27, 24, 21, 0.06); }
+      .pill { position: absolute; display: inline-flex; align-items: center; gap: 12px; border-radius: 999px; padding: 14px 24px; font: 600 26px "Inter", sans-serif; white-space: nowrap;
+        background: #fff; color: var(--ink); box-shadow: 0 12px 34px rgba(60, 40, 20, 0.14); border: 1px solid rgba(27, 24, 21, 0.06); }
+      .win { position: absolute; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 2px 0 rgba(27, 24, 21, 0.04), 0 40px 110px rgba(60, 40, 20, 0.22); border: 1px solid rgba(27, 24, 21, 0.08); }
+      .win .bar { position: absolute; left: 0; top: 0; width: 100%; height: 46px; background: #f6f3ee; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 9px; padding: 0 18px; }
+      .win .bar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+      .win .url { margin-left: 18px; height: 28px; flex: 1; max-width: 680px; border-radius: 8px; background: #fff; border: 1px solid var(--line); color: var(--ink2);
+        font: 500 16px "JBMono", monospace; display: flex; align-items: center; padding: 0 14px; }
+      .win .view { position: absolute; left: 0; top: 46px; width: 100%; bottom: 0; overflow: hidden; }
+      .win .view img { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+      .phone { position: absolute; overflow: hidden; background: #000; border: 5px solid #1b1815; box-shadow: 0 30px 80px rgba(60, 40, 20, 0.28); }
+      .phone video, .phone img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .code { font: 500 20px/1.6 "JBMono", monospace; color: #2d2823; white-space: pre; }
+      #cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 2; filter: drop-shadow(0 22px 40px rgba(50, 30, 15, 0.28)); }
+      #wrap { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      #aroll { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #ring { position: absolute; border-radius: 26px; border: 5px solid #fff; z-index: 5; opacity: 0; pointer-events: none; }
+      #ins { z-index: 3; }
+      #cards { z-index: 5; }
+      #top { z-index: 6; }
+      #launch { z-index: 8; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="howiedit" data-start="0" data-duration="__TOTAL__" data-width="1920" data-height="1080">
+      <div class="fill paper"></div>
+      <div id="cam"><div id="wrap"><!--AROLL--></div></div>
+      <div id="ring"></div>
+      <div id="ins" class="layer"></div>
+      <div id="cards" class="layer"></div>
+      <div id="top" class="layer"></div>
+      <div id="launch" class="layer"></div>
+    </div>
+    <script>
+      /*DATA*/
+      (function () {
+        const C = { paper: "#f3eee6", ink: "#1b1815", ink2: "#4a443d", mute: "#8a8178", acc: "#e2562b", ok: "#2f8a5b", line: "rgba(27,24,21,.1)" };
+        const ICON = {
+          cam: '<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-3v10l-5-3z"/>', broom: '<path d="M14 3l7 7M11 6l7 7-6 6H6v-6z"/><path d="M6 19l-3 2"/>',
+          map: '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>', search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+          code: '<path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/>', play: '<path d="M8 5.5v13l11-6.5z"/>', check: '<path d="M4.5 12.5l5 5 10-11"/>',
+          x: '<path d="M6 6l12 12M18 6L6 18"/>', bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', music: '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+          box: '<path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>', spark: '<path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z"/>',
+          star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/>',
+          film: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>', layers: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+          lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>', file: '<path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/>',
+          cut: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1L20 20M8.1 15.9L20 4"/>', sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+          wave: '<path d="M3 12h2M7 8v8M11 5v14M15 8v8M19 10v4"/>',
+        };
+        const icon = (n, size = 32, stroke = "currentColor", width = 2.2, fill = "none") =>
+          `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round">${ICON[n]}</svg>`;
+        const $ = (id) => document.getElementById(id);
+        const el = (parent, style, html = "", cls = "abs") => { const d = document.createElement("div"); d.className = cls; d.style.cssText = style; d.innerHTML = html; parent.append(d); return d; };
+        const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+        const P = D.pieces, Wd = D.words;
+        const span = (tag) => { const ps = P.filter((p) => p.tag === tag); if (!ps.length) throw new Error("tag " + tag); return [ps[0].out_a, ps[ps.length - 1].out_b]; };
+        const W = (i) => { const w = Wd.find((x) => x.i === i); if (!w) throw new Error("word " + i); return w.t; };
+        const tl = gsap.timeline({ paused: true });
+        const Q = (t) => Math.round(t * 30) / 30;
+        window.__CUES = [];
+        const sfx = (name, t, db) => window.__CUES.push({ name, at: Math.round(t * 1000) / 1000, gain_db: db });
+        const S = { swish: "whoosh/whoosh__air-woosh__mixkit-1489", slide: "whoosh/whoosh__technology-transition-slide__mixkit-3120", click: "ui/ui__clear-mouse-clicks__mixkit-2997",
+          pop: "ui/ui__bubble-pop-up-alert-notification__mixkit-2357", check: "ui/ui__modern-click-box-check__mixkit-1120", type: "typing/typing__typing-on-a-laptop-keyboard__mixkit-2531",
+          tone: "ui/ui__confirmation-tone__mixkit-2867", hit: "impact/impact__short-bass-hit__mixkit-2299", riser: "riser/riser__cinematic-synth-riser__mixkit-645" };
+
+        // ------------------------------------------------ motion: calm and exact. Entrances 0.6 s power3.out with a short travel,
+        // exits 0.35 s power2.in, text rises line by line inside a mask. No bounces, no glitches.
+        const show = (e, a, b) => { tl.set(e, { autoAlpha: 0 }, 0); tl.set(e, { autoAlpha: 1 }, Q(a)); if (b != null) tl.set(e, { autoAlpha: 0 }, Q(b)); };
+        const enter = (e, t, from = {}, dur = 0.6) => tl.fromTo(e, { opacity: 0, y: 28, filter: "blur(8px)", ...from },
+          { opacity: 1, x: 0, y: 0, scale: 1, rotation: 0, filter: "blur(0px)", duration: dur, ease: "power3.out" }, Q(t));
+        const exit = (e, t, to = {}) => tl.to(e, { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.35, ease: "power2.in", ...to }, Q(t));
+        const fade = (e, t, dur = 0.4) => tl.fromTo(e, { opacity: 0 }, { opacity: 1, duration: dur, ease: "power1.out" }, Q(t));
+        const drift = (e, a, b, s1 = 1.035) => tl.fromTo(e, { scale: 1 }, { scale: s1, duration: Math.max(0.3, b - a), ease: "none" }, Q(a));
+        function words(parent, str, style) {
+          const box = el(parent, style, "", "serif abs"), ws = [];
+          str.split("|").forEach((line, li) => {
+            if (li) box.append(document.createElement("br"));
+            line.trim().split(/\s+/).forEach((tok, i, arr) => {
+              const m = document.createElement("span"); m.className = "m";
+              const w = document.createElement("span"); w.className = "wi"; w.textContent = tok.replace(/^\*/, "");
+              if (tok[0] === "*") { w.style.fontStyle = "italic"; w.style.color = C.acc; }
+              m.append(w); box.append(m); if (i < arr.length - 1) box.append(" ");
+              ws.push(w);
+            });
+          });
+          return { box, ws };
+        }
+        const rise = (ws, ts, outAt) => ws.forEach((w, k) => {
+          const t = ts[Math.min(k, ts.length - 1)] + (k >= ts.length ? (k - ts.length + 1) * 0.07 : 0);
+          tl.fromTo(w, { yPercent: 115 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, Q(t));
+          if (outAt != null) tl.to(w, { yPercent: -115, duration: 0.3, ease: "power2.in" }, Q(outAt + k * 0.025));
+        });
+        function typeText(e, text, t, cps, caret = true) {
+          const o = { n: 0 };
+          tl.set(e, { textContent: caret ? "▍" : "" }, 0);
+          tl.to(o, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { e.textContent = text.slice(0, Math.round(o.n)) + (caret && o.n < text.length ? "▍" : ""); } }, Q(t));
+        }
+        function countUp(e, a, b, t, dur, fmt = (v) => Math.round(v)) {
+          const o = { v: a };
+          tl.set(e, { textContent: fmt(a) }, 0);
+          tl.to(o, { v: b, duration: dur, ease: "power3.out", onUpdate: () => { e.textContent = fmt(o.v); } }, Q(t));
+        }
+        let VID = 0;                                                       // media need a unique id to be tracked by the renderer
+        const phone = (parent, src, cx, cy, h, start, dur, media = 0, rot = 0) => {
+          const w = Math.round((h * 9) / 16), p = el(parent, `left:${cx - w / 2}px;top:${cy - h / 2}px;width:${w}px;height:${h}px;border-radius:${Math.round(h * 0.07)}px;transform:rotate(${rot}deg)`, "", "phone");
+          p.innerHTML = `<video id="v${VID++}" class="clip" src="assets/broll/${src}.mp4" muted playsinline data-start="${start.toFixed(3)}" data-duration="${dur.toFixed(3)}" data-media-start="${media}" data-track-index="5"></video>`;
+          return p;
+        };
+        function win(parent, x, y, w, h, url, img) {
+          const d = el(parent, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:0`, "", "win");
+          d.innerHTML = `<div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">${url}</div></div><div class="view">${img ? `<img src="${img}" alt="">` : ""}</div>`;
+          return d;
+        }
+        const card = (parent, x, y, w, h, html = "", extra = "") => el(parent, `left:${x}px;top:${y}px;width:${w}px;${h ? `height:${h}px;` : ""}opacity:0;${extra}`, html, "card");
+        const pill = (parent, x, y, html, extra = "") => el(parent, `left:${x}px;top:${y}px;opacity:0;${extra}`, html, "pill");
+        // a layer of side content (over the wall, next to the speaker)
+        function side(a, b) { const L = el($("cards"), "left:0;top:0;width:1920px;height:1080px"); show(L, a - 0.05, b + 0.45); return L; }
+        // a full-screen insert on paper; it rises in, and leaves with a short fade
+        function insert(a, b, keep = false) {
+          const L = el($("ins"), "left:0;top:0;width:1920px;height:1080px;opacity:0");
+          el(L, "", "", "fill paper"); el(L, "opacity:.6", "", "fill grain");
+          tl.fromTo(L, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, Q(a - 0.2));
+          if (!keep) tl.to(L, { opacity: 0, duration: 0.35, ease: "power2.in" }, Q(b - 0.1));
+          else tl.set(L, { opacity: 0 }, Q(b + 0.5));
+          sfx(S.swish, a - 0.22, -21);
+          return L;
+        }
+        // side columns, measured from the framing below: the speaker sits right (content at x 110..830) or left (1090..1810)
+        const LEFT = 110, RIGHT = 1150, COLW = 680;
+
+        // ================================================ THE SPEAKER: the real room, a new framing on every cut
+        // W wide, M medium, C close, SR speaker right (content left), SL speaker left (content right), PIP corner window, OFF hidden
+        const FR = { hello: "W", noeditor: "SR", magic: "SL", workflow: "SR", screen: "PIP", weekend: "SL", aieditor: "SR", whole: "PIP", record: "M",
+          cleanup: "SL", skill: "SL", plan: "SL", presets: "SL", search: "PIP", repos: "PIP", extracted: "PIP", suggest: "PIP", code: "SL", hyperframes: "PIP",
+          link: "PIP", assets: "SR", ncs: "PIP", library: "SR", slow: "SL", optimise: "SL", lost: "SR", again: "SL", minutes: "SR", cache: "PIP", faster: "OFF",
+          recap: "PIP", repo: "SL", caveat: "SL", comment: "SR", style: "SR", own: "OFF", launchask: "SL", launchgo: "C" };
+        const SC = { W: [1.0, 1.08], M: [1.14, 1.22], C: [1.3, 1.22], SR: [1.2, 1.28], SL: [1.32, 1.38] };
+        const PIPBOX = { x: 1556, y: 716, s: 316 }, PIPS = 0.5;
+        function place(lay, f, v) {
+          const [cx, cy] = f;
+          if (lay === "PIP" || lay === "OFF") {
+            const s = PIPS, half = PIPBOX.s / 2 / s, fy = cy + 70;
+            const x = PIPBOX.x + PIPBOX.s / 2 - cx * s, y = PIPBOX.y + PIPBOX.s / 2 - fy * s;
+            const clip = `inset(${(fy - half).toFixed(1)}px ${(1920 - cx - half).toFixed(1)}px ${(1080 - fy - half).toFixed(1)}px ${(cx - half).toFixed(1)}px round ${(26 / s).toFixed(1)}px)`;
+            return { x, y, scale: s, clipPath: clip };
+          }
+          const s = SC[lay][v];
+          const tx = lay === "SR" ? 1250 : lay === "SL" ? 640 : 960;
+          const ty = lay === "W" ? cy : 470;
+          const x = Math.min(0, Math.max(1920 * (1 - s), tx - cx * s)), y = Math.min(0, Math.max(1080 * (1 - s), ty - cy * s));
+          return { x, y, scale: s, clipPath: "inset(0px 0px 0px 0px round 0px)" };
+        }
+        {
+          const cam = $("cam"), wrap = $("wrap"), ring = $("ring");
+          Object.assign(ring.style, { left: PIPBOX.x - 5 + "px", top: PIPBOX.y - 5 + "px", width: PIPBOX.s + 10 + "px", height: PIPBOX.s + 10 + "px" });
+          let prev = null, v = 0;
+          P.forEach((p, i) => {
+            const lay = FR[p.tag];
+            if (!lay) throw new Error("no framing for " + p.tag);
+            v = prev === lay ? 1 - v : 0;
+            const st = place(lay, p.face, v), T = Q(p.out_a);
+            const small = (l) => l === "PIP" || l === "OFF";
+            const moved = !(prev === null || small(prev) === small(lay));
+            if (!moved) {
+              tl.set(wrap, st, T);
+            } else {
+              const T0 = Q(p.out_a - 0.22);
+              tl.to(wrap, { ...st, duration: 0.6, ease: "power3.inOut" }, T0);
+              if (small(lay)) { tl.set(cam, { zIndex: 4 }, T0); if (lay === "PIP") tl.to(ring, { opacity: 1, duration: 0.25 }, Q(T0 + 0.5)); }
+              else { tl.set(ring, { opacity: 0 }, T0); tl.set(cam, { zIndex: 2 }, Q(T0 + 0.6)); }
+            }
+            if (lay === "OFF" && prev !== "OFF") { tl.to([cam, ring], { opacity: 0, duration: 0.25 }, Q(p.out_a - 0.2)); }
+            if (prev === "OFF" && lay !== "OFF") { tl.to(cam, { opacity: 1, duration: 0.25 }, Q(p.out_a - 0.2)); if (small(lay)) tl.to(ring, { opacity: 1, duration: 0.25 }, Q(p.out_a - 0.2)); }
+            // slow push-in inside long pieces, so a held shot is never a still
+            // (ends 0.25 s before the next cut, so it never overlaps a framing move)
+            // (explicit start values, and never on a piece that opens with an animated framing move)
+            if (!small(lay) && !moved && p.out_b - p.out_a > 2.2)
+              tl.fromTo(wrap, { scale: st.scale, x: st.x, y: st.y }, { scale: st.scale * 1.025, x: st.x - 960 * st.scale * 0.025, y: st.y - 500 * st.scale * 0.025, duration: p.out_b - p.out_a - 0.25, ease: "none", immediateRender: false }, T);
+            prev = lay;
+          });
+          tl.to([cam, ring], { opacity: 0, duration: 0.2 }, Q(D.launch[0] - 0.05));
+        }
+
+        const CARDS = $("cards"), TOP = $("top");
+        // ================================================ INTRO: a name title as he says hi, then the comments he's answering
+        {
+          const [a, b] = span("hello");
+          const L = el(TOP, "left:0;top:0;width:1920px;height:1080px");
+          show(L, 0, b + 0.5);
+          const lt = el(L, "left:96px;top:786px;padding:26px 34px 24px 30px;border-radius:22px;background:rgba(255,255,255,.94);box-shadow:0 20px 50px rgba(60,40,20,.16);opacity:0");
+          lt.innerHTML = `<div style="display:flex;align-items:center;gap:22px"><div class="bar0" style="width:6px;height:96px;border-radius:3px;background:${C.acc};transform-origin:50% 100%"></div>` +
+            `<div><div class="nm serif" style="font-size:66px;line-height:1"><span class="m"><span class="wi">Your</span></span> <span class="m"><span class="wi">Name</span></span></div>` +
+            `<div class="sb" style="margin-top:10px;font:600 25px Inter,sans-serif;color:${C.ink2}">Building with Claude Code, every weekend</div></div></div>`;
+          const t0 = Math.max(0.25, W(1) + 0.15);
+          tl.fromTo(lt, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, Q(t0));
+          tl.fromTo(lt.querySelector(".bar0"), { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power3.out" }, Q(t0 + 0.1));
+          rise([...lt.querySelectorAll(".wi")], [t0 + 0.15, t0 + 0.25]);
+          fade(lt.querySelector(".sb"), t0 + 0.45);
+          tl.to(lt, { opacity: 0, x: -20, duration: 0.4, ease: "power2.in" }, Q(t0 + 4.2));
+          sfx(S.swish, t0, -22);
+          // the comments ("a lot of comments about how you edit")
+          [["How do you edit these?", 1330, 150], ["Which editor is this?", 1400, 280], ["Please share the workflow", 1310, 410]].forEach(([q, x, y], k) => {
+            const c = el(L, `left:${x}px;top:${y}px;padding:20px 26px 20px 20px;border-radius:22px;background:#fff;box-shadow:0 16px 44px rgba(60,40,20,.15);font:600 28px Inter,sans-serif;color:${C.ink};opacity:0;display:flex;align-items:center;gap:16px`,
+              `<span style="width:42px;height:42px;border-radius:50%;background:${["#e9c9b4", "#c9d6c4", "#d6cbe6"][k]};display:inline-block"></span>${q}`);
+            enter(c, W(8) + 0.2 * k, { x: 40, y: 0 });
+            sfx(S.pop, W(8) + 0.2 * k, -24);
+            exit(c, b + 0.1 + k * 0.04);
+          });
+        }
+        // ================================================ "I'm not hiding any editor, I'm just using Claude"
+        {
+          const [a, b] = span("noeditor"), L = side(a, b);
+          const w1 = words(L, "No editor.", `left:${LEFT}px;top:330px;font-size:150px;color:${C.mute}`);
+          const w2 = words(L, "Just *Claude.", `left:${LEFT}px;top:500px;font-size:190px`);
+          rise(w1.ws, [W(29), W(32)]); rise(w2.ws, [W(34), W(36) - 0.05]);
+          tl.to(w1.box, { opacity: 0.45, duration: 0.4 }, Q(W(34)));
+          sfx(S.swish, W(36) - 0.1, -20);
+        }
+        // ================================================ "if you just put your video in and expect a magical edit"
+        {
+          const [a, b] = span("magic"), L = side(a, b);
+          const tag = pill(L, RIGHT, 190, `${icon("spark", 26, C.acc)} One big prompt`);
+          enter(tag, W(43) - 0.1);
+          const box = card(L, RIGHT, 290, COLW, 250, `<div class="lbl" style="font-size:18px">You</div><div class="pt" style="margin-top:20px;font:600 44px/1.3 Inter,sans-serif;white-space:normal"></div>`, "padding:34px 38px");
+          enter(box, W(47) - 0.1);
+          typeText(box.querySelector(".pt"), "Here's my raw video. Make it viral ✨", W(48), 20);
+          sfx(S.type, W(48), -24);
+          const res = card(L, RIGHT, 580, COLW, 150, `<div style="display:flex;align-items:center;gap:26px;height:100%"><div style="width:84px;height:84px;border-radius:50%;background:#fbe4dc;display:flex;align-items:center;justify-content:center">${icon("x", 44, C.acc, 2.6)}</div>` +
+            `<div style="font:600 36px/1.25 Inter,sans-serif;color:${C.ink2}">The “magic” edit<br><span style="color:${C.ink}">doesn't happen</span></div></div>`, "padding:0 38px");
+          enter(res, W(62) - 0.1);
+          sfx(S.pop, W(62), -22);
+        }
+        // ================================================ "in this video: my exact workflow, which I made myself"
+        {
+          const [a, b] = span("workflow"), L = side(a, b);
+          const lb = el(L, `left:${LEFT + 4}px;top:330px`, "In this video", "lbl abs");
+          fade(lb, W(72));
+          const w = words(L, "My exact|*workflow", `left:${LEFT}px;top:380px;font-size:180px;line-height:.95`);
+          rise(w.ws, [W(77), W(78), W(79)]);
+          const m = pill(L, LEFT, 760, `${icon("check", 26, C.ok, 2.8)} Built it myself`);
+          enter(m, W(83) - 0.1);
+          sfx(S.swish, W(78) - 0.1, -20);
+        }
+        // ================================================ the Claude Code screen: seven agents (private details blurred)
+        {
+          const [a, b] = span("screen"), L = insert(a, b);
+          const fw = 1300, fh = Math.round((fw * 1266) / 2000);
+          const frame = el(L, `left:120px;top:${(1080 - fh) / 2 + 10}px;width:${fw}px;height:${fh}px;border-radius:16px;overflow:hidden;box-shadow:0 40px 110px rgba(60,40,20,.25);opacity:0`,
+            `<img src="assets/sessions_blurred.png" style="width:100%;height:100%;display:block" alt="">`);
+          enter(frame, a - 0.1, { y: 50, scale: 0.97 }, 0.7);
+          drift(frame, a + 0.6, b, 1.03);
+          const blur = pill(L, 150, 70, `${icon("lock", 24, C.acc)} Private details blurred`);
+          enter(blur, W(95) - 0.1);
+          sfx(S.pop, W(95), -23);
+          const cells = [[0, 0, 552, 505], [556, 0, 429, 505], [989, 0, 437, 1266], [1430, 0, 570, 505], [0, 512, 552, 754], [556, 512, 429, 754], [1430, 512, 570, 754]];
+          const k = fw / 2000;
+          cells.forEach(([x, y, w, h], i) => {
+            const g = el(frame, `left:${x * k + 3}px;top:${y * k + 3}px;width:${w * k - 6}px;height:${Math.min(fh - y * k, h * k) - 6}px;border:3px solid ${C.acc};border-radius:10px;opacity:0`);
+            tl.fromTo(g, { opacity: 0 }, { opacity: 1, duration: 0.12 }, Q(W(108) + i * 0.11));
+            tl.to(g, { opacity: 0.35, duration: 0.5 }, Q(W(108) + i * 0.11 + 0.35));
+          });
+          sfx(S.click, W(108), -22);
+          const cnt = card(L, 1480, 170, 330, 0, `<div class="serif" style="font-size:150px;color:${C.acc}">7</div><div style="margin-top:6px;font:600 30px/1.25 Inter,sans-serif;white-space:normal">Claude Code agents, running all weekend</div>`, "padding:30px 34px");
+          enter(cnt, W(108) - 0.1, { x: 30, y: 0 });
+        }
+        // ================================================ every weekend: spare credits, one new build
+        {
+          const a = span("weekend")[0], b = span("weekend")[1], L = side(a, b);
+          const c1 = card(L, RIGHT, 260, COLW, 0, `<div class="lbl" style="font-size:18px;color:${C.mute}">Every weekend</div><div class="serif" style="margin-top:14px;font-size:84px;white-space:normal;line-height:1.02">Spare credits <i>→</i><br>one new build</div>`, "padding:36px 40px");
+          enter(c1, W(119) - 0.1);
+          const days = el(L, `left:${RIGHT}px;top:600px;width:${COLW}px;display:flex;gap:16px;opacity:0`,
+            ["Sat", "Sun"].map((d) => `<div style="flex:1;height:120px;border-radius:22px;background:#fff;box-shadow:0 14px 40px rgba(60,40,20,.12);display:flex;align-items:center;justify-content:center;gap:16px;font:700 36px Inter,sans-serif">${icon("code", 34, C.acc)} ${d}</div>`).join(""));
+          enter(days, W(136) - 0.1);
+          sfx(S.pop, W(136) - 0.05, -23);
+        }
+        // ================================================ last weekend: an AI editor on my Claude Code credits
+        {
+          const [a, b] = span("aieditor"), L = side(a, b);
+          const lb = el(L, `left:${LEFT + 4}px;top:300px`, "Last weekend", "lbl abs");
+          fade(lb, W(144));
+          const w = words(L, "An AI|*video editor", `left:${LEFT}px;top:350px;font-size:170px;line-height:.98`);
+          rise(w.ws, [W(150), W(151), W(152)]);
+          const c = pill(L, LEFT, 740, `${icon("bolt", 26, C.acc)} Runs on my Claude Code credits`);
+          enter(c, W(157) - 0.1);
+          sfx(S.swish, W(151) - 0.1, -20);
+        }
+        // ================================================ THE WORKFLOW (overview, and again as the recap)
+        const STEPS = [["cam", "Record", "one take"], ["broom", "Clean up", "transcript + skill file"], ["map", "Plan", "from presets"], ["search", "Find motion", "open-source repos"], ["code", "Build in code", "HyperFrames → render"]];
+        function flow(L, t, stagger, allDone) {
+          const lb = el(L, `left:0;width:1920px;top:200px;text-align:center`, "My whole workflow", "lbl abs");
+          fade(lb, t);
+          const x0 = 200, gap = 300, y = 440;
+          const line = el(L, `left:${x0 + 60}px;top:${y + 58}px;width:${gap * 4}px;height:3px;background:${C.ink};opacity:.18;transform-origin:0 50%`);
+          tl.fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: stagger * 4 + 0.5, ease: "power2.inOut" }, Q(t + 0.1));
+          STEPS.forEach(([ic, n, sub], i) => {
+            const g = el(L, `left:${x0 + i * gap - 60}px;top:${y}px;width:240px;text-align:center;opacity:0`,
+              `<div style="margin:0 auto;width:120px;height:120px;border-radius:50%;background:#fff;box-shadow:0 14px 40px rgba(60,40,20,.14);display:flex;align-items:center;justify-content:center;color:${C.acc}">${icon(allDone ? "check" : ic, 50, allDone ? C.ok : C.acc, 2.2)}</div>` +
+              `<div class="lbl" style="margin-top:26px;font-size:16px;color:${C.mute}">Step ${i + 1}</div><div class="serif" style="margin-top:8px;font-size:54px">${n}</div>` +
+              `<div style="margin-top:8px;font:500 21px Inter,sans-serif;color:${C.ink2};white-space:nowrap">${sub}</div>`);
+            enter(g, t + 0.15 + i * stagger, { y: 30 });
+          });
+          sfx(S.click, t + 0.15, -22);
+        }
+        {
+          const [a, b] = span("whole"), L = insert(a, b);
+          flow(L, a - 0.05, 0.16, false);
+        }
+        // ================================================ chapter tag (top-left), one per step
+        function chapter(a, b, num, name) {
+          const c = el(TOP, `left:64px;top:56px;opacity:0;display:flex;align-items:center;gap:14px;padding:10px 22px 10px 10px;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 10px 30px rgba(60,40,20,.12);font:700 24px Inter,sans-serif;white-space:nowrap`,
+            `${num ? `<span style="width:40px;height:40px;border-radius:50%;background:${C.acc};color:#fff;display:inline-flex;align-items:center;justify-content:center;font:800 19px Inter,sans-serif">${num}</span>` : `<span style="width:12px;height:12px;margin-left:12px;border-radius:50%;background:${C.acc};display:inline-block"></span>`}${name}`);
+          tl.fromTo(c, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, Q(a));
+          tl.to(c, { opacity: 0, duration: 0.3 }, Q(b - 0.3));
+          return c;
+        }
+        chapter(W(199) - 0.1, span("cleanup")[0], 1, "Record");
+        chapter(span("cleanup")[0], span("plan")[0], 2, "Clean up");
+        chapter(span("plan")[0], span("search")[0], 3, "Plan");
+        chapter(span("search")[0], span("code")[0], 4, "Find motion");
+        chapter(span("code")[0], span("assets")[1], 5, "Build in code");
+        chapter(span("library")[0] - 0.1, span("minutes")[0], 0, "The hard part");
+        chapter(span("minutes")[0], span("recap")[0], 0, "Why it's fast");
+        chapter(span("repo")[0], span("own")[1], 0, "The repo");
+        chapter(span("launchask")[0], D.launch[0], 0, "The 10-second test");
+        // ================================================ clean up: the skill file
+        {
+          const a = span("cleanup")[0], b = span("skill")[1], L = side(a, b);
+          const t1 = card(L, RIGHT, 250, COLW, 0, `<div style="display:flex;align-items:center;gap:22px"><div style="width:80px;height:80px;border-radius:22px;background:#fbe4dc;display:flex;align-items:center;justify-content:center">${icon("broom", 42, C.acc)}</div>` +
+            `<div><div class="serif" style="font-size:60px">Clean the transcript</div><div style="margin-top:6px;font:500 24px Inter,sans-serif;color:${C.ink2}">misheard names, fillers, restarts</div></div></div>`, "padding:30px 34px");
+          enter(t1, W(211) - 0.15);
+          const doc = el(L, `left:${RIGHT}px;top:460px;width:${COLW}px;height:420px;opacity:0`, "", "win");
+          doc.innerHTML = `<div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">.claude/skills/video-shorts/SKILL.md</div></div>` +
+            `<div class="view" style="padding:20px 24px;font:500 16.5px/1.6 JBMono,monospace;color:${C.ink2};white-space:pre-wrap">${D.doc.map(esc).join("\n")}</div>`;
+          enter(doc, W(226) - 0.15, { y: 40 });
+          sfx(S.swish, W(226) - 0.15, -21);
+          const sh = pill(L, RIGHT + 380, 830, `${icon("file", 24, C.acc)} I'll share this file`);
+          enter(sh, W(233) - 0.1);
+        }
+        // ================================================ plan: sample presets (real templates from the library)
+        {
+          const a = span("plan")[0], b = span("presets")[1], L = side(a, b);
+          const hd = card(L, RIGHT, 220, COLW, 0, `<div class="lbl" style="font-size:18px;color:${C.mute}">Plan the edit</div><div class="serif" style="margin-top:10px;font-size:70px">Start from <i>presets</i></div>`, "padding:30px 36px");
+          enter(hd, W(242) - 0.15);
+          ["section_card", "quote_card", "chapter_pill", "counter_big"].forEach((n, k) => {
+            const t = el(L, `left:${RIGHT + k * 172}px;top:420px;width:160px;height:284px;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(60,40,20,.16);opacity:0`, `<img src="assets/tiles/${n}.jpg" style="width:100%;height:100%;object-fit:cover" alt="">`);
+            enter(t, W(248) + k * 0.08, { y: 40 });
+          });
+          sfx(S.pop, W(248), -23);
+        }
+        // ================================================ search: "edit video with Claude"
+        {
+          const [a, b] = span("search"), L = insert(a, b, true);
+          const bar = el(L, `left:300px;top:250px;width:1200px;height:110px;border-radius:55px;background:#fff;box-shadow:0 24px 70px rgba(60,40,20,.16);display:flex;align-items:center;gap:24px;padding:0 42px;opacity:0`);
+          bar.innerHTML = `${icon("search", 44, C.mute, 2.4)}<div class="q" style="font:500 46px Inter,sans-serif;color:${C.ink}"></div>`;
+          enter(bar, a - 0.05, { y: 40, scale: 0.98 });
+          typeText(bar.querySelector(".q"), "edit video with claude", a + 0.5, 11);
+          sfx(S.type, a + 0.5, -23);
+          drift(bar, a + 0.6, b, 1.02);
+          [["awesome-claude-video-skills", "204 open-source repos"], ["hyperframes", "write HTML, render video"], ["remotion skills", "motion graphics in code"]].forEach(([r, s], i) => {
+            const row = el(L, `left:340px;top:${420 + i * 112}px;width:1120px;height:92px;border-radius:20px;background:rgba(255,255,255,.7);border:1px solid ${C.line};display:flex;align-items:center;gap:22px;padding:0 30px;opacity:0`,
+              `<span style="color:${C.acc}">${icon("star", 30, C.acc)}</span><span style="font:600 32px Inter,sans-serif">${r}</span><span style="font:500 26px Inter,sans-serif;color:${C.mute}">· ${s}</span>`);
+            enter(row, W(265) + 0.05 + i * 0.12, { y: 24 });
+          });
+        }
+        // ================================================ GitHub repos with animated libraries (the awesome list, then the catalog)
+        {
+          const [a, b] = span("repos"), L = insert(a, b, true);
+          const w1 = win(L, 110, 120, 1340, 860, "github.com/zhuyansen/awesome-claude-video-skills", "assets/web/awesome_list_tall.png");
+          enter(w1, a - 0.1, { y: 50 }, 0.7);
+          tl.fromTo(w1.querySelector("img"), { y: 0 }, { y: -1000, duration: W(277) - a, ease: "power1.inOut" }, Q(a + 0.8));
+          const c1 = card(L, 1490, 160, 330, 0, `<div class="serif" style="font-size:130px;color:${C.acc}">204</div><div style="margin-top:4px;font:600 28px/1.25 Inter,sans-serif;white-space:normal">open-source repos for video with AI agents</div>`, "padding:28px 32px");
+          enter(c1, W(269) - 0.1, { x: 30, y: 0 });
+          countUp(c1.firstChild, 0, 204, W(269), 1.0);
+          exit(c1, W(277) - 0.2);
+          const w2 = win(L, 110, 120, 1340, 860, "hyperframes.heygen.com/catalog", "assets/web/hyperframes_catalog_tall.png");
+          tl.fromTo(w2, { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, Q(W(277) - 0.15));
+          tl.to(w1, { opacity: 0, x: -60, duration: 0.45, ease: "power2.in" }, Q(W(277) - 0.15));
+          tl.fromTo(w2.querySelector("img"), { y: 0 }, { y: -700, duration: b - W(277), ease: "power1.inOut" }, Q(W(277) + 0.4));
+          sfx(S.slide, W(277) - 0.15, -22);
+          const c2 = card(L, 1490, 300, 330, 0, `<div style="font:700 34px/1.25 Inter,sans-serif;white-space:normal">Each animation comes <i class="acc" style="font-family:InstrumentSerif;font-weight:400;font-size:44px">with its prompt</i></div>`, "padding:28px 32px");
+          enter(c2, W(280) - 0.1, { x: 30, y: 0 });
+        }
+        // ================================================ "I've extracted about 15": tiles from my own library
+        {
+          const [a, b] = span("extracted"), L = insert(a, b, true);
+          const grid = el(L, "left:0;top:0;width:1920px;height:1080px");
+          D.tiles.slice(0, 15).forEach((n, i) => {
+            const x = 150 + (i % 8) * 176, y = i >= 8 ? 540 : 150;
+            const t = el(grid, `left:${x}px;top:${y}px;width:160px;height:284px;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px rgba(60,40,20,.16);opacity:0`, `<img src="assets/tiles/${n}.jpg" style="width:100%;height:100%;object-fit:cover" alt="">`);
+            enter(t, a + 0.05 + i * 0.035, { y: 30, scale: 0.96 }, 0.5);
+          });
+          drift(grid, a + 0.1, b + 0.3, 1.04);
+          const n = pill(L, 160, 930, `<span class="serif" style="font-size:44px;color:${C.acc}">15</span> extracted into my own library`);
+          enter(n, W(299) - 0.1);
+          sfx(S.pop, a + 0.05, -23);
+        }
+        // ================================================ "it suggests the scene, and builds it in code itself"
+        {
+          const [a, b] = span("suggest"), L = insert(a, b);
+          const c = win(L, 110, 120, 1300, 840, "src/template.html — the scene, written as code", "");
+          c.querySelector(".view").innerHTML = `<div class="code" style="padding:28px 34px"></div>`;
+          enter(c, a - 0.1, { y: 50 }, 0.7);
+          typeText(c.querySelector(".code"), D.code.join("\n"), a + 0.5, 240, false);
+          sfx(S.type, a + 0.5, -24);
+          const s = card(L, 1460, 200, 360, 0, `<div class="lbl" style="font-size:16px">Suggested</div><div class="serif" style="margin-top:10px;font-size:52px;white-space:normal;line-height:1.05">a word behind the head</div>`, "padding:28px 30px");
+          enter(s, W(316) - 0.1, { x: 30, y: 0 });
+          sfx(S.pop, W(316), -23);
+          const d = pill(L, 1460, 480, `${icon("code", 26, C.acc)} Written in code`);
+          enter(d, W(333) - 0.1);
+        }
+        // ================================================ "not a video editor you trim; it deals with code"
+        {
+          const [a, b] = span("code"), L = side(a, b);
+          const t1 = card(L, RIGHT, 210, COLW, 270, "", "padding:0;overflow:hidden");
+          t1.innerHTML = `<div style="padding:26px 32px;display:flex;justify-content:space-between;align-items:center"><span class="serif" style="font-size:52px;color:${C.mute}">Timeline editor</span>` +
+            `<span class="xx" style="width:64px;height:64px;border-radius:50%;background:#fbe4dc;display:inline-flex;align-items:center;justify-content:center;opacity:0">${icon("x", 34, C.acc, 2.8)}</span></div>` +
+            `<div style="position:absolute;left:32px;right:32px;top:120px;height:50px;display:flex;gap:6px">${[2, 5, 1, 4, 3, 2].map((f, i) => `<i style="flex:${f};border-radius:8px;background:${["#d9cfc3", "#cbbfb2", "#e3d9cd"][i % 3]}"></i>`).join("")}</div>` +
+            `<div style="position:absolute;left:32px;right:32px;top:184px;height:50px;display:flex;gap:6px">${[4, 3, 6].map(() => `<i style="flex:1;border-radius:8px;background:#ece5dc"></i>`).join("")}</div>`;
+          const t2 = card(L, RIGHT, 520, COLW, 300, "", "padding:26px 32px");
+          t2.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><span class="serif" style="font-size:52px">Code</span><span class="ok" style="width:64px;height:64px;border-radius:50%;background:#dcefe3;display:inline-flex;align-items:center;justify-content:center;opacity:0">${icon("check", 34, C.ok, 2.8)}</span></div>` +
+            `<div class="code" style="margin-top:18px;font-size:22px">tl.fromTo(word, { yPercent: 115 },\n  { yPercent: 0, ease: "expo.out" }, t);\nsfx("swish", t - 0.2, -21);</div>`;
+          enter(t1, W(339) - 0.15); tl.to(t1.querySelector(".xx"), { opacity: 1, duration: 0.25 }, Q(W(344)));
+          enter(t2, W(347) - 0.15); tl.to(t2.querySelector(".ok"), { opacity: 1, duration: 0.25 }, Q(W(349)));
+          tl.to(t1, { opacity: 0.55, duration: 0.3 }, Q(W(347)));
+          sfx(S.click, W(344), -22); sfx(S.check, W(349), -21);
+        }
+        // ================================================ HyperFrames: open source, free, link in the description
+        {
+          const a = span("hyperframes")[0], b = span("link")[1], L = insert(a, b);
+          const w1 = win(L, 110, 120, 1340, 860, "github.com/heygen-com/hyperframes", "assets/web/hyperframes_repo_tall.png");
+          enter(w1, a - 0.1, { y: 50 }, 0.7);
+          tl.fromTo(w1.querySelector("img"), { y: 0 }, { y: -900, duration: b - a - 1.2, ease: "power1.inOut" }, Q(a + 1.4));
+          const t = card(L, 1490, 150, 330, 0, `<div class="serif" style="font-size:66px;line-height:1">HyperFrames</div><div style="margin-top:10px;font:500 24px/1.35 Inter,sans-serif;color:${C.ink2};white-space:normal">Write HTML. Render video.</div>`, "padding:28px 30px");
+          enter(t, W(358) - 0.1, { x: 30, y: 0 });
+          [["Open source", W(361)], ["Free · Apache-2.0", W(367)]].forEach(([n, tt], i) => {
+            const ch = pill(L, 1490, 380 + i * 92, `${icon("check", 24, C.ok, 2.8)} ${n}`);
+            enter(ch, tt - 0.1, { x: 20, y: 0 }); sfx(S.check, tt, -22);
+          });
+          const lk = pill(L, 1490, 600, `Link in the description <span style="color:${C.acc}">↓</span>`, `background:${C.ink};color:#fff`);
+          enter(lk, W(384) - 0.1, { y: 20 });
+        }
+        // ================================================ good assets
+        {
+          const [a, b] = span("assets"), L = side(a, b);
+          const lb = el(L, `left:${LEFT + 4}px;top:360px`, "The very main thing", "lbl abs");
+          fade(lb, a);
+          const w = words(L, "Good|*assets", `left:${LEFT}px;top:410px;font-size:200px;line-height:.95`);
+          rise(w.ws, [W(403) - 0.05, W(404) - 0.05]);
+        }
+        // ================================================ NCS: free music
+        {
+          const [a, b] = span("ncs"), L = insert(a, b);
+          const w = win(L, 110, 120, 1340, 860, "ncs.io", "assets/web/ncs_tall.png");
+          enter(w, a - 0.1, { y: 50 }, 0.7);
+          drift(w, a + 0.6, b + 0.3, 1.03);
+          const c = card(L, 1490, 200, 330, 0, `<div style="color:${C.acc}">${icon("music", 54, C.acc)}</div><div class="serif" style="margin-top:12px;font-size:56px;white-space:normal;line-height:1.02">Free music for creators</div>`, "padding:28px 30px");
+          enter(c, W(410) - 0.1, { x: 30, y: 0 });
+        }
+        // ================================================ the right library
+        {
+          const [a, b] = span("library"), L = side(a, b);
+          const w = words(L, "The right|*library", `left:${LEFT}px;top:390px;font-size:190px;line-height:.95`);
+          rise(w.ws, [W(469), W(470), W(471) - 0.05]);
+          sfx(S.swish, W(470) - 0.1, -21);
+        }
+        // ================================================ a basic setup renders very slowly ... optimised
+        {
+          const a = span("slow")[0], b = span("optimise")[1], L = side(a, b);
+          const c = card(L, RIGHT, 300, COLW, 0, "", "padding:40px 44px");
+          c.innerHTML = `<div class="lbl" style="font-size:18px;color:${C.mute}">Rendering</div><div class="pc serif" style="margin-top:14px;font-size:150px">0%</div>` +
+            `<div style="margin-top:22px;height:22px;border-radius:11px;background:#efe8df;overflow:hidden"><i class="bar" style="display:block;height:100%;width:100%;border-radius:11px;background:${C.acc};transform-origin:0 50%;transform:scaleX(0)"></i></div>` +
+            `<div class="eta" style="margin-top:20px;font:600 26px Inter,sans-serif;color:${C.acc}">very slow</div>`;
+          enter(c, W(481) - 0.15);
+          const pc = c.querySelector(".pc"), bar = c.querySelector(".bar"), eta = c.querySelector(".eta");
+          tl.to(bar, { scaleX: 0.06, duration: W(496) - W(481), ease: "none" }, Q(W(481)));
+          countUp(pc, 0, 6, W(481), W(496) - W(481), (v) => Math.round(v) + "%");
+          tl.to(bar, { scaleX: 1, backgroundColor: C.ok, duration: 1.4, ease: "power3.inOut" }, Q(W(505)));
+          countUp(pc, 6, 100, W(505), 1.4, (v) => Math.round(v) + "%");
+          tl.set(eta, { textContent: "optimised", color: C.ok }, Q(W(505) + 0.7));
+          sfx(S.slide, W(505), -22);
+          const tm = pill(L, RIGHT, 740, `It took a lot of time to get here`);
+          enter(tm, W(510) - 0.1);
+        }
+        // ================================================ two days with my agent ... and the whole project was gone
+        {
+          const [a, b] = span("lost"), L = side(a, b);
+          const w = words(L, "2 days", `left:${LEFT}px;top:330px;font-size:220px`);
+          rise(w.ws, [W(515), W(516)]);
+          const s = el(L, `left:${LEFT + 6}px;top:580px;font:600 30px Inter,sans-serif;color:${C.ink2};opacity:0`, "with my agent. Then the whole project…");
+          fade(s, W(523));
+          const g = words(L, "*gone.", `left:${LEFT}px;top:650px;font-size:170px`);
+          rise(g.ws, [W(531) - 0.05]);
+          tl.to(w.box, { opacity: 0.35, duration: 0.4 }, Q(W(531)));
+          sfx(S.hit, W(531) - 0.03, -16);
+        }
+        // ================================================ made it again
+        {
+          const [a, b] = span("again"), L = side(a, b);
+          const hd = el(L, `left:${RIGHT + 4}px;top:200px`, "So I rebuilt it", "lbl abs");
+          fade(hd, W(536));
+          ["Cut & sync", "Grade + light", "Graphics in code", "Mix + loudness", "Render + checks"].forEach((n, i) => {
+            const r = card(L, RIGHT, 250 + i * 116, COLW, 96, `<div style="display:flex;align-items:center;gap:22px;height:100%"><div style="width:50px;height:50px;border-radius:50%;background:#dcefe3;display:flex;align-items:center;justify-content:center">${icon("check", 30, C.ok, 2.8)}</div><div style="font:600 34px Inter,sans-serif">${n}</div></div>`, "padding:0 28px");
+            enter(r, W(538) + 0.2 + i * 0.3, { x: 30, y: 0 });
+          });
+          sfx(S.check, W(538) + 0.2, -22);
+        }
+        // ================================================ 15 to 20 minutes, sometimes 10
+        {
+          const [a, b] = span("minutes"), L = side(a, b);
+          const lb = el(L, `left:${LEFT + 4}px;top:290px`, "Raw take → finished edit", "lbl abs");
+          fade(lb, a);
+          const n = el(L, `left:${LEFT}px;top:330px;font-size:250px`, "", "serif abs");
+          n.innerHTML = `<span class="m"><span class="wi a1">15</span></span><span class="m"><span class="wi a2">–20</span></span>`;
+          rise([n.querySelector(".a1")], [W(556) - 0.05]); rise([n.querySelector(".a2")], [W(558) - 0.05]);
+          const u = words(L, "*minutes", `left:${LEFT}px;top:580px;font-size:150px`);
+          rise(u.ws, [W(559) - 0.05]);
+          const s = pill(L, LEFT, 800, `${icon("bolt", 24, C.acc)} sometimes 10`);
+          enter(s, W(562) - 0.1);
+          sfx(S.swish, W(556) - 0.1, -20);
+        }
+        // ================================================ why it's fast: made once, saved, reused
+        {
+          const a = span("cache")[0], b = span("cache")[1], L = insert(a, b);
+          const lb = el(L, "left:0;width:1920px;top:150px;text-align:center", "Why it keeps getting faster", "lbl abs");
+          fade(lb, a);
+          const items = [["layers", "Assets", W(603)], ["spark", "Animations", W(609)], ["film", "Effects", W(614)]];
+          items.forEach(([ic, n, t], i) => {
+            const c = card(L, 240 + i * 300, 280, 260, 200, `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px"><div style="color:${C.acc}">${icon(ic, 54, C.acc)}</div><div class="serif" style="font-size:48px">${n}</div></div>`);
+            enter(c, t - 0.1, { y: 30 });
+            tl.to(c, { x: 1250 - (370 + i * 300), y: 260, scale: 0.35, opacity: 0, duration: 0.6, ease: "power2.in" }, Q(W(618) + i * 0.08));
+            sfx(S.pop, t - 0.05, -24);
+          });
+          const box = card(L, 1030, 500, 440, 0, `<div style="color:${C.acc}">${icon("box", 60, C.acc)}</div><div class="serif" style="margin-top:12px;font-size:64px">Saved once</div><div style="margin-top:6px;font:500 24px Inter,sans-serif;color:${C.ink2}">picked from the cache next time</div>`, "padding:34px 38px");
+          enter(box, W(598) - 0.1, { y: 30 });
+          tl.to(box, { scale: 1.04, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, Q(W(618) + 0.55));
+          sfx(S.check, W(618) + 0.55, -21);
+        }
+        // ================================================ faster and faster: past edits, full screen
+        {
+          const a = span("faster")[0], b = span("faster")[1] + 0.12, L = insert(a, b);
+          [["short_c", 360], ["short_b", 760], ["reel_hf", 1160], ["short_a", 1560]].forEach(([s, cx], k) => {
+            const ph = phone(L, s, cx, 600, 700, a - 0.2, b - a + 0.6, 1 + k);
+            enter(ph, a - 0.15 + k * 0.06, { y: 60 }, 0.55);
+          });
+          const t = words(L, "Faster *& faster", "left:0;width:1920px;top:90px;text-align:center;font-size:120px");
+          rise(t.ws, [a, a + 0.08, W(647) - 0.05]);
+        }
+        // ================================================ recap: the whole workflow, every step done
+        {
+          const [a, b] = span("recap"), L = insert(a, b);
+          flow(L, a - 0.1, 0.08, true);
+        }
+        // ================================================ the repo, and an honest caveat
+        {
+          const a = span("repo")[0], b = span("caveat")[1], L = side(a, b);
+          const r = card(L, RIGHT, 220, COLW, 0, "", "padding:32px 36px");
+          r.innerHTML = `<div style="display:flex;align-items:center;gap:16px;font:700 32px JBMono,monospace">${icon("code", 36, C.acc)} my video editor</div>` +
+            `<div style="margin-top:16px;font:500 25px/1.45 Inter,sans-serif;color:${C.ink2};white-space:normal">Claude Code skills · HyperFrames · grade + light · audio mix · QA checks</div>`;
+          enter(r, W(670) - 0.15);
+          const warn = card(L, RIGHT, 520, COLW, 0, "", "padding:30px 36px");
+          warn.innerHTML = `<div class="lbl" style="font-size:16px">Honest caveat</div><div class="serif" style="margin-top:10px;font-size:60px;white-space:normal;line-height:1.04">Tuned for <i>my</i> style. Other genres: not great yet.</div>`;
+          enter(warn, W(683) - 0.1);
+          sfx(S.pop, W(683), -23);
+        }
+        // ================================================ drop a comment for the link
+        {
+          const [a, b] = span("comment"), L = side(a, b);
+          const c = card(L, LEFT, 330, COLW, 0, "", "padding:32px 36px");
+          c.innerHTML = `<div style="display:flex;gap:18px;align-items:center"><span style="width:56px;height:56px;border-radius:50%;background:#e9c9b4;display:inline-block"></span><div style="font:600 24px Inter,sans-serif;color:${C.mute}">Add a comment…</div></div>` +
+            `<div class="ct" style="margin-top:20px;font:600 52px Inter,sans-serif"></div>`;
+          enter(c, W(717) - 0.15);
+          typeText(c.querySelector(".ct"), "repo", W(721), 8);
+          sfx(S.type, W(721), -23);
+          const p = pill(L, LEFT, 600, `${icon("chat", 26, "#fff")} Comment “repo” and I'll send the link`, `background:${C.acc};color:#fff;font-size:28px;padding:18px 30px`);
+          enter(p, W(726) - 0.1);
+          sfx(S.pop, W(726), -22);
+        }
+        // ================================================ my edit style; built my own
+        {
+          const [a, b] = span("style"), L = side(a, b);
+          const w = words(L, "My own|*edit style", `left:${LEFT}px;top:380px;font-size:180px;line-height:.98`);
+          rise(w.ws, [W(774), W(775), W(776), W(777) - 0.05]);
+        }
+        {
+          const [a, b] = span("own"), L = insert(a, b);
+          const pw = 980, ph = 551;
+          const v = el(L, `left:120px;top:${(1080 - ph) / 2}px;width:${pw}px;height:${ph}px;border-radius:20px;overflow:hidden;box-shadow:0 34px 90px rgba(60,40,20,.22);opacity:0`,
+            `<video id="v${VID++}" class="clip" src="assets/broll/pitch.mp4" muted playsinline data-start="${(a - 0.2).toFixed(3)}" data-duration="${(b - a + 0.8).toFixed(3)}" data-media-start="1" data-track-index="5"></video>`);
+          v.firstChild.style.cssText = "width:100%;height:100%;object-fit:cover;display:block";
+          enter(v, a - 0.15, { y: 50 }, 0.6);
+          const p1 = phone(L, "desi", 1290, 560, 640, a - 0.2, b - a + 0.8, 1, -3), p2 = phone(L, "short_a", 1665, 560, 640, a - 0.2, b - a + 0.8, 2, 3);
+          enter(p1, a, { y: 60 }); enter(p2, a + 0.1, { y: 60 });
+          const ok = pill(L, 120, 120, `${icon("check", 24, C.ok, 2.8)} Working pretty well`);
+          enter(ok, W(803) - 0.1);
+        }
+        // ================================================ "I'm asking Claude: make a 10-second launch video. It starts now."
+        {
+          const a = span("launchask")[0], b = span("launchask")[1], L = side(a, b);
+          const c = card(L, RIGHT, 250, COLW, 0, "", "padding:34px 38px");
+          c.innerHTML = `<div style="display:flex;align-items:center;gap:12px"><span style="width:14px;height:14px;border-radius:50%;background:${C.acc};display:inline-block"></span><span class="lbl" style="font-size:16px;color:${C.mute}">Claude Code</span></div>` +
+            `<div class="pt" style="margin-top:20px;font:600 42px/1.3 Inter,sans-serif;white-space:normal;min-height:165px"></div>`;
+          enter(c, W(815) - 0.15);
+          typeText(c.querySelector(".pt"), "Edit this whole video into a 10-second launch film.", W(816), 20);
+          sfx(S.type, W(816), -23);
+          const run = pill(L, RIGHT, 560, `${icon("play", 22, "#fff", 2.4, "#fff")} Running…`, `background:${C.ink};color:#fff`);
+          enter(run, W(838) - 0.1);
+          sfx(S.riser, D.launch[0] - 2.6, -17);
+        }
+
+        // ================================================ THE 10-SECOND LAUNCH FILM: six beats, hard cuts on the music
+        const [L0, L1] = D.launch, BEAT = (L1 - L0) / 7, LZ = $("launch");
+        const LB = [["No editor.", "just Claude", ""], ["Record", "one take", "cam"], ["Cut", "by the word", "cut"], ["Grade", "real room, real light", "sun"], ["Animate", "graphics in code", "spark"],
+          ["Render", "minutes, not days", "bolt"], ["Check", "every frame, every cut", "check"]];
+        const BG = ["#1b1815", "#f3eee6", "#1b1815", "#f3eee6", C.acc, "#1b1815", "#f3eee6"], FG = ["#f3eee6", C.ink, "#f3eee6", C.ink, "#fff", "#f3eee6", C.ink];
+        LB.forEach(([n, sub, ic], i) => {
+          const t0 = L0 + i * BEAT, Sx = el(LZ, `left:0;top:0;width:1920px;height:1080px;background:${BG[i]};color:${FG[i]}`);
+          show(Sx, t0, i === LB.length - 1 ? L1 + 0.01 : t0 + BEAT);
+          if (BG[i] === "#f3eee6") el(Sx, "opacity:.6", "", "fill grain");
+          const world = el(Sx, "left:0;top:0;width:1920px;height:1080px");
+          const vis = el(world, "left:1000px;top:140px;width:800px;height:800px");
+          if (n === "No editor.") {
+            const t = words(Sx, "No editor.|*Just Claude.", "left:0;width:1920px;top:300px;text-align:center;font-size:220px;line-height:1.02;color:#f3eee6");
+            rise(t.ws, [t0 + 0.02, t0 + 0.08, t0 + 0.5, t0 + 0.56]);
+            tl.fromTo(world, { scale: 1.04 }, { scale: 1, duration: BEAT, ease: "power2.out" }, Q(t0));
+            sfx(S.hit, t0, -11);
+            return;
+          }
+          if (n === "Record") phone(vis, "short_b", 400, 400, 760, t0, BEAT + 0.2, 2, 4);
+          if (n === "Cut") {
+            const wv = el(vis, "left:40px;top:250px;width:720px;height:300px;display:flex;align-items:center;gap:9px");
+            for (let k = 0; k < 34; k++) {
+              const h = 40 + Math.abs(Math.sin(k * 1.7)) * 240, cut = [5, 6, 13, 14, 15, 24, 29, 30].includes(k);
+              const bar = el(wv, `position:relative;flex:1;height:${h}px;border-radius:6px;background:${cut ? C.acc : "#f3eee6"}`);
+              if (cut) tl.to(bar, { scaleY: 0, opacity: 0, duration: 0.25, ease: "power2.in" }, Q(t0 + 0.3 + (k % 3) * 0.05));
+            }
+          }
+          if (n === "Grade") {
+            const f = el(vis, "left:0;top:110px;width:800px;height:582px;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(60,40,20,.25)");
+            f.innerHTML = `<img src="assets/ba_before.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><img class="aft" src="assets/ba_after.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 100% 0 0)">` +
+              `<i class="ln" style="position:absolute;top:0;bottom:0;left:0;width:4px;background:#fff;opacity:0"></i>`;
+            tl.to(f.querySelector(".aft"), { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "power3.inOut" }, Q(t0 + 0.15));
+            tl.fromTo(f.querySelector(".ln"), { x: 0, opacity: 1 }, { x: 796, duration: 0.9, ease: "power3.inOut" }, Q(t0 + 0.15));
+            tl.to(f.querySelector(".ln"), { opacity: 0, duration: 0.15 }, Q(t0 + 1.05));
+          }
+          if (n === "Animate") D.tiles.slice(16, 24).forEach((nm, k) => {
+            const t = el(vis, `left:${(k % 4) * 200}px;top:${40 + Math.floor(k / 4) * 370}px;width:180px;height:320px;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.25)`, `<img src="assets/tiles/${nm}.jpg" style="width:100%;height:100%;object-fit:cover" alt="">`);
+            tl.fromTo(t, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, Q(t0 + 0.05 + k * 0.05));
+          });
+          if (n === "Render") {
+            const c = el(vis, "left:40px;top:280px;width:720px;height:240px", `<div class="pc serif" style="font-size:150px">0%</div><div style="margin-top:20px;height:22px;border-radius:11px;background:rgba(243,238,230,.15);overflow:hidden"><i class="bar" style="display:block;height:100%;width:100%;background:${C.acc};transform-origin:0 50%;transform:scaleX(0)"></i></div>`);
+            tl.to(c.querySelector(".bar"), { scaleX: 1, duration: BEAT * 0.8, ease: "power2.inOut" }, Q(t0 + 0.05));
+            countUp(c.querySelector(".pc"), 0, 100, t0 + 0.05, BEAT * 0.8, (v) => Math.round(v) + "%");
+          }
+          if (n === "Check") ["−14 LUFS loudness", "No frozen frames", "No clicks at cuts"].forEach((nm, k) => {
+            const r = el(vis, `left:40px;top:${200 + k * 140}px;width:720px;height:110px;border-radius:22px;background:#fff;box-shadow:0 16px 40px rgba(60,40,20,.14);display:flex;align-items:center;gap:22px;padding:0 30px;opacity:0`,
+              `<div style="width:56px;height:56px;border-radius:50%;background:#dcefe3;display:flex;align-items:center;justify-content:center">${icon("check", 32, C.ok, 2.8)}</div><div style="font:600 36px Inter,sans-serif;color:${C.ink}">${nm}</div>`);
+            tl.fromTo(r, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, Q(t0 + 0.05 + k * 0.16));
+          });
+          const num = el(Sx, `left:140px;top:300px;font:700 26px JBMono,monospace;letter-spacing:.2em;opacity:.6`, `0${i} / 06`);
+          const t = words(Sx, n, `left:130px;top:350px;font-size:230px;color:${FG[i]}`);
+          const sb = el(Sx, `left:140px;top:620px;font:600 40px Inter,sans-serif;opacity:.75`, sub);
+          rise(t.ws, [t0 + 0.02]);
+          tl.fromTo([num, sb], { opacity: 0, y: 16 }, { opacity: 0.7, y: 0, duration: 0.3, ease: "power2.out", stagger: 0.05 }, Q(t0 + 0.08));
+          tl.fromTo(world, { scale: 1.05 }, { scale: 1, duration: BEAT, ease: "none" }, Q(t0));          // constant push: no shot ever settles to a still
+          sfx(S.hit, t0, -15);
+        });
+        // end card
+        {
+          const t0 = L1, Sx = el(LZ, "left:0;top:0;width:1920px;height:1080px;opacity:0");
+          el(Sx, "", "", "fill paper"); el(Sx, "opacity:.6", "", "fill grain");
+          tl.set(Sx, { opacity: 1 }, Q(t0));
+          const h = words(Sx, "Edited with *Claude.", "left:0;width:1920px;top:300px;font-size:190px;text-align:center");
+          rise(h.ws, [t0 + 0.1, t0 + 0.18, t0 + 0.26]);
+          const s1 = el(Sx, `left:0;width:1920px;top:560px;text-align:center;font:500 34px Inter,sans-serif;color:${C.ink2};opacity:0`, "Claude Code · HyperFrames · one weekend (twice)");
+          fade(s1, t0 + 0.6);
+          const cta = el(Sx, `left:735px;top:680px;width:450px;padding:24px 0;border-radius:999px;background:${C.acc};color:#fff;text-align:center;font:700 40px Inter,sans-serif;box-shadow:0 18px 44px rgba(226,86,43,.35);opacity:0`, "Subscribe");
+          enter(cta, t0 + 0.9, { y: 20 });
+          const hd = el(Sx, `left:0;width:1920px;top:820px;text-align:center;font:600 32px Inter,sans-serif;color:${C.mute};opacity:0`, "@yourhandle");
+          fade(hd, t0 + 1.2);
+          sfx(S.tone, t0 + 0.9, -20);
+        }
+        window.__timelines = window.__timelines || {};
+        window.__timelines["howiedit"] = tl;
+      })();
+    </script>
+  </body>
+</html>

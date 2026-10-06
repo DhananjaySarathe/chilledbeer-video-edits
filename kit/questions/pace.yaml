@@ -1,0 +1,22 @@
+# Jev questions about pacing.
+
+deliberate_pause:
+  instructions: >-
+    The speaker pauses for {duration} seconds between "...{before}" and "{after}...".
+    Is this pause deliberate, for emphasis or timing, so it should be kept?
+  criteria:
+    if_true: >-
+      The pause sets up a reveal or punchline, lets a strong statement land,
+      or separates a question from its answer.
+    if_false: >-
+      The pause is hesitation, a breath or thinking time, and the video is better without it.
+
+punch_in:
+  instructions: >-
+    Sentence {sid}: "{sentence}"
+    Is this a key moment that deserves a quick zoom-in on the speaker for emphasis?
+  criteria:
+    if_true: >-
+      A hook, a surprising claim, the main point, a result, or a strong emotion.
+    if_false: >-
+      Setup, context, a transition or an ordinary statement.

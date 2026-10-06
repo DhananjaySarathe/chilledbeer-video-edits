@@ -1,0 +1,96 @@
+<style>
+  .cu-corner { position: absolute; width: 112px; height: 112px; border: 0 solid #fff;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .35)); }
+  .cu-corner.tl { left: 50px; top: 150px; border-top-width: 6px; border-left-width: 6px; border-top-left-radius: 20px; }
+  .cu-corner.tr { right: 50px; top: 150px; border-top-width: 6px; border-right-width: 6px; border-top-right-radius: 20px; }
+  .cu-corner.bl { left: 50px; bottom: 280px; border-bottom-width: 6px; border-left-width: 6px; border-bottom-left-radius: 20px; }
+  .cu-corner.br { right: 50px; bottom: 280px; border-bottom-width: 6px; border-right-width: 6px; border-bottom-right-radius: 20px; }
+  .cu-chip { position: absolute; display: inline-flex; align-items: center; gap: 12px; padding: 9px 16px;
+    border-radius: 10px; background: rgba(17, 17, 17, .55); color: #fff; font-family: var(--mono); font-weight: 700;
+    font-size: 28px; letter-spacing: .08em; line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .3); }
+  .cu-rec { left: 96px; top: 194px; }
+  .cu-rec i { width: 18px; height: 18px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 10px rgba(252, 59, 0, .8); }
+  .cu-tc { right: 96px; top: 194px; letter-spacing: .06em; }
+  .cu-meta { left: 96px; bottom: 322px; font-weight: 500; font-size: 24px; letter-spacing: .1em; max-width: 560px; }
+  .cu-bat { right: 96px; bottom: 322px; font-weight: 500; font-size: 24px; letter-spacing: .06em; }
+  .cu-bat svg { display: block; }
+  .cu-face { position: absolute; }
+  .cu-face b { position: absolute; width: 64px; height: 64px; border: 0 solid var(--accent);
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, .45)); }
+  .cu-face b:nth-child(1) { left: 0; top: 0; border-top-width: 5px; border-left-width: 5px; }
+  .cu-face b:nth-child(2) { right: 0; top: 0; border-top-width: 5px; border-right-width: 5px; }
+  .cu-face b:nth-child(3) { left: 0; bottom: 0; border-bottom-width: 5px; border-left-width: 5px; }
+  .cu-face b:nth-child(4) { right: 0; bottom: 0; border-bottom-width: 5px; border-right-width: 5px; }
+  .cu-lock { position: absolute; left: 0; font-size: 20px; padding: 6px 11px; border-radius: 6px; letter-spacing: .14em;
+    transform-origin: left center; }
+</style>
+<div class="cu-corner tl"></div><div class="cu-corner tr"></div>
+<div class="cu-corner bl"></div><div class="cu-corner br"></div>
+<div class="cu-chip cu-rec" id="rec"><i id="dot"></i>REC</div>
+<div class="cu-chip cu-tc" id="tc">00:00:00:00</div>
+<div class="cu-chip cu-meta" id="meta"><span id="metaText"></span></div>
+<div class="cu-chip cu-bat" id="bat">87%</div>
+<div class="cu-face" id="face"><b></b><b></b><b></b><b></b></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration, FPS = GFX.fps;
+
+    // running timecode HH:MM:SS:FF from start_tc (the only thing that changes every frame)
+    const tc = GFX.$("#tc"), base = Math.max(0, Math.round((Number(P.start_tc) || 0) * FPS));
+    const pad = (n) => String(n).padStart(2, "0");
+    const fmt = (f) => [Math.floor(f / (FPS * 3600)), Math.floor(f / (FPS * 60)) % 60, Math.floor(f / FPS) % 60, f % FPS].map(pad).join(":");
+    tc.textContent = fmt(base);
+    GFX.each((t) => { tc.textContent = fmt(base + Math.floor((t * FPS) / 1000 + 1e-6)); }, 0, D);
+
+    // bottom labels and battery glyph (87% full)
+    const metaText = GFX.$("#metaText");
+    metaText.textContent = P.labels || "";
+    if (!P.labels) GFX.$("#meta").remove();
+    else GFX.fit(metaText, { width: 520, max: 24, min: 16 });
+    GFX.$("#bat").insertAdjacentHTML("beforeend", `<svg width="46" height="24" viewBox="0 0 46 24">
+      <rect x="1.5" y="1.5" width="38" height="21" rx="5" fill="none" stroke="#fff" stroke-width="3"/>
+      <rect x="6" y="6" width="${(29 * 0.87).toFixed(1)}" height="12" rx="2" fill="#fff"/>
+      <rect x="41" y="8" width="4" height="8" rx="1.5" fill="#fff"/></svg>`);
+
+    // viewfinder in: corners slide in from outside, chips follow
+    const corners = GFX.$$(".cu-corner");
+    const from = [[-40, -40], [40, -40], [-40, 40], [40, 40]];
+    corners.forEach((c, i) => GFX.anim(c, [
+      { opacity: 0, transform: `translate(${from[i][0]}px, ${from[i][1]}px) scale(1.15)` },
+      { opacity: 1, transform: "translate(0, 0) scale(1)" },
+    ], { at: i * 40, dur: 460, ease: "expo" }));
+    GFX.in(GFX.$("#rec"), "left", { at: 120, dur: 380, ease: "expo" });
+    GFX.in(tc, "right", { at: 160, dur: 380, ease: "expo" });
+    GFX.in(GFX.$$("#meta, #bat"), "fade", { at: 220, dur: 320, stagger: 60 });
+
+    // blinking REC dot: a small finite blink, once per second
+    GFX.anim(GFX.$("#dot"), [
+      { opacity: 1, offset: 0 }, { opacity: 1, offset: 0.5 }, { opacity: 0.15, offset: 0.55 },
+      { opacity: 0.15, offset: 0.95 }, { opacity: 1, offset: 1 },
+    ], { at: 400, dur: 1000, ease: "linear", iterations: Math.max(1, Math.ceil((D - 400) / 1000)) });
+
+    // face-tracking bracket snaps onto the face with a slight overshoot, then confirms focus
+    const face = GFX.$("#face");
+    if (!P.face_lock) { face.remove(); return; }
+    const f = GFX.face || { x: 300, y: 390, w: 480, h: 620 };
+    const padX = f.w * 0.08, padY = f.h * 0.06;
+    const x0 = Math.max(80, f.x - padX), y0 = Math.max(290, f.y - padY);
+    const x1 = Math.min(1000, f.x + f.w + padX), y1 = Math.min(1560, f.y + f.h + padY);
+    Object.assign(face.style, { left: x0 + "px", top: y0 + "px", width: (x1 - x0) + "px", height: (y1 - y0) + "px" });
+    const lock = GFX.h("div", { class: "cu-chip cu-lock", text: "FACE · AF LOCK" });
+    face.append(lock);
+    // label above the top-left corner, or tucked inside beside it when the face is near the top of the frame
+    if (y0 > 330) lock.style.top = "-44px"; else { lock.style.top = "12px"; lock.style.left = "78px"; }
+    GFX.anim(face, [
+      { opacity: 0, transform: "scale(1.45)" },
+      { opacity: 1, transform: "scale(.93)", offset: 0.68 },
+      { opacity: 1, transform: "scale(1)" },
+    ], { at: 320, dur: 560, ease: "out" });
+    GFX.anim(GFX.$$("#face b"), [{ opacity: 1 }, { opacity: 0.25 }, { opacity: 1 }, { opacity: 0.25 }, { opacity: 1 }],
+      { at: 880, dur: 300, ease: "linear" });
+    GFX.anim(lock, [{ opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)" }],
+      { at: 860, dur: 300, ease: "out" });
+  })();
+</script>

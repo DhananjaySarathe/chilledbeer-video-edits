@@ -1,0 +1,62 @@
+{
+  "id": "speaker_card",
+  "name": "Speaker shrinks into a tilted card",
+  "category": "speaker",
+  "kind": "speaker",
+  "description": "The speaker starts full-frame, then shrinks into a slightly tilted photo card with a white border and a soft shadow, centred on the clean background; the card can turn black-and-white, and an optional orange rubber-stamp word (like 'MID' or 'NOPE') slams onto it.",
+  "use_when": "A verdict or judgement on what was just said: 'it's mid', 'nobody cares', 'that's the old way', 'rejected'; also a beat that steps back from the speaker to comment on him.",
+  "params": {
+    "stamp": {
+      "type": "text",
+      "default": "",
+      "max_len": 8,
+      "help": "one short word stamped on the card, e.g. 'MID', 'NOPE', 'BORING'; empty = no stamp"
+    },
+    "grayscale": {
+      "type": "bool",
+      "default": false,
+      "help": "turn the card black-and-white after it lands (reads as 'the dull version')"
+    },
+    "tilt": {
+      "type": "number",
+      "default": -4,
+      "help": "card rotation in degrees, -12 to 12; negative leans left"
+    }
+  },
+  "duration": {
+    "min": 1.4,
+    "default": 2.2,
+    "max": 4.0
+  },
+  "captions": "dark",
+  "caption_y": 0.62,
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -16
+    },
+    {
+      "at": 0.9,
+      "name": "stamp",
+      "gain_db": -10
+    }
+  ],
+  "tags": [
+    "speaker",
+    "card",
+    "stamp",
+    "verdict",
+    "judgement",
+    "grayscale"
+  ],
+  "explains": [
+    "emphasis"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "title_behind",
+  "version": "1"
+}

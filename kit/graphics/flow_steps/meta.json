@@ -1,0 +1,73 @@
+{
+  "id": "flow_steps",
+  "name": "Step-by-step flow",
+  "category": "list",
+  "kind": "fullscreen",
+  "description": "On the clean background, a small spaced label and a huge condensed title (one word in orange) punch in, then two to four white step cards stacked down the frame ('STEP 1' label, a bold line, an icon circle). Each step lights up on its word: the icon circle fills orange, a connector draws down from the previous step, and the previous step gets a green check; a black result pill ('→ YOUR OWN NOTES') stamps under the last card.",
+  "use_when": "A how-to said as a short sequence (do this, then this, then you get that): a method, a recipe, a workflow, a hack in 2-4 steps.",
+  "params": {
+    "kicker": {
+      "type": "text",
+      "default": "",
+      "max_len": 28
+    },
+    "title": {
+      "type": "text",
+      "default": "",
+      "max_len": 22,
+      "help": "2-3 words, fitted to one line"
+    },
+    "accent": {
+      "type": "text",
+      "default": "",
+      "max_len": 16,
+      "help": "word(s) of the title shown in orange"
+    },
+    "steps": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "[{text, sub, icon, at}] text <= 26 characters; icon from the icon set (default play, sparkle, file, check); at = seconds from the scene start"
+    },
+    "done": {
+      "type": "text",
+      "default": "",
+      "max_len": 22,
+      "help": "result pill after the last step"
+    },
+    "done_at": {
+      "type": "number",
+      "default": null
+    }
+  },
+  "duration": {
+    "min": 2.4,
+    "default": 4.0,
+    "max": 7.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "steps",
+    "how to",
+    "method",
+    "workflow",
+    "hack",
+    "process"
+  ],
+  "explains": [
+    "process"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "checklist_steps",
+  "version": "1"
+}

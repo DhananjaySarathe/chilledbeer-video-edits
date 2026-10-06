@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <script src="vendor/stickman.js"></script>
+    <style>
+      @font-face { font-family: "InstrumentSerif"; src: url("assets/fonts/InstrumentSerif-Regular.ttf"); font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/Inter-600.ttf"); font-weight: 600; font-display: block; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body, #root { width: 1920px; height: 1080px; overflow: hidden; background: #f3eee6; font-family: "Inter", sans-serif; }
+      .lbl { position: absolute; width: 240px; text-align: center; font: 600 22px "Inter", sans-serif; color: #4a443d; }
+      h1 { position: absolute; left: 60px; top: 30px; font: 400 56px "InstrumentSerif", serif; color: #1b1815; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="sheet" data-start="0" data-duration="1" data-width="1920" data-height="1080">
+      <h1>kit/stickman · pose library</h1>
+      <div id="figs" style="position:absolute;left:0;top:0;width:1920px;height:1080px"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const root = document.getElementById("figs");
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", 1920); svg.setAttribute("height", 1080); svg.style.cssText = "position:absolute;left:0;top:0";
+      root.append(svg);
+      const names = Object.keys(Stickman.POSES), cols = 8, cw = 230, rh = 300;
+      names.forEach((n, i) => {
+        const cx = 145 + (i % cols) * cw, ground = 380 + Math.floor(i / cols) * rh;
+        const f = Stickman.create(svg, { x: cx, ground, scale: 0.56, bob: 0 });
+        f.set(n);
+        const l = document.createElement("div"); l.className = "lbl"; l.textContent = n;
+        l.style.left = cx - 120 + "px"; l.style.top = ground + 14 + "px"; root.append(l);
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        line.setAttribute("d", `M${cx - 80} ${ground + 4} L${cx + 80} ${ground + 4}`); line.setAttribute("stroke", "rgba(27,24,21,.15)"); line.setAttribute("stroke-width", 3);
+        svg.append(line);
+      });
+      Stickman.drive(tl, 1);
+      window.__timelines = { sheet: tl };
+    </script>
+  </body>
+</html>

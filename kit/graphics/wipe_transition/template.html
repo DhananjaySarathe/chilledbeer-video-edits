@@ -1,0 +1,28 @@
+<style>
+  .wt { position: absolute; top: -300px; bottom: -300px; width: 2600px; transform: skewX(-14deg); }
+  .wt-main { background: var(--accent); }
+  .wt-main.ink { background: var(--ink); }
+  .wt-main.cream { background: var(--bg); }
+  .wt-edge { background: var(--ink); width: 90px; }
+  .wt-edge.ink { background: var(--accent); }
+</style>
+<div class="wt wt-edge" id="edge"></div>
+<div class="wt wt-main" id="band"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const band = GFX.$("#band"), edge = GFX.$("#edge");
+    const tone = ["ink", "cream"].includes(P.tone) ? P.tone : "";
+    if (tone) { band.classList.add(tone); if (tone === "ink") edge.classList.add("ink"); }
+    const dir = P.direction === "right" ? -1 : 1;
+    // the band (2600 px, wider than the skewed frame) is centred on the frame at D/2: off-screen at both ends,
+    // and the whole picture is covered for ~4 frames around the midpoint, where the cut should sit
+    const mid = 540 - 1300, off = 1780 - mid;
+    const from = dir > 0 ? mid + off : mid - off, to = dir > 0 ? mid - off : mid + off;
+    const trail = dir > 0 ? 2590 : -80;                     // the thin dark edge follows the band
+    GFX.anim(band, [{ transform: `translateX(${from}px) skewX(-14deg)` }, { transform: `translateX(${to}px) skewX(-14deg)` }],
+      { at: 0, dur: D, ease: "inOut" });
+    GFX.anim(edge, [{ transform: `translateX(${from + trail}px) skewX(-14deg)` }, { transform: `translateX(${to + trail}px) skewX(-14deg)` }],
+      { at: 0, dur: D, ease: "inOut" });
+  })();
+</script>

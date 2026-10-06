@@ -1,0 +1,91 @@
+{
+  "id": "counter_big",
+  "name": "Huge counter (clock or number)",
+  "category": "data",
+  "kind": "fullscreen",
+  "description": "A full-frame counter: a small spaced mono label over one huge condensed number that races from a start value and settles on the final one. As a clock it reads HH:MM:SS with the hours in the accent colour (e.g. 00:03:06 racing to 07:42:19); as a number it shows an optional prefix and suffix. Dark by default: a near-black moody background with a soft vignette and white digits.",
+  "use_when": "Lines about time sunk or piling up (hours spent editing, time wasted, waiting) or one big total the speaker names (hours, videos, messages, steps); a dramatic beat where a single number carries the line.",
+  "params": {
+    "kicker": {
+      "type": "text",
+      "default": "Hours spent",
+      "max_len": 28,
+      "help": "small spaced label above the number, e.g. 'HOURS SPENT EDITING'"
+    },
+    "from": {
+      "type": "number",
+      "default": 0,
+      "help": "start value; for format 'clock' it is seconds (186 = 00:03:06)"
+    },
+    "to": {
+      "type": "number",
+      "required": true,
+      "help": "final value; for 'clock' in seconds (27739 = 07:42:19)"
+    },
+    "format": {
+      "type": "text",
+      "default": "clock",
+      "help": "'clock' renders HH:MM:SS, 'number' renders a grouped number (decimals follow 'to')"
+    },
+    "prefix": {
+      "type": "text",
+      "default": "",
+      "max_len": 2,
+      "help": "number format only, e.g. '+' or '$'"
+    },
+    "suffix": {
+      "type": "text",
+      "default": "",
+      "max_len": 6,
+      "help": "number format only; 1-2 characters sit at full size ('%', 'x'), longer words are set small beside the number ('hours')"
+    },
+    "dark": {
+      "type": "bool",
+      "default": true,
+      "help": "near-black background with white digits; false = clean cream background with ink digits (then prefer dark captions)"
+    }
+  },
+  "duration": {
+    "min": 1.4,
+    "default": 2.2,
+    "max": 4.5
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    },
+    {
+      "at": 0.15,
+      "name": "riser",
+      "gain_db": -22
+    }
+  ],
+  "tags": [
+    "numbers",
+    "time",
+    "clock",
+    "counter",
+    "hours",
+    "dark",
+    "total"
+  ],
+  "captions_by": {
+    "param": "dark",
+    "values": {
+      "true": "show",
+      "false": "dark"
+    }
+  },
+  "explains": [
+    "quantity"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "word_slam",
+  "version": "1"
+}

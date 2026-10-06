@@ -1,0 +1,71 @@
+<style>
+  .ft-row { position: absolute; top: 272px; left: 40px; right: 40px; display: flex; justify-content: center; gap: 14px; }
+  .ft-chip { position: relative; flex: none; min-height: 76px; border-radius: 999px; background: var(--card); color: var(--ink);
+    display: flex; align-items: center; justify-content: center; padding: 0 18px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .22), 0 3px 8px rgba(0, 0, 0, .12); }
+  .ft-fill { position: absolute; inset: 0; border-radius: inherit; background: var(--accent); clip-path: circle(0% at 22% 50%); }
+  .ft-ring { position: absolute; inset: -4px; border-radius: inherit; border: 4px solid var(--accent); opacity: 0; }
+  .ft-ico { position: relative; flex: none; width: 0; height: 30px; overflow: hidden; display: flex; align-items: center; }
+  .ft-ico svg { flex: none; display: block; }
+  .ft-label { position: relative; font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: .08em;
+    text-transform: uppercase; white-space: nowrap; line-height: 1; }
+  .ft-chip.on .ft-fill { clip-path: circle(150% at 22% 50%); }
+  .ft-chip.on .ft-label { color: var(--accent-ink); }
+  .ft-chip.on .ft-ico { width: 38px; }
+</style>
+<div class="ft-row" id="row"></div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    const row = GFX.$("#row");
+    const items = (P.items || []).slice(0, 4).map((it) => (typeof it === "string" ? it : (it && (it.text || it.label)) || ""));
+    const n = items.length;
+    const checked = Math.max(0, Math.min(n, Math.round(Number(P.checked) || 0)));
+    const checkTo = Math.max(checked, Math.min(n, P.check_to == null ? n : Math.round(Number(P.check_to))));
+    const gap = 14, W = Math.min(300, (1000 - gap * (n - 1)) / Math.max(1, n));
+
+    const chips = items.map((text, i) => {
+      const chip = GFX.h("div", { class: "ft-chip" + (i < checked ? " on" : ""), style: `width:${W.toFixed(1)}px` },
+        GFX.h("i", { class: "ft-ring" }), GFX.h("span", { class: "ft-fill" }),
+        GFX.h("span", { class: "ft-ico", html: GFX.icon("check", { size: 30, stroke: "#fff", width: 3.6 }) }),
+        GFX.h("span", { class: "ft-label", text }));
+      row.append(chip);
+      return chip;
+    });
+    // one shared font size: the longest label must fit next to its check mark (wrap to two lines before going tiny)
+    GFX.layout(() => {
+      const labels = GFX.$$(".ft-label", row), room = W - 36 - 38;
+      const fits = () => labels.every((l) => l.scrollWidth <= room + 1);
+      const set = (px) => labels.forEach((l) => { l.style.fontSize = px + "px"; });
+      let size = 26;
+      while (!fits() && size > 20) set(--size);
+      if (!fits()) labels.forEach((l) => Object.assign(l.style, { whiteSpace: "normal", maxWidth: room + "px", textAlign: "center", lineHeight: "1.08", letterSpacing: ".03em" }));
+      while (!fits() && size > 16) set(--size);
+    });
+
+    // the row drops in, one chip after another
+    GFX.in(chips, "drop", { at: 0, dur: 480, stagger: 70 });
+
+    // then the chips get checked one by one: accent fill sweeps in, a check draws, a small pop and ring
+    const todo = chips.slice(checked, checkTo);
+    const t0 = 700, t1 = Math.max(t0, D - 420);
+    const gapT = todo.length > 1 ? (t1 - t0) / (todo.length - 1) : 0;
+    todo.forEach((chip, k) => {
+      const cue = Array.isArray(P.at) ? Number(P.at[k]) : NaN;   // optional: check each chip on its spoken word
+      const at = Number.isFinite(cue) ? GFX.clamp(cue * 1000, 500, Math.max(500, D - 300))
+        : todo.length > 1 ? t0 + k * gapT : Math.min(t1, t0 + 150);
+      GFX.anim(chip.querySelector(".ft-fill"), [{ clipPath: "circle(0% at 22% 50%)" }, { clipPath: "circle(150% at 22% 50%)" }],
+        { at, dur: 280, ease: "out" });
+      GFX.anim(chip.querySelector(".ft-label"), [{ color: getComputedStyle(chip).color }, { color: "#fff" }], { at, dur: 200 });
+      GFX.anim(chip.querySelector(".ft-ico"), [{ width: "0px" }, { width: "38px" }], { at, dur: 260, ease: "out" });
+      const path = chip.querySelector(".ft-ico path");
+      path.setAttribute("pathLength", "1");
+      path.style.strokeDasharray = "1 1.1";
+      GFX.anim(path, [{ strokeDashoffset: 1.04 }, { strokeDashoffset: 0 }], { at: at + 80, dur: 260, ease: "inOut" });
+      GFX.anim(chip, [{ scale: "1" }, { scale: "1.12", offset: 0.4 }, { scale: ".97", offset: 0.75 }, { scale: "1" }],
+        { at, dur: 380, ease: "out" });
+      GFX.anim(chip.querySelector(".ft-ring"), [{ opacity: .85, scale: "1" }, { opacity: 0, scale: "1.28" }],
+        { at: at + 60, dur: 420, ease: "out", fill: "forwards" });
+    });
+  })();
+</script>

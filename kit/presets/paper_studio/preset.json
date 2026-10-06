@@ -1,0 +1,244 @@
+{
+  "name": "preset_paper_studio",
+  "version": "1.3 (2026-10-04: + looks per scene (kit/look/looks.py), natural v2 with less orange skin, scopes)",
+  "for": "talking-head tech explainers: 16:9 YouTube long-form plus a 9:16 teaser reel",
+  "footage": {
+    "cutout": false,
+    "grade_tool": "kit/look/grade.py",
+    "grade": {
+      "black": 0.03,
+      "skin": 0.5,
+      "wall": 0.87,
+      "key": 0.2,
+      "fall": 0.08,
+      "vignette": 0.16,
+      "sat": 1.1,
+      "skin_sat": 1.0,
+      "warm_mids": [
+        0.013,
+        0.005,
+        -0.012
+      ],
+      "warm_highs": [
+        0.018,
+        0.008,
+        -0.016
+      ],
+      "sharpen": 0.45,
+      "grain": 0.01,
+      "light": 1.0
+    },
+    "voice": "DeepFilterNet3 (~/.venvs/df/bin/deepFilter), then highpass 80 Hz, EQ (-2 dB @220, +3 dB @3.2k, +1.5 dB shelf @9k), compressor 3:1 @-26 dB, loudnorm -19 LUFS",
+    "speed": 1.07,
+    "looks": {
+      "engine": "kit/look/grade.py --look / --looks (kit/look/README.md)",
+      "default": "natural (v2: warm tint spares skin, skin sat 0.132 vs 0.149)",
+      "others": [
+        "bright",
+        "cinematic",
+        "moody",
+        "film",
+        "noir"
+      ],
+      "rules": "kit/refs/SCENES.md §6",
+      "luts": "kit/look/luts/paper_studio_*.cube"
+    }
+  },
+  "palette": {
+    "paper": "#f3eee6",
+    "card": "#ffffff",
+    "ink": "#1b1815",
+    "ink2": "#4a443d",
+    "mute": "#8a8178",
+    "accent": "#e2562b",
+    "ok": "#2f8a5b",
+    "accent_tint": "#fbe4dc",
+    "ok_tint": "#dcefe3",
+    "line": "rgba(27,24,21,.10)",
+    "shadow": "0 22px 60px rgba(60,40,20,.14)"
+  },
+  "type": {
+    "display": {
+      "family": "InstrumentSerif",
+      "files": [
+        "kit/fonts/InstrumentSerif-Regular.ttf",
+        "kit/fonts/InstrumentSerif-Italic.ttf"
+      ],
+      "emphasis": "italic + accent colour"
+    },
+    "ui": {
+      "family": "Inter",
+      "weights": [
+        500,
+        600,
+        700,
+        800
+      ]
+    },
+    "code": {
+      "family": "JBMono",
+      "file": "kit/fonts/JetBrainsMono-500.ttf"
+    },
+    "label": "Inter 700, 20px, uppercase, 0.22em tracking, accent colour",
+    "never_name_a_family": [
+      "Serif",
+      "Sans",
+      "Mono",
+      "serif",
+      "monospace"
+    ]
+  },
+  "motion": {
+    "enter": "0.6 s power3.out, y 28 px, blur 8 -> 0",
+    "exit": "0.35 s power2.in, y -16 px",
+    "text_rise": "word by word in a mask, yPercent 115 -> 0, 0.7 s expo.out",
+    "insert": "full-screen paper rises in 0.55 s (y 60), sfx air-woosh -21 dB",
+    "framing_move": "0.6 s power3.inOut, only into / out of the corner window",
+    "push_in": "x1.025 over long pieces (> 2.2 s), linear, fromTo with explicit start",
+    "banned": [
+      "glitch",
+      "rgb split",
+      "bounce / back eases",
+      "shader transitions",
+      "blue"
+    ]
+  },
+  "framing_16x9": {
+    "W": [
+      1.0,
+      1.08
+    ],
+    "M": [
+      1.14,
+      1.22
+    ],
+    "C": [
+      1.3,
+      1.22
+    ],
+    "SR": [
+      1.2,
+      1.28
+    ],
+    "SL": [
+      1.32,
+      1.38
+    ],
+    "SR_face_x": 1250,
+    "SL_face_x": 640,
+    "face_y": 470,
+    "content_left": [
+      110,
+      830
+    ],
+    "content_right": [
+      1150,
+      1830
+    ],
+    "pip": {
+      "x": 1556,
+      "y": 716,
+      "size": 316,
+      "scale": 0.5,
+      "radius": 26,
+      "ring": "5px white"
+    },
+    "note": "alternate the two scales on consecutive cuts of the same layout (jump-cut cover). The take sits right of centre, so speaker-left needs the bigger scale."
+  },
+  "audio": {
+    "bed": {
+      "file": "kit/music/chill/chill__lakey-inspired__chill.mp3",
+      "credit": "Music: LAKEY INSPIRED - Chill / https://soundcloud.com/lakeyinspired",
+      "gap_db": -4,
+      "speech_db": -13
+    },
+    "payoff": {
+      "file": "kit/music/upbeat/upbeat__mokkamusic__drive.mp3",
+      "credit": "Music: MokkaMusic - Drive",
+      "bpm": 85,
+      "beat": 0.706,
+      "phase": 0.385,
+      "enter_at_track_time": "phase + 16 * beat (a downbeat)",
+      "shot_length": "2 beats = 1.412 s"
+    },
+    "sfx": {
+      "insert": [
+        "whoosh/whoosh__air-woosh__mixkit-1489",
+        -21
+      ],
+      "slide": [
+        "whoosh/whoosh__technology-transition-slide__mixkit-3120",
+        -22
+      ],
+      "click": [
+        "ui/ui__clear-mouse-clicks__mixkit-2997",
+        -22
+      ],
+      "pop": [
+        "ui/ui__bubble-pop-up-alert-notification__mixkit-2357",
+        -23
+      ],
+      "check": [
+        "ui/ui__modern-click-box-check__mixkit-1120",
+        -21
+      ],
+      "type": [
+        "typing/typing__typing-on-a-laptop-keyboard__mixkit-2531",
+        -23
+      ],
+      "hit": [
+        "impact/impact__short-bass-hit__mixkit-2299",
+        -15
+      ],
+      "riser": [
+        "riser/riser__cinematic-synth-riser__mixkit-645",
+        -17
+      ],
+      "tone": [
+        "ui/ui__confirmation-tone__mixkit-2867",
+        -20
+      ]
+    },
+    "master": "-14 LUFS integrated, -1.5 dBTP",
+    "mux": "aac 320k with -aac_pns 0 (no PNS spikes)"
+  },
+  "captions": {
+    "longform": "none burned in; captions.srt (42 chars, 3.2 s max, break on sentence ends and pauses > 0.6 s)",
+    "reel": "burned word captions: Inter 800 66px ink, 3 words a page, active word in accent, at y 730, pages hand over on one frame"
+  },
+  "reel_9x16": {
+    "top_panel": [
+      0,
+      880
+    ],
+    "face_panel": [
+      880,
+      1920
+    ],
+    "face_crop": "1:1 of the 16:9 take (scale 1.0 / 1.12 alternating), slow 3% push",
+    "length_s": [
+      28,
+      40
+    ],
+    "music": "payoff track ~12 dB under speech, +4 dB during the launch excerpt"
+  },
+  "stickman": {
+    "kit": "kit/stickman/stickman.js",
+    "per_video": "2-4 moments, 2-5 s each, never a whole video",
+    "use_for": [
+      "visual metaphor",
+      "emotional story beat",
+      "process acted out",
+      "before / after",
+      "roles"
+    ],
+    "mount": "insert() or side()",
+    "line": "ink, 9 units, round caps, paper-filled head",
+    "accents": "orange, green check, muted ink only"
+  },
+  "components": {
+    "kit": "kit/hf (README.md, registry.json)",
+    "planning": "kit/refs/SCENES.md + kit/hf/plan_check.py",
+    "example": "kit/hf/showcase"
+  }
+}

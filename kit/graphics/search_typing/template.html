@@ -1,0 +1,131 @@
+<style>
+  .st-wrap { position: absolute; left: 72px; right: 72px; top: 0; }
+  .st-bar { position: relative; z-index: 2; height: 128px; border-radius: 64px; display: flex; align-items: center; gap: 24px;
+    padding: 0 44px; }
+  .st-bar .st-ico { flex: none; color: var(--ink); display: flex; }
+  .st-field { position: relative; flex: 1; min-width: 0; height: 64px; display: flex; align-items: center; }
+  .st-q { flex: none; font-family: var(--ui); font-weight: 500; font-size: 46px; color: var(--ink); white-space: pre; }
+  .st-ph { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-family: var(--ui); font-weight: 500;
+    font-size: 46px; color: var(--muted); }
+  .st-caret { flex: none; width: 4px; height: 56px; margin-left: 3px; border-radius: 2px; background: var(--accent); }
+  .st-mic { flex: none; color: var(--muted); display: flex; }
+  .st-panel { position: relative; margin-top: 18px; padding: 14px 0; border-radius: 34px; }
+  .st-row { position: relative; display: flex; align-items: center; gap: 24px; min-height: 104px; padding: 12px 44px; }
+  .st-row .st-bg { position: absolute; inset: 0 14px; border-radius: 22px; background: var(--soft); opacity: 0; }
+  .st-row .st-sel { position: absolute; inset: 0 14px; border-radius: 22px; background: var(--accent-soft); opacity: 0; }
+  .st-row .st-sel::before { content: ""; position: absolute; left: 0; top: 22px; bottom: 22px; width: 6px; border-radius: 3px;
+    background: var(--accent); }
+  .st-row .st-ico2 { position: relative; flex: none; color: var(--muted); display: flex; }
+  .st-text { position: relative; flex: 1; min-width: 0; font-family: var(--ui); font-weight: 400; font-size: 38px; line-height: 1.25;
+    color: var(--ink-2); overflow-wrap: anywhere; }
+  .st-text b { font-weight: 700; color: var(--ink); }
+  .st-go { position: relative; flex: none; width: 40px; height: 40px; color: var(--muted); display: flex; transform: rotate(-45deg); }
+  .st-go.on { color: var(--accent); }
+</style>
+<div class="st-wrap" id="wrap">
+  <div class="card st-bar" id="bar">
+    <div class="st-ico" id="ico"></div>
+    <div class="st-field"><span class="st-ph" id="ph">Search</span><span class="st-q" id="q"></span><i class="st-caret" id="caret"></i></div>
+    <div class="st-mic" id="mic"></div>
+  </div>
+  <div class="card st-panel" id="panel"></div>
+</div>
+<script>
+  (() => {
+    const P = GFX.params, D = GFX.duration;
+    // GFX.cursor, patched locally: its click press animates `scale`, which applies outside the translate and throws the
+    // pointer toward the frame's top-left, and its ripples show (fill: both) before their click. Press the icon instead.
+    const cursor = (points) => {
+      const before = new Set(GFX.$$(".ripple"));
+      const c = GFX.cursor(points);
+      c.getAnimations().forEach((a) => { if (a.effect.getKeyframes().some((k) => "scale" in k)) a.cancel(); });
+      const icon = c.firstElementChild;
+      icon.style.transformOrigin = "20% 12%";
+      const clicks = points.filter((p) => p.click);
+      GFX.$$(".ripple").filter((r) => !before.has(r)).forEach((r, i) =>
+        GFX.anim(r, [{ visibility: "hidden" }, { visibility: "hidden" }], { at: 0, dur: clicks[i].at, fill: "none" }));
+      clicks.forEach((p) => GFX.anim(icon, [{ transform: "scale(1)" }, { transform: "scale(.8)" }, { transform: "scale(1)" }],
+        { at: p.at - 60, dur: 220, ease: "inOut", fill: "none" }));
+      return c;
+    };
+
+    const query = String(P.query || "");
+    const sugg = (P.suggestions || []).slice(0, 4).map(String);
+    const pick = sugg.length ? Math.max(0, Math.min(sugg.length - 1, Math.round(Number(P.pick) || 0))) : -1;
+    GFX.$("#ico").innerHTML = GFX.icon("search", { size: 52, width: 2.6 });
+    GFX.$("#mic").innerHTML = GFX.icon("mic", { size: 40, width: 2.2 });
+    const q = GFX.$("#q"), caret = GFX.$("#caret"), ph = GFX.$("#ph");
+    q.textContent = query;                       // full text for fitting; the typing below takes over per frame
+    GFX.fit(q, { width: 680, max: 46, min: 26 });
+
+    // suggestions: the typed part in bold
+    const panel = GFX.$("#panel");
+    const lower = query.toLowerCase().trim();
+    const rows = sugg.map((s, i) => {
+      const k = lower ? s.toLowerCase().indexOf(lower) : -1;
+      const html = k < 0 ? GFX.esc(s) : GFX.esc(s.slice(0, k)) + "<b>" + GFX.esc(s.slice(k, k + lower.length)) + "</b>" + GFX.esc(s.slice(k + lower.length));
+      const row = GFX.h("div", { class: "st-row" }, GFX.h("div", { class: "st-bg" }), GFX.h("div", { class: "st-sel" }),
+        GFX.h("div", { class: "st-ico2", html: GFX.icon("search", { size: 36, width: 2.4 }) }),
+        GFX.h("div", { class: "st-text", html }),
+        GFX.h("div", { class: "st-go", html: GFX.icon("arrowUp", { size: 40, width: 2.4 }) }));
+      panel.append(row);
+      GFX.fit(row.querySelector(".st-text"), { width: 4000, height: 52, max: 38, min: 26 });
+      return row;
+    });
+    if (!rows.length) panel.remove();
+    // one size for every row: the smallest any row needed, but not below 30 px (an outlier wraps instead); runs after the fits
+    GFX.layout(() => {
+      const texts = rows.map((row) => row.querySelector(".st-text"));
+      const size = Math.max(30, Math.min(...texts.map((el) => parseFloat(el.style.fontSize) || 38)));
+      texts.forEach((el) => { el.style.fontSize = size + "px"; });
+    });
+
+    // vertical placement: the bar starts centred, then rises as the suggestions open under it (content box y 270-1090)
+    const wrap = GFX.$("#wrap");
+    const total = 128 + (rows.length ? 18 + 28 + rows.length * 104 : 0);
+    const top = Math.round(680 - total / 2), lift = Math.round(680 - 64) - top;
+    wrap.style.top = top + "px";
+
+    // human typing rhythm: irregular gaps between keys, deterministic
+    const tType = 320, typeDur = Math.min(1000, Math.max(300, query.length * 55));
+    const tEnd = tType + typeDur;
+    const r = GFX.rand(3), gaps = Array.from(query, () => 0.55 + r() * 0.9), sum = gaps.reduce((a, b) => a + b, 0) || 1;
+    let acc = 0;
+    const keyAt = gaps.map((g) => tType + ((acc += g) / sum) * typeDur);
+    GFX.each((t) => {
+      let n = 0;
+      while (n < keyAt.length && keyAt[n] <= t) n++;
+      q.textContent = query.slice(0, n);
+      ph.style.opacity = t < tType ? 1 : 0;
+      caret.style.opacity = t < tEnd + 80 ? 1 : (Math.floor((t - tEnd - 80) / 420) % 2 ? 0 : 1);
+    }, 0, D);
+
+    GFX.in(GFX.$("#bar"), "pop", { at: 0, dur: 460 });
+    if (!rows.length) return;
+    const tOpen = tEnd - 60;
+    GFX.anim(wrap, [{ transform: `translateY(${lift}px)` }, { transform: "translateY(0px)" }], { at: tOpen, dur: 520, ease: "expo" });
+    GFX.anim(panel, [{ opacity: 0, transform: "translateY(-40px) scale(.97)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+      { at: tOpen + 40, dur: 420, ease: "out" });
+    rows.forEach((row, i) => GFX.anim(row, [{ opacity: 0, transform: "translateY(-14px)" }, { opacity: 1, transform: "translateY(0)" }],
+      { at: tOpen + 120 + i * 80, dur: 320, ease: "out" }));
+
+    // the cursor comes in, hovers the picked row and clicks it; the row is measured after fonts and fits (rows can wrap)
+    const row = rows[pick];
+    const tHover = Math.min(D - 520, tOpen + 120 + rows.length * 80 + 380), tClick = Math.min(D - 260, tHover + 240);
+    GFX.layout(() => {
+      const rowY = top + panel.offsetTop + row.offsetTop + row.offsetHeight / 2;
+      cursor([
+        { x: 930, y: 1080, at: tHover - 460 },
+        { x: 790, y: rowY - 4, at: tHover },
+        { x: 790, y: rowY - 4, at: tClick, click: true },
+        { x: 802, y: rowY + 6, at: Math.min(D - 20, tClick + 220) },
+      ]);
+    });
+    GFX.anim(row.querySelector(".st-bg"), [{ opacity: 0 }, { opacity: 1 }], { at: tHover - 140, dur: 180 });
+    GFX.anim(row.querySelector(".st-sel"), [{ opacity: 0 }, { opacity: 1 }], { at: tClick, dur: 200 });
+    GFX.anim(row, [{ scale: "1" }, { scale: ".985" }, { scale: "1" }], { at: tClick - 40, dur: 220, ease: "inOut", fill: "none" });
+    const go = row.querySelector(".st-go");
+    GFX.each((t) => go.classList.toggle("on", t >= tClick), 0, tClick + 1);
+    GFX.anim(go, [{ transform: "rotate(-45deg)" }, { transform: "rotate(90deg)" }], { at: tClick, dur: 300, ease: "back" });
+  })();
+</script>

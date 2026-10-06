@@ -1,0 +1,26 @@
+{
+  "result": {"language": "en"},
+  "transcription": [
+    {"offsets": {"from": 0, "to": 2000}, "text": " So, it's 3 p.m.",
+     "tokens": [
+       {"text": "[_BEG_]", "offsets": {"from": 0, "to": 0}, "p": 0.9, "t_dtw": -1},
+       {"text": " So", "offsets": {"from": 30, "to": 150}, "p": 0.8, "t_dtw": -1},
+       {"text": ",", "offsets": {"from": 150, "to": 300}, "p": 0.9, "t_dtw": -1},
+       {"text": " it", "offsets": {"from": 450, "to": 450}, "p": 0.95, "t_dtw": -1},
+       {"text": "'s", "offsets": {"from": 450, "to": 600}, "p": 0.99, "t_dtw": -1},
+       {"text": " 3", "offsets": {"from": 600, "to": 650}, "p": 0.93, "t_dtw": -1},
+       {"text": " p", "offsets": {"from": 860, "to": 900}, "p": 0.7, "t_dtw": -1},
+       {"text": ".", "offsets": {"from": 900, "to": 1050}, "p": 0.99, "t_dtw": -1},
+       {"text": "m", "offsets": {"from": 1140, "to": 1200}, "p": 0.99, "t_dtw": -1},
+       {"text": ".", "offsets": {"from": 1200, "to": 1430}, "p": 0.99, "t_dtw": -1}
+     ]},
+    {"offsets": {"from": 2000, "to": 3000}, "text": " [BLANK_AUDIO] uh",
+     "tokens": [
+       {"text": " [", "offsets": {"from": 2000, "to": 2100}, "p": 0.5, "t_dtw": -1},
+       {"text": "BLANK_AUDIO", "offsets": {"from": 2100, "to": 2300}, "p": 0.5, "t_dtw": -1},
+       {"text": "]", "offsets": {"from": 2300, "to": 2400}, "p": 0.5, "t_dtw": -1},
+       {"text": " uh", "offsets": {"from": 2500, "to": 2700}, "p": 0.6, "t_dtw": -1},
+       {"text": "[_TT_150]", "offsets": {"from": 3000, "to": 3000}, "p": 0.9, "t_dtw": -1}
+     ]}
+  ]
+}

@@ -1,0 +1,3 @@
+{"kicker": "Any topic", "title": "Learn anything", "accent": "anything",
+ "steps": [{"text": "Watch a video", "icon": "play", "at": 0.9}, {"text": "Give it to your AI", "icon": "sparkle", "at": 1.8}, {"text": "Ask for notes", "icon": "file", "at": 2.7}],
+ "done": "Your own notes", "done_at": 3.3}

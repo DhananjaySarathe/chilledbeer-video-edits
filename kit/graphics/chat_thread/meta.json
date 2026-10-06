@@ -1,0 +1,64 @@
+{
+  "id": "chat_thread",
+  "name": "Chat conversation",
+  "category": "mockup",
+  "kind": "fullscreen",
+  "description": "A messaging app card: contact name with an online dot, then chat bubbles appearing one by one (my messages dark on the right, theirs light on the left), a typing indicator before their replies, and an optional time-skip divider like '3 days later'.",
+  "use_when": "Lines about talking to someone: a client, an editor, a friend, waiting for a reply, being ghosted, a DM or a customer message.",
+  "params": {
+    "name": {
+      "type": "text",
+      "default": "Editor",
+      "max_len": 20
+    },
+    "status": {
+      "type": "text",
+      "default": "online",
+      "max_len": 16
+    },
+    "messages": {
+      "type": "list",
+      "required": true,
+      "max_len": 6,
+      "help": "[{from: 'me' or 'them', text}] in order; keep each under ~40 characters"
+    },
+    "divider": {
+      "type": "object",
+      "default": null,
+      "help": "{after: index of the message it follows, text: '3 days later'}"
+    },
+    "typing": {
+      "type": "bool",
+      "default": true
+    }
+  },
+  "duration": {
+    "min": 2.0,
+    "default": 3.4,
+    "max": 6.0
+  },
+  "captions": "dark",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "whoosh",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "chat",
+    "dm",
+    "message",
+    "client",
+    "waiting"
+  ],
+  "explains": [
+    "conversation"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "comment_reply",
+  "version": "1"
+}

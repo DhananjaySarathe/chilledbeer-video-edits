@@ -1,0 +1,61 @@
+{
+  "id": "doodles",
+  "name": "Hand-drawn doodles around the speaker",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "Five to eight bold hand-drawn doodles draw themselves around the speaker's head, never on the face: a little orange-and-black bar chart, a plus, a triangle, a squiggle, a star, sparkles, a scribbled loop, a curvy arrow, a thick arc or emphasis dashes; an optional white chip with a short stat like '+248%' pops under the bar chart.",
+  "use_when": "Lines about creativity, motion graphics, visuals, making something fun or eye-catching, 'adds some flair', growth and energy; good under an excited or playful sentence.",
+  "params": {
+    "tag": {
+      "type": "text",
+      "default": "",
+      "max_len": 10,
+      "help": "optional short stat chip under the bar chart, e.g. '+248%'; empty hides it"
+    },
+    "count": {
+      "type": "number",
+      "default": 7,
+      "help": "how many doodles, 5-8"
+    },
+    "seed": {
+      "type": "number",
+      "default": 3,
+      "help": "any whole number; changes which doodles appear and their tilt"
+    }
+  },
+  "duration": {
+    "min": 1.2,
+    "default": 1.8,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "swipe",
+      "gain_db": -18
+    },
+    {
+      "at": 0.45,
+      "name": "pop",
+      "gain_db": -18
+    }
+  ],
+  "tags": [
+    "doodles",
+    "sketch",
+    "creative",
+    "fun",
+    "motion graphics",
+    "overlay"
+  ],
+  "explains": [
+    "emphasis"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "arrow_note",
+  "version": "1"
+}

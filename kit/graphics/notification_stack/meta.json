@@ -1,0 +1,53 @@
+{
+  "id": "notification_stack",
+  "name": "Phone notifications dropping in",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "Phone-style notification banners drop in from the top of the frame over the speaker one after another: rounded white cards with an orange square app icon, app name, 'now', a bold title and a one-line body; each new one lands on top and pushes the earlier ones down into a stack in the upper third.",
+  "use_when": "Lines about things piling up or arriving on your phone: messages, sales, new followers, comments, alerts, 'my phone kept buzzing', 'the orders started coming in', reminders you ignore.",
+  "params": {
+    "items": {
+      "type": "list",
+      "required": true,
+      "max_len": 4,
+      "help": "2-4 [{app, title, body, icon}] in arrival order (the last one ends on top). app ≤ 14 chars, title ≤ 28, body ≤ 40; icon is a GFX icon name such as chat, bell, dollar, heart, user, calendar, play, trendUp"
+    }
+  },
+  "duration": {
+    "min": 1.6,
+    "default": 2.6,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.15,
+      "name": "ding",
+      "gain_db": -18
+    },
+    {
+      "at": 0.71,
+      "name": "ding",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "notification",
+    "phone",
+    "alert",
+    "messages",
+    "inbox",
+    "buzzing",
+    "overlay"
+  ],
+  "explains": [
+    "proof",
+    "story"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "phone_feed",
+  "version": "1"
+}

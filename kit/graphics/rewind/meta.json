@@ -1,0 +1,53 @@
+{
+  "id": "rewind",
+  "name": "VHS rewind transition",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A tape-rewind transition laid over the picture for about a second: the frame dims, white VHS tracking bars and thin cyan and magenta streaks race up the frame, a big double-triangle rewind symbol and 'REWIND' flash in the middle with a running backwards timecode, and an orange pill names where we jump to ('1 WEEK AGO'); it clears the moment the story restarts.",
+  "use_when": "Right after a cold open or flash-forward, to jump back to the start of the story ('let me rewind', 'a week ago', 'it all started when'); centre it on the cut.",
+  "params": {
+    "label": {
+      "type": "text",
+      "default": "",
+      "max_len": 20,
+      "help": "where the story jumps to, e.g. '1 WEEK AGO'; empty for none"
+    },
+    "text": {
+      "type": "text",
+      "default": "Rewind",
+      "max_len": 12,
+      "help": "the big word beside the symbol"
+    }
+  },
+  "duration": {
+    "min": 0.6,
+    "default": 1.0,
+    "max": 1.6
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "rewind",
+      "gain_db": -12
+    }
+  ],
+  "tags": [
+    "rewind",
+    "flashback",
+    "transition",
+    "vhs",
+    "cold open",
+    "overlay"
+  ],
+  "explains": [
+    "chronology",
+    "story"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "freeze_twist",
+  "version": "1"
+}

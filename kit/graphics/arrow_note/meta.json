@@ -1,0 +1,67 @@
+{
+  "id": "arrow_note",
+  "name": "Hand-written note with an arrow",
+  "category": "overlay",
+  "kind": "overlay",
+  "description": "A short hand-written note in orange marker (slightly tilted, white outline) appears in a corner beside the speaker's head, then a hand-drawn curved arrow draws itself from the note to the speaker's face (or a chosen point) and its arrowhead snaps on.",
+  "use_when": "Lines that point at the speaker or something on screen: 'this one', 'me', 'that's the guy', 'look at this', 'the raw take'; calling out a person, an object or a detail.",
+  "params": {
+    "text": {
+      "type": "text",
+      "required": true,
+      "max_len": 18,
+      "help": "the note, written as given, e.g. 'THIS ONE' or 'me!'; long notes wrap to two lines"
+    },
+    "corner": {
+      "type": "text",
+      "default": "top-right",
+      "max_len": 12,
+      "help": "where the note sits: top-right | top-left | bottom-right | bottom-left"
+    },
+    "target_x": {
+      "type": "number",
+      "default": null,
+      "help": "optional x (0-1080) the arrow points at; default is the face edge"
+    },
+    "target_y": {
+      "type": "number",
+      "default": null,
+      "help": "optional y (0-1920) the arrow points at"
+    }
+  },
+  "duration": {
+    "min": 1.2,
+    "default": 1.8,
+    "max": 5.0
+  },
+  "captions": "show",
+  "cutout": false,
+  "sfx": [
+    {
+      "at": 0.0,
+      "name": "swipe",
+      "gain_db": -18
+    },
+    {
+      "at": 0.42,
+      "name": "whoosh",
+      "gain_db": -20
+    }
+  ],
+  "tags": [
+    "arrow",
+    "note",
+    "handwritten",
+    "callout",
+    "pointing",
+    "overlay"
+  ],
+  "explains": [
+    "emphasis"
+  ],
+  "ratios": [
+    "9:16"
+  ],
+  "fallback": "badge_pop",
+  "version": "1"
+}
